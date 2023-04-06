@@ -1,15 +1,35 @@
 ---
-title: "LBSPR: An R package for simulation and estimation using life-history ratios and length composition data "
-author: "Modificado de Adrian Hordyk, Autor:Mauricio Mardones"
-date: "18 de marzo de 2019"
-output: pdf_document
+title: "LBSPR: An R package for simulation and estimation using life-history ratios and length composition data"
+subtitle: "Alternative Analysis to know productivity in Krill 48.1 SubArea"
+author: "Mauricio Mardones"
+date:  "`r format(Sys.time(), '%d %B, %Y')`"
+bibliography: LBSPR.bib
+csl: apa.csl
+link-citations: yes
+linkcolor: blue
+output:
+  html_document:
+    keep_md: true
+    toc: true
+    toc_deep: 3
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    theme: cosmo
+    fontsize: 0.9em
+    linestretch: 1.7
+    html-math-method: katex
+    self-contained: true
+    code-tools: true
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 
-# Resumen
+# Abstract
 
-El presente documento tiene como objetivo aplicar la metodologia del metodo de evualaci?n de stock
-basado en datos pobres llamado Length-Based Spawning Potential Ratio (LBSPR) (Hordyk, 2014).  En este ejercicio se estudia el caso de la almeja  (Venus antiqua) de la regi?n XI en el sur de Chile. Este adelanto metodol?gico se ha realizado en las 2 ultimas evaluaciones reportasdas en el proyecto ASIPA "Programa de Seguimiento de pesquer?as Bent?nicas bajo Planes de Manejo".
+Testing changes in intrinsic productivity in Antarctic Krill (*Euphausia superba*) with Length-Based Spawning Potential Ratio (LBSPR) [@Hordyk2015a; @Hordyk2016]. 
 
 
 \newpage
@@ -25,7 +45,7 @@ Like any assessment method, the LBSPR model relies on a number of simplifying as
 There are two versions of the LBSPR model included in this package.
 
 ### 1.1 Age-Structured Length-Based Model
-The LBSPR model described by Hordyk et al. (2015a, b), and tested in a MSE framework (Hordyk et al. 2015c), use a conventional age-structured equilibrium population model. An important assumption of this model structure is that selectivity is age-based not length-based.
+The LBSPR model described by Hordyk et al. (2015a, b), and tested in a MSE framework [@Hordyk2015a], use a conventional age-structured equilibrium population model. An important assumption of this model structure is that selectivity is age-based not length-based.
 
 ### 1.2 Length-Structured Growth-Type-Group Model
 Hordyk et al. (2016) describe a length-structured version of the LBSPR model that uses growth-type-groups (GTG) to account for size-based selectivity. The GTG-LBSPR model also has the ability to include variable M at size (by default M is assumed to be constant). The GTG-LBSPR model typically estimates a lower fishing mortality rate for a given size structure compared to the earlier age-structured model. This is because the age-structured model has a 'regeneration assumption', where, because of the age-based selectivity assumption, large individuals are expected even at high fishing mortality (large, young fish).
