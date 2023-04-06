@@ -2,7 +2,7 @@
 title: "LBSPR: An R package for simulation and estimation using life-history ratios and length composition data"
 subtitle: "Alternative Analysis to know productivity in Krill 48.1 SubArea"
 author: "Mauricio Mardones"
-date:  "`r format(Sys.time(), '%d %B, %Y')`"
+date:  "06 April, 2023"
 bibliography: LBSPR.bib
 csl: apa.csl
 link-citations: yes
@@ -60,7 +60,8 @@ The default setting for the LBSPR package is to use the GTG-LBSPR model for all 
 ### 2.1 Installing the Package
 The LBSPR package is now available on CRAN:
 
-```{r setup1}
+
+```r
 rm(list = ls())
 knitr::opts_chunk$set(echo = TRUE,
                       message = FALSE,
@@ -76,7 +77,8 @@ options(bitmapType = "cairo")
 
 
 
-```{r}
+
+```r
 #install.packages("LBSPR")
 #install.packages("devtools")
 #devtools::install_github("AdrianHordyk/LBSPR")
@@ -100,18 +102,29 @@ The first thing to do is to create a LB_pars object that contains all of the req
 To create a new LB_pars object you use the new function:
 
 
-```{r}
+
+```r
 MyPars <- new("LB_pars")
 ```
 
 You can see the elements or slots of the LB_pars object using the slotNames function:
 
-```{r}
+
+```r
 slotNames(MyPars)
+```
+
+```
+##  [1] "Species"      "MK"           "M"            "Linf"         "L_units"     
+##  [6] "CVLinf"       "L50"          "L95"          "Walpha"       "Walpha_units"
+## [11] "Wbeta"        "FecB"         "Steepness"    "Mpow"         "R0"          
+## [16] "SL50"         "SL95"         "MLL"          "sdLegal"      "fDisc"       
+## [21] "FM"           "SPR"          "BinMin"       "BinMax"       "BinWidth"
 ```
 MyPars is an object of class LB_pars. You can access the help file for classes by using the ? symbol (similar to how you find the help file for functions):
 
-```{r echo =TRUE}
+
+```r
 #class?LB_pars
 ```
 
@@ -138,7 +151,8 @@ Size Classes - Width of the length classes (BinWidth)
 Remember, you can find the help documentation for the LB_pars object by typing: class?LB_pars in the console.
 
 To create an example parameter object:
-```{r, echo =TRUE}
+
+```r
 MyPars@Species <- "Euphausia superba"
 MyPars@Linf <- 60 
 MyPars@L50 <- 34 
@@ -155,14 +169,14 @@ MyPars@BinWidth <- 1
 
 MyPars@Walpha <- 0.005
 MyPars@Wbeta <- 3.0637 #r2 = 0.9651
-
 ```
 BinMax not set. Using default of 1.3 Linf
 BinMin not set. Using default value of 0
 You will notice some messages in the console alerting you that default values have been used. You can change these by specifying values in MyPars and re-running the LBSPRsim function.
 
 We'll manually set those values here so we don't keep seeing the messages throughout the vignette
-```{r, echo =TRUE}
+
+```r
 MyPars@BinWidth <-1
 MyPars@BinMax <- 70
 MyPars@BinMin <- 0
@@ -175,7 +189,8 @@ MyPars@L_units <- "mm"
 ### 3.2 Running the Simulation Model
 Now we are ready to run the LBSPR simulation model. To do this we use the LBSPRsim function:
 ngtg function es el # de grupos para el GTG model, por default es 13)
-```{r, echo =TRUE}
+
+```r
 MySim <- LBSPRsim(MyPars, Control=list(modtype="GTG", maxFM=5)) 
 ```
 
@@ -188,15 +203,25 @@ Many of the functions in the LBSPR package return an object of class LB_obj. You
 
 #### 3.2.2 Simulation Output
 Let's take a look at some of the simulated output.
-```{r, echo =TRUE}
+
+```r
 MySim@SPR 
+```
+
+```
+## [1] 0.75
 ```
 
 The simulated SPR is the same as our input value (MyPars@SPR).
 
 What is the ratio of fishing mortality to natural mortality in this scenario?
-```{r}
+
+```r
 MySim@FM 
+```
+
+```
+## [1] 0.27
 ```
 
 It is important to note that the F/M ratio reported in the LBSPR model refers to the apical F over the adult natural mortality rate. That is, the value for fishing mortality refers to the highest level of F experienced by any single size class.
@@ -213,27 +238,24 @@ See the help file for the LBSPRsim function for additional parameters for the Co
 
 #### 3.2.4 Plotting the Simulation
 The plotSim function can be used to plot MySim:
-```{r, echo=FALSE, fig.align='center', fig.cap="Ploteo de Simulaci?n estructuras."}
-plotSim(MySim) #, type = c("len.freq"))
-# plotSim(LB_obj = NULL, type = c("all", "len.freq", "growth",
-#   "maturity.select", "yield.curve"), lf.type = c("catch", "pop"),
-#   growth.type = c("LAA", "WAA"), y.type = c("SPR", "SSB", "Yield", "YPR"),
-#   x.type = c("FM", "SSB", "SPR"), perRec = FALSE, inc.SPR = TRUE,
-#   Cols = NULL, size.axtex = 12, size.title = 14, size.SPR = 4,
-#   size.leg = 12, inc.pts = TRUE, size.pt = 4)
-```
+<div class="figure" style="text-align: center">
+<img src="index_files/figure-html/unnamed-chunk-10-1.jpeg" alt="Ploteo de Simulaci?n estructuras."  />
+<p class="caption">Ploteo de Simulaci?n estructuras.</p>
+</div>
 
 By default the function plots: a) the expected (equilibrium) size structure of the catch and the expected unfished size structure of the vulnerable population, b) the maturity and selectivity-at-length curves, c) the von Bertalanffy growth curve with relative age, and d) the SPR and relative yield curves as a function of relative fishing mortality (see note above on the F/M ratio).
 
 The plotSim function can be controlled in a number of ways. For example, you can plot the expected unfished and fished size structure of the population by changing the lf.type argument:
-```{r, echo=FALSE,fig.align='center',fig.cap="Ploteo de Simulaci?n Population."}
-plotSim(MySim, lf.type="pop")
-```
+<div class="figure" style="text-align: center">
+<img src="index_files/figure-html/unnamed-chunk-11-1.jpeg" alt="Ploteo de Simulaci?n Population."  />
+<p class="caption">Ploteo de Simulaci?n Population.</p>
+</div>
 
 Individual plots can be created using the type argument:
-```{r, echo=FALSE,fig.align='center',fig.cap="Plot Leng Freq"}
-plotSim(MySim, type="len.freq")
-```
+<div class="figure" style="text-align: center">
+<img src="index_files/figure-html/unnamed-chunk-12-1.jpeg" alt="Plot Leng Freq"  />
+<p class="caption">Plot Leng Freq</p>
+</div>
 
 See ?plotSim for more options for plotting the output of the LBSPR simulation model.
 
@@ -244,26 +266,34 @@ Two objects are required to fit the LBSPR model to length data: LB_pars which co
 
 ### 4.1 Creating a LB_lengths object
 A LB_lengths object can be created in two ways. The new function can be used to create an empty object which can be manually populated:
-```{r}
+
+```r
 MyLengths <- new("LB_lengths")
 ```
 
-```{r, echo= TRUE}
+
+```r
 slotNames(MyLengths)
+```
+
+```
+## [1] "LMids"   "LData"   "L_units" "Years"   "NYears"  "Elog"
 ```
 
 
 However, it is probably easier to create the LB_lengths object by directly reading in a CSV file.
 
 Now, we need set our directory
-```{r}
+
+```r
 datdir <- setwd("~/DOCAS/LBSPR_Krill")  
 ```
 
 #### 4.2 Reading in Example CSV
 A valid LB_pars object must be first created (see sections above):
 
-```{r}
+
+```r
 MyPars <- new("LB_pars")
 ## A blank LB_pars object created
 ## Default values have been set for some parameters
@@ -287,14 +317,13 @@ MyPars@BinWidth <-1
 MyPars@BinMax <- 70
 MyPars@BinMin <- 0
 MyPars@L_units <- "mm"
-
-
 ```
 
 Note that only the life history parameters need to be specified for the estimation model. The exploitation parameters will be estimated.
 
 A length frequency data set with multiple years:
-```{r, echo =TRUE}
+
+```r
 Len1 <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/Length_481_Krill.csv"), dataType="freq",sep=";",header=T)
 ```
 
@@ -314,16 +343,19 @@ Notice that for raw length measurements you must specify the parameters for the 
 
 ## 4.3 Plotting Length Data
 The plotSize function can be used to plot the imported length data. This is usually a good idea to do before proceeding with fitting the model, to confirm that everything has been read in correctly:
-```{r}
+
+```r
 plotSize(Len1)
 ```
+
+<img src="index_files/figure-html/unnamed-chunk-18-1.jpeg" style="display: block; margin: auto;" />
 
 ### 4.4 Fit the Model
 The LBSPR model is fitted using the LBSPRfit function:
 
-```{r}
-myFit1 <- LBSPRfit(MyPars, Len1)
 
+```r
+myFit1 <- LBSPRfit(MyPars, Len1)
 ```
 
 to fit another data,
@@ -335,8 +367,31 @@ The LBSPR package uses a Kalman filter and the Rauch-Tung-Striebel smoother func
 
 The smoother parameter estimates can be accessed from the myFit object (which is an object of class LB_obj [see earlier section for details]):
 
-```{r, echo=TRUE}
+
+```r
 myFit1@Ests
+```
+
+```
+##        SL50  SL95   FM  SPR
+##  [1,] 43.83 54.14 6.17 0.24
+##  [2,] 43.07 53.00 5.69 0.24
+##  [3,] 42.86 52.62 5.33 0.24
+##  [4,] 42.93 53.48 5.20 0.24
+##  [5,] 42.51 53.38 4.97 0.24
+##  [6,] 41.64 52.37 4.81 0.24
+##  [7,] 42.09 52.74 4.79 0.24
+##  [8,] 42.53 53.32 4.78 0.25
+##  [9,] 42.76 53.70 4.69 0.26
+## [10,] 41.67 52.60 4.37 0.25
+## [11,] 40.47 50.64 4.25 0.23
+## [12,] 40.08 50.04 4.27 0.22
+## [13,] 39.71 49.73 4.20 0.22
+## [14,] 39.24 49.32 4.08 0.21
+## [15,] 38.19 47.98 3.91 0.20
+## [16,] 37.70 47.48 3.91 0.20
+## [17,] 37.17 47.05 3.86 0.19
+## [18,] 36.82 46.65 3.99 0.18
 ```
 
 
@@ -344,30 +399,47 @@ Note that by default the smoothed estimates are used in the plotting routines.
 
 The individual point estimates for each year can be accessed from the LB_obj object:
 
-```{r, echo = TRUE}
+
+```r
 data.frame(rawSL50=myFit1@SL50, rawSL95=myFit1@SL95, rawFM=myFit1@FM, rawSPR=myFit1@SPR)
+```
+
+```
+##    rawSL50 rawSL95 rawFM     rawSPR
+## 1    51.80   66.05 11.00 0.27075727
+## 2    37.66   45.39  4.58 0.16112290
+## 3    40.11   40.28  2.92 0.28958137
+## 4    47.76   63.13  6.28 0.25007834
+## 5    46.96   62.34  4.30 0.29298975
+## 6    28.48   38.74  3.29 0.09639728
+## 7    42.25   50.53  4.82 0.23245955
+## 8    44.49   55.33  5.43 0.24490900
+## 9    56.08   68.49  7.11 0.47756227
+## 10   42.73   61.18  2.34 0.31364754
+## 11   32.46   37.09  2.85 0.15464924
+## 12   39.78   47.09  5.14 0.18430564
+## 13   40.71   50.75  4.72 0.19728857
+## 14   45.03   58.66  4.53 0.26009592
+## 15   32.59   39.55  2.33 0.18657642
+## 16   38.19   46.76  4.29 0.17394007
+## 17   35.24   46.71  2.11 0.23599986
+## 18   33.39   42.69  5.29 0.09232830
 ```
 
 
 The plotSize function can also be used to show the model fit to the data:
 
-```{r, echo =FALSE}
-plotSize(myFit1)
-```
+<img src="index_files/figure-html/unnamed-chunk-22-1.jpeg" style="display: block; margin: auto;" />
 
 
 Similarly, the plotMat function can be used to show the specified maturity-at-length curve, and the estimated selectivity-at-length curve:
 
-```{r, echo=FALSE}
-plotMat(myFit1)
-```
+<img src="index_files/figure-html/unnamed-chunk-23-1.jpeg" style="display: block; margin: auto;" />
 
 
 Finally, the plotEsts function can be used to visually display the estimated parameters. Note that this works for all data sets, but only makes sense when there are several years of data:
 
-```{r, echo=FALSE}
-plotEsts(myFit1)
-```
+<img src="index_files/figure-html/unnamed-chunk-24-1.jpeg" style="display: block; margin: auto;" />
 
 By default the plotting function adds the smoother line to the estimated points.
 
@@ -378,7 +450,8 @@ You can compare the observed size data against an expected size composition at a
 
 
 
-```{r}
+
+```r
 Mod <- LBSPRfit(MyPars, Len1, verbose=FALSE)
 
 yr <- 1 # first year of data
@@ -386,9 +459,7 @@ MyPars@SL50 <- Mod@SL50[yr]
 MyPars@SL95 <- Mod@SL95[yr] 
 ```
 
-```{r, echo=FALSE}
-plotTarg(MyPars, Len1, yr=yr)
-```
+<img src="index_files/figure-html/unnamed-chunk-26-1.jpeg" style="display: block; margin: auto;" />
 
 
 # 6 References
