@@ -467,6 +467,7 @@ Finally, the plotEsts function can be used to visually display the
 estimated parameters. Note that this works for all data sets, but only
 makes sense when there are several years of data:
 
+
 ```{r, echo=FALSE, fig.width=12, fig.height=5}
 plotEsts(myFit1,
          pars = c("Sel", "SPR"),
