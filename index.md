@@ -1,6 +1,6 @@
 ---
-title: "LBSPR: An R package for simulation and estimation using life-history ratios and length composition data"
-subtitle: "Alternative Analysis to know productivity in Krill 48.1 SubArea"
+title: "Searching Intrinsic Productivity Antarctic Krill"
+subtitle: "Alternative analysis to know productivity in Krill 48.1 SubArea based on invariants parametres and lenght structures"
 author: "Mauricio Mardones"
 date:  "06 April, 2023"
 bibliography: LBSPR.bib
@@ -30,15 +30,23 @@ editor_options:
 
 Testing changes in intrinsic productivity in Antarctic Krill (*Euphausia
 superba*) with Length-Based Spawning Potential Ratio (LBSPR)
-[@Hordyk2015a; @Hordyk2016].
+[@Hordyk2014c; @Hordyk2016].
 
-This code with metdology is this [link](https://github.com/MauroMardones/LBSPR_Krill)
+One way to understand krill dynamics is through empirical data such as sizes structure from the fishery. In this sense we can, through the life history parameters and the sizes through the years, what should be the virgin reproductive potential (intrinsic productivity) and under the effects of fishing.
 
-![Size distribution Krill 48.1 SubArea](Map1.png)
+This is a simple apprach to know intrinsic productivity based on life history parameters.
 
-# Introduction
 
-This package contains functions to run the Length-Based Spawning
+This code with methodology in this
+[link](https://github.com/MauroMardones/LBSPR_Krill)
+
+The krill population structure changes over time and space. Trying to understand these cycles is part of the assessment and management process for the population in the context of CCAMLR. (Figure 1)
+
+![Figure 1. Size distribution Krill 48.1 SubArea](Map1.png)
+
+# 1. Introduction
+
+This guide contains functions to run the Length-Based Spawning
 Potential Ratio (LBSPR) method. The LBSPR package can be used in two
 ways: 1) simulating the expected length composition, growth curve, and
 SPR and yield curves using the LBSPR model and 2) fitting to empirical
@@ -64,14 +72,14 @@ these assumptions.
 
 There are two versions of the LBSPR model included in this package.
 
-### Age-Structured Length-Based Model
+### 1.1. Age-Structured Length-Based Model
 
-The LBSPR model described by [@Hordyk2015a; @Hordyk2016], and tested in
-a MSE framework [@Hordyk2015a], use a conventional age-structured
+The LBSPR model described by [@Hordyk2014c; @Hordyk2016], and tested in
+a MSE framework [@Hordyk2014c], use a conventional age-structured
 equilibrium population model. An important assumption of this model
 structure is that selectivity is age-based not length-based.
 
-### Length-Structured Growth-Type-Group Model
+### 1.2. Length-Structured Growth-Type-Group Model
 
 @Hordyk2016 describe a length-structured version of the LBSPR model that
 uses growth-type-groups (GTG) to account for size-based selectivity. The
@@ -88,7 +96,7 @@ for all simulation and estimation. Control options in the simulation and
 estimation functions can be used to switch to the age-structured LBSPR
 model.
 
-# First Steps
+# 2. First Steps
 
 ### 2.1 Installing the Package
 
@@ -123,19 +131,19 @@ library(ggplot2)
 library(stringr)
 ```
 
-# Simulation
+# 3. Simulation
 
 The LBSPR package can be used to generate the expected size composition,
 the SPR, and relative yield for a given set of biological and
 exploitation pattern parameters.
 
-## LB_pars Object
+## 3.1. LB_pars Object
 
 The first thing to do is to create a LB_pars object that contains all of
 the required parameters for the simulation model. LB_pars is an S4 class
 object.
 
-#### Create a new LB_pars Object
+#### 3.1.1. Create a new LB_pars Object
 
 To create a new LB_pars object you use the new function:
 
@@ -169,7 +177,7 @@ functions):
 #class?LB_pars
 ```
 
-#### Populate the LB_pars Object
+#### 3.1.2. Populate the LB_pars Object
 
 The LB_pars object has 25 slots. However, not all parameters need to be
 specified for the simulation model.
@@ -197,9 +205,9 @@ or SPR (SPR). If you specify both, the F/M value will be ignored.
 Size Classes - Width of the length classes (BinWidth)
 
 Remember, you can find the help documentation for the LB_pars object by
-typing: class?LB_pars in the console.
+typing: `class?LB_pars` in the console.
 
-To create an example parameter object:
+To create an example parameter object regarding @Maschette2020;
 
 
 ```r
@@ -211,13 +219,13 @@ MyPars@MK <- 0.4/0.45
 
 
 #Explotation
-MyPars@SL50 <- 38#numeric() #1
+MyPars@SL50 <- 34#numeric() #1
 MyPars@SL95 <- 55#numeric() #27
-MyPars@SPR <- 0.25 #numeric()# ###cambia el numero 0.4 a en blanco
+MyPars@SPR <- 0.75 #numeric()# ###cambia el numero 0.4 a en blanco
 MyPars@BinWidth <- 1
 #MyPars@FM <- 1
 
-MyPars@Walpha <- 0.005
+MyPars@Walpha <- 1
 MyPars@Wbeta <- 3.0637 #r2 = 0.9651
 ```
 
@@ -239,9 +247,9 @@ MyPars@L_units <- "mm"
 
 We can also choose to set the units for the length parameters:
 
-[MyPars\@L](mailto:MyPars@L){.email}\_units \<- "mm"
 
-### 3.2 Running the Simulation Model
+
+## 3.2 Running the Simulation Model
 
 Now we are ready to run the LBSPR simulation model. To do this we use
 the LBSPRsim function: ngtg function es el \# de grupos para el GTG
@@ -249,7 +257,9 @@ model, por default es 13)
 
 
 ```r
-MySim <- LBSPRsim(MyPars, Control=list(modtype="GTG", maxFM=5)) 
+MySim <- LBSPRsim(MyPars, 
+                  Control=list(modtype="GTG", 
+                               maxFM=1)) 
 ```
 
 #### 3.2.1 The LB_obj Object
@@ -273,11 +283,11 @@ MySim@SPR
 ```
 
 ```
-## [1] 0.25
+## [1] 0.75
 ```
 
 The simulated SPR is the same as our input value
-([MyPars\@SPR](mailto:MyPars@SPR){.email}).
+`MyPars@SPR`
 
 What is the ratio of fishing mortality to natural mortality in this
 scenario?
@@ -288,7 +298,7 @@ MySim@FM
 ```
 
 ```
-## [1] 2.08
+## [1] 0.24
 ```
 
 It is important to note that the F/M ratio reported in the LBSPR model
@@ -377,16 +387,14 @@ slotNames(MyLengths)
 However, it is probably easier to create the LB_lengths object by
 directly reading in a CSV file.
 
-Now, we need set our directory
+Now, we need set our directory again
 
 
 ```r
 datdir <- setwd("~/DOCAS/LBSPR_Krill")  
 ```
 
-#### 4.2 Reading in Example CSV
-
-A valid LB_pars object must be first created (see sections above):
+### 4.2 reading own data
 
 
 ```r
@@ -401,14 +409,15 @@ MyPars@MK <- 0.4/0.45
 
 
 #Explotation
-MyPars@SL50 <- 38#numeric() #1
+MyPars@SL50 <- 34#numeric() #1
 MyPars@SL95 <- 55#numeric() #27
-MyPars@SPR <- 0.25 #numeric()# ###cambia el numero 0.4 a en blanco
+MyPars@SPR <- 0.75 #numeric()# ###cambia el numero 0.4 a en blanco
 MyPars@BinWidth <- 1
 #MyPars@FM <- 1
 
-MyPars@Walpha <- 0.005
+MyPars@Walpha <- 1
 MyPars@Wbeta <- 3.0637 #r2 = 0.9651
+
 MyPars@BinWidth <-1
 MyPars@BinMax <- 70
 MyPars@BinMin <- 0
@@ -418,34 +427,20 @@ MyPars@L_units <- "mm"
 Note that only the life history parameters need to be specified for the
 estimation model. The exploitation parameters will be estimated.
 
-A length frequency data set with multiple years:
+A length frequency data of krill set with multiple years (2001-2020):
 
 
 ```r
-Len1 <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/Length_481_Krill.csv"), dataType="freq",sep=";",header=T)
+Len1 <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/Length_481_Krill_2.csv"), dataType="freq",sep=";",header=T)
 ```
 
 Another form to read data is: A length frequency data set with multiple
 years and a header row (identical to Len1 data, but with a header row):
 
-Len2 \<- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir,
-"/LFreq_MultiYrHead.csv"), dataType="freq", header=TRUE) A raw length
-data set with multiple years:
 
-Len3 \<- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir,
-"/LRaw_MultiYr.csv"), dataType="raw") Length bin parameters (BinMax)
-must be set for raw data. Using defaults Length bin parameters (BinMin)
-must be set for raw data. Using defaults Length bin parameters
-(BinWidth) must be set for raw data. Using defaults Notice that for raw
-length measurements you must specify the parameters for the length bins
-(maximum, minimum, and width of length classes) in the LB_pars object.
-If these are left blank, default values are used.
+## 4.3 Plotting Length Data Krill
 
-## 4.3 Plotting Length Data
-
-The plotSize function can be used to plot the imported length data. This
-is usually a good idea to do before proceeding with fitting the model,
-to confirm that everything has been read in correctly:
+The `plotSize` function can be used to plot the imported length data. This is usually a good idea to do before proceeding with fitting the model, to confirm that everything has been read in correctly:
 
 
 ```r
@@ -483,24 +478,24 @@ myFit1@Ests
 
 ```
 ##        SL50  SL95   FM  SPR
-##  [1,] 43.83 54.14 6.17 0.24
-##  [2,] 43.07 53.00 5.69 0.24
-##  [3,] 42.86 52.62 5.33 0.24
-##  [4,] 42.93 53.48 5.20 0.24
-##  [5,] 42.51 53.38 4.97 0.24
-##  [6,] 41.64 52.37 4.81 0.24
-##  [7,] 42.09 52.74 4.79 0.24
-##  [8,] 42.53 53.32 4.78 0.25
-##  [9,] 42.76 53.70 4.69 0.26
-## [10,] 41.67 52.60 4.37 0.25
-## [11,] 40.47 50.64 4.25 0.23
-## [12,] 40.08 50.04 4.27 0.22
-## [13,] 39.71 49.73 4.20 0.22
-## [14,] 39.24 49.32 4.08 0.21
-## [15,] 38.19 47.98 3.91 0.20
-## [16,] 37.70 47.48 3.91 0.20
-## [17,] 37.17 47.05 3.86 0.19
-## [18,] 36.82 46.65 3.99 0.18
+##  [1,] 45.59 55.77 5.35 0.30
+##  [2,] 44.96 54.87 5.02 0.29
+##  [3,] 44.87 54.76 4.80 0.30
+##  [4,] 44.77 55.29 4.55 0.30
+##  [5,] 44.28 55.03 4.27 0.30
+##  [6,] 43.40 53.99 4.08 0.29
+##  [7,] 43.78 54.25 4.00 0.30
+##  [8,] 44.15 54.74 3.91 0.32
+##  [9,] 44.33 55.09 3.78 0.33
+## [10,] 43.29 54.10 3.60 0.31
+## [11,] 42.32 52.54 3.61 0.29
+## [12,] 42.11 52.25 3.72 0.28
+## [13,] 41.98 52.36 3.77 0.27
+## [14,] 41.69 52.32 3.72 0.27
+## [15,] 40.93 51.55 3.68 0.26
+## [16,] 40.22 50.59 3.64 0.25
+## [17,] 39.48 49.77 3.56 0.25
+## [18,] 39.13 49.35 3.68 0.24
 ```
 
 Note that by default the smoothed estimates are used in the plotting
@@ -515,25 +510,25 @@ data.frame(rawSL50=myFit1@SL50, rawSL95=myFit1@SL95, rawFM=myFit1@FM, rawSPR=myF
 ```
 
 ```
-##    rawSL50 rawSL95 rawFM     rawSPR
-## 1    51.80   66.05 11.00 0.27075727
-## 2    37.66   45.39  4.58 0.16112290
-## 3    40.11   40.28  2.92 0.28958137
-## 4    47.76   63.13  6.28 0.25007834
-## 5    46.96   62.34  4.30 0.29298975
-## 6    28.48   38.74  3.29 0.09639728
-## 7    42.25   50.53  4.82 0.23245955
-## 8    44.49   55.33  5.43 0.24490900
-## 9    56.08   68.49  7.11 0.47756227
-## 10   42.73   61.18  2.34 0.31364754
-## 11   32.46   37.09  2.85 0.15464924
-## 12   39.78   47.09  5.14 0.18430564
-## 13   40.71   50.75  4.72 0.19728857
-## 14   45.03   58.66  4.53 0.26009592
-## 15   32.59   39.55  2.33 0.18657642
-## 16   38.19   46.76  4.29 0.17394007
-## 17   35.24   46.71  2.11 0.23599986
-## 18   33.39   42.69  5.29 0.09232830
+##    rawSL50 rawSL95 rawFM    rawSPR
+## 1    52.44   65.34  8.69 0.3390804
+## 2    39.43   46.97  3.92 0.2087088
+## 3    45.01   48.33  5.11 0.3251658
+## 4    48.63   63.15  4.89 0.3141996
+## 5    48.24   62.96  3.30 0.3718446
+## 6    30.72   40.89  3.04 0.1254271
+## 7    44.01   51.94  4.00 0.2960077
+## 8    45.92   56.19  4.39 0.3095126
+## 9    56.55   68.49  4.31 0.5789779
+## 10   42.64   59.75  1.64 0.3952354
+## 11   34.69   39.89  2.65 0.1931645
+## 12   41.36   48.17  4.35 0.2346415
+## 13   43.51   53.96  4.71 0.2468353
+## 14   46.46   59.59  3.59 0.3306032
+## 15   40.44   53.47  3.74 0.2114859
+## 16   40.45   49.14  4.10 0.2164218
+## 17   35.63   45.84  1.40 0.3311026
+## 18   35.62   45.10  4.97 0.1211154
 ```
 
 The plotSize function can also be used to show the model fit to the
@@ -558,7 +553,7 @@ points.
 # 5 Comparing Observed Length Data to Target Size Structure
 
 You can compare the observed size data against an expected size
-composition at a target SPR using the plotTarg function. To do this, you
+composition at a target SPR using the `plotTarg` function. To do this, you
 need a LB_pars object with the life history parameters and the target
 SPR:
 
@@ -573,4 +568,8 @@ MyPars@SL95 <- Mod@SL95[yr]
 
 <img src="index_files/figure-html/unnamed-chunk-26-1.jpeg" style="display: block; margin: auto;" />
 
-# 6 References
+# 6. Some home works
+
+- Preliminar outputs to know intrinsic productivity of Antarctic krill (*Euphausia superba*) in Antarctic Peninsula, SubArea 48.1.
+
+# 7. References
