@@ -510,4 +510,8 @@ plotTarg(MyPars, Len1, yr=yr)
 
 - Preliminar outputs to know intrinsic productivity of Antarctic krill (*Euphausia superba*) in Antarctic Peninsula, SubArea 48.1.
 
+- This method dont incorportate environmental variables
+
+- Based in own krill dynamics
+
 # 7. References
