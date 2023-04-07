@@ -406,7 +406,7 @@ Another form to read data is: A length frequency data set with multiple
 years and a header row (identical to Len1 data, but with a header row):
 
 
-## 4.3 Plotting Length Data Krill
+### 4.3 Plotting Length Data Krill
 
 The `plotSize` function can be used to plot the imported length data. This is usually a good idea to do before proceeding with fitting the model, to confirm that everything has been read in correctly:
 
