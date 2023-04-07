@@ -2,7 +2,7 @@
 title: "Searching Intrinsic Productivity Antarctic Krill"
 subtitle: "Alternative analysis to know productivity in Krill 48.1 SubArea based on invariants parametres and lenght structures"
 author: "Mauricio Mardones"
-date:  "06 April, 2023"
+date:  "07 April, 2023"
 bibliography: LBSPR.bib
 csl: apa.csl
 link-citations: yes
@@ -39,7 +39,12 @@ This is a simple apprach to know intrinsic productivity based on life history pa
 
 The krill population structure changes over time and space. Trying to understand these cycles is part of the assessment and management process for the population in the context of CCAMLR. (Figure 1)
 
-![Figure 1. Size distribution Krill 48.1 SubArea](Map1.png)
+![Figure 2. Length structure between Subaareas and Year](Size48.png)
+Focus on 48.1 SuArea (Figure 2).
+
+![Figure 2. Size distribution Krill 48.1 SubArea](Map1.png)
+
+
 What follows is a guide for it and its methodological explanation.
 
 # 1. Introduction
@@ -540,6 +545,7 @@ maturity-at-length curve, and the estimated selectivity-at-length curve:
 Finally, the plotEsts function can be used to visually display the
 estimated parameters. Note that this works for all data sets, but only
 makes sense when there are several years of data:
+
 
 <img src="index_files/figure-html/unnamed-chunk-24-1.jpeg" style="display: block; margin: auto;" />
 
