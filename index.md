@@ -37,12 +37,10 @@ One way to understand krill dynamics is through empirical data such as sizes str
 This is a simple apprach to know intrinsic productivity based on life history parameters.
 
 
-This code with methodology in this
-[link](https://github.com/MauroMardones/LBSPR_Krill)
-
 The krill population structure changes over time and space. Trying to understand these cycles is part of the assessment and management process for the population in the context of CCAMLR. (Figure 1)
 
 ![Figure 1. Size distribution Krill 48.1 SubArea](Map1.png)
+What follows is a guide for it and its methodological explanation.
 
 # 1. Introduction
 
@@ -219,8 +217,8 @@ MyPars@MK <- 0.4/0.45
 
 
 #Explotation
-MyPars@SL50 <- 34#numeric() #1
-MyPars@SL95 <- 55#numeric() #27
+MyPars@SL50 <- 40#numeric() #1
+MyPars@SL95 <- 56#numeric() #27
 MyPars@SPR <- 0.75 #numeric()# ###cambia el numero 0.4 a en blanco
 MyPars@BinWidth <- 1
 #MyPars@FM <- 1
@@ -298,7 +296,7 @@ MySim@FM
 ```
 
 ```
-## [1] 0.24
+## [1] 0.29
 ```
 
 It is important to note that the F/M ratio reported in the LBSPR model
@@ -359,7 +357,7 @@ simulation model.
 
 \newpage
 
-# 4 Fitting Empirical Length Data
+# 4 Fitting Empirical Krill Length Data
 
 Two objects are required to fit the LBSPR model to length data: LB_pars
 which contains the life-history parameters (described above) and
@@ -385,7 +383,7 @@ slotNames(MyLengths)
 ```
 
 However, it is probably easier to create the LB_lengths object by
-directly reading in a CSV file.
+directly reading in a `CSV file`.
 
 Now, we need set our directory again
 
@@ -394,7 +392,7 @@ Now, we need set our directory again
 datdir <- setwd("~/DOCAS/LBSPR_Krill")  
 ```
 
-### 4.2 reading own data
+### 4.2 Reading Krill Data
 
 
 ```r
@@ -409,8 +407,8 @@ MyPars@MK <- 0.4/0.45
 
 
 #Explotation
-MyPars@SL50 <- 34#numeric() #1
-MyPars@SL95 <- 55#numeric() #27
+MyPars@SL50 <- 40#numeric() #1
+MyPars@SL95 <- 56#numeric() #27
 MyPars@SPR <- 0.75 #numeric()# ###cambia el numero 0.4 a en blanco
 MyPars@BinWidth <- 1
 #MyPars@FM <- 1
@@ -451,16 +449,14 @@ plotSize(Len1)
 
 ### 4.4 Fit the Model
 
-The LBSPR model is fitted using the LBSPRfit function:
+The LBSPR model is fitted using the `LBSPRfit` function:
 
 
 ```r
 myFit1 <- LBSPRfit(MyPars, Len1)
 ```
 
-to fit another data, myFit2 \<- LBSPRfit(MyPars, Len2) Note that the
-Control argument can be used to modify the additional parameters or
-LBSPR model type (see description in earlier section).
+Note that the Control argument can be used to modify the additional parameters or LBSPR model type (see description in earlier section).
 
 ### 4.5 Examine and Plot Results
 
@@ -468,7 +464,7 @@ The LBSPR package uses a Kalman filter and the Rauch-Tung-Striebel
 smoother function (see FilterSmooth) to smooth out the multi-year
 estimates of SPR, F/M, and selectivity parameters.
 
-The smoother parameter estimates can be accessed from the myFit object
+The smoother parameter estimates can be accessed from the `myFit` object
 (which is an object of class LB_obj [see earlier section for details]):
 
 
@@ -502,7 +498,7 @@ Note that by default the smoothed estimates are used in the plotting
 routines.
 
 The individual point estimates for each year can be accessed from the
-LB_obj object:
+`LB_obj` object:
 
 
 ```r
@@ -531,7 +527,7 @@ data.frame(rawSL50=myFit1@SL50, rawSL95=myFit1@SL95, rawFM=myFit1@FM, rawSPR=myF
 ## 18   35.62   45.10  4.97 0.1211154
 ```
 
-The plotSize function can also be used to show the model fit to the
+The `plotSize` function can also be used to show the model fit to the
 data:
 
 <img src="index_files/figure-html/unnamed-chunk-22-1.jpeg" style="display: block; margin: auto;" />
@@ -571,5 +567,14 @@ MyPars@SL95 <- Mod@SL95[yr]
 # 6. Some home works
 
 - Preliminar outputs to know intrinsic productivity of Antarctic krill (*Euphausia superba*) in Antarctic Peninsula, SubArea 48.1.
+
+- This method dont incorportate environmental variables
+
+- Based in own krill dynamics
+
+- Do sensitivity analysis based on Linf (5 scenarios)
+
+- This code with methodology in this
+[link](https://github.com/MauroMardones/LBSPR_Krill)
 
 # 7. References
