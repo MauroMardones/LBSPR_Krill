@@ -1,7 +1,7 @@
 ---
 title: "Searching Intrinsic Productivity Antarctic Krill"
 subtitle: "Alternative analysis to know productivity in Krill 48.1 SubArea based on invariants parametres and lenght structures"
-author: "Mauricio Mardones"
+author: "Mardones, M; Watters, G.; Cárdenas, C."
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 bibliography: LBSPR.bib
 csl: apa.csl

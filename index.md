@@ -1,8 +1,8 @@
 ---
 title: "Searching Intrinsic Productivity Antarctic Krill"
 subtitle: "Alternative analysis to know productivity in Krill 48.1 SubArea based on invariants parametres and lenght structures"
-author: "Mauricio Mardones"
-date:  "07 April, 2023"
+author: "Mardones, M; Watters, G.; Cárdenas, C."
+date:  "11 April, 2023"
 bibliography: LBSPR.bib
 csl: apa.csl
 link-citations: yes
@@ -37,7 +37,8 @@ One way to understand krill dynamics is through empirical data such as sizes str
 This is a simple apprach to know intrinsic productivity based on life history parameters.
 
 
-The krill population structure changes over time and space. Trying to understand these cycles is part of the assessment and management process for the population in the context of CCAMLR. (Figure 1)
+The krill population structure changes over time and space. Trying to understand these cycles is part of the assessment and management process for the population in the context of CCAMLR. (Figure 1).
+
 
 ![Figure 2. Length structure between Subaareas and Year](Size48.png)
 Focus on 48.1 SuArea (Figure 2).
