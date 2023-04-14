@@ -139,7 +139,7 @@ The LBSPR package can be used to generate the expected size composition,
 the SPR, and relative yield for a given set of biological and
 exploitation pattern parameters.
 
-## 3.1. LB_pars Object
+## 3.1. LB_pars Object to Antarctic Krill
 
 The first thing to do is to create a LB_pars object that contains all of
 the required parameters for the simulation model. LB_pars is an S4 class
@@ -168,7 +168,7 @@ functions):
 #class?LB_pars
 ```
 
-#### 3.1.2. Populate the LB_pars Object
+#### 3.1.2. Populate the LB_pars Object with Krill parameters
 
 The LB_pars object has 25 slots. However, not all parameters need to be
 specified for the simulation model.
@@ -187,20 +187,33 @@ minimum parameters that are needed for the simulation model are:
 
 Biology
 
-von Bertalanffy asymptotic length (Linf) M/K ratio (natural mortality
-divided by von Bertalanffy K coefficient) (MK) Length at 50% maturity
-(L50) Length at 95% maturity (L95) Exploitation - Length at 50%
-selectivity (SL50) - Length at 95% selectivity (SL95) - F/M ratio (FM)
-or SPR (SPR). If you specify both, the F/M value will be ignored.
+- von Bertalanffy asymptotic length `Linf` 
+- M/K ratio (natural mortality)divided by von Bertalanffy K coefficient) `MK` 
+- Length at 50% maturity (`L50`) 
+- Length at 95% maturity (`L95`) 
 
-Size Classes - Width of the length classes (BinWidth)
+Exploitation 
+
+- Length at 50% selectivity (`SL50`) 
+- Length at 95% selectivity (`SL95`) 
+- Biological Reference Point (BRP). 
+F/M ratio (`FM`) or Spawning Potential Ratio (`SPR`). If you specify both, the F/M value will be ignored.
+
+Size Classes 
+
+-Width of the length classes (`BinWidth`)
 
 Remember, you can find the help documentation for the LB_pars object by
 typing: `class?LB_pars` in the console.
 
 To create an example parameter object regarding @Maschette2020;
 
-```{r, echo =TRUE}
+Creating parms template
+
+```{r}
+MyPars <- new("LB_pars")
+## A blank LB_pars object created
+## Default values have been set for some parameters
 MyPars@Species <- "Euphausia superba"
 MyPars@Linf <- 60 
 MyPars@L50 <- 34 
@@ -217,6 +230,11 @@ MyPars@BinWidth <- 1
 
 MyPars@Walpha <- 1
 MyPars@Wbeta <- 3.0637 #r2 = 0.9651
+
+MyPars@BinWidth <-1
+MyPars@BinMax <- 70
+MyPars@BinMin <- 0
+MyPars@L_units <- "mm"
 ```
 
 BinMax not set. Using default of 1.3 Linf BinMin not set. Using default
@@ -225,17 +243,7 @@ that default values have been used. You can change these by specifying
 values in MyPars and re-running the LBSPRsim function.
 
 We'll manually set those values here so we don't keep seeing the
-messages throughout the vignette
-
-```{r, echo =TRUE}
-MyPars@BinWidth <-1
-MyPars@BinMax <- 70
-MyPars@BinMin <- 0
-MyPars@L_units <- "mm"
-```
-
-We can also choose to set the units for the length parameters:
-
+messages throughout the vignette. We can also choose to set the units for the length parameters by `L_units`
 
 
 ## 3.2 Running the Simulation Model
@@ -362,42 +370,14 @@ slotNames(MyLengths)
 However, it is probably easier to create the LB_lengths object by
 directly reading in a `CSV file`.
 
-Now, we need set our directory again
+<!-- Now, we need set our directory again -->
 
-```{r eho=FALSE}
-datdir <- setwd("~/DOCAS/LBSPR_Krill")  
-```
+<!-- ```{r eho=FALSE} -->
+<!-- datdir <- setwd("~/DOCAS/LBSPR_Krill")   -->
+<!-- ``` -->
 
 ### 4.2 Reading Krill Data
 
-```{r}
-MyPars <- new("LB_pars")
-## A blank LB_pars object created
-## Default values have been set for some parameters
-MyPars@Species <- "Euphausia superba"
-MyPars@Linf <- 60 
-MyPars@L50 <- 34 
-MyPars@L95 <- 55 # verrificar bibliografia
-MyPars@MK <- 0.4/0.45
-
-
-#Explotation
-MyPars@SL50 <- 40#numeric() #1
-MyPars@SL95 <- 56#numeric() #27
-MyPars@SPR <- 0.75 #numeric()# ###cambia el numero 0.4 a en blanco
-MyPars@BinWidth <- 1
-#MyPars@FM <- 1
-
-MyPars@Walpha <- 1
-MyPars@Wbeta <- 3.0637 #r2 = 0.9651
-
-MyPars@BinWidth <-1
-MyPars@BinMax <- 70
-MyPars@BinMin <- 0
-MyPars@L_units <- "mm"
-
-
-```
 
 Note that only the life history parameters need to be specified for the
 estimation model. The exploitation parameters will be estimated.
@@ -426,7 +406,6 @@ The LBSPR model is fitted using the `LBSPRfit` function:
 
 ```{r}
 myFit1 <- LBSPRfit(MyPars, Len1)
-
 ```
 
 Note that the Control argument can be used to modify the additional parameters or LBSPR model type (see description in earlier section).
@@ -505,7 +484,105 @@ MyPars@SL95 <- Mod@SL95[yr]
 plotTarg(MyPars, Len1, yr=yr)
 ```
 
-# 6. Some home works
+# 6. Productivity intrinsic by Strata
+
+One imortant thing in this analysis is considering spatial structure in 48.1. For this we can follorw Strata structure like show in this figure
+
+
+![Figure 3. Strata analysis Areas in 48.1](Strata.png)
+This consideration is because we have different size structure in each strata, like we can see in this figure.
+
+
+![Figure 3. Size length mean fishery by Strata and years](StrataLen.jpg)
+With this differences, we proceed to search intrinsic productivity (Spawning Potential Ratio) by strata and by years.
+
+### 6.1. Reading length strata data
+
+Brainsflied Strata
+```{r, echo =TRUE}
+Lenbs <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/Length_481_Krill_2.csv"), dataType="freq",sep=";",header=T)
+```
+
+Elephan Island  Strata
+```{r, echo =TRUE}
+Lenei <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtEI.csv"), dataType="freq",sep=";",header=T)
+```
+
+Extra Strata
+```{r, echo =TRUE}
+Lenex <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtExtra.csv"), dataType="freq",sep=";",header=T)
+```
+Join Strata
+```{r, echo =TRUE}
+Lenjo <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtJOIN.csv"), dataType="freq",sep=";",header=T)
+```
+SSIW Strata
+```{r, echo =TRUE}
+Lenssiw <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtSSIW.csv"), dataType="freq",sep=";",header=T)
+```
+
+### 6.2 Fit the Model by strata
+
+The LBSPR model is fitted using the `LBSPRfit` function:
+
+```{r echo=TRUE, message=FALSE}
+fitbs <- LBSPRfit(MyPars, Lenbs)
+fitei <- LBSPRfit(MyPars, Lenei)
+fitex <- LBSPRfit(MyPars, Lenex)
+fitjo <- LBSPRfit(MyPars, Lenjo)
+fitssiw <- LBSPRfit(MyPars, Lenbssiw)
+
+```
+The smoother parameter estimates can be accessed from the `myFit` object (which is an object of class LB_obj [see earlier section for details]):
+In this cae, we can look up estimates in Brainsfield Strata
+
+```{r, echo=TRUE}
+fitei@Ests
+```
+
+Plotting fits by strata
+
+Fit Bransfield
+```{r}
+plotSize(fitbs)
+```
+
+Fit Elephan Island
+```{r}
+plotSize(fitei)
+```
+
+Fit Extra
+```{r}
+plotSize(fitex)
+```
+
+Fit Join
+```{r}
+plotSize(fitjo)
+```
+
+Fit SSIW
+```{r}
+plotSize(fitssiw)
+```
+
+Now we use `plotMat` function to know specified
+maturity-at-length curve by strata, and the estimated selectivity-at-length curve.
+
+Braisnfield curve
+```{r, echo=FALSE}
+plotMat(fitbs,
+        useSmooth = TRUE,
+        Title = "Brainsfield")
+```
+Elephant Island curve
+```{r, echo=FALSE}
+plotMat(fitei,
+        useSmooth = TRUE,
+        Title = "Elephant Island")
+```
+# 7. Take Home Messages 
 
 - Preliminar outputs to know intrinsic productivity of Antarctic krill (*Euphausia superba*) in Antarctic Peninsula, SubArea 48.1.
 
@@ -518,4 +595,4 @@ plotTarg(MyPars, Len1, yr=yr)
 - This code with methodology in this
 [link](https://github.com/MauroMardones/LBSPR_Krill)
 
-# 7. References
+# 8. References
