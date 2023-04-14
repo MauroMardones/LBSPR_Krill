@@ -8,22 +8,9 @@ csl: apa.csl
 link-citations: yes
 linkcolor: blue
 output:
-  html_document:
+  pdf_document:
     keep_md: true
     toc: true
-    toc_deep: 3
-    toc_float:
-      collapsed: false
-      smooth_scroll: false
-    theme: cosmo
-    fontsize: 0.9em
-    linestretch: 1.7
-    html-math-method: katex
-    self-contained: true
-    code-tools: true
-editor_options: 
-  markdown: 
-    wrap: 72
 ---
 
 # Context
@@ -338,10 +325,14 @@ for the Control argument.
 
 The plotSim function can be used to plot MySim:
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/unnamed-chunk-9-1.jpeg" alt="Ploteo de Simulaci?n estructuras."  />
-<p class="caption">Ploteo de Simulaci?n estructuras.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{index_files/figure-latex/unnamed-chunk-9-1} 
+
+}
+
+\caption{Ploteo de Simulaci?n estructuras.}\label{fig:unnamed-chunk-9}
+\end{figure}
 
 By default the function plots: a) the expected (equilibrium) size
 structure of the catch and the expected unfished size structure of the
@@ -354,17 +345,25 @@ The plotSim function can be controlled in a number of ways. For example,
 you can plot the expected unfished and fished size structure of the
 population by changing the lf.type argument:
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/unnamed-chunk-10-1.jpeg" alt="Ploteo de Simulaci?n Population."  />
-<p class="caption">Ploteo de Simulaci?n Population.</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{index_files/figure-latex/unnamed-chunk-10-1} 
+
+}
+
+\caption{Ploteo de Simulaci?n Population.}\label{fig:unnamed-chunk-10}
+\end{figure}
 
 Individual plots can be created using the type argument:
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/unnamed-chunk-11-1.jpeg" alt="Plot Leng Freq"  />
-<p class="caption">Plot Leng Freq</p>
-</div>
+\begin{figure}
+
+{\centering \includegraphics{index_files/figure-latex/unnamed-chunk-11-1} 
+
+}
+
+\caption{Plot Leng Freq}\label{fig:unnamed-chunk-11}
+\end{figure}
 
 See ?plotSim for more options for plotting the output of the LBSPR
 simulation model.
@@ -432,7 +431,9 @@ The `plotSize` function can be used to plot the imported length data. This is us
 plotSize(Len1)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-16-1.jpeg" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-16-1} \end{center}
 
 ### 4.4 Fit the Model
 
@@ -517,19 +518,22 @@ data.frame(rawSL50=myFit1@SL50, rawSL95=myFit1@SL95, rawFM=myFit1@FM, rawSPR=myF
 The `plotSize` function can also be used to show the model fit to the
 data:
 
-<img src="index_files/figure-html/unnamed-chunk-20-1.jpeg" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-20-1} \end{center}
 
 Similarly, the plotMat function can be used to show the specified
 maturity-at-length curve, and the estimated selectivity-at-length curve:
 
-<img src="index_files/figure-html/unnamed-chunk-21-1.jpeg" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-21-1} \end{center}
 
 Finally, the plotEsts function can be used to visually display the
 estimated parameters. Note that this works for all data sets, but only
 makes sense when there are several years of data:
 
 
-<img src="index_files/figure-html/unnamed-chunk-22-1.jpeg" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-22-1} \end{center}
 
 By default the plotting function adds the smoother line to the estimated
 points.
@@ -550,7 +554,8 @@ MyPars@SL50 <- Mod@SL50[yr]
 MyPars@SL95 <- Mod@SL95[yr] 
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-24-1.jpeg" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-24-1} \end{center}
 
 # 6. Productivity intrinsic by Strata
 
@@ -644,7 +649,9 @@ Fit Bransfield
 plotSize(fitbs)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-32-1.jpeg" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-32-1} \end{center}
 
 Fit Elephan Island
 
@@ -652,7 +659,9 @@ Fit Elephan Island
 plotSize(fitei)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-33-1.jpeg" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-33-1} \end{center}
 
 Fit Extra
 
@@ -660,7 +669,9 @@ Fit Extra
 plotSize(fitex)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-34-1.jpeg" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-34-1} \end{center}
 
 Fit Join
 
@@ -668,7 +679,9 @@ Fit Join
 plotSize(fitjo)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-35-1.jpeg" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-35-1} \end{center}
 
 Fit SSIW
 
@@ -676,22 +689,29 @@ Fit SSIW
 plotSize(fitssiw)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-36-1.jpeg" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-36-1} \end{center}
 
 Now we use `plotMat` function to know specified
 maturity-at-length curve by strata, and the estimated selectivity-at-length curve.
 
-<img src="index_files/figure-html/unnamed-chunk-37-1.jpeg" style="display: block; margin: auto;" />
 
-<img src="index_files/figure-html/unnamed-chunk-38-1.jpeg" style="display: block; margin: auto;" />
-
-<img src="index_files/figure-html/unnamed-chunk-39-1.jpeg" style="display: block; margin: auto;" />
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-37-1} \end{center}
 
 
-<img src="index_files/figure-html/unnamed-chunk-40-1.jpeg" style="display: block; margin: auto;" />
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-38-1} \end{center}
 
 
-<img src="index_files/figure-html/unnamed-chunk-41-1.jpeg" style="display: block; margin: auto;" />
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-39-1} \end{center}
+
+
+
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-40-1} \end{center}
+
+
+
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-41-1} \end{center}
 
 ### 6.3 Comparing producivity between Strata
 
@@ -754,7 +774,9 @@ allsprpl <- ggplot(allspr,
 allsprpl
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-43-1.jpeg" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-43-1} \end{center}
 
 
 

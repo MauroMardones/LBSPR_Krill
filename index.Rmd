@@ -8,7 +8,7 @@ csl: apa.csl
 link-citations: yes
 linkcolor: blue
 output:
-  html_document:
+  pdf_document:
     keep_md: true
     toc: true
     toc_deep: 3
