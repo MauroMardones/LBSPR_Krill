@@ -2,7 +2,7 @@
 title: "Searching Intrinsic Productivity Antarctic Krill"
 subtitle: "Alternative analysis to know productivity in Krill 48.1 SubArea based on invariants parametres and lenght structures"
 author: "Mardones, M; Watters, G.; Cárdenas, C."
-date:  "11 April, 2023"
+date:  "14 April, 2023"
 bibliography: LBSPR.bib
 csl: apa.csl
 link-citations: yes
@@ -114,7 +114,8 @@ knitr::opts_chunk$set(echo = TRUE,
                       warning = FALSE,
                       fig.align = 'center',
                       dev = 'jpeg',
-                      dpi = 300)
+                      dpi = 300,
+                      fig.width = 6)
 #XQuartz is a mess, put this in your onload to default to cairo instead
 options(bitmapType = "cairo") 
 # (https://github.com/tidyverse/ggplot2/issues/2655)
@@ -141,7 +142,7 @@ The LBSPR package can be used to generate the expected size composition,
 the SPR, and relative yield for a given set of biological and
 exploitation pattern parameters.
 
-## 3.1. LB_pars Object
+## 3.1. LB_pars Object to Antarctic Krill
 
 The first thing to do is to create a LB_pars object that contains all of
 the required parameters for the simulation model. LB_pars is an S4 class
@@ -181,7 +182,7 @@ functions):
 #class?LB_pars
 ```
 
-#### 3.1.2. Populate the LB_pars Object
+#### 3.1.2. Populate the LB_pars Object with Krill parameters
 
 The LB_pars object has 25 slots. However, not all parameters need to be
 specified for the simulation model.
@@ -200,21 +201,34 @@ minimum parameters that are needed for the simulation model are:
 
 Biology
 
-von Bertalanffy asymptotic length (Linf) M/K ratio (natural mortality
-divided by von Bertalanffy K coefficient) (MK) Length at 50% maturity
-(L50) Length at 95% maturity (L95) Exploitation - Length at 50%
-selectivity (SL50) - Length at 95% selectivity (SL95) - F/M ratio (FM)
-or SPR (SPR). If you specify both, the F/M value will be ignored.
+- von Bertalanffy asymptotic length `Linf` 
+- M/K ratio (natural mortality)divided by von Bertalanffy K coefficient) `MK` 
+- Length at 50% maturity (`L50`) 
+- Length at 95% maturity (`L95`) 
 
-Size Classes - Width of the length classes (BinWidth)
+Exploitation 
+
+- Length at 50% selectivity (`SL50`) 
+- Length at 95% selectivity (`SL95`) 
+- Biological Reference Point (BRP). 
+F/M ratio (`FM`) or Spawning Potential Ratio (`SPR`). If you specify both, the F/M value will be ignored.
+
+Size Classes 
+
+-Width of the length classes (`BinWidth`)
 
 Remember, you can find the help documentation for the LB_pars object by
 typing: `class?LB_pars` in the console.
 
 To create an example parameter object regarding @Maschette2020;
 
+Creating parms template
+
 
 ```r
+MyPars <- new("LB_pars")
+## A blank LB_pars object created
+## Default values have been set for some parameters
 MyPars@Species <- "Euphausia superba"
 MyPars@Linf <- 60 
 MyPars@L50 <- 34 
@@ -231,6 +245,11 @@ MyPars@BinWidth <- 1
 
 MyPars@Walpha <- 1
 MyPars@Wbeta <- 3.0637 #r2 = 0.9651
+
+MyPars@BinWidth <-1
+MyPars@BinMax <- 70
+MyPars@BinMin <- 0
+MyPars@L_units <- "mm"
 ```
 
 BinMax not set. Using default of 1.3 Linf BinMin not set. Using default
@@ -239,18 +258,7 @@ that default values have been used. You can change these by specifying
 values in MyPars and re-running the LBSPRsim function.
 
 We'll manually set those values here so we don't keep seeing the
-messages throughout the vignette
-
-
-```r
-MyPars@BinWidth <-1
-MyPars@BinMax <- 70
-MyPars@BinMin <- 0
-MyPars@L_units <- "mm"
-```
-
-We can also choose to set the units for the length parameters:
-
+messages throughout the vignette. We can also choose to set the units for the length parameters by `L_units`
 
 
 ## 3.2 Running the Simulation Model
@@ -331,7 +339,7 @@ for the Control argument.
 The plotSim function can be used to plot MySim:
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-html/unnamed-chunk-10-1.jpeg" alt="Ploteo de Simulaci?n estructuras."  />
+<img src="index_files/figure-html/unnamed-chunk-9-1.jpeg" alt="Ploteo de Simulaci?n estructuras."  />
 <p class="caption">Ploteo de Simulaci?n estructuras.</p>
 </div>
 
@@ -347,14 +355,14 @@ you can plot the expected unfished and fished size structure of the
 population by changing the lf.type argument:
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-html/unnamed-chunk-11-1.jpeg" alt="Ploteo de Simulaci?n Population."  />
+<img src="index_files/figure-html/unnamed-chunk-10-1.jpeg" alt="Ploteo de Simulaci?n Population."  />
 <p class="caption">Ploteo de Simulaci?n Population.</p>
 </div>
 
 Individual plots can be created using the type argument:
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-html/unnamed-chunk-12-1.jpeg" alt="Plot Leng Freq"  />
+<img src="index_files/figure-html/unnamed-chunk-11-1.jpeg" alt="Plot Leng Freq"  />
 <p class="caption">Plot Leng Freq</p>
 </div>
 
@@ -395,38 +403,11 @@ Now, we need set our directory again
 
 
 ```r
-datdir <- setwd("~/DOCAS/LBSPR_Krill")  
+datdir <- setwd("~/DOCAS/LBSPR_Krill")
 ```
 
 ### 4.2 Reading Krill Data
 
-
-```r
-MyPars <- new("LB_pars")
-## A blank LB_pars object created
-## Default values have been set for some parameters
-MyPars@Species <- "Euphausia superba"
-MyPars@Linf <- 60 
-MyPars@L50 <- 34 
-MyPars@L95 <- 55 # verrificar bibliografia
-MyPars@MK <- 0.4/0.45
-
-
-#Explotation
-MyPars@SL50 <- 40#numeric() #1
-MyPars@SL95 <- 56#numeric() #27
-MyPars@SPR <- 0.75 #numeric()# ###cambia el numero 0.4 a en blanco
-MyPars@BinWidth <- 1
-#MyPars@FM <- 1
-
-MyPars@Walpha <- 1
-MyPars@Wbeta <- 3.0637 #r2 = 0.9651
-
-MyPars@BinWidth <-1
-MyPars@BinMax <- 70
-MyPars@BinMin <- 0
-MyPars@L_units <- "mm"
-```
 
 Note that only the life history parameters need to be specified for the
 estimation model. The exploitation parameters will be estimated.
@@ -451,7 +432,7 @@ The `plotSize` function can be used to plot the imported length data. This is us
 plotSize(Len1)
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-18-1.jpeg" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-16-1.jpeg" style="display: block; margin: auto;" />
 
 ### 4.4 Fit the Model
 
@@ -536,19 +517,19 @@ data.frame(rawSL50=myFit1@SL50, rawSL95=myFit1@SL95, rawFM=myFit1@FM, rawSPR=myF
 The `plotSize` function can also be used to show the model fit to the
 data:
 
-<img src="index_files/figure-html/unnamed-chunk-22-1.jpeg" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-20-1.jpeg" style="display: block; margin: auto;" />
 
 Similarly, the plotMat function can be used to show the specified
 maturity-at-length curve, and the estimated selectivity-at-length curve:
 
-<img src="index_files/figure-html/unnamed-chunk-23-1.jpeg" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-21-1.jpeg" style="display: block; margin: auto;" />
 
 Finally, the plotEsts function can be used to visually display the
 estimated parameters. Note that this works for all data sets, but only
 makes sense when there are several years of data:
 
 
-<img src="index_files/figure-html/unnamed-chunk-24-1.jpeg" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-22-1.jpeg" style="display: block; margin: auto;" />
 
 By default the plotting function adds the smoother line to the estimated
 points.
@@ -569,9 +550,215 @@ MyPars@SL50 <- Mod@SL50[yr]
 MyPars@SL95 <- Mod@SL95[yr] 
 ```
 
-<img src="index_files/figure-html/unnamed-chunk-26-1.jpeg" style="display: block; margin: auto;" />
+<img src="index_files/figure-html/unnamed-chunk-24-1.jpeg" style="display: block; margin: auto;" />
 
-# 6. Some home works
+# 6. Productivity intrinsic by Strata
+
+One imortant thing in this analysis is considering spatial structure in 48.1. For this we can follorw Strata structure like show in this figure
+
+
+<center>
+![Figure 3. Strata analysis Areas in 48.1](Strata.png){width=50%}
+</center>
+
+
+This consideration is because we have different size structure in each strata, like we can see in this figure.
+
+
+![Figure 3. Size length mean fishery by Strata and years](StrataLen.jpg)
+With this differences, we proceed to search intrinsic productivity (Spawning Potential Ratio) by strata and by years.
+
+### 6.1. Reading length strata data
+
+Brainsflied Strata
+
+```r
+Lenbs <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/Length_481_Krill_2.csv"), dataType="freq",sep=";",header=T)
+```
+
+Elephan Island  Strata
+
+```r
+Lenei <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtEI.csv"), dataType="freq",sep=";",header=T)
+```
+
+Extra Strata
+
+```r
+Lenex <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtExtra.csv"), dataType="freq",sep=";",header=T)
+```
+Join Strata
+
+```r
+Lenjo <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtJOIN.csv"), dataType="freq",sep=";",header=T)
+```
+SSIW Strata
+
+```r
+Lenssiw <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtSSIW.csv"), dataType="freq",sep=";",header=T)
+```
+
+### 6.2 Fit the Model by strata
+
+The LBSPR model is fitted using the `LBSPRfit` function:
+
+
+```r
+fitbs <- LBSPRfit(MyPars, Lenbs)
+fitei <- LBSPRfit(MyPars, Lenei)
+fitex <- LBSPRfit(MyPars, Lenex)
+fitjo <- LBSPRfit(MyPars, Lenjo)
+fitssiw <- LBSPRfit(MyPars, Lenssiw)
+```
+The smoother parameter estimates can be accessed from the `myFit` object (which is an object of class LB_obj [see earlier section for details]):
+In this cae, we can look up estimates in Brainsfield Strata
+
+
+```r
+fitei@Ests
+```
+
+```
+##        SL50  SL95   FM  SPR
+##  [1,] 43.66 54.32 8.51 0.22
+##  [2,] 43.10 53.47 8.17 0.21
+##  [3,] 42.49 52.94 7.94 0.21
+##  [4,] 42.48 52.71 7.80 0.22
+##  [5,] 43.99 54.13 8.06 0.25
+##  [6,] 44.51 54.19 8.01 0.27
+##  [7,] 44.83 54.27 8.51 0.28
+##  [8,] 45.12 54.14 8.76 0.29
+##  [9,] 45.88 54.69 9.32 0.31
+## [10,] 47.24 56.25 9.98 0.36
+## [11,] 47.81 57.04 9.49 0.39
+## [12,] 47.77 56.79 8.75 0.44
+## [13,] 48.58 57.86 8.88 0.43
+## [14,] 49.11 58.44 9.02 0.43
+```
+
+Plotting fits by strata
+
+Fit Bransfield
+
+```r
+plotSize(fitbs)
+```
+
+<img src="index_files/figure-html/unnamed-chunk-32-1.jpeg" style="display: block; margin: auto;" />
+
+Fit Elephan Island
+
+```r
+plotSize(fitei)
+```
+
+<img src="index_files/figure-html/unnamed-chunk-33-1.jpeg" style="display: block; margin: auto;" />
+
+Fit Extra
+
+```r
+plotSize(fitex)
+```
+
+<img src="index_files/figure-html/unnamed-chunk-34-1.jpeg" style="display: block; margin: auto;" />
+
+Fit Join
+
+```r
+plotSize(fitjo)
+```
+
+<img src="index_files/figure-html/unnamed-chunk-35-1.jpeg" style="display: block; margin: auto;" />
+
+Fit SSIW
+
+```r
+plotSize(fitssiw)
+```
+
+<img src="index_files/figure-html/unnamed-chunk-36-1.jpeg" style="display: block; margin: auto;" />
+
+Now we use `plotMat` function to know specified
+maturity-at-length curve by strata, and the estimated selectivity-at-length curve.
+
+<img src="index_files/figure-html/unnamed-chunk-37-1.jpeg" style="display: block; margin: auto;" />
+
+<img src="index_files/figure-html/unnamed-chunk-38-1.jpeg" style="display: block; margin: auto;" />
+
+<img src="index_files/figure-html/unnamed-chunk-39-1.jpeg" style="display: block; margin: auto;" />
+
+
+<img src="index_files/figure-html/unnamed-chunk-40-1.jpeg" style="display: block; margin: auto;" />
+
+
+<img src="index_files/figure-html/unnamed-chunk-41-1.jpeg" style="display: block; margin: auto;" />
+
+### 6.3 Comparing producivity between Strata
+
+For this, we extract `SPR` from each slot in the fits models by strata. 
+
+
+```r
+sprbs <- as.data.frame(cbind(fitbs@Years, 
+                             fitbs@SPR)) 
+colnames(sprbs) <- c("Year","SPR")
+sprbs$SPRv <- rep("BS", nrow(sprbs))
+
+sprei <- as.data.frame(cbind(fitei@Years, 
+                             fitei@SPR)) 
+colnames(sprei) <- c("Year","SPR")
+sprei$SPRv <- rep("EI", nrow(sprei))
+
+sprex <- as.data.frame(cbind(fitex@Years, 
+                             fitex@SPR)) 
+colnames(sprex) <- c("Year","SPR")
+sprex$SPRv <- rep("EX", nrow(sprex))
+
+sprjo <- as.data.frame(cbind(fitjo@Years, 
+                             fitjo@SPR)) 
+colnames(sprjo) <- c("Year","SPR")
+sprjo$SPRv <- rep("JO", nrow(sprjo))
+
+sprssiw <- as.data.frame(cbind(fitssiw@Years, 
+                             fitssiw@SPR)) 
+colnames(sprssiw) <- c("Year","SPR")
+sprssiw$SPRv <- rep("SSWI", nrow(sprssiw))
+
+allspr <- rbind(sprbs, sprei, sprex, sprjo, sprssiw)
+```
+Plot with all intrinsic productivity.
+
+
+
+```r
+allsprpl <- ggplot(allspr,
+       aes(Year,
+           SPR,
+           color=SPRv))+
+  geom_point()+
+  stat_smooth(method = "loess",
+              alpha=0.3)+
+  geom_hline(yintercept = 0.75,
+               color = "red",
+               linetype  = 2,
+             alpha=0.5)+
+  facet_wrap(.~SPRv, ncol = 3)+
+  scale_color_viridis_d(option = "F")+
+  scale_y_log10()+
+  xlim(2001,2021)+
+  theme_bw()+
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 90, hjust = 2))+
+  ggtitle(label="Intrinsic Productivity (SPR)")
+
+allsprpl
+```
+
+<img src="index_files/figure-html/unnamed-chunk-43-1.jpeg" style="display: block; margin: auto;" />
+
+
+
+# 7. Take Home Messages 
 
 - Preliminar outputs to know intrinsic productivity of Antarctic krill (*Euphausia superba*) in Antarctic Peninsula, SubArea 48.1.
 
@@ -584,4 +771,4 @@ MyPars@SL95 <- Mod@SL95[yr]
 - This code with methodology in this
 [link](https://github.com/MauroMardones/LBSPR_Krill)
 
-# 7. References
+# 8. References

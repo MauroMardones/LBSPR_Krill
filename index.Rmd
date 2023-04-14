@@ -113,7 +113,8 @@ knitr::opts_chunk$set(echo = TRUE,
                       warning = FALSE,
                       fig.align = 'center',
                       dev = 'jpeg',
-                      dpi = 300)
+                      dpi = 300,
+                      fig.width = 6)
 #XQuartz is a mess, put this in your onload to default to cairo instead
 options(bitmapType = "cairo") 
 # (https://github.com/tidyverse/ggplot2/issues/2655)
@@ -370,11 +371,11 @@ slotNames(MyLengths)
 However, it is probably easier to create the LB_lengths object by
 directly reading in a `CSV file`.
 
-<!-- Now, we need set our directory again -->
+Now, we need set our directory again
 
-<!-- ```{r eho=FALSE} -->
-<!-- datdir <- setwd("~/DOCAS/LBSPR_Krill")   -->
-<!-- ``` -->
+```{r eho=FALSE}
+datdir <- setwd("~/DOCAS/LBSPR_Krill")
+```
 
 ### 4.2 Reading Krill Data
 
@@ -489,7 +490,11 @@ plotTarg(MyPars, Len1, yr=yr)
 One imortant thing in this analysis is considering spatial structure in 48.1. For this we can follorw Strata structure like show in this figure
 
 
-![Figure 3. Strata analysis Areas in 48.1](Strata.png)
+<center>
+![Figure 3. Strata analysis Areas in 48.1](Strata.png){width=50%}
+</center>
+
+
 This consideration is because we have different size structure in each strata, like we can see in this figure.
 
 
@@ -530,7 +535,7 @@ fitbs <- LBSPRfit(MyPars, Lenbs)
 fitei <- LBSPRfit(MyPars, Lenei)
 fitex <- LBSPRfit(MyPars, Lenex)
 fitjo <- LBSPRfit(MyPars, Lenjo)
-fitssiw <- LBSPRfit(MyPars, Lenbssiw)
+fitssiw <- LBSPRfit(MyPars, Lenssiw)
 
 ```
 The smoother parameter estimates can be accessed from the `myFit` object (which is an object of class LB_obj [see earlier section for details]):
@@ -570,18 +575,101 @@ plotSize(fitssiw)
 Now we use `plotMat` function to know specified
 maturity-at-length curve by strata, and the estimated selectivity-at-length curve.
 
-Braisnfield curve
 ```{r, echo=FALSE}
 plotMat(fitbs,
         useSmooth = TRUE,
         Title = "Brainsfield")
 ```
-Elephant Island curve
+
 ```{r, echo=FALSE}
 plotMat(fitei,
         useSmooth = TRUE,
         Title = "Elephant Island")
 ```
+
+```{r, echo=FALSE}
+plotMat(fitex,
+        useSmooth = TRUE,
+        Title = "Extra")
+```
+
+
+```{r, echo=FALSE}
+plotMat(fitjo,
+        useSmooth = TRUE,
+        Title = "Join")
+```
+
+
+```{r, echo=FALSE}
+plotMat(fitssiw,
+        useSmooth = TRUE,
+        Title = "SSIW")
+```
+
+### 6.3 Comparing producivity between Strata
+
+For this, we extract `SPR` from each slot in the fits models by strata. 
+
+```{r}
+sprbs <- as.data.frame(cbind(fitbs@Years, 
+                             fitbs@SPR)) 
+colnames(sprbs) <- c("Year","SPR")
+sprbs$SPRv <- rep("BS", nrow(sprbs))
+
+sprei <- as.data.frame(cbind(fitei@Years, 
+                             fitei@SPR)) 
+colnames(sprei) <- c("Year","SPR")
+sprei$SPRv <- rep("EI", nrow(sprei))
+
+sprex <- as.data.frame(cbind(fitex@Years, 
+                             fitex@SPR)) 
+colnames(sprex) <- c("Year","SPR")
+sprex$SPRv <- rep("EX", nrow(sprex))
+
+sprjo <- as.data.frame(cbind(fitjo@Years, 
+                             fitjo@SPR)) 
+colnames(sprjo) <- c("Year","SPR")
+sprjo$SPRv <- rep("JO", nrow(sprjo))
+
+sprssiw <- as.data.frame(cbind(fitssiw@Years, 
+                             fitssiw@SPR)) 
+colnames(sprssiw) <- c("Year","SPR")
+sprssiw$SPRv <- rep("SSWI", nrow(sprssiw))
+
+allspr <- rbind(sprbs, sprei, sprex, sprjo, sprssiw)
+
+```
+Plot with all intrinsic productivity.
+
+
+```{r warning=FALSE}
+
+allsprpl <- ggplot(allspr,
+       aes(Year,
+           SPR,
+           color=SPRv))+
+  geom_point()+
+  stat_smooth(method = "loess",
+              alpha=0.3)+
+  geom_hline(yintercept = 0.75,
+               color = "red",
+               linetype  = 2,
+             alpha=0.5)+
+  facet_wrap(.~SPRv, ncol = 3)+
+  scale_color_viridis_d(option = "F")+
+  scale_y_log10()+
+  xlim(2001,2021)+
+  theme_bw()+
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 90, hjust = 2))+
+  ggtitle(label="Intrinsic Productivity (SPR)")
+
+allsprpl
+```
+
+
+
 # 7. Take Home Messages 
 
 - Preliminar outputs to know intrinsic productivity of Antarctic krill (*Euphausia superba*) in Antarctic Peninsula, SubArea 48.1.
