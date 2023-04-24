@@ -663,6 +663,7 @@ allspr <- rbind(sprbs, sprei, sprex, sprjo, sprssiw)
 Plot with all intrinsic productivity.
 
 
+
 ```{r warning=FALSE}
 
 allsprpl <- ggplot(allspr,
