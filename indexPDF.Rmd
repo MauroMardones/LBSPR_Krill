@@ -12,7 +12,7 @@ output:
 ---
 
 ```{=tex}
-\fontsize{12}{16}
+\fontsize{12}{14}
 \selectfont{}
 ```
 \newpage
@@ -25,13 +25,16 @@ output:
 
 # ABSTRACT
 
-Testing changes in intrinsic productivity in Antarctic Krill (*Euphausia
-superba*) with Length-Based Spawning Potential Ratio (LBSPR)
-[@Hordyk2014c; @Hordyk2016].
+Testing changes spatial and temporal in intrinsic productivity in Antarctic Krill (*Euphausia superba*) with Length-Based Spawning Potential Ratio (LBSPR).
+
 
 One way to understand krill dynamics is through empirical data such as sizes structure from the fishery. In this sense we can, through the life history parameters and the sizes through the years, what should be the virgin reproductive potential (intrinsic productivity) and under the effects of fishing.
 
-This is a simple approach to know intrinsic productivity based on life history parameters.
+
+
+Recognizing the intrinsic productivity changes of krill based on their reproductive potential and how this changes in time and space, serves to recognize the particularities of this species and the implications that these results may have for management in the CCAMLR context.
+
+
 
 
 
@@ -58,12 +61,12 @@ In this sense, we propose an analysis to understand the intrinsic productivity t
 
 
 
-This guide contains functions to run the Length-Based Spawning
-Potential Ratio (LBSPR) method. The LBSPR package can be used in two
-ways: 1) simulating the expected length composition, growth curve, and
-SPR and yield curves using the LBSPR model and 2) fitting to empirical
-length data to provide an estimate of the spawning potential ratio
-(SPR).
+
+\newpage
+# 2. METHODOLOGY
+
+
+
 
 The LBSPR method has been developed for data-limited fisheries, where
 few data are available other than a representative sample of the size
@@ -84,14 +87,14 @@ these assumptions.
 
 There are two versions of the LBSPR model included in this package.
 
-## 1.1. Age-Structured Length-Based Model
+## 2.1. Age-Structured Length-Based Model
 
 The LBSPR model described by [@Hordyk2014c; @Hordyk2016], and tested in
 a MSE framework [@Hordyk2014c], use a conventional age-structured
 equilibrium population model. An important assumption of this model
 structure is that selectivity is age-based not length-based.
 
-## 1.2. Length-Structured Growth-Type-Group Model
+## 2.2. Length-Structured Growth-Type-Group Model
 
 @Hordyk2016 describe a length-structured version of the LBSPR model that
 uses growth-type-groups (GTG) to account for size-based selectivity. The
@@ -109,9 +112,6 @@ estimation functions can be used to switch to the age-structured LBSPR
 model.
 
 
-\newpage
-# 2. METHODOLOGY
-
 
 The krill population structure changes over time and space. Trying to understand these cycles is part of the assessment and management process for the population in the context of CCAMLR. (Figure 1).
 
@@ -121,7 +121,7 @@ Focus on 48.1 SuArea (Figure 1).
 ![Figure 1. Size distribution Krill 48.1 SubArea](Map1.png)
 LB-SPR uses length-composition data and as- sumptions about biological parameters to make a rapid assess- ment of stock status relative to unfished levels assuming equilibrium conditions (Hordyk et al. 2015; Prince et al. 2015b). While LB-SPR can use multiple years of length data, status deter- mination is based on one year of data at a time (i.e., estimates of status over multiple years are based on that year’s length compo- sition alone). Mean-length mortality estimators (e.g., Gedamke and Hoenig 2006), first developed by Beverton and Holt (1957), assume that fishing mortality directly influences mean length of the catch and have been used for assessments in the US South Atlantic, Pacific islands, and Caribbean (Ehrhardt and Ault 1992; Ault et al. 2005, 2008; Gedamke and Hoenig 2006; Nadon et al. 2015). As measures of stock status, these length-based methods derive the spawning potential ratio (SPR) reference point, defined as the proportion of unfished reproductive potential at a given level of fishing pressure (Goodyear 1993).
 
-## 2.1. Installing the Package
+## 2.3. Installing the Package
 
 The LBSPR package is now available on CRAN:
 
@@ -154,19 +154,19 @@ library(stringr)
 ```
 \newpage
 
-## 2.2. Simulation
+## 2.4. Simulation
 
 The LBSPR package can be used to generate the expected size composition,
 the SPR, and relative yield for a given set of biological and
 exploitation pattern parameters.
 
-## 2.3. LB_pars Object to Antarctic Krill
+## 2.5. LB_pars Object to Antarctic Krill
 
 The first thing to do is to create a LB_pars object that contains all of
 the required parameters for the simulation model. LB_pars is an S4 class
 object.
 
-#### 2.3.1. Create a new LB_pars Object
+#### 2.5.1. Create a new LB_pars Object
 
 To create a new LB_pars object you use the new function:
 
@@ -189,7 +189,7 @@ functions):
 #class?LB_pars
 ```
 
-#### 2.3.2. Populate the LB_pars Object with Krill parameters
+#### 2.5.2. Populate the LB_pars Object with Krill parameters
 
 The LB_pars object has 25 slots. However, not all parameters need to be
 specified for the simulation model.
@@ -267,7 +267,7 @@ We'll manually set those values here so we don't keep seeing the
 messages throughout the vignette. We can also choose to set the units for the length parameters by `L_units`
 
 
-## 2.4. Running the Simulation Model
+## 2.6. Running the Simulation Model
 
 Now we are ready to run the LBSPR simulation model. To do this we use
 the LBSPRsim function: ngtg function es el \# de grupos para el GTG
@@ -279,7 +279,7 @@ MySim <- LBSPRsim(MyPars,
                                maxFM=1)) 
 ```
 
-#### 2.4.1. The LB_obj Object
+#### 2.6.1. The LB_obj Object
 
 The output of the LBSPRsim function is an object of class LB_obj. This
 is another S4 object, and contains all of the information from the
@@ -290,7 +290,7 @@ LB_obj. You should not modify the LB_obj object directly. Rather, make
 changes to the LB_pars object (MyPars in this case), and re-run the
 simulation model (or other functions, covered later in the vignette).
 
-#### 2.4.2. Simulation Output
+#### 2.6.2. Simulation Output
 
 Let's take a look at some of the simulated output.
 
@@ -317,7 +317,7 @@ If the selectivity pattern excludes all but the largest individuals from
 being exploited, it is possible to have a very high F/M ratio in a
 sustainable fishery (high SPR). And visceverse!!
 
-#### 2.4.3. Control Options
+#### 2.6.3. Control Options
 
 There are a number of additional parameters that can be modified to
 control other aspects of the simulation model.
@@ -329,7 +329,7 @@ to the Age-Structured model (Hordyk et al. 2015a, b):
 See the help file for the LBSPRsim function for additional parameters
 for the Control argument.
 
-#### 2.4.4. Plotting the Simulation
+#### 2.6.4. Plotting the Simulation
 
 The plotSim function can be used to plot MySim:
 
@@ -369,13 +369,13 @@ simulation model.
 
 \newpage
 
-## 2.5 Fitting Empirical Krill Length Data
+## 2.7 Fitting Empirical Krill Length Data
 
 Two objects are required to fit the LBSPR model to length data: LB_pars
 which contains the life-history parameters (described above) and
 LB_lengths, which contains the length frequency data.
 
-#### 2.5.1 Creating a LB_lengths object
+#### 2.7.1 Creating a LB_lengths object
 
 A LB_lengths object can be created in two ways. The new function can be
 used to create an empty object which can be manually populated:
@@ -397,7 +397,7 @@ Now, we need set our directory again
 datdir <- setwd("~/DOCAS/LBSPR_Krill")
 ```
 
-#### 2.5.2 Reading Krill Data
+#### 2.7.2 Reading Krill Data
 
 
 Note that only the life history parameters need to be specified for the
@@ -413,7 +413,7 @@ Another form to read data is: A length frequency data set with multiple
 years and a header row (identical to Len1 data, but with a header row):
 
 
-#### 2.5.3 Plotting Length Data Krill
+#### 2.7.3 Plotting Length Data Krill
 
 The `plotSize` function can be used to plot the imported length data. This is usually a good idea to do before proceeding with fitting the model, to confirm that everything has been read in correctly:
 
@@ -421,7 +421,7 @@ The `plotSize` function can be used to plot the imported length data. This is us
 plotSize(Len1)
 ```
 
-### 2.6. Fit the Model
+### 2.7. Fit the Model
 
 The LBSPR model is fitted using the `LBSPRfit` function:
 
