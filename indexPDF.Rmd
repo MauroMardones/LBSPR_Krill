@@ -1,5 +1,5 @@
 ---
-title: "Searching Intrinsic Productivity Antarctic Krill "
+title: "Searching spatial-temporal changes in intrinsic productivity of Antarctic Krill"
 subtitle: "Alternative analysis to know productivity in Krill 48.1 SubArea based on invariants parametres and fishery lenghts structures"
 author: "Mardones, M; Watters, G.; Cárdenas, C."
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
@@ -58,11 +58,8 @@ One way to understand and measure changes in intrinsic productivity is through a
 
 In this sense, we propose an analysis to understand the intrinsic productivity trhought Spawning Pontential Ratio (SPR) from krill population catch in SubArea 48.1 in Antarctic Peninsula in Southern Ocean.
 
-
-
-
-
 \newpage
+
 # 2. METHODOLOGY
 
 
@@ -421,7 +418,7 @@ The `plotSize` function can be used to plot the imported length data. This is us
 plotSize(Len1)
 ```
 
-### 2.7. Fit the Model
+### 2.7.4. Fit the Model
 
 The LBSPR model is fitted using the `LBSPRfit` function:
 
