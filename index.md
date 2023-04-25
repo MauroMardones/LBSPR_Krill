@@ -1,19 +1,33 @@
 ---
-title: "Searching Intrinsic Productivity Antarctic Krill"
-subtitle: "Alternative analysis to know productivity in Krill 48.1 SubArea based on invariants parametres and lenght structures"
+title: "Searching Intrinsic Productivity Antarctic Krill "
+subtitle: "Alternative analysis to know productivity in Krill 48.1 SubArea based on invariants parametres and fishery lenghts structures"
 author: "Mardones, M; Watters, G.; Cárdenas, C."
-date:  "14 April, 2023"
+date:  "25 April, 2023"
 bibliography: LBSPR.bib
 csl: apa.csl
 link-citations: yes
 linkcolor: blue
 output:
-  pdf_document:
+  html_document:
     keep_md: true
     toc: true
+    toc_deep: 3
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    theme: cosmo
+    fontsize: 0.9em
+    linestretch: 1.7
+    html-math-method: katex
+    self-contained: true
+    code-tools: true
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
-# Context
+# Abstract
+
 
 Testing changes in intrinsic productivity in Antarctic Krill (*Euphausia
 superba*) with Length-Based Spawning Potential Ratio (LBSPR)
@@ -24,18 +38,26 @@ One way to understand krill dynamics is through empirical data such as sizes str
 This is a simple apprach to know intrinsic productivity based on life history parameters.
 
 
-The krill population structure changes over time and space. Trying to understand these cycles is part of the assessment and management process for the population in the context of CCAMLR. (Figure 1).
+# 1. INTRODUCTION
+
+The northern Antarctic Peninsula ecosystem is a critical
+region of the Southern Ocean for populations of Antarctic
+krill (**Euphausia superba**; hereafter krill) serving as a major
+spawning and recruitment area and as an overwintering hotspot, especially within Bransfield Strait. Over the last 40 years, climate driven
+changes have resulted in warming waters, declines in seasonal sea ice extent and duration [@Stammerjohn2008a; @Stammerjohn2008], changing trends phytoplankton productivity 
+
+Additionally, changes have impacted the population dynamics of krill, resulting in the contraction of the population in the southwest Atlantic Ocean toward the
+peninsula and increasing the mean length of krill, suggesting
+that recruitment events are declining [@Atkinson2009]. 
+
+One way to understand this dynamics populations changes, is find the way to know what is happening with intrinsic condition this species.
+
+Length-based assessment methods are a vital component of the data-limited stock assessment toolbox because it is much easier to obtain reliable length measurements of a portion of the fishery [@Rudd2017a; @Canales2021].  Similarly, age information and a fishery-independent survey that are representative of total abundance are prohibitively expensive or impossible to collect for most fisheries in the world. Prominent length-based methods for estimating reference points in data-limited fisheries include length-based spawning potential ratio (LB-SPR) (Hordyk et al. 2015) and mean-length mortality estimation methods (Nadon et al. 2015). LB-SPR uses length-composition data and as- sumptions about biological parameters to make a rapid assess- ment of stock status relative to unfished levels assuming equilibrium conditions (Hordyk et al. 2015; Prince et al. 2015b). While LB-SPR can use multiple years of length data, status deter- mination is based on one year of data at a time (i.e., estimates of status over multiple years are based on that year’s length compo- sition alone). Mean-length mortality estimators (e.g., Gedamke and Hoenig 2006), first developed by Beverton and Holt (1957), assume that fishing mortality directly influences mean length of the catch and have been used for assessments in the US South Atlantic, Pacific islands, and Caribbean (Ehrhardt and Ault 1992; Ault et al. 2005, 2008; Gedamke and Hoenig 2006; Nadon et al. 2015). As measures of stock status, these length-based methods derive the spawning potential ratio (SPR) reference point, defined as the proportion of unfished reproductive potential at a given level of fishing pressure (Goodyear 1993).
+
+In this sense, we propose an analysis to understand the intrinsic productivity trhought Spawning Pontential Ratio (SPR) from krill population catch in SubArea 48.1 in Antarctic Peninsula in Southern Ocean.
 
 
-![Figure 2. Length structure between Subaareas and Year](Size48.png)
-Focus on 48.1 SuArea (Figure 2).
 
-![Figure 2. Size distribution Krill 48.1 SubArea](Map1.png)
-
-
-What follows is a guide for it and its methodological explanation.
-
-# 1. Introduction
 
 This guide contains functions to run the Length-Based Spawning
 Potential Ratio (LBSPR) method. The LBSPR package can be used in two
@@ -87,9 +109,19 @@ for all simulation and estimation. Control options in the simulation and
 estimation functions can be used to switch to the age-structured LBSPR
 model.
 
-# 2. First Steps
 
-### 2.1 Installing the Package
+
+# 2. METHODOLOGY
+
+
+The krill population structure changes over time and space. Trying to understand these cycles is part of the assessment and management process for the population in the context of CCAMLR. (Figure 1).
+
+
+Focus on 48.1 SuArea (Figure 1).
+
+![Figure 1. Size distribution Krill 48.1 SubArea](Map1.png)
+
+### 2.1. Installing the Package
 
 The LBSPR package is now available on CRAN:
 
@@ -123,19 +155,19 @@ library(ggplot2)
 library(stringr)
 ```
 
-# 3. Simulation
+## 2.2. Simulation
 
 The LBSPR package can be used to generate the expected size composition,
 the SPR, and relative yield for a given set of biological and
 exploitation pattern parameters.
 
-## 3.1. LB_pars Object to Antarctic Krill
+## 2.3. LB_pars Object to Antarctic Krill
 
 The first thing to do is to create a LB_pars object that contains all of
 the required parameters for the simulation model. LB_pars is an S4 class
 object.
 
-#### 3.1.1. Create a new LB_pars Object
+#### 2.3.1. Create a new LB_pars Object
 
 To create a new LB_pars object you use the new function:
 
@@ -169,7 +201,7 @@ functions):
 #class?LB_pars
 ```
 
-#### 3.1.2. Populate the LB_pars Object with Krill parameters
+#### 2.3.2. Populate the LB_pars Object with Krill parameters
 
 The LB_pars object has 25 slots. However, not all parameters need to be
 specified for the simulation model.
@@ -248,7 +280,7 @@ We'll manually set those values here so we don't keep seeing the
 messages throughout the vignette. We can also choose to set the units for the length parameters by `L_units`
 
 
-## 3.2 Running the Simulation Model
+## 2.4. Running the Simulation Model
 
 Now we are ready to run the LBSPR simulation model. To do this we use
 the LBSPRsim function: ngtg function es el \# de grupos para el GTG
@@ -261,7 +293,7 @@ MySim <- LBSPRsim(MyPars,
                                maxFM=1)) 
 ```
 
-#### 3.2.1 The LB_obj Object
+#### 2.4.1. The LB_obj Object
 
 The output of the LBSPRsim function is an object of class LB_obj. This
 is another S4 object, and contains all of the information from the
@@ -272,7 +304,7 @@ LB_obj. You should not modify the LB_obj object directly. Rather, make
 changes to the LB_pars object (MyPars in this case), and re-run the
 simulation model (or other functions, covered later in the vignette).
 
-#### 3.2.2 Simulation Output
+#### 2.4.2. Simulation Output
 
 Let's take a look at some of the simulated output.
 
@@ -309,7 +341,7 @@ If the selectivity pattern excludes all but the largest individuals from
 being exploited, it is possible to have a very high F/M ratio in a
 sustainable fishery (high SPR). And visceverse!!
 
-#### 3.2.3 Control Options
+#### 2.4.3. Control Options
 
 There are a number of additional parameters that can be modified to
 control other aspects of the simulation model.
@@ -321,18 +353,14 @@ to the Age-Structured model (Hordyk et al. 2015a, b):
 See the help file for the LBSPRsim function for additional parameters
 for the Control argument.
 
-#### 3.2.4 Plotting the Simulation
+#### 2.4.4. Plotting the Simulation
 
 The plotSim function can be used to plot MySim:
 
-\begin{figure}
-
-{\centering \includegraphics{index_files/figure-latex/unnamed-chunk-9-1} 
-
-}
-
-\caption{Ploteo de Simulaci?n estructuras.}\label{fig:unnamed-chunk-9}
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="index_files/figure-html/unnamed-chunk-9-1.jpeg" alt="Ploteo de Simulaci?n estructuras."  />
+<p class="caption">Ploteo de Simulaci?n estructuras.</p>
+</div>
 
 By default the function plots: a) the expected (equilibrium) size
 structure of the catch and the expected unfished size structure of the
@@ -345,38 +373,30 @@ The plotSim function can be controlled in a number of ways. For example,
 you can plot the expected unfished and fished size structure of the
 population by changing the lf.type argument:
 
-\begin{figure}
-
-{\centering \includegraphics{index_files/figure-latex/unnamed-chunk-10-1} 
-
-}
-
-\caption{Ploteo de Simulaci?n Population.}\label{fig:unnamed-chunk-10}
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="index_files/figure-html/unnamed-chunk-10-1.jpeg" alt="Ploteo de Simulaci?n Population."  />
+<p class="caption">Ploteo de Simulaci?n Population.</p>
+</div>
 
 Individual plots can be created using the type argument:
 
-\begin{figure}
-
-{\centering \includegraphics{index_files/figure-latex/unnamed-chunk-11-1} 
-
-}
-
-\caption{Plot Leng Freq}\label{fig:unnamed-chunk-11}
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="index_files/figure-html/unnamed-chunk-11-1.jpeg" alt="Plot Leng Freq"  />
+<p class="caption">Plot Leng Freq</p>
+</div>
 
 See ?plotSim for more options for plotting the output of the LBSPR
 simulation model.
 
-\newpage
 
-# 4 Fitting Empirical Krill Length Data
+
+## 2.5 Fitting Empirical Krill Length Data
 
 Two objects are required to fit the LBSPR model to length data: LB_pars
 which contains the life-history parameters (described above) and
 LB_lengths, which contains the length frequency data.
 
-### 4.1 Creating a LB_lengths object
+#### 2.5.1 Creating a LB_lengths object
 
 A LB_lengths object can be created in two ways. The new function can be
 used to create an empty object which can be manually populated:
@@ -405,7 +425,7 @@ Now, we need set our directory again
 datdir <- setwd("~/DOCAS/LBSPR_Krill")
 ```
 
-### 4.2 Reading Krill Data
+#### 2.5.2 Reading Krill Data
 
 
 Note that only the life history parameters need to be specified for the
@@ -422,7 +442,7 @@ Another form to read data is: A length frequency data set with multiple
 years and a header row (identical to Len1 data, but with a header row):
 
 
-### 4.3 Plotting Length Data Krill
+#### 2.5.3 Plotting Length Data Krill
 
 The `plotSize` function can be used to plot the imported length data. This is usually a good idea to do before proceeding with fitting the model, to confirm that everything has been read in correctly:
 
@@ -431,11 +451,9 @@ The `plotSize` function can be used to plot the imported length data. This is us
 plotSize(Len1)
 ```
 
+<img src="index_files/figure-html/unnamed-chunk-16-1.jpeg" style="display: block; margin: auto;" />
 
-
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-16-1} \end{center}
-
-### 4.4 Fit the Model
+### 2.6. Fit the Model
 
 The LBSPR model is fitted using the `LBSPRfit` function:
 
@@ -446,7 +464,7 @@ myFit1 <- LBSPRfit(MyPars, Len1)
 
 Note that the Control argument can be used to modify the additional parameters or LBSPR model type (see description in earlier section).
 
-### 4.5 Examine and Plot Results
+# 3. RESULTS
 
 The LBSPR package uses a Kalman filter and the Rauch-Tung-Striebel
 smoother function (see FilterSmooth) to smooth out the multi-year
@@ -518,27 +536,25 @@ data.frame(rawSL50=myFit1@SL50, rawSL95=myFit1@SL95, rawFM=myFit1@FM, rawSPR=myF
 The `plotSize` function can also be used to show the model fit to the
 data:
 
-
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-20-1} \end{center}
+<img src="index_files/figure-html/unnamed-chunk-20-1.jpeg" style="display: block; margin: auto;" />
 
 Similarly, the plotMat function can be used to show the specified
 maturity-at-length curve, and the estimated selectivity-at-length curve:
 
-
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-21-1} \end{center}
+<img src="index_files/figure-html/unnamed-chunk-21-1.jpeg" style="display: block; margin: auto;" />
 
 Finally, the plotEsts function can be used to visually display the
 estimated parameters. Note that this works for all data sets, but only
 makes sense when there are several years of data:
 
 
-
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-22-1} \end{center}
+<img src="index_files/figure-html/unnamed-chunk-22-1.jpeg" style="display: block; margin: auto;" />
 
 By default the plotting function adds the smoother line to the estimated
 points.
 
-# 5 Comparing Observed Length Data to Target Size Structure
+
+## 3.1. Comparing Observed Length Data to Target Size Structure
 
 You can compare the observed size data against an expected size
 composition at a target SPR using the `plotTarg` function. To do this, you
@@ -554,10 +570,9 @@ MyPars@SL50 <- Mod@SL50[yr]
 MyPars@SL95 <- Mod@SL95[yr] 
 ```
 
+<img src="index_files/figure-html/unnamed-chunk-24-1.jpeg" style="display: block; margin: auto;" />
 
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-24-1} \end{center}
-
-# 6. Productivity intrinsic by Strata
+## 3.2. Productivity intrinsic by Strata
 
 One imortant thing in this analysis is considering spatial structure in 48.1. For this we can follorw Strata structure like show in this figure
 
@@ -573,7 +588,7 @@ This consideration is because we have different size structure in each strata, l
 ![Figure 3. Size length mean fishery by Strata and years](StrataLen.jpg)
 With this differences, we proceed to search intrinsic productivity (Spawning Potential Ratio) by strata and by years.
 
-### 6.1. Reading length strata data
+## 3.3. Reading length strata data
 
 Brainsflied Strata
 
@@ -603,7 +618,7 @@ SSIW Strata
 Lenssiw <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtSSIW.csv"), dataType="freq",sep=";",header=T)
 ```
 
-### 6.2 Fit the Model by strata
+## 3.4. Fit the Model by strata
 
 The LBSPR model is fitted using the `LBSPRfit` function:
 
@@ -649,9 +664,7 @@ Fit Bransfield
 plotSize(fitbs)
 ```
 
-
-
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-32-1} \end{center}
+<img src="index_files/figure-html/unnamed-chunk-32-1.jpeg" style="display: block; margin: auto;" />
 
 Fit Elephan Island
 
@@ -659,9 +672,7 @@ Fit Elephan Island
 plotSize(fitei)
 ```
 
-
-
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-33-1} \end{center}
+<img src="index_files/figure-html/unnamed-chunk-33-1.jpeg" style="display: block; margin: auto;" />
 
 Fit Extra
 
@@ -669,9 +680,7 @@ Fit Extra
 plotSize(fitex)
 ```
 
-
-
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-34-1} \end{center}
+<img src="index_files/figure-html/unnamed-chunk-34-1.jpeg" style="display: block; margin: auto;" />
 
 Fit Join
 
@@ -679,9 +688,7 @@ Fit Join
 plotSize(fitjo)
 ```
 
-
-
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-35-1} \end{center}
+<img src="index_files/figure-html/unnamed-chunk-35-1.jpeg" style="display: block; margin: auto;" />
 
 Fit SSIW
 
@@ -689,31 +696,24 @@ Fit SSIW
 plotSize(fitssiw)
 ```
 
-
-
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-36-1} \end{center}
+<img src="index_files/figure-html/unnamed-chunk-36-1.jpeg" style="display: block; margin: auto;" />
 
 Now we use `plotMat` function to know specified
 maturity-at-length curve by strata, and the estimated selectivity-at-length curve.
 
+<img src="index_files/figure-html/unnamed-chunk-37-1.jpeg" style="display: block; margin: auto;" />
 
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-37-1} \end{center}
+<img src="index_files/figure-html/unnamed-chunk-38-1.jpeg" style="display: block; margin: auto;" />
 
-
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-38-1} \end{center}
-
-
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-39-1} \end{center}
+<img src="index_files/figure-html/unnamed-chunk-39-1.jpeg" style="display: block; margin: auto;" />
 
 
-
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-40-1} \end{center}
-
+<img src="index_files/figure-html/unnamed-chunk-40-1.jpeg" style="display: block; margin: auto;" />
 
 
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-41-1} \end{center}
+<img src="index_files/figure-html/unnamed-chunk-41-1.jpeg" style="display: block; margin: auto;" />
 
-### 6.3 Comparing producivity between Strata
+## 3.5. Comparing producivity between Strata
 
 For this, we extract `SPR` from each slot in the fits models by strata. 
 
@@ -756,7 +756,7 @@ allsprpl <- ggplot(allspr,
            SPR,
            color=SPRv))+
   geom_point()+
-  stat_smooth(method = "loess",
+  stat_smooth(method = "lm",
               alpha=0.3)+
   geom_hline(yintercept = 0.75,
                color = "red",
@@ -774,13 +774,11 @@ allsprpl <- ggplot(allspr,
 allsprpl
 ```
 
-
-
-\begin{center}\includegraphics{index_files/figure-latex/unnamed-chunk-43-1} \end{center}
+<img src="index_files/figure-html/unnamed-chunk-43-1.jpeg" style="display: block; margin: auto;" />
 
 
 
-# 7. Take Home Messages 
+# 4. DISCUSSION 
 
 - Preliminar outputs to know intrinsic productivity of Antarctic krill (*Euphausia superba*) in Antarctic Peninsula, SubArea 48.1.
 
@@ -793,4 +791,6 @@ allsprpl
 - This code with methodology in this
 [link](https://github.com/MauroMardones/LBSPR_Krill)
 
-# 8. References
+
+
+# 5. REFERENCES

@@ -688,8 +688,6 @@ allsprpl <- ggplot(allspr,
 allsprpl
 ```
 
-
-
 # 4. DISCUSSION 
 
 - Preliminar outputs to know intrinsic productivity of Antarctic krill (*Euphausia superba*) in Antarctic Peninsula, SubArea 48.1.
