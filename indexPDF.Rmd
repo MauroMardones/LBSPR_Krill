@@ -605,6 +605,7 @@ plotMat(fitei,
         Title = "Elephant Island")
 ```
 
+
 ```{r, echo=FALSE}
 plotMat(fitex,
         useSmooth = TRUE,
