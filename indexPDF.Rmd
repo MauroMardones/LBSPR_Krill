@@ -46,15 +46,15 @@ Recognizing the intrinsic productivity changes of krill based on their reproduct
 
 The northern Antarctic Peninsula ecosystem is a critical
 region of the Southern Ocean for populations of Antarctic
-krill (**Euphausia superba**; hereafter krill) serving as a major
+krill (*Euphausia superba*; hereafter krill) serving as a major
 spawning and recruitment area and as an overwintering hotspot, especially within Bransfield Strait. Over the last 40 years, climate driven
-changes have resulted in warming waters, declines in seasonal sea ice extent and duration [@Stammerjohn2008a; @Stammerjohn2008], changing trends phytoplankton productivity 
+changes have resulted in warming waters, declines in seasonal sea ice extent and duration [@Stammerjohn2008a; @Stammerjohn2008], changing trends phytoplankton productivity.
 
 Additionally, changes have impacted the population dynamics of krill, resulting in the contraction of the population in the southwest Atlantic Ocean toward the
 peninsula and increasing the mean length of krill, suggesting
 that recruitment events are declining [@Atkinson2009]. These changes in the population structure have been verified in this resource for the last years [@Reiss2020]. This has implications for the reproductive potential of the species and this, in turn, for productivity.
 
-One way to understand and measure changes in intrinsic productivity is through assessing the ratio of krill reproductive potential. There are many length-based assessment methods to understand this changes between years [@Rudd2017a; @Froese2018; @Hordyk2016; @@Canales2021]. On the other hand, one of the advantages of these methods is to use one of the most reliable and abundant sources in the sampling of fishing activities, such as size structures [@Canales2021].  
+One way to understand and measure changes in intrinsic productivity is through assessing the ratio of krill reproductive potential. There are many length-based assessment methods to understand this changes between years [@Rudd2017a; @Froese2018; @Hordyk2016; @Canales2021]. On the other hand, one of the advantages of these methods is to use one of the most reliable and abundant sources in the sampling of fishing activities, such as size structures [@Canales2021].  
 
 In this sense, we propose an analysis to understand the intrinsic productivity trhought Spawning Pontential Ratio (SPR) from krill population catch in SubArea 48.1 in Antarctic Peninsula in Southern Ocean.
 
@@ -62,8 +62,23 @@ In this sense, we propose an analysis to understand the intrinsic productivity t
 
 # 2. METHODOLOGY
 
+## 2.1. Study area
+
+One important thing in this analysis is considering spatial structure in 48.1. For this we can follow Strata structure like show in this figure
 
 
+<center>
+
+![Figure 3. Strata analysis Areas in 48.1](Strata.png){width=50%}
+
+</center>
+
+
+This consideration is because we have different size structure in each strata, like we can see in this figure.
+
+
+![Figure 3. Size length mean fishery by Strata and years](StrataLen.jpg)
+With this differences, we proceed to search intrinsic productivity (Spawning Potential Ratio) by strata and by years.
 
 The LBSPR method has been developed for data-limited fisheries, where
 few data are available other than a representative sample of the size
@@ -503,21 +518,6 @@ MyPars@SL95 <- Mod@SL95[yr]
 plotTarg(MyPars, Len1, yr=yr)
 ```
 \newpage
-## 3.2. Productivity intrinsic by Strata
-
-One imortant thing in this analysis is considering spatial structure in 48.1. For this we can follorw Strata structure like show in this figure
-
-
-<center>
-![Figure 3. Strata analysis Areas in 48.1](Strata.png){width=50%}
-</center>
-
-
-This consideration is because we have different size structure in each strata, like we can see in this figure.
-
-
-![Figure 3. Size length mean fishery by Strata and years](StrataLen.jpg)
-With this differences, we proceed to search intrinsic productivity (Spawning Potential Ratio) by strata and by years.
 
 ## 3.3. Reading length strata data
 
@@ -690,7 +690,21 @@ allsprpl
 
 # 4. DISCUSSION 
 
-Mace & Sissenwine (1993) Review and meta-analysis of SPR reference points for teleosts: 20% SPR as limit reference points, & 35-40% SPR for MSY that have been internationally recognized in the US, USA, Australia, NZ etc. [@Goodyear1993; @Mace2001]
+Las cambios espaciales y temporales de la dinámica temporal en el krill se manifiestan de varias maneras, entre ellas, cambios en la distribución, biomasa, fenología entre otras. Sin embargo, la productividad intrínseca poblacional, es decir, el potencial reproductivo tambien ha sufrido cambios por efecto de las  condiciones cambiantes, ya sean ambientales y/o antropogénicas como la pesca.
+
+Aca analizamos mas de 20 años de datos de la pesquería para identificar cambios de la productividad intrinseca en escalas espaciotemporales del krill en la Peninsula Antártica. Estos cambios fueron medidos de forma cuantitativa a través del potencial reproductivo mediante un nobel método de uso común en pesquerías del mundo.
+
+
+En este método determinamos las diferencias entre estructururas de tallas simuladas del krill en función de sus parámetros de hisoria de vida (@Maschette2020) y las resultantes de la pesquería, lo cua lpermite conocer la diferencia entre el potencial reproductivo virginal y el que actualmente se captura.
+
+
+
+
+
+
+Mace & Sissenwine (1993) Review and meta-analysis of SPR reference points for teleosts: 20% SPR as limit reference points, & 35-40% SPR for MSY that have been internationally recognized in the US, USA, Australia, NZ etc. [@Goodyear1993; @Mace2001].
+
+
 
 - Preliminar outputs to know intrinsic productivity of Antarctic krill (*Euphausia superba*) in Antarctic Peninsula, SubArea 48.1.
 
