@@ -606,6 +606,7 @@ plotMat(fitei,
 ```
 
 
+
 ```{r, echo=FALSE}
 plotMat(fitex,
         useSmooth = TRUE,
