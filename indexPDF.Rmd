@@ -663,6 +663,7 @@ sprssiw$SPRv <- rep("SSWI", nrow(sprssiw))
 allspr <- rbind(sprbs, sprei, sprex, sprjo, sprssiw)
 
 ```
+
 Plot with all intrinsic productivity.
 
 
@@ -701,10 +702,6 @@ Aca analizamos mas de 20 años de datos de la pesquería para identificar cambio
 
 
 En este método determinamos las diferencias entre estructururas de tallas simuladas del krill en función de sus parámetros de hisoria de vida (@Maschette2020) y las resultantes de la pesquería, lo cua lpermite conocer la diferencia entre el potencial reproductivo virginal y el que actualmente se captura.
-
-
-
-
 
 
 Mace & Sissenwine (1993) Review and meta-analysis of SPR reference points for teleosts: 20% SPR as limit reference points, & 35-40% SPR for MSY that have been internationally recognized in the US, USA, Australia, NZ etc. [@Goodyear1993; @Mace2001].
