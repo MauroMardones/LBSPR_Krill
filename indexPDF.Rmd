@@ -697,17 +697,47 @@ allsprpl
 
 # 4. DISCUSSION 
 
-Las cambios espaciales y temporales de la dinámica temporal en el krill se manifiestan de varias maneras, entre ellas, cambios en la distribución, biomasa, fenología entre otras. Sin embargo, la productividad intrínseca poblacional, es decir, el potencial reproductivo tambien ha sufrido cambios por efecto de las  condiciones cambiantes, ya sean ambientales y/o antropogénicas como la pesca.
+(En la discusión se resumen, interpretan y extrapolan los resultados, se analizan sus implicaciones y limitaciones, y se confrontan con las hipótesis planteadas, considerando cómo ha sido la perspectiva de otros autores.)
 
-Aca analizamos mas de 20 años de datos de la pesquería para identificar cambios de la productividad intrinseca en escalas espaciotemporales del krill en la Peninsula Antártica. Estos cambios fueron medidos de forma cuantitativa a través del potencial reproductivo mediante un nobel método de uso común en pesquerías del mundo.
+Identificar los cambios espaciales y temporales del krill en la PA ha sido uno de los mayores desafíos durante los ultimos años. El krill es una especie clave en el ambiente antartico y entender la dinamica población es un elemento basico para visivilizar los impactos en el funcionamenito de la trama trofica, conservacion del recurso y manejo de la pesquería. nunestro interes fue dimiensionar el potencial reproductivo de la especie a escalas finas de espacio y tiempo en la subarea 48.1, dado que en esta area es donde se ha concentrado la pesquería y el recurso durante los ultimos 20 años. Nuestro resultados indentifican variabilidad espaciotemporal del krill en diferentes estratos de manejo pesquero y a su vez fu posible proponer Pubtos Biologicos de rewferencia en función de las caracteristicas de la especie, lo cual constituye a su vez una recomendación para las actuales estrategia de explotacion que lleva a cabo la CCMLAR. En este sentido, identifican los periodos historicos pesqueros ren funcion del potencial reproductivo y  a su vez se propone un manejo espacialente explicito en fincion de estos resultados
+
+
+## 4.1. Cambios en estructura poblacional del Krill
+
+Las cambios en la dinámica y estructura poblacional en el krill en la Península Antártica se manifiestan de varias maneras, como por ejemplo, en la distribución, biomasa, , reclutamiento, fenología entre otras. Los principales forzantes de estos cambios estan asociados al comportamiento cambiante de las distintas variables ambientales en el habitat del krill [@Flores2012a; @Pinones2016; @Saba2014; @Veytia2021; @Flores2012; @Walsh2020]. Frente a este escenario cambiante, la productividad intrínseca poblacional, es decir, el potencial reproductivo de la especie también ha sufrido cambios en las ultimas decadas [@Atkinson2022; @Perry2020; @McBride2021], tanto en la escala temporal así como la espacial. De igual manera la estructura poblacional del krill en la PA se ha visto impactada por este tipo de forzantes ambientales [@Siegel2013; @Reiss2020]
+
+
+## 4.2. Datos pesqueros como indicadores poblacionales
+
+El krill en la PA ha sido extraído comercialmente desde aproximadamente 1970 y constituye la pesquería mas grande del Océano Austral. Los datos de la actividad pesquera en torno al krill han sido sistematicamente colectados a bordo de las embarcaciones pesqueras a traves del programa SISO, con lo cual ha sido posible tambien identificar  cambios de la dinamica poblacional que han ocurrido durantes las ultimas decada y entoda la zona de mayor explotacion. Cambios en la disponibilidad, distribucion, y concentracion, rendimiento del recurso se han visto reflejados en los datos [@SantaCruz2018; @SantaCruz2022; @Atkinson2019a; @Kruger2019]. Para identificar cambios la productividad intrinseca de la población del krill, utilizamos una de las piezas de información mas representativos de la dinamica poblaciional de los recursos marinos explotados que existen en este tipo de programas de monitoreo de pesquerías, en este caso, datos de frecuencia de talla de la captura. [Hordyk et al., 2014; Froese et al., 2018; Prince et al., 2015; Rudd y Thorson, 2018; Ault et al., 2019; Chong et al., 2019; Pilling et al., 2008; Hordyk et al., 2015; Mildenberger et al., 2017]. ; Froese et al., 2018). Este tipo de datos son abundantes y permite cubrir una gran escala temporal y espacial, en este caso, desde 1980 a 2020 y en toda la subarea 48.1 (Figura 1).
+
+
+## 4.3. Diferencias temporales en la productividad intrinseca del krill
+
+En terminos temporales, los estratos tienen diferencias en el potencial reproductivo y por consiguiente en la productividad intrinseca de la población. Durante los ultimos 20 años, el strato de elephant Island ha tenido un aumento del potencial reporductivo lllegando a niveles del 56% para el año 2020. Esto tiene relación con los cambios en los niveles de produccón primaria que han suceido en esta zona. (cita) 
+
+
+Para demostrar esto, analizamos mas de 20 años de indicadores poblacionales directos desde los datos de la pesquería para identificar cambios de la productividad intrínseca en escalas espaciotemporales del krill en la PA. Estos cambios fueron medidos cuantitativamente a través del potencial reproductivo mediante un nobel método de uso común en pesquerías del mundo que considera el uso de parametros de historia de vida, como madurez, crecimiento y tasa de crecimiento, estructuras de tallas y simulaciones basadas en paramettros invariantes 
+
+
+Cambios en la estructuración espacial de la población de krill han sido demostradas de variadas maneras. @Atkinson2009; @Atkinson2008 indica que la población muestra evidentes siítomas de contracción hacia el suroeste de la PA. Esta contracción de la distribución de la población tiene consecuencias otros fenomenos como en los rendimientos productivos que se manfiestan en indicadores pesqueros como lo demuestra @SantaCruz2022; @SantaCruz2018. 
+
+
+## 4.4. Diferencias espaciales en la productividad intrinseca del krill
 
 
 En este método determinamos las diferencias entre estructururas de tallas simuladas del krill en función de sus parámetros de hisoria de vida (@Maschette2020) y las resultantes de la pesquería, lo cua lpermite conocer la diferencia entre el potencial reproductivo virginal y el que actualmente se captura.
 
+## 4.5. Comparacion con otros estudios
 
 Mace & Sissenwine (1993) Review and meta-analysis of SPR reference points for teleosts: 20% SPR as limit reference points, & 35-40% SPR for MSY that have been internationally recognized in the US, USA, Australia, NZ etc. [@Goodyear1993; @Mace2001].
 
 
+cambios en el potencial reproductivo por zona:
+
+@Atkinson2022, @Perry2020
+
+## 4.6. Consideraciones finales
 
 - Preliminar outputs to know intrinsic productivity of Antarctic krill (*Euphausia superba*) in Antarctic Peninsula, SubArea 48.1.
 
