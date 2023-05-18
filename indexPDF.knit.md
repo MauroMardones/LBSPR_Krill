@@ -2,7 +2,7 @@
 title: "Searching spatial-temporal changes in intrinsic productivity of Antarctic Krill"
 subtitle: "Alternative analysis to know productivity in Krill 48.1 SubArea based on invariants parametres and fishery lenghts structures"
 author: "Mardones, M; Watters, G.; Cárdenas, C."
-date:  "`r format(Sys.time(), '%d %B, %Y')`"
+date:  "18 May, 2023"
 bibliography: LBSPR.bib
 csl: apa.csl
 link-citations: yes
@@ -23,7 +23,8 @@ output:
 ```
 \newpage
 
-```{r setup1}
+
+```r
 rm(list = ls())
 knitr::opts_chunk$set(echo = FALSE,
                       message = FALSE,
@@ -38,20 +39,7 @@ options(bitmapType = "cairo")
 # Lo mapas se hacen mas rapido
 ```
 
-```{r}
-## Installing the Package
-#The LBSPR package is now available on CRAN:
-#install.packages("LBSPR")
-#install.packages("devtools")
-#devtools::install_github("AdrianHordyk/LBSPR")
-###load the package
-library(LBSPR)
-library(devtools)#to install_github
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-library(stringr)
-```
+
 
 # ABSTRACT
 
@@ -85,7 +73,7 @@ The study area includes one of the sectors where today the largest amount of kri
 
 <center>
 
-![Figure 1. Subarea 48.1 and management strata considered in the spatio-temporal analysis of intrinsic productivity of Krill (BS=Brainsfield Straith, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West)](Strata2.png){width="60%"}
+![Figure 1. Subarea 48.1 and management strata considered in the spatio-temporal analysis of intrinsic productivity of Krill (BS=Brainsfield Straith, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West) West)](Strata2.png){width="60%"}
 
 <center>
 
@@ -93,11 +81,7 @@ The study area includes one of the sectors where today the largest amount of kri
 
 For this analysis, data from the monitoring of the krill fishery were used, which have been systematically collected on board fishing vessels by the SISO (Scheme of International Scientific Observation) program carried out by CCAMLR. Krill sizes compositions were obtained from the entire area 48.1, which was joined in each management stratum defined at 2.1 section.
 
-![Figure 2. Sizes compositions from SISO program monitoring krill fishery](tallastrata.png){width="75%"}
-
 ## 2.3 Assessment of intrinsic productivity
-
-of a stock is defined as the proportion of potential unexploited spawning at any given level of fishing pressure (Goodyear, 1993; Walters and Martell, 2004)
 
 The intrinsic productivity of krill was evaluated through a method that measures the reproductive potential of commercially exploited marine species known as LB-SPR (Length Based Spawining Potential Ratio) and described by @Hordyk2016. The LB-SPR method has been developed for data-limited fisheries, where few data are available other than a representative sample of the size structure of the vulnerable portion of the population (i.e., the catch) and an understanding of the life history of the species. The LBSPR method assumes the reproductive characteristics of the species based on the life history parameters, being able to establish strategies for long-lived species with low reproductive output as well as highly reproductive species with a high growth constant such as krill [@Prince2018].
 
@@ -105,16 +89,15 @@ LBSPR uses length-composition data and assumptions about biological parameters t
 
 here are two versions of the LB-SPR model included in this methodology.
 
-## 2.4. Life story and fishery parameters Krill
+## 2.5. Life story and fishery parameters
 
-```{r}
-#Create a new LB_pars Object
-#To create a new LB_pars object you use the new function:
-MyPars <- new("LB_pars")
 
-#You can see the elements or slots of the LB_pars object using the
-#slotNames function:
-slotNames(MyPars)
+```
+##  [1] "Species"      "MK"           "M"            "Linf"         "L_units"     
+##  [6] "CVLinf"       "L50"          "L95"          "Walpha"       "Walpha_units"
+## [11] "Wbeta"        "FecB"         "Steepness"    "Mpow"         "R0"          
+## [16] "SL50"         "SL95"         "MLL"          "sdLegal"      "fDisc"       
+## [21] "FM"           "SPR"          "BinMin"       "BinMax"       "BinWidth"
 ```
 
 The model needs specifications related to both biological and fishery parameters according to the taxonomic group evaluated. These specifications are compiled in technical reports and/or indexed publications about krill life history and fishery [@Thanassekos2014; @Maschette2020], which are described in Table 1.
@@ -138,36 +121,11 @@ Size Classes
 
 -Width of the length classes (`BinWidth`)
 
-```{r}
-MyPars <- new("LB_pars")
-## A blank LB_pars object created
-## Default values have been set for some parameters
-MyPars@Species <- "Euphausia superba"
-MyPars@Linf <- 60 
-MyPars@L50 <- 34 
-MyPars@L95 <- 55 # verrificar bibliografia
-MyPars@MK <- 0.4/0.45
 
 
-#Explotation
-MyPars@SL50 <- 40#numeric() #1
-MyPars@SL95 <- 56#numeric() #27
-MyPars@SPR <- 0.75 #numeric()# ###cambia el numero 0.4 a en blanco
-MyPars@BinWidth <- 1
-#MyPars@FM <- 1
+## 2.4. Model Estimation LB-SPR
 
-MyPars@Walpha <- 1
-MyPars@Wbeta <- 3.0637 #r2 = 0.9651
-
-MyPars@BinWidth <-1
-MyPars@BinMax <- 70
-MyPars@BinMin <- 0
-MyPars@L_units <- "mm"
-```
-
-## 2.5. Model Estimation LB-SPR
-
-Recent work has shown that, under equilibrium conditions (that is, constant F and no recruitment variability) and assuming the von Bertalanffy growth equation, constant natural mortality for all ages, and logistic or jack-knife selectivity, standardization of the composition of lengths of two populations with the same ratio of natural mortality to growth rate (M/k) and the same ratio of mortality by fishing to natural mortality (F/M) will be identical [@Hordyk2016]. Extension of this model to incorporate length-at-age variability and logistic selectivity confirms that, at equilibrium, the composition of the predicted duration of catch of an exploited population is primarily determined by the ratios of M/k and F/M. The analytical models developed in @Hordyk2014c suggest that with knowledge of the asymptotic von Bertalanffy length $L_{\infty}$ and the coefficient of variation in $CVL_{\infty}$, the ratio of total mortality to the von Bertalanffy growth coefficient (Z /k) for a given population can be estimated from a representative sample of the size structure of the catch. If M/k is also known (from meta-analyses, life history theory, expert opinion, or population biological studies), then the results of @Hordyk2016 suggest that it is possible to estimate F/M from the composition of the catch. Often the F/M ratio has been used as a biological reference point when is 1 [@Zhou2012].
+Recent work has shown that, under equilibrium conditions (that is, constant F and no recruitment variability) and assuming the von Bertalanffy growth equation, constant natural mortality for all ages, and logistic or jack-knife selectivity, standardization of the composition of lengths of two populations with the same ratio of natural mortality to growth rate (M/k) and the same ratio of mortality by fishing to natural mortality (F/M) will be identical [@Hordyk2016]. Extension of this model to incorporate length-at-age variability and logistic selectivity confirms that, at equilibrium, the composition of the predicted duration of catch of an exploited population is primarily determined by the ratios of M/k and F/M. The analytical models developed in @Hordyk2014c suggest that with knowledge of the asymptotic von Bertalanffy length L_{\infty} and the coefficient of variation in CVL_{\infty}, the ratio of total mortality to the von Bertalanffy growth coefficient (Z /k) for a given population can be estimated from a representative sample of the size structure of the catch. If M/k is also known (from meta-analyses, life history theory, expert opinion, or population biological studies), then the results of @Hordyk2016 suggest that it is possible to estimate F/M from the composition of the catch. Often the F/M ratio has been used as a biological reference point when is 1 [@Zhou2012].
 
 The LB-SPR model requires the following parameters: an estimate of the M/k ratio, L_inf, CVL_inf, and knowledge of maturity by length (maturity ogive), both know in krill. This model uses data on composition by catch sizes to estimate intrinsic productivity or SPR. This concept was calculated following @Goodyear1993, where he calculated the ratio between the average lifetime egg production per recruit (EPR) in equilibrium for fish and non-fish resources, assuming density-dependent suppression of maturity or fecundity. 
 
@@ -213,23 +171,75 @@ class i, respectively, and $\hat{P}_i$ is the model estimate of the probability
 in length class i [@Hordyk2016].
 
 
-Like any assessment method, the LBSPR model relies on a number of simplifying assumptions. In particular, the LBSPR models are equilibrium based, and assume that the length composition data is representative of the exploited population at steady state [@Hordyk2014c; @Hordyk2016]. This methodology was implemented through the package @LBSPR2021 [@Hordyk2014c] and this code and data could be visited in ![https://github.com/MauroMardones/LBSPR_Krill](LBSPRKrill).
+The LBSPR model described by [@Hordyk2014c; @Hordyk2016], and tested in a MSE framework [@Hordyk2014c], use a conventional age-structured equilibrium population model. An important assumption of this model structure is that selectivity is age-based not length-based. @Hordyk2016 describe a length-structured version of the LBSPR model that uses growth-type-groups (GTG) to account for size-based selectivity. The GTG-LBSPR model also has the ability to include variable M at size (by default M is assumed to be constant). The GTG-LBSPR model typically estimates a lower fishing mortality rate for a given size structure compared to the earlier age-structured model. This is because the age-structured model has a 'regeneration assumption', where, because of the age-based selectivity assumption, large individuals are expected even at high fishing mortality (large, young fish).
 
-## 2.6. Biological References Point (PBR) in Krill.
+The default setting for the LBSPR package is to use the GTG-LBSPR model for all simulation and estimation. Control options in the simulation and estimation functions can be used to switch to the age-structured LBSPR model.
 
-A constant challenge for krill has been to provide indicators of stock status that can be compared to predetermined biological reference points. The intrinsic productivity or SPR is commonly used to set the limit and target reference [@Goodyear1993; @Mace2001]. By definition, the SPR is equal to 100% in an unexploited stock, and zero in a non-spawning stock (eg all mature fish have been removed, or all females have been caught). The F40%, that is, the fishing mortality that allows an escape of 40% of the biomass to MSY, is the fishing mortality rate that translates into SPR = 40%, is considered a reference point to many species [@Clark2002]. Suitable SPR biological points can be derived from hypotheses about the steepness of the stock-recruit relationship [@Brooks2013; @Hordyk2016]. However @Prince do some considerations in relation to the life strategy of the organisms and the SPR necessary to ensure the sustainability of the fishery. In this work, three types (I, II and III) are identified, which refers to the r and K life strategy. The krill is Type 1 (r-strategy), M/k=~1 (m=0.4, k =0.43) therefore, it requires a higher save of SPR.
+Like any assessment method, the LBSPR model relies on a number of simplifying assumptions. In particular, the LBSPR models are equilibrium based, and assume that the length composition data is representative of the exploited population at steady state. This methodology was implemented through the package @LBSPR2021.
 
-On the other hand, and considering the current krill fisheries management schemes established by @CCAMLR2010, @Constable2000 proposes a decision rule scheme based on biomass that ensure the sustainability of this resource in the Ocean Southern. Through a simulation process, a 20-year projection of the krill population is generated, and a probability distribution is established around two decision rules. The first is based on the lowest level of exploitation allowed, around 20% of biomass, which could become a limit reference point. The second is the target level of the fishery, which indicates the statistical distribution of the biomass at the end of the 20-year projection under a constant catch that allows the average escape of 75% at pre-exploited levels (CCAMLR-2000 Survey).In this regards, we propose two reference points for intrinsic krill productivity, 20% SPR as the limit reference point and 75% as the target.
+## 2.4. References Point in Krill fishery
+
+A constant challenge for length-based methods has been to provide indicators of stock status that can be compared to predetermined biological reference points. The spawning potential ratio (SPR) of a stock is defined as the proportion of potential unexploited spawning at any given level of fishing pressure (Goodyear, 1993; Walters and Martell, 2004) and is commonly used to set the target points. limit and target reference. By definition, the SPR is equal to 100% in an unexploited stock, and zero in a non-spawning stock (eg all mature fish have been removed, or all females have been caught). The F40%, that is, the fishing mortality rate that translates into SPR = 40%, is considered risky for many species (Clark, 2002). Suitable SPR biological points can be derived from hypotheses about the steepness of the stock-recruit relationship (Brooks et al., 2010). Hordyk et al. (2015) show that, under the assumptions of razor-edge selectivity for length at Lc, and maturity at Lm, the SPR is determined by the ratios of M / k, F / M, Lm / L\^, and Lc /L\^.
+
+
+As measures of stock status, these length-based methods derive the spawning potential ratio (SPR) reference point, defined as the proportion of unfished reproductive potential at a given level of fishing pressure [@Goodyear1993].
+
+There are three management rules for krill (Constable et al 2000):
+
+(1) the median krill spawning biomass over a 20-year period should not fall below 75% of its pre-exploitation median level (PBR Obj ó MSY (Hill et al., 2016);
+
+(2) the probability that krill spawning biomass drops below 20% of its pre-exploitation median level over a 20-year harvesting period should not exceed 10%; (PBR Limit)
 
 \newpage
 
-## 2.7. Running the Simulation Model
+## 2.4. Simulation
 
 The LBSPR package can be used to generate the expected size composition, the SPR, and relative yield for a given set of biological and exploitation pattern parameters.
+
+## 2.5. LB_pars Object to Antarctic Krill
+
+The first thing to do is to create a LB_pars object that contains all of the required parameters for the simulation model. LB_pars is an S4 class object.
+
+#### 2.5.2. Populate the LB_pars Object with Krill parameters
+
+## 2.6. Running the Simulation Model
+
+Now we are ready to run the LBSPR simulation model. To do this we use the LBSPRsim function: ngtg function es el \# de grupos para el GTG model, por default es 13)
+
+
+```r
+MySim <- LBSPRsim(MyPars, 
+                  Control=list(modtype="GTG", 
+                               maxFM=1)) 
+```
+
+#### 2.6.1. The LB_obj Object
+
 The output of the LBSPRsim function is an object of class LB_obj. This is another S4 object, and contains all of the information from the LB_pars object and the output of the LBSPRsim function.
 
 Many of the functions in the LBSPR package return an object of class LB_obj. You should not modify the LB_obj object directly. Rather, make changes to the LB_pars object (MyPars in this case), and re-run the simulation model (or other functions, covered later in the vignette).
 
+#### 2.6.2. Simulation Output
+
+Let's take a look at some of the simulated output.
+
+
+```r
+MySim@SPR 
+```
+
+```
+## [1] 0.75
+```
+
+The simulated SPR is the same as our input value `MyPars@SPR`
+
+What is the ratio of fishing mortality to natural mortality in this scenario?
+
+
+```
+## [1] 0.29
+```
 
 It is important to note that the F/M ratio reported in the LBSPR model refers to the apical F over the adult natural mortality rate. That is, the value for fishing mortality refers to the highest level of F experienced by any single size class.
 
@@ -245,25 +255,40 @@ See the help file for the LBSPRsim function for additional parameters for the Co
 
 #### 2.6.4. Plotting the Simulation
 
+The plotSim function can be used to plot MySim:
+
+\begin{figure}
+
+{\centering \includegraphics{indexPDF_files/figure-latex/unnamed-chunk-7-1} 
+
+}
+
+\caption{Ploteo de Simulaci?n estructuras.}\label{fig:unnamed-chunk-7}
+\end{figure}
 
 By default the function plots: a) the expected (equilibrium) size structure of the catch and the expected unfished size structure of the vulnerable population, b) the maturity and selectivity-at-length curves, c) the von Bertalanffy growth curve with relative age, and d) the SPR and relative yield curves as a function of relative fishing mortality (see note above on the F/M ratio).
 
 The plotSim function can be controlled in a number of ways. For example, you can plot the expected unfished and fished size structure of the population by changing the lf.type argument:
 
-```{r, message=FALSE}
-MySim <- LBSPRsim(MyPars, 
-                  Control=list(modtype="GTG"))
+\begin{figure}
 
-# Plot with
-plotSim(MySim, type="len.freq",
-        Cols = NULL, 
-        size.axtex = 12, 
-        size.title = 14,
-        size.SPR = 4,
-        size.leg = 12,
-        inc.pts = TRUE, 
-        size.pt = 6)
-```
+{\centering \includegraphics{indexPDF_files/figure-latex/unnamed-chunk-8-1} 
+
+}
+
+\caption{Ploteo de Simulaci?n Population.}\label{fig:unnamed-chunk-8}
+\end{figure}
+
+Individual plots can be created using the type argument:
+
+\begin{figure}
+
+{\centering \includegraphics{indexPDF_files/figure-latex/unnamed-chunk-9-1} 
+
+}
+
+\caption{Plot Leng Freq}\label{fig:unnamed-chunk-9}
+\end{figure}
 
 See ?plotSim for more options for plotting the output of the LBSPR simulation model.
 
@@ -277,21 +302,22 @@ Two objects are required to fit the LBSPR model to length data: LB_pars which co
 
 A LB_lengths object can be created in two ways. The new function can be used to create an empty object which can be manually populated:
 
-```{r}
-MyLengths <- new("LB_lengths")
+
+
+
+```r
+slotNames(MyLengths)
 ```
 
-```{r}
-slotNames(MyLengths)
+```
+## [1] "LMids"   "LData"   "L_units" "Years"   "NYears"  "Elog"
 ```
 
 However, it is probably easier to create the LB_lengths object by directly reading in a `CSV file`.
 
 Now, we need set our directory again
 
-```{r}
-datdir <- setwd("~/DOCAS/LBSPR_Krill")
-```
+
 
 #### 2.7.2 Reading Krill Data
 
@@ -299,7 +325,8 @@ Note that only the life history parameters need to be specified for the estimati
 
 A length frequency data of krill set with multiple years (2001-2020):
 
-```{r}
+
+```r
 Len1 <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/Length_481_Krill_2.csv"), dataType="freq",sep=";",header=T)
 ```
 
@@ -309,17 +336,14 @@ Another form to read data is: A length frequency data set with multiple years an
 
 The `plotSize` function can be used to plot the imported length data. This is usually a good idea to do before proceeding with fitting the model, to confirm that everything has been read in correctly:
 
-```{r}
-plotSize(Len1)
-```
+
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 ### 2.7.4. Fit the Model
 
 The LBSPR model is fitted using the `LBSPRfit` function:
 
-```{r}
-myFit1 <- LBSPRfit(MyPars, Len1)
-```
+
 
 Note that the Control argument can be used to modify the additional parameters or LBSPR model type (see description in earlier section).
 
@@ -333,41 +357,78 @@ The LBSPR package uses a Kalman filter and the Rauch-Tung-Striebel smoother func
 
 The smoother parameter estimates can be accessed from the `myFit` object (which is an object of class LB_obj [see earlier section for details]):
 
-```{r}
+
+```r
 myFit1@Ests
+```
+
+```
+##        SL50  SL95   FM  SPR
+##  [1,] 45.59 55.77 5.35 0.30
+##  [2,] 44.96 54.87 5.02 0.29
+##  [3,] 44.87 54.76 4.80 0.30
+##  [4,] 44.77 55.29 4.55 0.30
+##  [5,] 44.28 55.03 4.27 0.30
+##  [6,] 43.40 53.99 4.08 0.29
+##  [7,] 43.78 54.25 4.00 0.30
+##  [8,] 44.15 54.74 3.91 0.32
+##  [9,] 44.33 55.09 3.78 0.33
+## [10,] 43.29 54.10 3.60 0.31
+## [11,] 42.32 52.54 3.61 0.29
+## [12,] 42.11 52.25 3.72 0.28
+## [13,] 41.98 52.36 3.77 0.27
+## [14,] 41.69 52.32 3.72 0.27
+## [15,] 40.93 51.55 3.68 0.26
+## [16,] 40.22 50.59 3.64 0.25
+## [17,] 39.48 49.77 3.56 0.25
+## [18,] 39.13 49.35 3.68 0.24
 ```
 
 Note that by default the smoothed estimates are used in the plotting routines.
 
 The individual point estimates for each year can be accessed from the `LB_obj` object:
 
-```{r}
+
+```r
 data.frame(rawSL50=myFit1@SL50, rawSL95=myFit1@SL95, rawFM=myFit1@FM, rawSPR=myFit1@SPR)
+```
+
+```
+##    rawSL50 rawSL95 rawFM    rawSPR
+## 1    52.44   65.34  8.69 0.3390804
+## 2    39.43   46.97  3.92 0.2087088
+## 3    45.01   48.33  5.11 0.3251658
+## 4    48.63   63.15  4.89 0.3141996
+## 5    48.24   62.96  3.30 0.3718446
+## 6    30.72   40.89  3.04 0.1254271
+## 7    44.01   51.94  4.00 0.2960077
+## 8    45.92   56.19  4.39 0.3095126
+## 9    56.55   68.49  4.31 0.5789779
+## 10   42.64   59.75  1.64 0.3952354
+## 11   34.69   39.89  2.65 0.1931645
+## 12   41.36   48.17  4.35 0.2346415
+## 13   43.51   53.96  4.71 0.2468353
+## 14   46.46   59.59  3.59 0.3306032
+## 15   40.44   53.47  3.74 0.2114859
+## 16   40.45   49.14  4.10 0.2164218
+## 17   35.63   45.84  1.40 0.3311026
+## 18   35.62   45.10  4.97 0.1211154
 ```
 
 The `plotSize` function can also be used to show the model fit to the data:
 
-```{r}
-plotSize(myFit1)
-```
+
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-18-1} \end{center}
 
 Similarly, the plotMat function can be used to show the specified maturity-at-length curve, and the estimated selectivity-at-length curve:
 
-```{r, echo=FALSE}
-plotMat(myFit1,
-        useSmooth = TRUE)
-```
+
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-19-1} \end{center}
 
 Finally, the plotEsts function can be used to visually display the estimated parameters. Note that this works for all data sets, but only makes sense when there are several years of data:
 
-```{r, echo=FALSE, fig.width=12, fig.height=5}
-plotEsts(myFit1,
-         pars = c("Sel", "SPR"),
-  doSmooth = TRUE,
-  incL50 = FALSE,
-  CIcol = "blue",
-  L50col = "blue")
-```
+
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-20-1} \end{center}
 
 By default the plotting function adds the smoother line to the estimated points.
 
@@ -377,17 +438,10 @@ By default the plotting function adds the smoother line to the estimated points.
 
 You can compare the observed size data against an expected size composition at a target SPR using the `plotTarg` function. To do this, you need a LB_pars object with the life history parameters and the target SPR:
 
-```{r}
-Mod <- LBSPRfit(MyPars, Len1, verbose=FALSE)
 
-yr <- 1 # first year of data
-MyPars@SL50 <- Mod@SL50[yr]
-MyPars@SL95 <- Mod@SL95[yr] 
-```
 
-```{r, echo=FALSE}
-plotTarg(MyPars, Len1, yr=yr)
-```
+
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-22-1} \end{center}
 
 \newpage
 
@@ -395,31 +449,36 @@ plotTarg(MyPars, Len1, yr=yr)
 
 Brainsflied Strata
 
-```{r, echo =TRUE}
+
+```r
 Lenbs <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/Length_481_Krill_2.csv"), dataType="freq",sep=";",header=T)
 ```
 
 Elephan Island Strata
 
-```{r, echo =TRUE}
+
+```r
 Lenei <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtEI.csv"), dataType="freq",sep=";",header=T)
 ```
 
 Extra Strata
 
-```{r, echo =TRUE}
+
+```r
 Lenex <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtExtra.csv"), dataType="freq",sep=";",header=T)
 ```
 
 Join Strata
 
-```{r, echo =TRUE}
+
+```r
 Lenjo <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtJOIN.csv"), dataType="freq",sep=";",header=T)
 ```
 
 SSIW Strata
 
-```{r, echo =TRUE}
+
+```r
 Lenssiw <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtSSIW.csv"), dataType="freq",sep=";",header=T)
 ```
 
@@ -427,149 +486,94 @@ Lenssiw <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtSSIW.cs
 
 The LBSPR model is fitted using the `LBSPRfit` function:
 
-```{r echo=TRUE, message=FALSE}
+
+```r
 fitbs <- LBSPRfit(MyPars, Lenbs)
 fitei <- LBSPRfit(MyPars, Lenei)
 fitex <- LBSPRfit(MyPars, Lenex)
 fitjo <- LBSPRfit(MyPars, Lenjo)
 fitssiw <- LBSPRfit(MyPars, Lenssiw)
-
 ```
 
 The smoother parameter estimates can be accessed from the `myFit` object (which is an object of class LB_obj [see earlier section for details]): In this cae, we can look up estimates in Brainsfield Strata
 
-```{r, echo=TRUE}
+
+```r
 fitei@Ests
+```
+
+```
+##        SL50  SL95   FM  SPR
+##  [1,] 43.66 54.32 8.51 0.22
+##  [2,] 43.10 53.47 8.17 0.21
+##  [3,] 42.49 52.94 7.94 0.21
+##  [4,] 42.48 52.71 7.80 0.22
+##  [5,] 43.99 54.13 8.06 0.25
+##  [6,] 44.51 54.19 8.01 0.27
+##  [7,] 44.83 54.27 8.51 0.28
+##  [8,] 45.12 54.14 8.76 0.29
+##  [9,] 45.88 54.69 9.32 0.31
+## [10,] 47.24 56.25 9.98 0.36
+## [11,] 47.81 57.04 9.49 0.39
+## [12,] 47.77 56.79 8.75 0.44
+## [13,] 48.58 57.86 8.88 0.43
+## [14,] 49.11 58.44 9.02 0.43
 ```
 
 Plotting fits by strata
 
 Fit Bransfield
 
-```{r}
-plotSize(fitbs)
-```
+
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-30-1} \end{center}
 
 Fit Elephan Island
 
-```{r}
-plotSize(fitei)
-```
+
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-31-1} \end{center}
 
 Fit Extra
 
-```{r}
-plotSize(fitex)
-```
+
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-32-1} \end{center}
 
 Fit Join
 
-```{r}
-plotSize(fitjo)
-```
+
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-33-1} \end{center}
 
 Fit SSIW
 
-```{r}
-plotSize(fitssiw)
-```
+
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-34-1} \end{center}
 
 Now we use `plotMat` function to know specified maturity-at-length curve by strata, and the estimated selectivity-at-length curve.
 
-```{r, echo=FALSE}
-plotMat(fitbs,
-        useSmooth = TRUE,
-        Title = "Brainsfield")
-```
 
-```{r, echo=FALSE}
-plotMat(fitei,
-        useSmooth = TRUE,
-        Title = "Elephant Island")
-```
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-35-1} \end{center}
 
-```{r, echo=FALSE}
-plotMat(fitex,
-        useSmooth = TRUE,
-        Title = "Extra")
-```
 
-```{r, echo=FALSE}
-plotMat(fitjo,
-        useSmooth = TRUE,
-        Title = "Join")
-```
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-36-1} \end{center}
 
-```{r, echo=FALSE}
-plotMat(fitssiw,
-        useSmooth = TRUE,
-        Title = "SSIW")
-```
+
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-37-1} \end{center}
+
+
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-38-1} \end{center}
+
+
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-39-1} \end{center}
 
 ## 3.5. Comparing producivity between Strata
 
 For this, we extract `SPR` from each slot in the fits models by strata.
 
-```{r}
-sprbs <- as.data.frame(cbind(fitbs@Years, 
-                             fitbs@SPR)) 
-colnames(sprbs) <- c("Year","SPR")
-sprbs$SPRv <- rep("BS", nrow(sprbs))
 
-sprei <- as.data.frame(cbind(fitei@Years, 
-                             fitei@SPR)) 
-colnames(sprei) <- c("Year","SPR")
-sprei$SPRv <- rep("EI", nrow(sprei))
-
-sprex <- as.data.frame(cbind(fitex@Years, 
-                             fitex@SPR)) 
-colnames(sprex) <- c("Year","SPR")
-sprex$SPRv <- rep("EX", nrow(sprex))
-
-sprjo <- as.data.frame(cbind(fitjo@Years, 
-                             fitjo@SPR)) 
-colnames(sprjo) <- c("Year","SPR")
-sprjo$SPRv <- rep("JO", nrow(sprjo))
-
-sprssiw <- as.data.frame(cbind(fitssiw@Years, 
-                             fitssiw@SPR)) 
-colnames(sprssiw) <- c("Year","SPR")
-sprssiw$SPRv <- rep("SSWI", nrow(sprssiw))
-
-allspr <- rbind(sprbs, sprei, sprex, sprjo, sprssiw)
-
-```
 
 Plot with all intrinsic productivity.
 
-```{r warning=FALSE}
 
-allsprpl <- ggplot(allspr,
-       aes(Year,
-           SPR,
-           color=SPRv))+
-  geom_point()+
-  stat_smooth(method = "lm",
-              alpha=0.3)+
-  geom_hline(yintercept = 0.75,
-               color = "yellow",
-               linetype  = 2,
-             alpha=0.5)+
-  geom_hline(yintercept = 0.20,
-               color = "red",
-               linetype  = 2,
-             alpha=0.5)+
-  facet_wrap(.~SPRv, ncol = 3)+
-  scale_color_viridis_d(option = "F")+
-  scale_y_log10()+
-  xlim(2001,2021)+
-  theme_bw()+
-  theme(legend.position = "none",
-        axis.text.x = element_text(angle = 90, hjust = 2))+
-  ggtitle(label="Intrinsic Productivity (SPR)")
-
-allsprpl
-```
+\begin{center}\includegraphics{indexPDF_files/figure-latex/unnamed-chunk-41-1} \end{center}
 
 \newpage
 
