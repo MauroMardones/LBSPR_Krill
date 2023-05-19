@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.20)  18 MAY 2023 12:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.20)  19 MAY 2023 14:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -217,21 +217,6 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layouthoffset=\dimen157
 \Gm@layoutvoffset=\dimen158
 \Gm@dimlist=\toks25
-) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
-Package: fancyvrb 2022/06/06 4.5 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count277
-\FV@InFile=\read2
-\FV@TabBox=\box54
-\c@FancyVerbLine=\count278
-\FV@StepNumber=\count279
-\FV@OutFile=\write3
-) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/framed/framed.sty
-Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
-\OuterFrameSep=\skip54
-\fb@frw=\dimen159
-\fb@frh=\dimen160
-\FrameRule=\dimen161
-\FrameSep=\dimen162
 ) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
@@ -243,24 +228,161 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
 )
-\Gin@req@height=\dimen163
-\Gin@req@width=\dimen164
+\Gin@req@height=\dimen159
+\Gin@req@width=\dimen160
 )
-\cslhangindent=\skip55
-\csllabelwidth=\skip56
-\cslentryspacingunit=\skip57
+\cslhangindent=\skip54
+\csllabelwidth=\skip55
+\cslentryspacingunit=\skip56
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count280
-\calc@Bcount=\count281
-\calc@Adimen=\dimen165
-\calc@Bdimen=\dimen166
-\calc@Askip=\skip58
-\calc@Bskip=\skip59
+\calc@Acount=\count277
+\calc@Bcount=\count278
+\calc@Adimen=\dimen161
+\calc@Bdimen=\dimen162
+\calc@Askip=\skip57
+\calc@Bskip=\skip58
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count282
-\calc@Cskip=\skip60
+\calc@Ccount=\count279
+\calc@Cskip=\skip59
+) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen163
+\lightrulewidth=\dimen164
+\cmidrulewidth=\dimen165
+\belowrulesep=\dimen166
+\belowbottomsep=\dimen167
+\aboverulesep=\dimen168
+\abovetopsep=\dimen169
+\cmidrulesep=\dimen170
+\cmidrulekern=\dimen171
+\defaultaddspace=\dimen172
+\@cmidla=\count280
+\@cmidlb=\count281
+\@aboverulesep=\dimen173
+\@belowrulesep=\dimen174
+\@thisruleclass=\count282
+\@lastruleclass=\count283
+\@thisrulewidth=\dimen175
+) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
+\LTleft=\skip60
+\LTright=\skip61
+\LTpre=\skip62
+\LTpost=\skip63
+\LTchunksize=\count284
+\LTcapwidth=\dimen176
+\LT@head=\box54
+\LT@firsthead=\box55
+\LT@foot=\box56
+\LT@lastfoot=\box57
+\LT@gbox=\box58
+\LT@cols=\count285
+\LT@rows=\count286
+\c@LT@tables=\count287
+\c@LT@chunks=\count288
+\LT@p@ftn=\toks26
+) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/tools/array.sty
+Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen177
+\ar@mcellbox=\box59
+\extrarowheight=\dimen178
+\NC@list=\toks27
+\extratabsurround=\skip64
+\backup@length=\skip65
+\ar@cellbox=\box60
+) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip66
+\multirow@cntb=\count289
+\multirow@dima=\skip67
+\bigstrutjot=\dimen179
+) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen180
+\WF@size=\dimen181
+\c@WF@wrappedlines=\count290
+\WF@box=\box61
+\WF@everypar=\toks28
+Package: wrapfig 2003/01/31  v 3.6
+) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count291
+\float@exts=\toks29
+\float@box=\box62
+\@float@everytoks=\toks30
+\@floatcapt=\box63
+) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2022/06/20 v1.0f Color table columns (DPC)
+\everycr=\toks31
+\minrowclearance=\skip68
+\rownum=\count292
+) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
+(/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
+Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PDF (HO)
+(/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+)) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/tabu/tabu.sty
+Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
+(/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box64
+\sift@deathcycles=\count293
+\@vwid@loff=\dimen182
+\@vwid@roff=\dimen183
+)
+\c@taburow=\count294
+\tabu@nbcols=\count295
+\tabu@cnt=\count296
+\tabu@Xcol=\count297
+\tabu@alloc=\count298
+\tabu@nested=\count299
+\tabu@target=\dimen184
+\tabu@spreadtarget=\dimen185
+\tabu@naturalX=\dimen186
+\tabucolX=\dimen187
+\tabu@Xsum=\dimen188
+\extrarowdepth=\dimen189
+\abovetabulinesep=\dimen190
+\belowtabulinesep=\dimen191
+\tabustrutrule=\dimen192
+\tabu@thebody=\toks32
+\tabu@footnotes=\toks33
+\tabu@box=\box65
+\tabu@arstrutbox=\box66
+\tabu@hleads=\box67
+\tabu@vleads=\box68
+\tabu@cellskip=\skip69
+) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/threeparttable/threeparttable.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box69
+) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/threeparttablex/threeparttablex.sty
+Package: threeparttablex 2013/07/23 v0.3 by daleif
+(/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+(/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+\TPTL@width=\skip70
+) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box70
+\UL@hyphenbox=\box71
+\UL@skip=\skip71
+\UL@hook=\toks34
+\UL@height=\dimen193
+\UL@pe=\count300
+\UL@pixel=\dimen194
+\ULC@box=\box72
+Package: ulem 2019/11/18
+\ULdepth=\dimen195
+) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/makecell/makecell.sty
+Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
+\rotheadsize=\dimen196
+\c@nlinenum=\count301
+\TeXr@lab=\toks35
 ) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty
 Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
@@ -290,11 +412,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count283
+\c@section@level=\count302
 )
-\@linkdim=\dimen167
-\Hy@linkcounter=\count284
-\Hy@pagecounter=\count285
+\@linkdim=\dimen197
+\Hy@linkcounter=\count303
+\Hy@pagecounter=\count304
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2022-11-13 v7.00u Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -304,7 +426,7 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 ) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count286
+\Hy@SavedSpaceFactor=\count305
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2022-11-13 v7.00u Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -318,21 +440,21 @@ Package hyperref Info: Plain pages OFF on input line 4177.
 Package hyperref Info: Backreferencing OFF on input line 4182.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4410.
-\c@Hy@tempcnt=\count287
+\c@Hy@tempcnt=\count306
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4748.
-\XeTeXLinkMargin=\dimen168
+\XeTeXLinkMargin=\dimen198
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count288
-\Field@Width=\dimen169
-\Fld@charsize=\dimen170
+\Fld@menulength=\count307
+\Field@Width=\dimen199
+\Fld@charsize=\dimen256
 Package hyperref Info: Hyper figures OFF on input line 6027.
 Package hyperref Info: Link nesting OFF on input line 6032.
 Package hyperref Info: Hyper index ON on input line 6035.
@@ -344,9 +466,9 @@ Package hyperref Info: PDF/A mode OFF on input line 6057.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count289
-\c@Item=\count290
-\c@Hfootnote=\count291
+\Hy@abspage=\count308
+\c@Item=\count309
+\c@Hfootnote=\count310
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
@@ -355,8 +477,8 @@ File: hpdftex.def 2022-11-13 v7.00u Hyperref driver for pdfTeX
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
 )
-\Fld@listcount=\count292
-\c@bookmark@seq@number=\count293
+\Fld@listcount=\count311
+\c@bookmark@seq@number=\count312
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -364,50 +486,49 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
-\Hy@SectionHShift=\skip61
+\Hy@SectionHShift=\skip72
 ) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
 File: bkm-pdftex.def 2020-11-06 v1.29 bookmark driver for pdfTeX (HO)
-\BKM@id=\count294
+\BKM@id=\count313
 ))
-Package hyperref Info: Option `colorlinks' set `true' on input line 132.
+Package hyperref Info: Option `colorlinks' set `true' on input line 106.
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count295
-\l__pdf_internal_box=\box55
-)
-No file indexPDF.aux.
+\l__color_backend_stack_int=\count314
+\l__pdf_internal_box=\box73
+) (./indexPDF.aux)
 \openout1 = `indexPDF.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 147.
-LaTeX Font Info:    ... okay on input line 147.
-LaTeX Info: Redefining \microtypecontext on input line 147.
-Package microtype Info: Applying patch `item' on input line 147.
-Package microtype Info: Applying patch `toc' on input line 147.
-Package microtype Info: Applying patch `eqnum' on input line 147.
-Package microtype Info: Applying patch `footnote' on input line 147.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Info: Redefining \microtypecontext on input line 120.
+Package microtype Info: Applying patch `item' on input line 120.
+Package microtype Info: Applying patch `toc' on input line 120.
+Package microtype Info: Applying patch `eqnum' on input line 120.
+Package microtype Info: Applying patch `footnote' on input line 120.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 147.
+LaTeX Info: Redefining \showhyphens on input line 120.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -453,92 +574,124 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 147.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 149.
+Package hyperref Info: Link coloring ON on input line 120.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 122.
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 149.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 122.
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 149.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 122.
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 149.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 122.
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 149.
+(Font)              <12> on input line 122.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 149.
+(Font)              <8> on input line 122.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 149.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 149.
+(Font)              <6> on input line 122.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 122.
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 149.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 122.
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [1
 
-{/Users/mauriciomardones/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-No file indexPDF.toc.
-\tf@toc=\write4
-\openout4 = `indexPDF.toc'.
+{/Users/mauriciomardones/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./indexPDF.toc)
+\tf@toc=\write3
+\openout3 = `indexPDF.toc'.
 
-[2]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 161.
+[2] [3] [4]
+<Strata2.png, id=105, 643.40375pt x 718.685pt>
+File: Strata2.png Graphic file (type png)
+<use Strata2.png>
+Package pdftex.def Info: Strata2.png  used on input line 230.
+(pdftex.def)             Requested size: 281.86151pt x 314.84062pt.
+<tallastrata.png, id=107, 1367.1075pt x 845.1575pt>
+File: tallastrata.png Graphic file (type png)
+<use tallastrata.png>
+Package pdftex.def Info: tallastrata.png  used on input line 249.
+(pdftex.def)             Requested size: 469.7543pt x 290.40611pt.
+[5 <./Strata2.png>] [6 <./tallastrata.png>]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 305.
+(/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 305.
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 166.
-(/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
-File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [3] [4]
-<Strata2.png, id=60, 643.40375pt x 718.685pt>
-File: Strata2.png Graphic file (type png)
-<use Strata2.png>
-Package pdftex.def Info: Strata2.png  used on input line 267.
-(pdftex.def)             Requested size: 281.86151pt x 314.84062pt.
-[5 <./Strata2.png>]
-Overfull \hbox (5.72021pt too wide) in paragraph at lines 328--328
-[]\T1/lmtt/m/n/12 ##  [1] "Species"      "MK"           "M"            "Linf"         "L_units"[] 
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 343.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 343.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 343.
+[7] [8] [9] [10]
+<indexPDF_files/figure-latex/unnamed-chunk-8-1.jpeg, id=207, 433.62pt x 361.35pt>
+File: indexPDF_files/figure-latex/unnamed-chunk-8-1.jpeg Graphic file (type jpg)
+<use indexPDF_files/figure-latex/unnamed-chunk-8-1.jpeg>
+Package pdftex.def Info: indexPDF_files/figure-latex/unnamed-chunk-8-1.jpeg  used on input line 562.
+(pdftex.def)             Requested size: 433.61894pt x 361.34912pt.
+<indexPDF_files/figure-latex/unnamed-chunk-9-1.jpeg, id=208, 433.62pt x 216.81pt>
+File: indexPDF_files/figure-latex/unnamed-chunk-9-1.jpeg Graphic file (type jpg)
+<use indexPDF_files/figure-latex/unnamed-chunk-9-1.jpeg>
+Package pdftex.def Info: indexPDF_files/figure-latex/unnamed-chunk-9-1.jpeg  used on input line 575.
+(pdftex.def)             Requested size: 433.63878pt x 216.81938pt.
+[11 <./indexPDF_files/figure-latex/unnamed-chunk-8-1.jpeg>]
+<indexPDF_files/figure-latex/unnamed-chunk-11-1.jpeg, id=216, 433.62pt x 325.215pt>
+File: indexPDF_files/figure-latex/unnamed-chunk-11-1.jpeg Graphic file (type jpg)
+<use indexPDF_files/figure-latex/unnamed-chunk-11-1.jpeg>
+Package pdftex.def Info: indexPDF_files/figure-latex/unnamed-chunk-11-1.jpeg  used on input line 593.
+(pdftex.def)             Requested size: 433.63878pt x 325.22908pt.
+[12 <./indexPDF_files/figure-latex/unnamed-chunk-9-1.jpeg>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[13 <./indexPDF_files/figure-latex/unnamed-chunk-11-1.jpeg>]
+<indexPDF_files/figure-latex/curve_mat-1.jpeg, id=229, 505.89pt x 433.62pt>
+File: indexPDF_files/figure-latex/curve_mat-1.jpeg Graphic file (type jpg)
+<use indexPDF_files/figure-latex/curve_mat-1.jpeg>
+Package pdftex.def Info: indexPDF_files/figure-latex/curve_mat-1.jpeg  used on input line 660.
+(pdftex.def)             Requested size: 469.76265pt x 402.65372pt.
+[14]
+<indexPDF_files/figure-latex/unnamed-chunk-14-1.jpeg, id=235, 433.62pt x 289.08pt>
+File: indexPDF_files/figure-latex/unnamed-chunk-14-1.jpeg Graphic file (type jpg)
+<use indexPDF_files/figure-latex/unnamed-chunk-14-1.jpeg>
+Package pdftex.def Info: indexPDF_files/figure-latex/unnamed-chunk-14-1.jpeg  used on input line 689.
+(pdftex.def)             Requested size: 433.63878pt x 289.09251pt.
+[15 <./indexPDF_files/figure-latex/curve_mat-1.jpeg>] [16 <./indexPDF_files/figure-latex/unnamed-chunk-14-1.jpeg>] [17] [18] [19] [20] [21]
+Overfull \hbox (0.18787pt too wide) in paragraph at lines 989--994
+[][]$\T1/lmr/m/n/12 (+13) https : / / www . ccamlr . org / en / system / ^^\les / meeting % 7B / _ % 7Ddocuments / with % 7B / _ %
  []
 
-
-Overfull \hbox (36.58122pt too wide) in paragraph at lines 328--328
-[]\T1/lmtt/m/n/12 ##  [6] "CVLinf"       "L50"          "L95"          "Walpha"       "Walpha_units"[] 
- []
-
-
-Overfull \hbox (11.89522pt too wide) in paragraph at lines 328--328
-[]\T1/lmtt/m/n/12 ## [21] "FM"           "SPR"          "BinMin"       "BinMax"       "BinWidth"[] 
- []
-
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 345.
-(/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
-File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [6]
-! Missing $ inserted.
-<inserted text> 
-                $
-l.391 L\_\{\infty
-                 \} and the coefficient of variation in CVL\_\{\infty\}, the 
+[22] [23] [24] (./indexPDF.aux) ) 
 Here is how much of TeX's memory you used:
- 14142 strings out of 478051
- 228699 string characters out of 5839183
- 1860330 words of memory out of 5000000
- 33913 multiletter control sequences out of 15000+600000
- 552811 words of font info for 110 fonts, out of 8000000 for 9000
+ 15706 strings out of 478051
+ 258708 string characters out of 5839183
+ 1872330 words of memory out of 5000000
+ 35245 multiletter control sequences out of 15000+600000
+ 567838 words of font info for 157 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 77i,6n,81p,1005b,491s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 77i,10n,81p,1005b,517s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
+Output written on indexPDF.pdf (24 pages, 1789669 bytes).
+PDF statistics:
+ 555 PDF objects out of 1000 (max. 8388607)
+ 483 compressed objects within 5 object streams
+ 125 named destinations out of 1000 (max. 500000)
+ 28908 words of extra memory for PDF output out of 29859 (max. 10000000)
 
-!  ==> Fatal error occurred, no output PDF file produced!
