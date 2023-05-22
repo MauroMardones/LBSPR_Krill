@@ -259,6 +259,8 @@ A constant challenge for krill has been to provide indicators of stock status th
 
 On the other hand, and considering the current krill fisheries management schemes established by @CCAMLR2010, @Constable2000 proposes a decision rule scheme based on biomass that ensure the sustainability of this resource in the Ocean Southern. Through a simulation process, a 20-year projection of the krill population is generated, and a probability distribution is established around two decision rules. The first is based on the lowest level of exploitation allowed, around 20% of biomass, which could become a limit reference point. The second is the target level of the fishery, which indicates the statistical distribution of the biomass at the end of the 20-year projection under a constant catch that allows the average escape of 75% at pre-exploited levels (CCAMLR-2000 Survey).In this regards, we propose two reference points for intrinsic krill productivity, 20% SPR as the limit reference point and 75% as the target.
 
+With this we can test a challenge for fishing exploitation and sustainability, which is related to overfishing by recruitment. This condition occurs when the adult (reproductive) fraction has been severely reduced due to excessive fishing, jeopardizing the success of recruitment and stock replenishment in order to ensure sustainability in relation to the previously mentioned PBRs.
+
 ## 2.7. Running the Simulation Model
 
 The LBSPR package can be used to generate the expected size composition, the SPR, and relative yield for a given set of biological and exploitation pattern parameters. The output of the `LBSPRsim` function is an object of class `LB_obj`. This is another LBSPR object, and contains all of the information from the `LB_pars` object and the output of the `LBSPRsim` function.
@@ -487,7 +489,7 @@ plotEsts(fitbs,
 
 Finally, we identified the reproductive potential between years and strata for the krill population. It is possible to identify marked differences between stratas, where Brainsfield and Extra have low reproductive potential below the proposed management target of 75% for the last year at 0.121 and 0.085 respectively, and also below the limit reference point. This situation is due that these stratas concentrates a large proportion of immature individuals (juveniles) that are being exploited by the fishery, not allowing their reproductive cycles to end. In contrast, the Elephant Island stratum has higher SPR levels in recent years (0.421 in 2019) which is considered closer to a management objective. This situation is also due to the spatial structuring of krill, since in this stratum the proportion of adult individuals is greater than in all other strata. In figure 7, we can visualize the SPR trend between years and strata and also identify the references (yellow line =SPR Objective 75% and Red line= Limit SPR =20%).
 
-```{r warning=FALSE, fig.cap="Krill Intrinsic Productivity (SPR) by strata and by year", fig.height=4}
+```{r warning=FALSE, fig.cap="Krill Intrinsic Productivity (SPR) by strata and by year", fig.height=3}
 
 allsprpl <- ggplot(allspr,
        aes(Year,
@@ -516,6 +518,7 @@ allsprpl <- ggplot(allspr,
 allsprpl
 ```
 
+On the other hand, the Bransfield and Extra strata are the area where recruitment overfishing is most intense, as the reproductive potential that ensures the stock is at only 54% and 66.5% respectively  of the recommended target.
 
 ```{r eval=FALSE}
 ## 3.6 Simulating length data krill
@@ -567,7 +570,13 @@ Identifying the spatial and temporal changes of krill in the PA has been one of 
 
 ## 4.1. Changes in Krill population structure
 
-Changes in the dynamics and population structure of krill in the Antarctic Peninsula are manifested in various ways, such as distribution, biomass, recruitment, phenology, among others. The main drivers of these changes are associated with the changing behavior of the different environmental variables in the krill habitat [@Flores2012a; @Pinones2016; @Saba2014; @Veytia2021; @Flores2012; @Walsh2020]. Faced with this changing scenario, the intrinsic population productivity, that is, the reproductive potential of the species, has also undergone changes in the last decades [@Atkinson2022; @Perry2020; @McBride2021], both on the temporal scale as well as the spatial one. Similarly, the population structure of krill in the PA has been impacted by this type of environmental forcing [@Siegel2013; @Reiss2020]
+Changes in the dynamics and population structure of krill in the Antarctic Peninsula are manifested in various ways, such as distribution, biomass, recruitment, phenology, among others. The main drivers of these changes are associated with the changing behavior of the different environmental variables in the krill habitat [@Flores2012a; @Pinones2016; @Saba2014; @Veytia2021; @Flores2012; @Walsh2020]. Faced with this changing scenario, the intrinsic population productivity, that is, the reproductive potential of the species, has also undergone changes in the last decades [@Atkinson2022; @Perry2020; @McBride2021], both on the temporal scale as well as the spatial one. Similarly, the population structure of krill in the PA has been impacted by this type of environmental forcing [@Siegel2013; @Reiss2020]. While we understand that recruitment variability is influenced by environmental factors, including biomass, it is possible to identify the risk of fishing activity on the reproductive condition of the krill population over time and space, in other words, the risk of recruitment overfishing varies across years and strata in Antarctic Peninsula.
+
+
+
+ in the Antarctic Peninsula
+
+
 
 ## 4.2. Fishery data as population indicators
 
