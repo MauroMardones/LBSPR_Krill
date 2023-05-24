@@ -58,6 +58,23 @@ library(kableExtra)
 library(hrbrthemes)
 ```
 
+
+```{r}
+My_theme <- theme(axis.text.y = element_blank(),
+                  axis.ticks.y = element_blank(),
+                  axis.ticks.x=element_blank(),
+                  panel.background = element_blank(),
+                  panel.border = element_rect(fill = NA, size = 1),
+                  strip.background = element_rect(fill = "white", 
+                                                  color = "white", 
+                                                  size = 1),
+                  text = element_text(size = 14),
+                  panel.grid.major = element_line(colour = "white", 
+                                                  size = 0.1),
+                  panel.grid.minor = element_line(colour = "white", 
+                                                  size = 0.1))
+```
+
 # ABSTRACT
 
 One approach to understanding the dynamics of krill populations in the Antarctic Peninsula of the Southern Ocean is through the analysis of empirical data, such as size compositions obtained from fishery monitoring. By studying this data over multiple years and considering life history parameters, we can assess the intrinsic productivity of krill and how it has changed over time and in different areas. To achieve this, we have employed a method known as the Length-Based Spawning Potential Ratio (LBSPR). This method allows us to estimate the reproductive potential of the population based on current exploitation levels, as well as in comparison to a virgin condition. By identifying reference points specifically related to reproductive potential, the LBSPR method provides insights into the state of the krill population. Recognizing spatial and temporal changes in the intrinsic productivity of krill, as indicated by their reproductive potential, is crucial in understanding the unique characteristics of this species. Moreover, these findings have important implications for management strategies within the context of the Commission for the Conservation of Antarctic Marine Living Resources (CCAMLR). By integrating knowledge of krill dynamics and their reproductive potential, we can give advise to ensure the sustainable management of krill populations in the Antarctic Peninsula.
@@ -96,7 +113,7 @@ For this analysis, data from the monitoring of the krill fishery were used, whic
 
 ![Figure 2. Sizes compositions from SISO program monitoring krill fishery](tallastrata.png){width="100%"}
 
-## 2.3 Assessment of intrinsic productivity
+## 2.3. Assessment of intrinsic productivity
 
 of a stock is defined as the proportion of potential unexploited spawning at any given level of fishing pressure (Goodyear, 1993; Walters and Martell, 2004)
 
@@ -331,15 +348,21 @@ fitssiw <- LBSPRfit(MyPars, Lenssiw)
 
 One way to evaluate the performance of the model for the estimation of the SPR is the fit to the data. An example of this can be seen through the settings in Braisnfield strata (Figure 3). 
 ```{r fig.cap="Fit of the model to the data of lengths in Braishfield strata", fig.height=5}
-plotSize(fitbs,
-         Title="Braisnfield strata")
+plotSize(fitei55,
+         Title="Braisnfield strata")+
+  My_theme
+
+plotSize(fitei65,
+         Title="Braisnfield strata")+
+  My_theme
 ```
 
 In all strata, the model adequately reproduces the observed sizes, except for the Joinville strata, possibly due to the few years of data (Figure 4). 
 
-```{r fig.cap="Fit of the model to the data of lengths in Joinville strata", fig.height=3}
+```{r eval=FALSE, fig.cap="Fit of the model to the data of lengths in Joinville strata", fig.height=3}
 plotSize(fitjo,
-         Title="Joinville strata")
+         Title="Joinville strata")+
+  My_theme
 ```
 
 ```{r eval=FALSE}
@@ -365,27 +388,32 @@ bscom <- plotTarg(MyPars, Lenbs, yr=yr,
                   Cols = c(2,4),
                   size.axtex = 8,
                   title="Braisnfield strata",
-                  targtext = FALSE)
+                  targtext = FALSE)+
+  My_theme 
 eicom <- plotTarg(MyPars, Lenei, yr=yr,
                   Cols = c(2,4),
                   size.axtex = 8,
                   title="Elephan I. strata",
-                  targtext = FALSE)
+                  targtext = FALSE)+
+  My_theme 
 excom <- plotTarg(MyPars, Lenex, yr=yr,
                   Cols = c(2,4),
                   size.axtex = 8,
                   title="Extra strata",
-                  targtext = FALSE)
+                  targtext = FALSE)+
+  My_theme 
 jocom <- plotTarg(MyPars, Lenjo, yr=1,
                   Cols = c(2,4),
                   size.axtex = 8,
                   title="Joinville strata",
-                  targtext = FALSE)
+                  targtext = FALSE)+
+  My_theme 
 sscom <- plotTarg(MyPars, Lenssiw , yr=yr,
                   Cols = c(2,4),
                   size.axtex = 8,
                   title="SSWI strata",
-                  targtext = FALSE)
+                  targtext = FALSE)+
+  My_theme 
 
 ggarrange(bscom, eicom, excom, jocom, sscom, 
           ncol = 3, nrow = 2,
@@ -455,21 +483,30 @@ Similarly, the plotMat function can be used to show the specified maturity-at-le
 
 bsmat <- plotMat(fitbs,
         useSmooth = TRUE,
-        Title="Braisnfield strata")
+        Title="BS")+
+  My_theme 
 eimat <-  plotMat(fitei,
         useSmooth = TRUE,
-        Title="Elephan Island strata")
+        Title="EI")+
+  My_theme 
 exmat <-  plotMat(fitex,
         useSmooth = TRUE,
-        Title="Extra strata")
+        Title="EX")+
+  My_theme 
 jomat <-  plotMat(fitjo,
         useSmooth = TRUE,
-        Title="Joinville strata")
+        Title="JO")+
+  My_theme 
 ssmat <-  plotMat(fitssiw,
         useSmooth = TRUE,
-        Title="SSWI strata")
+        Title="SSWI")+
+  My_theme 
 
-ggarrange(bsmat, eimat, exmat, jomat, ssmat, 
+ggarrange(bsmat,
+          eimat + rremove("ylab"), 
+          exmat , 
+          jomat + rremove("ylab"), 
+          ssmat+ rremove("ylab"), 
           ncol = 2, nrow = 3,
           legend="right",
           common.legend = TRUE)
@@ -489,7 +526,7 @@ plotEsts(fitbs,
 
 Finally, we identified the reproductive potential between years and strata for the krill population. It is possible to identify marked differences between stratas, where Brainsfield and Extra have low reproductive potential below the proposed management target of 75% for the last year at 0.121 and 0.085 respectively, and also below the limit reference point. This situation is due that these stratas concentrates a large proportion of immature individuals (juveniles) that are being exploited by the fishery, not allowing their reproductive cycles to end. In contrast, the Elephant Island stratum has higher SPR levels in recent years (0.421 in 2019) which is considered closer to a management objective. This situation is also due to the spatial structuring of krill, since in this stratum the proportion of adult individuals is greater than in all other strata. In figure 7, we can visualize the SPR trend between years and strata and also identify the references (yellow line =SPR Objective 75% and Red line= Limit SPR =20%).
 
-```{r warning=FALSE, fig.cap="Krill Intrinsic Productivity (SPR) by strata and by year", fig.height=3}
+```{r warning=FALSE, fig.cap="Krill Intrinsic Productivity (SPR) by strata and by year", fig.height=3, fig.width=7}
 
 allsprpl <- ggplot(allspr,
        aes(Year,
@@ -497,18 +534,19 @@ allsprpl <- ggplot(allspr,
            color=SPRv))+
   geom_point(alpha=1.5)+
   stat_smooth(method = "lm",
-              alpha=0.6)+
+              alpha=0.3)+
   geom_hline(yintercept = 0.75,
-             colour= 'yellow',
-             alpha=0.5)+
+             colour= '#006d2c',
+             alpha=0.5,
+             linewidth=1.2)+
   geom_hline(yintercept = 0.20, 
-             colour= 'red',
-             alpha=0.5)+
+             colour= '#bd0026',
+             alpha=0.5,
+             linewidth=1.2)+
   facet_wrap(.~SPRv, ncol = 5)+
   scale_color_viridis_d(option = "F")+
-  scale_y_log10()+
   xlim(2001,2021)+
-  theme_bw()+
+  My_theme+
   theme(legend.position = "none",
         axis.text.x = element_text(angle = 90, hjust = 2),
         panel.background = element_rect(),
@@ -518,49 +556,482 @@ allsprpl <- ggplot(allspr,
 allsprpl
 ```
 
-On the other hand, the Bransfield and Extra strata are the area where recruitment overfishing is most intense, as the reproductive potential that ensures the stock is at only 54% and 66.5% respectively  of the recommended target.
+In Elephan Island strata adult fraction has been more prevalent in fishing catches, and as a result, the reproductive potential has increased in recent years. On the other hand, the Bransfield and Extra strata are the area where recruitment overfishing is most intense, as the reproductive potential that ensures the stock is at only 54% and 66.5% respectively  of the recommended target.
+
+## 3.7. Sensitivity analysis
+
+Overestimated and Underestimated specification
+
+```{r message=FALSE}
+
+for (i in 55:65) {
+  nombre_objeto <- paste0("MyPars_", i)  # Crear un nombre único para cada objeto modificado
+  objeto_modificado <- MyPars  # Crear una copia del objeto original
+  
+  objeto_modificado@Linf <- i  # Modificar el valor de @Linf en cada iteración
+  
+  assign(nombre_objeto, objeto_modificado, envir = .GlobalEnv)  # Asignar el objeto modificado al nombre creado
+  
+  # Resto del código que deseas ejecutar con el objeto modificado
+## A blank LB_pars object created
+## Default values have been set for some parameters
+      MyPars@Species <- "Euphausia superba"
+      MyPars@L50 <- 34 
+      MyPars@L95 <- 55 # verrificar bibliografia
+      MyPars@MK <- 0.4/0.45
+      
+      
+      #Explotation
+      MyPars@SL50 <- 40#numeric() #1
+      MyPars@SL95 <- 56#numeric() #27
+      MyPars@SPR <- 0.75 #numeric()# ###cambia el numero 0.4 a en blanco
+      MyPars@BinWidth <- 1
+      #MyPars@FM <- 1
+      
+      MyPars@Walpha <- 1
+      MyPars@Wbeta <- 3.0637 #r2 = 0.9651
+      
+      MyPars@BinWidth <-1
+      MyPars@BinMax <- 70
+      MyPars@BinMin <- 0
+      MyPars@L_units <- "mm"
+  
+  # Imprimir el valor de @Linf después de cada cambio
+  #print(get(nombre_objeto)@Linf)
+}
+```
+
+
+```{r message=FALSE}
+
+# Recuerdo las bases de datos de lengths
+
+#Brainsflied Strata: Lenbs 
+#Elephan Island Strata: Lenei 
+#Extra Strata:Lenex 
+#Join Strata: Lenjo 
+#SSIW Strata: Lenssiw 
+
+
+# ciclo de ajuste para BS
+for (i in 55:65) {
+  nombre_objeto <- paste0("MyPars_", i)  # Nombre del objeto S4 en cada iteración
+  nombre_variable <- paste0("fitbs", i)  # Nuevo nombre para el resultado
+  
+  # Obtener el objeto S4 correspondiente
+  objeto <- get(nombre_objeto)
+  
+  # Ejecutar LBSPRfit() y asignar el resultado a una nueva variable con nombre único
+  assign(nombre_variable, LBSPRfit(objeto, Lenbs), envir = .GlobalEnv)
+}
+
+
+# ciclo de ajuste para Extra
+for (i in 55:65) {
+  nombre_objeto <- paste0("MyPars_", i)  
+  nombre_variable <- paste0("fitei", i)  
+  objeto <- get(nombre_objeto)
+  assign(nombre_variable, LBSPRfit(objeto, Lenei), envir = .GlobalEnv)
+}
+
+# ciclo de ajuste para Extra
+for (i in 55:65) {
+  nombre_objeto <- paste0("MyPars_", i)  
+  nombre_variable <- paste0("fitex", i)  
+  objeto <- get(nombre_objeto)
+  assign(nombre_variable, LBSPRfit(objeto, Lenex), envir = .GlobalEnv)
+}
+
+# ciclo de ajuste para JoinVIlle
+for (i in 55:65) {
+  nombre_objeto <- paste0("MyPars_", i) 
+  nombre_variable <- paste0("fitjo", i)  
+  objeto <- get(nombre_objeto)
+  assign(nombre_variable, LBSPRfit(objeto, Lenjo), envir = .GlobalEnv)
+}
+
+# ciclo de ajuste para JSSWI
+for (i in 55:65) {
+  nombre_objeto <- paste0("MyPars_", i) 
+  nombre_variable <- paste0("fitsswi", i) 
+  objeto <- get(nombre_objeto)
+  assign(nombre_variable, LBSPRfit(objeto, Lenssiw), envir = .GlobalEnv)
+}
+```
+
+```{r}
+#Genero lo que quiero comparar BS
+valbs <- as.data.frame(cbind(fitbs55@Years,
+  fitbs55@SPR,
+           fitbs56@SPR,
+           fitbs57@SPR,
+           fitbs58@SPR,
+           fitbs59@SPR,
+           fitbs60@SPR,
+           fitbs61@SPR,
+           fitbs62@SPR,
+           fitbs63@SPR,
+           fitbs64@SPR,
+           fitbs65@SPR))
+colnames(valbs) <- c("Years", "Linf55","Linf56", "Linf57", "Linf58", 
+                     "Linf59", "Linf60", 
+                      "Linf61", "Linf62" , "Linf63",  "Linf64",
+                     "Linf65")
+
+valbs_largo <- pivot_longer(valbs, 
+                            cols = c(2:12,), 
+                            names_to = "Parameter", 
+                            values_to = "SPR")
+valbs_largo$SPRstra <- rep("BS", nrow(valbs_largo))
+
+#Genero lo que quiero comparar EI
+valei <- as.data.frame(cbind(fitei55@Years,
+  fitei55@SPR,
+           fitei56@SPR,
+           fitei57@SPR,
+           fitei58@SPR,
+           fitei59@SPR,
+           fitei60@SPR,
+           fitei61@SPR,
+           fitei62@SPR,
+           fitei63@SPR,
+           fitei64@SPR,
+           fitei65@SPR))
+colnames(valei) <- c("Years", "Linf55","Linf56", "Linf57", "Linf58", 
+                     "Linf59", "Linf60", 
+                      "Linf61", "Linf62" , "Linf63",  "Linf64",
+                     "Linf65")
+
+valei_largo <- pivot_longer(valei, 
+                            cols = c(2:12,), 
+                            names_to = "Parameter", 
+                            values_to = "SPR")
+valei_largo$SPRstra <- rep("EI", nrow(valei_largo))
+#Genero lo que quiero comparar Extra
+valex <- as.data.frame(cbind(fitex55@Years,
+  fitex55@SPR,
+           fitex56@SPR,
+           fitex57@SPR,
+           fitex58@SPR,
+           fitex59@SPR,
+           fitex60@SPR,
+           fitex61@SPR,
+           fitex62@SPR,
+           fitex63@SPR,
+           fitex64@SPR,
+           fitex65@SPR))
+colnames(valex) <- c("Years", "Linf55","Linf56", "Linf57", "Linf58", 
+                     "Linf59", "Linf60", 
+                      "Linf61", "Linf62" , "Linf63",  "Linf64",
+                     "Linf65")
+
+valex_largo <- pivot_longer(valex, 
+                            cols = c(2:12,), 
+                            names_to = "Parameter", 
+                            values_to = "SPR")
+valex_largo$SPRstra <- rep("EX", nrow(valex_largo))
+
+#Genero lo que quiero comparar JOin
+valjo <- as.data.frame(cbind(fitjo55@Years,
+  fitjo55@SPR,
+           fitjo56@SPR,
+           fitjo57@SPR,
+           fitjo58@SPR,
+           fitjo59@SPR,
+           fitjo60@SPR,
+           fitjo61@SPR,
+           fitjo62@SPR,
+           fitjo63@SPR,
+           fitjo64@SPR,
+           fitjo65@SPR))
+colnames(valjo) <- c("Years", "Linf55","Linf56", "Linf57", "Linf58", 
+                     "Linf59", "Linf60", 
+                      "Linf61", "Linf62" , "Linf63",  "Linf64",
+                     "Linf65")
+
+valjo_largo <- pivot_longer(valjo, 
+                            cols = c(2:12,), 
+                            names_to = "Parameter", 
+                            values_to = "SPR")
+valjo_largo$SPRstra <- rep("JO", nrow(valjo_largo))
+
+#Genero lo que quiero comparar SSWI
+valsswi <- as.data.frame(cbind(fitsswi55@Years,
+  fitsswi55@SPR,
+           fitsswi56@SPR,
+           fitsswi57@SPR,
+           fitsswi58@SPR,
+           fitsswi59@SPR,
+           fitsswi60@SPR,
+           fitsswi61@SPR,
+           fitsswi62@SPR,
+           fitsswi63@SPR,
+           fitsswi64@SPR,
+           fitsswi65@SPR))
+colnames(valsswi) <- c("Years", "Linf55","Linf56", "Linf57", "Linf58", 
+                     "Linf59", "Linf60", 
+                      "Linf61", "Linf62" , "Linf63",  "Linf64",
+                     "Linf65")
+
+valsswi_largo <- pivot_longer(valsswi, 
+                            cols = c(2:12,), 
+                            names_to = "Parameter", 
+                            values_to = "SPR")
+valsswi_largo$SPRstra <- rep("SSWI", nrow(valsswi_largo))
+#agrupo
+valtodo <- rbind(valsswi_largo, 
+              valjo_largo,
+              valbs_largo,
+              valei_largo,
+              valex_largo)
+```
+
+
+```{r warning=FALSE, fig.cap="Sensitivity analysis by strata about Longitud asymptotic (VB)", , fig.height=4, fig.width=8}
+#### Plot separados
+# senbs <- ggplot(valbs_largo %>% 
+#          drop_na(), 
+#        aes(x = Parameter, 
+#            y = SPR)) +
+#   geom_violin(trim=FALSE)+
+#   scale_color_viridis_b(option="E")+
+#   geom_jitter(height = 0, 
+#               width = 0.1,
+#               alpha=0.3)+
+#   stat_summary(fun.y=mean, geom="point", size=2, color="red")+
+#   labs(y="SPR Mean",
+#        x="VB Parameter",
+#        title = "BS")+
+#   theme_minimal()+
+#   theme(legend.position = "none",
+#         axis.text.x = element_text(angle = 90, hjust = 2),
+#         panel.background = element_rect(),
+#         panel.grid.major = element_blank(), 
+#         panel.grid.minor = element_blank())
+# 
+# 
+# senei <- ggplot(valei_largo %>% 
+#          drop_na(), 
+#        aes(x = Parameter, 
+#            y = SPR)) +
+#   geom_violin(trim=FALSE)+
+#   scale_color_viridis_b(option="E")+
+#   geom_jitter(height = 0, 
+#               width = 0.1,
+#               alpha=0.3)+
+#   stat_summary(fun.y=mean, geom="point", size=2, color="red")+
+#   labs(y="SPR Mean",
+#        x="VB Parameter",
+#        title = "EI")+
+#   theme_minimal()+
+#   theme(legend.position = "none",
+#         axis.text.x = element_text(angle = 90, hjust = 2),
+#         panel.background = element_rect(),
+#         panel.grid.major = element_blank(), 
+#         panel.grid.minor = element_blank())
+# 
+# 
+# senex <- ggplot(valex_largo %>% 
+#          drop_na(), 
+#        aes(x = Parameter, 
+#            y = SPR)) +
+#   geom_violin(trim=FALSE)+
+#   scale_color_viridis_b(option="E")+
+#   geom_jitter(height = 0, 
+#               width = 0.1,
+#               alpha=0.3)+
+#   stat_summary(fun.y=mean, geom="point", size=2, color="red")+
+#   labs(y="SPR Mean",
+#        x="VB Parameter",
+#        title = "EX")+
+#   theme_minimal()+
+#   theme(legend.position = "none",
+#         axis.text.x = element_text(angle = 90, hjust = 2),
+#         panel.background = element_rect(),
+#         panel.grid.major = element_blank(), 
+#         panel.grid.minor = element_blank())
+# 
+# 
+# senjo <- ggplot(valjo_largo %>% 
+#          drop_na(), 
+#        aes(x = Parameter, 
+#            y = SPR)) +
+#   geom_violin(trim=FALSE)+
+#   scale_color_viridis_b(option="E")+
+#   geom_jitter(height = 0, 
+#               width = 0.1,
+#               alpha=0.3)+
+#   stat_summary(fun.y=mean, geom="point", size=2, color="red")+
+#   labs(y="SPR Mean",
+#        x="VB Parameter",
+#        title = "JO")+
+#   theme_minimal()+
+#   theme(legend.position = "none",
+#         axis.text.x = element_text(angle = 90, hjust = 2),
+#         panel.background = element_rect(),
+#         panel.grid.major = element_blank(), 
+#         panel.grid.minor = element_blank())
+# 
+# 
+# sensswi <- ggplot(valsswi_largo %>% 
+#          drop_na(), 
+#        aes(x = Parameter, 
+#            y = SPR)) +
+#   geom_violin(trim=FALSE)+
+#   scale_color_viridis_b(option="E")+
+#   geom_jitter(height = 0, 
+#               width = 0.1,
+#               alpha=0.3)+
+#   stat_summary(fun.y=mean, geom="point", size=2, color="red")+
+#   labs(y="SPR Mean",
+#        x="VB Parameter",
+#        title = "SSWI")+
+#   theme_minimal()+
+#   theme(legend.position = "none",
+#         axis.text.x = element_text(angle = 90, hjust = 2),
+#         panel.background = element_rect(),
+#         panel.grid.major = element_blank(), 
+#         panel.grid.minor = element_blank())
+####
+
+
+# todo
+sensto <- ggplot(valtodo %>%
+         drop_na(),
+       aes(x = Parameter,
+           y = SPR)) +
+  geom_violin(trim=FALSE)+
+  geom_jitter(height = 0,
+              width = 0.1,
+              alpha=0.9,
+              color="grey")+
+  scale_fill_viridis_b(option="E")+
+  facet_wrap(~SPRstra,
+             ncol=5)+
+  stat_summary(fun.y=mean, geom="point", size=2, color="red")+
+  labs(y="SPR Mean",
+       x="VB Parameters tested",
+       title = "sswi")+
+  theme_minimal()+
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 90, hjust = 2),
+        panel.background = element_rect(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())+
+  coord_flip()
+sensto
+# ggarrange(senbs , 
+#           senei + rremove("ylab"),
+#           senex + rremove("ylab"),
+#           senjo + rremove("ylab"),
+#           sensswi+ rremove("ylab"), 
+#           ncol=5,
+#           common.legend = TRUE)
+
+```
+
+
+
+## 3.7. Risk assessment
+
+```{r eval=FALSE}
+xn <-rnorm(1000, mean = 0.121, sd = 0.002)
+xn1  <-seq(min(xn),max(xn), 0.0005)
+yn  <-dnorm(xn1, mean = 0.121, sd = 0.002)
+qn <- as.data.frame(qnorm(c(0.1, 0.2, 0.3, 0.4,  0.5),
+                          mean = 0.121, sd = 0.002))
+
+brapro <- as.data.frame(cbind(xn1,yn)) %>% 
+  rename(fre=xn1,
+         value=yn)
+xnor <- ggplot()+
+  geom_line(aes(xn1, yn))+
+  geom_vline(xintercept=qn[1,1], col="#999999")+
+  geom_vline(xintercept=qn[2,1], col="#E69F00")+
+  geom_vline(xintercept=qn[3,1], col="#009E73")+
+  geom_vline(xintercept=qn[4,1], col="#56B4E9")+
+  geom_vline(xintercept=qn[5,1], col="#e66101")+
+   geom_text(aes(x=qn[1,1]+15, 
+                label=round(qn[1,1], 1),y=100),
+             colour="#999999", angle=90)+
+   geom_text(aes(x=qn[2,1], 
+                label=round(qn[2,1], 1),y=0.0020),
+             colour="#E69F00", angle=90)+
+   geom_text(aes(x=qn[3,1]+15, 
+                label=round(qn[3,1], 1),y=0.0020),
+             colour="#009E73", angle=90)+
+   geom_text(aes(x=qn[4,1]+15, 
+                label=round(qn[4,1], 1),y=0.0020),
+             colour="#56B4E9", angle=90)+
+   geom_text(aes(x=qn[5,1]+15, 
+                label=round(qn[5,1], 1),y=0.0020),
+             colour="#e66101", angle=90)+
+  ylab('')+
+  xlab('')+
+  lims(x=c(min(xn),max(xn)))+
+  ggtitle(" Riesgo X Norte F2022")+
+  My_theme
+xnor
+
+```
+
 
 ```{r eval=FALSE}
 ## 3.6 Simulating length data krill
 # Definir las edades
-tallas <- 0:7
+
+longitudes <- seq(0,7)
 
 # Especificar las probabilidades de ocurrencia de cada edad
-probabilidades <- c(0.1, 0.15, 0.2, 0.15, 0.12, 0.1, 0.08, 0.1)
+probabilidades <- c(0.1, 0.05, 0.2, 0.15, 0.12, 0.1, 0.08, 0.1)
 
 # Realizar la simulación multinomial 200 veces
-n_simulaciones <- 1000
-resultados <- matrix(0, nrow = n_simulaciones, ncol = length(tallas))
+n_simulaciones <- 200
+resultados <- matrix(0, nrow = n_simulaciones, ncol = length(longitudes))
 
 for (i in 1:n_simulaciones) {
-  resultados[i, ] <- rmultinom(1, size = 1000, prob = probabilidades)
+  resultados[i, ] <- rmultinom(1, size = 1, prob = probabilidades)
 }
 
 # Crear un data frame con los resultados
-tabla_resultados <- data.frame(tallas = rep(tallas, n_simulaciones),
-                               simulacion = rep(1:n_simulaciones, each = length(tallas)),
+tabla_resultados <- data.frame(longitudes = rep(longitudes, 
+                                                n_simulaciones),
+                               simulacion = rep(1:n_simulaciones, 
+                                                each = length(longitudes)),
                                frecuencia = c(resultados))
 
 # Imprimir los primeros registros de la tabla de resultados
 print(head(tabla_resultados))
 
 # Graficar histograma
-hist(tabla_resultados$tallas, breaks = length(tallas), col = "skyblue", xlab = "tallas", main = "Distribución de tallas Simuladas")
-
+hist(tabla_resultados$longitudes, 
+     breaks = length(longitudes), 
+     col = "skyblue", 
+     xlab = "longitudes", 
+     main = "Distribución de longitudes Simuladas")
 
 # Calcular la frecuencia por edad
-frecuencia_por_edad <- aggregate(frecuencia ~ tallas, data = tabla_resultados, FUN = sum)
+frecuencia_por_edad <- aggregate(frecuencia ~ longitudes, data = tabla_resultados, FUN = sum)
 
 # Graficar gráfico de barras
-barplot(frecuencia_por_edad$frecuencia, names.arg = frecuencia_por_edad$tallas, col = "skyblue",
-        xlab = "tallas", ylab = "Frecuencia", main = "Frecuencia de tallas Simuladas")
+barplot(frecuencia_por_edad$frecuencia, names.arg = frecuencia_por_edad$longitudes, col = "skyblue",
+        xlab = "longitudes", ylab = "Frecuencia", main = "Frecuencia de longitudes Simuladas")
 
 
-# Graficar gráfico de densidad
-plot(density(tabla_resultados$tallas), col = "skyblue",
-     xlab = "tallas", ylab = "Densidad", main = "Densidad de tallas Simuladas")
+datos <- data.frame(edades = tabla_resultados$longitudes)
+
+# Crear el gráfico de densidad con cuantiles
+ggplot(datos, aes(x = edades)) +
+  geom_density(fill = "skyblue", alpha = 0.5) +
+  geom_quantile(quantiles = c(0.25, 0.5, 0.75), 
+                color = "red", 
+                linetype = "dashed") +
+  xlab("Edades") +
+  ylab("Densidad") +
+  ggtitle("Densidad de Edades Simuladas con Cuantiles")
 
 ```
+
 
 \newpage
 
@@ -573,14 +1044,9 @@ Identifying the spatial and temporal changes of krill in the PA has been one of 
 Changes in the dynamics and population structure of krill in the Antarctic Peninsula are manifested in various ways, such as distribution, biomass, recruitment, phenology, among others. The main drivers of these changes are associated with the changing behavior of the different environmental variables in the krill habitat [@Flores2012a; @Pinones2016; @Saba2014; @Veytia2021; @Flores2012; @Walsh2020]. Faced with this changing scenario, the intrinsic population productivity, that is, the reproductive potential of the species, has also undergone changes in the last decades [@Atkinson2022; @Perry2020; @McBride2021], both on the temporal scale as well as the spatial one. Similarly, the population structure of krill in the PA has been impacted by this type of environmental forcing [@Siegel2013; @Reiss2020]. While we understand that recruitment variability is influenced by environmental factors, including biomass, it is possible to identify the risk of fishing activity on the reproductive condition of the krill population over time and space, in other words, the risk of recruitment overfishing varies across years and strata in Antarctic Peninsula.
 
 
-
- in the Antarctic Peninsula
-
-
-
 ## 4.2. Fishery data as population indicators
 
-Krill in the PA have been harvested commercially since about 1970 and constitute the largest fishery in the Southern Ocean. The data on the fishing activity around krill have been systematically collected on board the fishing vessels through the SISO program, with which it has also been possible to identify changes in the population dynamics that have occurred during the last decade and throughout the area. of greater exploitation. Changes in the availability, distribution, and concentration, performance of the resource have been reflected in the data [@SantaCruz2018; @SantaCruz2022; @Atkinson2019a; @Kruger2019]. To identify changes in the intrinsic productivity of the krill population, we used one of the most representative pieces of information on the population dynamics of exploited marine resources that exist in this type of fisheries monitoring program, in this case, frequency data of catch size. [Hordyk et al., 2014; Froese et al., 2018; Prince et al., 2015; Rudd and Thorson, 2018; Ault et al., 2019; Chong et al., 2019; Pilling et al., 2008; Hordyk et al., 2015; Mildenberger et al., 2017]. ; Froese et al., 2018). This type of data is abundant and makes it possible to cover a large temporal and spatial scale, in this case, from 1980 to 2020 and throughout subarea 48.1 (Figure 1).
+Krill in the PA have been harvested commercially since about 1970 and constitute the largest fishery in the Southern Ocean. The data on the fishing activity around krill have been systematically collected on board the fishing vessels through the SISO program, with which it has also been possible to identify changes in the population dynamics that have occurred during the last decade and throughout the area. of greater exploitation. Changes in the availability, distribution, and concentration, performance of the resource have been reflected in the data [@SantaCruz2018; @SantaCruz2022; @Atkinson2019a; @Kruger2019]. To identify changes in the intrinsic productivity of the krill population, we used one of the most representative pieces of information on the population dynamics of exploited marine resources that exist in this type of fisheries monitoring program, in this case, frequency data of catch size. [Hordyk et al., 2014; Froese et al., 2018; Prince et al., 2015; Rudd and Thorson, 2018; Ault et al., 2019; Chong et al., 2019; Pilling et al., 2008; Hordyk et al., 2015; Mildenberger et al., 2017]. ; Froese et al., 2018). This type of data is abundant and informative about signals status populations, and makes it possible to cover a large temporal and spatial scale, in this case, from 1980 to 2020 and throughout subarea 48.1 (Figure 1).
 
 ## 4.3. Temporal differences in intrinsic krill productivity
 
