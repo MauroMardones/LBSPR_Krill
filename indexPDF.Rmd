@@ -543,6 +543,7 @@ allsprwide <- round(pivot_wider(allspr,
                           values_from = c(SPR, Var),
                           values_fill = NA,
                           names_sep = " ",),3)
+
 ```
 
 
