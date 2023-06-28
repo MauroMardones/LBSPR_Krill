@@ -1,7 +1,10 @@
 ---
 title: "Searching spatial-temporal changes in intrinsic productivity of Antarctic Krill (Euphausia superba) in a fishery management context"
 subtitle: "Working Paper to be submitted in a CCAMLR WG 2023"
-author: "Mardones, M; Watters, G.; Cárdenas, C."
+author:
+  - Mardones Mauricio^[Instituo de Fomento Pesquero, mardones.mauricio@gmail.com]
+  - George Watters^[Antarctic División NOAA]
+  - César Cárdenas^[Instituto Antártico Chileno]
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 bibliography: LBSPR.bib
 csl: apa.csl
