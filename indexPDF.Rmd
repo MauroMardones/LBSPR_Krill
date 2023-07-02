@@ -13,7 +13,6 @@ linkcolor: blue
 always_allow_html: yes
 output:
   pdf_document
-
 ---
 
 ```{=tex}
@@ -61,7 +60,6 @@ library(kableExtra)
 library(hrbrthemes)
 ```
 
-
 ```{r}
 My_theme <- theme(axis.text.y = element_blank(),
                   axis.ticks.y = element_blank(),
@@ -106,22 +104,17 @@ We then propose to identify differences in krill reproductive potential at the f
 
 The study area includes subarea 48.1, which is one of the sectors where today the largest amount of krill fishing is concentrated [@McBride2021; @Atkinson2022; @SantaCruz2022]. In order to have a finest spatial definition of krill dynamics population, we will analyze the differences between the management strata defined in WG-EMM-2021/05 Rev. (@Dornam2021), namely Brainsfield Strait, Elephant Island, Extra, Joinville Island and South West (hereafter BS, EI, Extra, JOIN and SSIW respectively) (Figure \ref{Figure 1})
 
-
 ```{r Figure 1, echo=FALSE, out.width='60%', fig.cap="\\label{Figure 1} Subarea 48.1 and management strata considered in the spatio-temporal analysis of intrinsic productivity of Krill (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West)"}
 knitr::include_graphics('Strata2.png')
 ```
 
-
-
 ## 2.2. Monitoring Data (SISO Program)
 
-For this analysis, data from the monitoring of the krill fishery were used, which have been systematically collected on board fishing vessels by the CCAMLR SISO (Scheme of International Scientific Observation) program. Krill sizes compositions were obtained from the entire area 48.1, which was combined in each management stratum defined at 2.1 section  (Figure \ref{Figure 2}). 
-
+For this analysis, data from the monitoring of the krill fishery were used, which have been systematically collected on board fishing vessels by the CCAMLR SISO (Scheme of International Scientific Observation) program. Krill sizes compositions were obtained from the entire area 48.1, which was combined in each management stratum defined at 2.1 section (Figure \ref{Figure 2}).
 
 ```{r Figure 2, echo=FALSE, out.width='100%', fig.cap="\\label{Figure 2}Sizes compositions from SISO program monitoring krill fishery by strata (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West). Red line represent recruit size"}
 knitr::include_graphics('tallastrata.png')
 ```
-
 
 The information gaps (years without sizes composition data) are not calculated because there is no autocorrelation between years, but singular estimators over time.
 
@@ -183,7 +176,7 @@ MyPars@BinMin <- 0
 MyPars@L_units <- "mm"
 ```
 
-These parameters were taken from previous works about krill life history and fishery [@Thanassekos2014; @Maschette2020], which are described (Table \ref{Table1}). 
+These parameters were taken from previous works about krill life history and fishery [@Thanassekos2014; @Maschette2020], which are described (Table \ref{Table1}).
 
 ```{r table_par}
 
@@ -224,16 +217,13 @@ The intrinsic productivity of krill was evaluated through a method that measures
 
 LBSPR uses length-composition data and assumptions about biological parameters to make a rapid assessment of stock status relative to unfished levels assuming equilibrium conditions. While LBSPR can use multiple years of length data, status determination is based on one year of data at a time (i.e., estimates of status over multiple years are based on that year's length composition alone). Mean-length mortality estimators, first developed by @Beverton1957, assume that fishing mortality directly influences mean length of the catch and therefore in the reproductive potential of the species. Al l this concept about life history and implications in spawning potential ratio was revisited by @Jensen1996.
 
-
 ## 2.5. Model Estimation LBSPR
 
 Recent work has shown that under equilibrium conditions (that is, constant F and no recruitment variability) and assuming the von Bertalanffy growth equation, constant natural mortality for all ages, and logistic or jack-knife selectivity, standardization of the composition of lengths of two populations with the same ratio of natural mortality to growth rate (*M/k*) and the same ratio of mortality by fishing to natural mortality (*F/M*) will be identical [@Hordyk2016]. Extension of this model to incorporate length-at-age variability and logistic selectivity confirms that, at equilibrium, the composition of the predicted duration of catch of an exploited population is primarily determined by the ratios of M/k and F/M. The analytical models developed in @Hordyk2014c suggest that with knowledge of the asymptotic von Bertalanffy length $L_{\infty}$ and the coefficient of variation in $CVL_{\infty}$, the ratio of total mortality to the von Bertalanffy growth coefficient (*Z/k*) for a given population can be estimated from a representative sample of the size structure of the catch. If *M/k* (or parameters) is also known, then the results of @Hordyk2016 suggest that it is possible to estimate F/M from the composition of the catch. Often the F/M ratio has been used as a biological reference point when is 1 [@Zhou2012].
 
 The LBSPR model requires the following parameters: an estimate of the M/k ratio, $L_{\infty}$, $CVL_{\infty}$, and knowledge of maturity by length (maturity ogive), both set parameters know in krill. This model uses data on composition by catch sizes to estimate intrinsic productivity or Spawning Potential Ratio (SPR). This concept was extracted from @Goodyear1993, where the ratio of lifetime average egg production per recruit (EPR) was calculated for fish and non-fish resources. An algorithm route for the calculation of the SPR is the following;
 
-
-$${SPR}=\frac{EPR_{fished}}{EPR_{nofished}}$$
-where; 
+$${SPR}=\frac{EPR_{fished}}{EPR_{nofished}}$$ where;
 
 $$
 EPR_{fished} =
@@ -242,24 +232,17 @@ EPR_{fished} =
  E_{a},  a = 0  \\
  e^{-Z_{{a-1}}a} {E_a}, 0 < a  < a_\le{max}
  \end{cases}       
-$$
-where $Z_a$ = $M+F_a$, and $E$ is  egg production at age assumed to be proportional to weight;
+$$ where $Z_a$ = $M+F_a$, and $E$ is egg production at age assumed to be proportional to weight;
 
-$$E_a \in  Mat_a W_a$$
-on the other hand, the calculation of the reproductive potential is the same as that of those captured without F;
-$$
+$$E_a \in  Mat_a W_a$$ on the other hand, the calculation of the reproductive potential is the same as that of those captured without F; $$
 EPR_{nofished} =
 \sum_{a}
  E_ae^{-M_a}
-$$
-Assuming that egg production is proportional to the size of
-mature fish, relative fecundity-at-size is given by;
+$$ Assuming that egg production is proportional to the size of mature fish, relative fecundity-at-size is given by;
 
 $$
 Fec_{L,g} = Mat_{L,g} L^b
-$$
-where b is value of the exponent to reflect differente size fecunditity relationship  and g is the fraction of recruits to group.
-
+$$ where b is value of the exponent to reflect differente size fecunditity relationship and g is the fraction of recruits to group.
 
 Assuming reasonable estimates of the M/K ratio, $L_{\infty}$ (or $CVL_{\infty}$), size-at-maturity, the parameters F/M, $SL_{50}$, and $SL_{95}$ can be estimated from a representative sample of the length structure of the catch by minimizing the following multinomial negative loglikelihood function (NLL):
 
@@ -271,14 +254,13 @@ $$
 
 where $O_i$ and $\hat{O}_i$ are the observed number and proportion in length class i, respectively, and $\hat{P}_i$ is the model estimate of the probability in length class i [@Hordyk2016].
 
-
-Like any assessment method, the LBSPR model relies on a number of simplifying assumptions. In particular, the LBSPR models are both equilibrium based and that the length composition data is representative of the exploited population at steady state [@Hordyk2014c; @Hordyk2016]. This methodology was implemented through the package @LBSPR2021 [@Hordyk2014c] and this code and data could be visited in [LBSPRKrill](https://github.com/MauroMardones/LBSPR_Krill).
+Like any assessment method, the LBSPR model relies on a number of simplifying assumptions. In particular, the LBSPR models are both equilibrium based and that the length composition data is representative of the exploited population at steady state [@Hordyk2014c; @Hordyk2016]. This methodology was implemented through the package [@LBSPR2021; @Hordyk2014c] and this code and data could be visited in [LBSPRKrill](https://github.com/MauroMardones/LBSPR_Krill).
 
 ## 2.6. Biological References Point (PBR) in krill.
 
-A constant challenge for krill has been to provide indicators of stock status that can be compared to predetermined biological reference points. The intrinsic productivity or SPR is commonly used to set the limit and target reference point [@Goodyear1993; @Mace2001; @Prince2014]. By definition, the SPR is equal to 100% in an unexploited stock, and zero in a non-spawning stock (eg all mature fish have been removed, or all females have been caught). The F40%, that is, the fishing mortality that allows an escape of 40% of the biomass to MSY, is the fishing mortality rate that translates into SPR = 40%, is considered a reference point to many species [@Clark2002]. Suitable SPR biological points can be derived from hypotheses about the steepness of the stock-recruit relationship [@Brooks2013; @Hordyk2016]. 
+A constant challenge for krill has been to provide indicators of stock status that can be compared to predetermined biological reference points. The intrinsic productivity or SPR is commonly used to set the limit and target reference point [@Goodyear1993; @Mace2001; @Prince2014]. By definition, the SPR is equal to 100% in an unexploited stock, and zero in a non-spawning stock (eg all mature fish have been removed, or all females have been caught). The F40%, that is, the fishing mortality that allows an escape of 40% of the biomass to MSY, is the fishing mortality rate that translates into SPR = 40%, is considered a reference point to many species [@Clark2002]. Suitable SPR biological points can be derived from hypotheses about the steepness of the stock-recruit relationship [@Brooks2013; @Hordyk2016].
 
-However @Prince2014 provide some considerations in relation to the life strategy of the organisms and the SPR necessary to ensure the sustainability of the fishery. In this work, three types (I, II and III) are identified, which refers to the r and K life strategy. The krill is Type 1 (r-strategy), M/k=~1 (m=0.4, k =0.43) therefore, it requires a higher save of SPR.
+However @Prince2014 provide some considerations in relation to the life strategy of the organisms and the SPR necessary to ensure the sustainability of the fishery. In this work, three types (I, II and III) are identified, which refers to the r and K life strategy. The krill is Type 1 (r-strategy), M/k=\~1 (m=0.4, k =0.43) therefore, it requires a higher save of SPR.
 
 On the other hand, the current krill fisheries management schemes established by @CCAMLR2010, @Constable2000 proposes a decision rule scheme based on biomass that ensure the sustainability of this resource in the Southern Ocean. Through a simulation process, a 20-year projection of the krill population is generated, and a probability distribution is established around two decision rules. The first rule is based on the lowest level of exploitation allowed, around 20% of biomass, which could be consider a limit reference point. The second is the target level of the fishery, which indicates the statistical distribution of the biomass at the end of the 20-year projection under a constant catch that allows the average escape of 75% at pre-exploited levels (CCAMLR-2000 Survey). Linking this management scheme to intrinsic productivity of krill, we used two reference points for intrinsic krill productivity, 20% SPR as the limit reference point and 75% as the target to this fishery.
 
@@ -287,7 +269,6 @@ With this references points we can test a challenge for fishing exploitation and
 The LBSPR package can be used to generate the expected size composition, the SPR, and relative yield for a given set of biological and exploitation pattern parameters. The output of the `LBSPRsim` function is an object of class `LB_obj`. This is another LBSPR object, and contains all of the information from the `LB_pars` object and the output of the `LBSPRsim` function.
 
 It is important to note that the F/M ratio reported in the LBSPR model refers to the apical F over the adult natural mortality rate. That is, the value for fishing mortality refers to the highest level of F experienced by any single size class [@Hordyk2014c]. If the selectivity pattern excludes all but the largest individuals from being exploited, it is possible to have a very high F/M ratio in a sustainable fishery (high SPR) and visceverse. Note that only the life history parameters need to be specified for the estimation model. The exploitation parameters will be estimated [@Hordyk2014c].
-
 
 ```{r, message=FALSE, eval=FALSE}
 
@@ -306,15 +287,15 @@ plotSim(MySim, type="len.freq",
         inc.pts = TRUE, 
         size.pt = 6)
 ```
-Two objects are required to fit the LBSPR model to length data: life-history parameters (`LB_pars`) described previously (2.4. section) and size compositions (`LB_lengths`), which contains the length frequency data. We provide a set of global size data and also by strata, with which we will be able to identify the spatial differences of the potential. 
+
+Two objects are required to fit the LBSPR model to length data: life-history parameters (`LB_pars`) described previously (2.4. section) and size compositions (`LB_lengths`), which contains the length frequency data. We provide a set of global size data and also by strata, with which we will be able to identify the spatial differences of the potential.
 
 ```{r eval=FALSE}
 MyLengths <- new("LB_lengths")
 slotNames(MyLengths)
 ```
 
-However, it is probably easier to create the `LB_lengths` object by directly reading in a `.csv`. A length frequency data of krill set with multiple years (2001-2020) by strata in 48.1 Subarea. 
-
+However, it is probably easier to create the `LB_lengths` object by directly reading in a `.csv`. A length frequency data of krill set with multiple years (2001-2020) by strata in 48.1 Subarea.
 
 ```{r message=F}
 #Brainsflied Strata
@@ -329,8 +310,6 @@ Lenjo <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtJOIN.csv"
 #SSIW Strata
 Lenssiw <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtSSIW.csv"), dataType="freq",sep=";",header=T)
 ```
-
-
 
 ```{r message=FALSE}
 
@@ -378,20 +357,23 @@ ggplot(df, aes(x = edades,
                        labels = c("Low", "Medium", "High"))+
   theme_bw()
 ```
+
 After applying each scenario using each of the parameter setting, the results of scenarios are compared with the results provided by the methods based setting (Table 1), analyzing in this way the efect of underestimation/overestimation of the parameters $L_{\infty}$ and *k*.
 
 \newpage
+
 # 3. RESULTS
 
 ## 3.1. Model Perfomance
 
-The results demonstrate good fits of the size structure distribution model for krill across the strata. The model accurately captures the distribution patterns of size classes, indicating its effectiveness in characterizing the population structure. The model successfully captures the variations in size distribution, reflecting the natural variability in krill populations across different strata. These findings suggest that the model can be utilized as a valuable tool for understanding and predicting size structure dynamics in krill populations (Figure \ref{Figure4}). 
+The results demonstrate good fits of the size structure distribution model for krill across the strata. The model accurately captures the distribution patterns of size classes, indicating its effectiveness in characterizing the population structure. The model successfully captures the variations in size distribution, reflecting the natural variability in krill populations across different strata. These findings suggest that the model can be utilized as a valuable tool for understanding and predicting size structure dynamics in krill populations (Figure \ref{Figure4}).
 
 ```{r fig.cap="\\label{Figure4}Fit of the model to the data of lengths in Braishfield strata", fig.height=5}
 plotSize(fitei,
          Title="Braisnfield strata")+
   My_theme
 ```
+
 The Joinville strata exhibits the least model fits, supposedly attributed to the limited available size compositions data spanning only three years (Figure \ref{Figure5}).
 
 ```{r fig.cap="\\label{Figure5}Fit of the model to the data of lengths in Joinville strata", fig.height=3, fig.width=4}
@@ -414,7 +396,6 @@ plotSize(fitssiw,
 ```
 
 The difference between the observed accumulated size compositions for each stratum and compare it with the expected size composition at a target SPR (75% SPR). In the simulation of the structure in its virgin condition (without fishing), the red bars represent each stratum. Additionally, the overlap with the average structures observed during the years of fishery monitoring can be visualized. The SSWI Extra and EI strata exhibit the greatest differences from the simulated structure, possibly due to the significant contribution of juveniles in these strata. Conversely, the BS and JO strata demonstrate the closest resemblance to the simulated structure (Figure \ref{Figure6}).
-
 
 ```{r, fig.cap="\\label{Figure6}Difference between the observed accumulated size structure for each stratum related SPR objective", fig.height=5, fig.width=5}
 yr <- 5 # first year of data
@@ -458,7 +439,7 @@ ggarrange(bscom, eicom + rremove("ylab"),
           common.legend = TRUE)
 ```
 
-Furthermore, ogive maturity curve specific to each stratum and year, as well as the estimated length selectivity curve, are presented in Figure \ref{Figure7}. These curves offer crucial insights into the fishery's impact on the population and its reproductive status, providing measures of the population's vulnerability to fishing mortality. Notably, the Braisnfield stratum stands out with a lower proportion of mature individuals, suggesting a higher prevalence of juveniles. It is important to note that the same maturity parameters were applied across all strata. 
+Furthermore, ogive maturity curve specific to each stratum and year, as well as the estimated length selectivity curve, are presented in Figure \ref{Figure7}. These curves offer crucial insights into the fishery's impact on the population and its reproductive status, providing measures of the population's vulnerability to fishing mortality. Notably, the Braisnfield stratum stands out with a lower proportion of mature individuals, suggesting a higher prevalence of juveniles. It is important to note that the same maturity parameters were applied across all strata.
 
 ```{r curve_mat, echo=FALSE, fig.cap= "\\label{Figure7}Maturity curves by strata", fig.height=7, fig.width=5}
 
@@ -501,7 +482,6 @@ plotEsts(fitbs,
   CIcol = "blue",
   L50col = "blue")
 ```
-
 
 ## 3.2. Comparing producivity between years and Stratas
 
@@ -550,7 +530,6 @@ allsprwide <- round(pivot_wider(allspr,
 
 ```
 
-
 ```{r warning=FALSE, fig.cap="\\label{Figure8}Krill Intrinsic Productivity (SPR) by strata and by year", fig.height=3, fig.width=7}
 
 allsprpl <- ggplot(allspr,
@@ -595,11 +574,11 @@ kbl(allsprwide,
 
 ```
 
-\newpage 
+\newpage
 
 ## 3.3. Sensitivity and perfomance analysis
 
-The results of the methods in the reference setting are compared to the obtained under overstimation/underestimation in intrinsic productivity regarding asymptotic length von Bertalanffy $L_{\infty}$  parameter in krill. First, it was possible to identify that for all strata, the impact of low $L_{\infty}$ ranges under the base model (60 mm) overestimates the level of reproductive potential krill with values between 42% and 32% (Bransfield and Elephant Island strata respectively). Regarding higher $L_{\infty}$ settings, the model tends to underestimate the reproductive potential with values between -25% and -30% (Extra and Joinville strata) (Figure \ref{Figure9}, Table \ref{Table3}).
+The results of the methods in the reference setting are compared to the obtained under overstimation/underestimation in intrinsic productivity regarding asymptotic length von Bertalanffy $L_{\infty}$ parameter in krill. First, it was possible to identify that for all strata, the impact of low $L_{\infty}$ ranges under the base model (60 mm) overestimates the level of reproductive potential krill with values between 42% and 32% (Bransfield and Elephant Island strata respectively). Regarding higher $L_{\infty}$ settings, the model tends to underestimate the reproductive potential with values between -25% and -30% (Extra and Joinville strata) (Figure \ref{Figure9}, Table \ref{Table3}).
 
 ```{r message=FALSE}
 
@@ -639,7 +618,6 @@ for (i in 55:65) {
   #print(get(nombre_objeto)@Linf)
 }
 ```
-
 
 ```{r message=FALSE}
 
@@ -828,7 +806,6 @@ valtodo <- rbind(valsswi_largo,
 
 ```
 
-
 ```{r warning=FALSE, fig.cap="\\label{Figure9}lSensitivity analysis by strata about asymptotic length VB", fig.height=3, fig.width=8}
 # plot all Linf
 sensto <- ggplot(valtodo %>%
@@ -876,7 +853,6 @@ sensto
 
 ```
 
-
 ```{r message=F}
 # Tables
 
@@ -898,6 +874,7 @@ kbl(tablinf,
   kable_styling(latex_options = c("scale_down",  "hold_position"),
                 font_size = 10)
 ```
+
 Regarding the three growth levels of the species (high, medium, low) referred to the parameter $k$, it was possible to identify that high and medium growth types result in very low SPR (spawning potential ratio) estimates compared to slow and medium growth. In fact, with high individual growth, the model estimates that SPR levels would be very close to the target management levels (75% SPR) and far from the limit reference level of 20% (Figure \ref{Figure10}, Table \ref{Table4}).
 
 ```{r message=FALSE}
@@ -938,8 +915,6 @@ for (i in c(2,0.5,0.3)) {
   #print(get(nombre_objeto)@Linf)
 }
 ```
-
-
 
 ```{r message=FALSE}
 
@@ -997,7 +972,6 @@ for (i in c(2,0.5,0.3)) {
   assign(nombre_variable, LBSPRfit(objeto, Lenssiw), envir = .GlobalEnv)
 }
 ```
-
 
 ```{r}
 #Genero lo que quiero comparar BS
@@ -1071,7 +1045,6 @@ valprotodo <- rbind(valprosswi_largo,
 
 ```
 
-
 ```{r warning=FALSE, fig.cap="\\label{Figure10}Sensitivity analysis by strata about krill growth type",  out.width='70%'}
 #plot
 # todo
@@ -1109,8 +1082,6 @@ sensproto <- ggplot(valprotodo %>%
                        name="Strata")
 sensproto
 ```
-
-
 
 ```{r message=FALSE}
 tablk <- valprotodo %>% 
@@ -1174,7 +1145,6 @@ xnor <- ggplot()+
 xnor
 
 ```
-
 
 ```{r eval=FALSE}
 ## 3.6 Simulating length data krill
@@ -1240,14 +1210,11 @@ ggplot(datos, aes(x = edades)) +
 
 ## 4.1. Changes in krill population structure
 
-Identifying the population dynamics changes of krill in Subarea 48.1 has been one of the biggest challenges in recent years as temporal-spatial patterns of both concentration and productivity of catches has increased, as well environmental changes are already affecting the ecosystem [@McBride2021; @Hill2016]. Krill is a key species in the Antarctic environment and understanding its population dynamics is a basic element to visualize the impacts on the functioning of the food web, conservation of the resource and management of the fishery [@Hill2016]. For these reasons, it is key to assess the reproductive potential of the species at fine scales of space and time in subarea 48.1, because this area is where the fishery and resource have been concentrated for the last 20 years [@Atkinson2022; @SantaCruz2022] and the needs for advises for a sustainable management are currently required. In this method we determined the differences between the simulated krill size structures based on their life history parameters [@Maschette2020] and those resulting from the fishery, which allows us to know the difference between the virginal reproductive potential and that currently fishing mortality levels. 
+Identifying the population dynamics changes of krill in Subarea 48.1 has been one of the biggest challenges in recent years as temporal-spatial patterns of both concentration and productivity of catches has increased, as well environmental changes are already affecting the ecosystem [@McBride2021; @Hill2016]. Krill is a key species in the Antarctic environment and understanding its population dynamics is a basic element to visualize the impacts on the functioning of the food web, conservation of the resource and management of the fishery [@Hill2016]. For these reasons, it is key to assess the reproductive potential of the species at fine scales of space and time in subarea 48.1, because this area is where the fishery and resource have been concentrated for the last 20 years [@Atkinson2022; @SantaCruz2022] and the needs for advises for a sustainable management are currently required. In this method we determined the differences between the simulated krill size structures based on their life history parameters [@Maschette2020] and those resulting from the fishery, which allows us to know the difference between the virginal reproductive potential and that currently fishing mortality levels.
 
 Our results identify this changes in spatio-temporal variability of krill in different fishing management strata and, in turn, it was possible to propose Biological Reference Points based on the characteristics of the species, which in turn constitutes a recommendation for the current exploitation strategy carried out by CCMLAR. In this sense, we identify the historical fishing periods based on the reproductive potential and, in turn, an explicit spatial management is proposed based on these results. In recent years, the identification of population dynamics changes in krill within Subarea 48.1 has posed significant challenges. Temporal-spatial patterns of catch concentration and productivity have witnessed a notable increase, while the ecosystem has already begun experiencing the impacts of environmental changes [@McBride2021; @Hill2016]. Krill plays a crucial role in the Antarctic environment, and understanding its population dynamics is fundamental for comprehending the effects on the food web, conserving the resource, and managing the fishery [@Hill2016]. Given the concentration of fishing activity and resource abundance in Subarea 48.1 over the past two decades [@Atkinson2022; @SantaCruz2022], it is vital to assess the krill intrinsic productivity at fine spatial and temporal scales. This assessment is currently necessary to provide guidance for sustainable management practices. Our research has successfully identified spatio-temporal variability changes in krill across different fishing management strata. Furthermore, based on the krill population features, we have proposed a Biological Reference Points, offering recommendations for the current exploitation strategy conducted by CCAMLR.
 
-
 Changes in the dynamics and population structure of krill in the Antarctic Peninsula are manifested in various ways, such as distribution, biomass, recruitment, phenology, among others. The main drivers of these changes are associated with the changing behavior of the different environmental variables in the krill habitat [@Flores2012a; @Pinones2016; @Saba2014; @Veytia2021; @Flores2012; @Walsh2020]. Faced with this changing scenario, the intrinsic population productivity, that is, the reproductive potential of the species, has also undergone changes in the last decades [@Atkinson2022; @Perry2020; @McBride2021], both on the temporal scale as well as the spatial one. Similarly, the population structure of krill in the PA has been impacted by this type of environmental forcing [@Siegel2013; @Reiss2020]. While we understand that recruitment variability is influenced by environmental factors, including biomass, it is possible to identify the risk of fishing activity on the reproductive condition of the krill population over time and space, in other words, the risk of recruitment overfishing varies across years and strata in Antarctic Peninsula.
-
-
 
 ## 4.2. Fishery data as population indicators
 
@@ -1255,7 +1222,7 @@ Krill in the PA have been harvested commercially since about 1970 and constitute
 
 ## 4.3. Spatial and Temporal differences in intrinsic krill productivity
 
-We verified that the reproductive potential of krill has had changes through the years and spaces. These changes were quantitatively measured through reproductive potential using a novel method commonly used in world fisheries that considers the use of life history parameters, such as maturity, growth and growth rate, size structures, and simulations based on invariant parameters. Elephant Island stratum has had an increase in reproductive potential, reaching levels of 56% by the year 2020. This situation has been mainly due to two aspects. The first is that the effect of recruitment, and therefore is a greater proportion of older individuals who are ensuring a reproductive potential for the population. In the opposite case, Extra strata has a zone where juvenile individuals (nursery) [@Perry2020; @Veytia2021] are more abundant. This situation affects that throughout these 20 years analyzed, the SPR is less compared to the other strata, with an average of 16 throughout the historical series with a 6% at least in 2007. This year is particularly interesting given the high levels of primary productivity concentration in this area that could have had an impact on a high level of recruitment [@Saba2014; @Walsh2020] and consequently, a decrease in reproductive potential at the population level. A large proportion of juvenile individuals is also identified in the Brainsfield strait sector, incorporating in recent years in an important way [@Perry2020; @Reiss2020], which has had an impact on the fact that the SPR has decreased in the last few years, reaching its lowest level in 2020 with 12%, which is below a limit reference level for this resource. 
+We verified that the reproductive potential of krill has had changes through the years and spaces. These changes were quantitatively measured through reproductive potential using a novel method commonly used in world fisheries that considers the use of life history parameters, such as maturity, growth and growth rate, size structures, and simulations based on invariant parameters. Elephant Island stratum has had an increase in reproductive potential, reaching levels of 56% by the year 2020. This situation has been mainly due to two aspects. The first is that the effect of recruitment, and therefore is a greater proportion of older individuals who are ensuring a reproductive potential for the population. In the opposite case, Extra strata has a zone where juvenile individuals (nursery) [@Perry2020; @Veytia2021] are more abundant. This situation affects that throughout these 20 years analyzed, the SPR is less compared to the other strata, with an average of 16 throughout the historical series with a 6% at least in 2007. This year is particularly interesting given the high levels of primary productivity concentration in this area that could have had an impact on a high level of recruitment [@Saba2014; @Walsh2020] and consequently, a decrease in reproductive potential at the population level. A large proportion of juvenile individuals is also identified in the Brainsfield strait sector, incorporating in recent years in an important way [@Perry2020; @Reiss2020], which has had an impact on the fact that the SPR has decreased in the last few years, reaching its lowest level in 2020 with 12%, which is below a limit reference level for this resource.
 
 These results are consistent with other analyzes that identify these spatial changes.. @Atkinson2009; @Atkinson2008 indicates that the population shows evident symptoms of contraction towards the southwest of the PA. This contraction of the distribution of the population has consequences for other phenomena such as productive yields that are manifested in fishing indicators as shown by @SantaCruz2022 and @Kruger2019.
 
@@ -1267,9 +1234,7 @@ This method is sensitive to biological information assumptions. Therefore, an an
 
 According to our results, we were able to verify that an individual with a lower growth ($L_{\infty}$ 55), the estimates of SPR increases (Figure \ref{Figure8}). This was possible to observe through the sensitivity analysis for this parameter in all strata. This situation is repeated in the same way in all the strata, which confirms that the condition is between all them. spaces within SubArea 48.1. Regarding variability in growth krill, our study found that life history as expressed in the $k$ parameters was a factor with high influence of SPR estimators. This result supports those in previous studies of length-based analysis about growth type [@Cousido-Rocha2022; @Prince2018; @Rudd2017a], but it is the first time that this type of analysis has been carried out on krill.
 
-
 ## 4.5. Implications for fisheries management in CCAMLR context
-
 
 Differences spatial and temporal in intrinsic productivity krill can significantly impact long-term conservation and sustainability in the Antarctic Peninsula. This feature directly influences population growth and abundance, which are crucial for maintaining ecosystem balance and species diversity [@Hill2016; @McBride2021]. Higher reproductive potential ensures a larger number of offspring, increasing the chances of population recovery after disturbances or by environmental fluctuations [@Saba2014; @Pinones2016]. Reduced reproductive output can lead to decreased food availability for dependent predators, disrupting the trophic cascade and affecting the entire ecosystem [@Kruger2019]. Krill is a key food source for a wide range of species, including penguins, seals, and whales, so fluctuations in reproductive potential can have cascading effects on their populations [@McBride2021]. Regarding fishery, the sustainability of commercial krill explotation relies on maintaining a healthy population through sustainable harvesting practices, which can be influenced by variations in reproductive potential. Understanding the changes in intrinsic productivity of krill population in SubArea 48.1 allows better management strategies such as implementation of size and catch limits to protect breeding areas of individuals (e.g. strata) and ensure sustainable catch levels. Climate change impacts on the Antarctic Peninsula, such as rising temperatures and changing sea ice dynamics, can directly affect intrinsic productivity of krill, further influencing long-term sustainability. Maintain a process for monitoring these changes in krill productivity provides valuable insights into the overall health and resilience of the Antarctic Peninsula ecosystem. We believe that this type of analysis can help to identify krill population characteristics and in turn give recommendations for management.
 
@@ -1281,16 +1246,15 @@ In this sense, incorporating the findings regarding the changes in krill intrins
 
 # 5. CONCLUSION
 
-- This study show the first analisys about intrinsic productivity of Antarctic krill (*Euphausia superba*) in Antarctic Peninsula, SubArea 48.1 through a quantitative method called LBSPR.
+-   This study show the first analisys about intrinsic productivity of Antarctic krill (*Euphausia superba*) in Antarctic Peninsula, SubArea 48.1 through a quantitative method called LBSPR.
 
-- It was possible to identify differences through temporal and spatial scale within one of the areas with the highest fishing activity on this resource.
+-   It was possible to identify differences through temporal and spatial scale within one of the areas with the highest fishing activity on this resource.
 
-- Specifically, we have identified historical fishing periods based on reproductive potential, and we propose an explicit spatial management approach based on these results. These findings contribute to the development of a more informed and sustainable krill fishery management plan.
+-   Specifically, we have identified historical fishing periods based on reproductive potential, and we propose an explicit spatial management approach based on these results. These findings contribute to the development of a more informed and sustainable krill fishery management plan.
 
-- We  propose reference points associated with the SPR to give management recommendations in the CCAMLR context.
+-   We propose reference points associated with the SPR to give management recommendations in the CCAMLR context.
 
-- Considering these differences in an eventual spatially explicit in the new management scheme could be beneficial to ensure sustainability of krill in subarea 48.1 and Antarctic Peninsula.
-
+-   Considering these differences in an eventual spatially explicit in the new management scheme could be beneficial to ensure sustainability of krill in subarea 48.1 and Antarctic Peninsula.
 
 # 5. SUPLEMENTARY INFORMATION
 
