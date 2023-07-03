@@ -15,9 +15,9 @@ institute:
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   beamer_presentation:
-    theme: "CambridgeUS"
+    theme: "Berkeley"
+    fonttheme: "structurebold"
     slide_level: 3
-    toc: true
 classoption: "aspectratio=169"
 header-includes:
   - \usepackage{fancyhdr}
