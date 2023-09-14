@@ -196,9 +196,9 @@ tablepar <-data.frame(Value=c(MyPars@Linf,
                                    "Maturity 50%",
                                    "Maturity 95%",
                                    "M/K Ratio",
-                                   "SPR",
                                    "Selectivity 50%",
                                    "Seletivity 95%",
+                                   "SPR",
                                    "a (Length-Weight Relation)",
                                    "b (Length-Weight Relation)",
                                    "Bin Min",
@@ -342,7 +342,7 @@ df <- data.frame(edades = rep(edades,
 df <- df %>% 
   mutate(crecimiento = L_inf * (1 - exp(-k * (edades - t_0))))
 # Graficar la curva de crecimiento somático
-ggplot(df, aes(x = edades, 
+sen <- ggplot(df, aes(x = edades, 
                y = crecimiento, 
                color = factor(k))) +
   geom_line(size=1.5) +
@@ -353,9 +353,9 @@ ggplot(df, aes(x = edades,
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())+
   scale_color_viridis_d(option="C",
-                       name = "Growth",
+                       name = "Theoretical growth",
                        labels = c("Low", "Medium", "High"))+
-  theme_bw()
+  theme_few()
 ```
 
 After applying each scenario using each of the parameter setting, the results of scenarios are compared with the results provided by the methods based setting (Table 1), analyzing in this way the efect of underestimation/overestimation of the parameters $L_{\infty}$ and *k*.
