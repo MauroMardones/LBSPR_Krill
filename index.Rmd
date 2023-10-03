@@ -259,6 +259,7 @@ Like any assessment method, the LBSPR model relies on a number of simplifying as
 
 ## Biological References Point (PBR) in krill.
 
+
 A constant challenge for krill has been to provide indicators of stock status that can be compared to predetermined biological reference points. The intrinsic productivity or SPR is commonly used to set the limit and target reference point [@Goodyear1993; @Mace2001; @Prince2014]. By definition, the SPR is equal to 100% in an unexploited stock, and zero in a non-spawning stock (eg all mature fish have been removed, or all females have been caught). The F40%, that is, the fishing mortality that allows an escape of 40% of the biomass to MSY, is the fishing mortality rate that translates into SPR = 40%, is considered a reference point to many species [@Clark2002]. Suitable SPR biological points can be derived from hypotheses about the steepness of the stock-recruit relationship [@Brooks2013; @Hordyk2016].
 
 However @Prince2014 provide some considerations in relation to the life strategy of the organisms and the SPR necessary to ensure the sustainability of the fishery. In this work, three types (I, II and III) are identified, which refers to the r and K life strategy. The krill is Type 1 (r-strategy), M/k=\~1 (m=0.4, k =0.43) therefore, it requires a higher save of SPR.
