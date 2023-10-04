@@ -1263,3 +1263,4 @@ The methodology and data of this exercise can be found in the following link [LB
 \newpage
 
 # 6. REFERENCES
+
