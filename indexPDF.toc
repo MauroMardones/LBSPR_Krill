@@ -1,0 +1,23 @@
+\contentsline {section}{ABSTRACT}{3}{section*.2}%
+\contentsline {section}{1. INTRODUCTION}{4}{section*.3}%
+\contentsline {section}{2. METHODOLOGY}{5}{section*.4}%
+\contentsline {subsection}{2.1. Study area}{5}{section*.5}%
+\contentsline {subsection}{2.2. Monitoring Data (SISO Program)}{5}{section*.6}%
+\contentsline {subsection}{2.3. Biological and fishery parameters krill}{6}{section*.7}%
+\contentsline {subsection}{2.4. Assessment of intrinsic productivity}{7}{section*.8}%
+\contentsline {subsection}{2.5. Model Estimation LBSPR}{8}{section*.9}%
+\contentsline {subsection}{2.6. Biological References Point (PBR) in krill.}{9}{section*.10}%
+\contentsline {subsection}{2.7. Sensitivity and perfomance analysis.}{10}{section*.11}%
+\contentsline {section}{3. RESULTS}{12}{section*.12}%
+\contentsline {subsection}{3.1. Model Perfomance}{12}{section*.13}%
+\contentsline {subsection}{3.2. Comparing producivity between years and Stratas}{15}{section*.14}%
+\contentsline {subsection}{3.3. Sensitivity and perfomance analysis}{17}{section*.15}%
+\contentsline {section}{4. DISCUSION}{19}{section*.16}%
+\contentsline {subsection}{4.1. Changes in krill population structure}{19}{section*.17}%
+\contentsline {subsection}{4.2. Fishery data as population indicators}{20}{section*.18}%
+\contentsline {subsection}{4.3. Spatial and Temporal differences in intrinsic krill productivity}{20}{section*.19}%
+\contentsline {subsection}{4.4. Sensitivity analysis}{21}{section*.20}%
+\contentsline {subsection}{4.5. Implications for fisheries management in CCAMLR context}{22}{section*.21}%
+\contentsline {section}{5. CONCLUSION}{24}{section*.22}%
+\contentsline {section}{5. SUPLEMENTARY INFORMATION}{24}{section*.23}%
+\contentsline {section}{6. REFERENCES}{25}{section*.24}%
