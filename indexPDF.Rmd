@@ -351,7 +351,8 @@ sen <- ggplot(df, aes(x = edades,
   ggtitle("") +
   theme(panel.background = element_rect(),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())+
+        panel.grid.minor = element_blank(),
+        legend.position="bottom")+
   scale_color_viridis_d(option="C",
                        name = "Theorycal growth",
                        labels = c("Low", "Medium", "High"))+
