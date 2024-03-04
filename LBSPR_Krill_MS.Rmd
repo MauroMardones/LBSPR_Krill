@@ -1,37 +1,52 @@
 ---
-title: "Searching Intrinsic Productivity Antarctic Krill "
-subtitle: "Alternative analysis to know productivity in Krill 48.1 SubArea based on invariants parametres and fishery lenghts structures"
-author: "Mardones, M; Watters, G.; Cárdenas, C."
-date:  "08 December, 2023"
+title: "Searching spatial-temporal changes in intrinsic productivity of Antarctic Krill (Euphausia superba) in a fishery management context"
+subtitle: "Working Paper to be submitted in a CCAMLR WG 2023"
+author:
+  - Mardones Mauricio^[Instituo de Fomento Pesquero, mardones.mauricio@gmail.com]
+  - George Watters^[Antarctic División NOAA]
+  - César Cárdenas^[Instituto Antártico Chileno]
+date:  "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::word_document2:
+    reference_docx: LBSPR_template.docx
 bibliography: LBSPR.bib
-csl: apa.csl
+#csl: apa.csl
+csl: plosone.csl
 link-citations: yes
 linkcolor: blue
-output:
-  bookdown::html_document2:
-    fig_caption: yes
-    keep_md: true
-    toc: true
-    toc_deep: 3
-    toc_float:
-      collapsed: false
-      smooth_scroll: false
-    theme: cosmo
-    fontsize: 0.9em
-    linestretch: 1.7
-    html-math-method: katex
-    self-contained: true
-    code-tools: true
-editor_options: 
-  markdown: 
-    wrap: 72
+fig_caption: yes
+always_allow_html: true
 ---
 
 
+```{=tex}
+\fontsize{12}{16}
+\selectfont{}
+```
+\newpage
 
+```{=latex}
+\setcounter{tocdepth}{3}
+\tableofcontents
+```
+\newpage
 
+```{r setup1, echo=FALSE}
+rm(list = ls())
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.align = 'center',
+                      fig.pos = "H",
+                      dev = 'jpeg',
+                      dpi = 300)
+#XQuartz is a mess, put this in your onload to default to cairo instead
+options(bitmapType = "cairo") 
+# (https://github.com/tidyverse/ggplot2/issues/2655)
+# Lo mapas se hacen mas rapido
+```
 
-```r
+```{r message=FALSE}
 ## Installing the Package
 #The LBSPR package is now available on CRAN:
 #install.packages("LBSPR")
@@ -48,11 +63,9 @@ library(ggpubr)
 library(kableExtra)
 library(hrbrthemes)
 library(ggthemes)
-library(tidyverse)
 ```
 
-
-```r
+```{r}
 My_theme <- theme(axis.text.y = element_blank(),
                   axis.ticks.y = element_blank(),
                   axis.ticks.x=element_blank(),
@@ -76,7 +89,7 @@ One approach for understanding the dynamics of krill populations in the Antarcti
 
 \newpage
 
-# INTRODUCTION
+# 1. INTRODUCTION
 
 The western Antarctic Peninsula ecosystem is a critical region of the Southern Ocean for populations of Antarctic krill (*Euphausia superba*; hereafter krill) serving as a major spawning and recruitment area and as an overwintering hotspot, especially within Bransfield Strait. Over the last 40 years, climate driven changes have resulted in warming waters, declines in seasonal sea ice extent and duration [@Stammerjohn2008a; @Stammerjohn2008], changing trends phytoplankton productivity [@Saba2014; @Siegel2013].
 
@@ -90,32 +103,29 @@ We then propose to identify differences in krill reproductive potential at the f
 
 \newpage
 
-# METHODOLOGY
+# 2. METHODOLOGY
 
-## Study area
+## 2.1. Study area
 
-The study area includes subarea 48.1, which is one of the sectors where today the largest amount of krill fishing is concentrated [@McBride2021; @Atkinson2022; @SantaCruz2022]. In order to have a finest spatial definition of krill dynamics population, we will analyze the differences between the management strata defined in WG-EMM-2021/05 Rev. (@Dornam2021), namely Brainsfield Strait, Elephant Island, Extra, Joinville Island and South West (hereafter BS, EI, Extra, JOIN and SSIW respectively) (Figure \@ref(fig:Figure1)).
+The study area includes subarea 48.1, which is one of the sectors where today the largest amount of krill fishing is concentrated [@McBride2021; @Atkinson2022; @SantaCruz2022]. In order to have a finest spatial definition of krill dynamics population, we will analyze the differences between the management strata defined in WG-EMM-2021/05 Rev. (@Dornam2021), namely Brainsfield Strait, Elephant Island, Extra, Joinville Island and South West (hereafter BS, EI, Extra, JOIN and SSIW respectively) (Figure \ref{Figure 1})
 
-<div class="figure" style="text-align: center">
-<img src="Strata2.png" alt="Subarea 48.1 and management strata considered in the spatio-temporal analysis of intrinsic productivity of Krill (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West)" width="60%" />
-<p class="caption">(\#fig:Figure1)Subarea 48.1 and management strata considered in the spatio-temporal analysis of intrinsic productivity of Krill (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West)</p>
-</div>
+```{r Figure 1, echo=FALSE, out.width='60%', fig.cap="\\label{Figure 1} Subarea 48.1 and management strata considered in the spatio-temporal analysis of intrinsic productivity of Krill (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West)"}
+knitr::include_graphics('Strata2.png')
+```
 
-## Monitoring Data (SISO Program)
+## 2.2. Monitoring Data (SISO Program)
 
-For this analysis, data from the monitoring of the krill fishery were used, which have been systematically collected on board fishing vessels by the CCAMLR SISO (Scheme of International Scientific Observation) program. Krill sizes compositions were obtained from the entire area 48.1, which was combined in each management stratum defined at 2.1 section (Figure \@ref(fig:Figure2)).
+For this analysis, data from the monitoring of the krill fishery were used, which have been systematically collected on board fishing vessels by the CCAMLR SISO (Scheme of International Scientific Observation) program. Krill sizes compositions were obtained from the entire area 48.1, which was combined in each management stratum defined at 2.1 section (Figure \ref{Figure 2}).
 
-<div class="figure" style="text-align: center">
-<img src="tallastrata.png" alt="\label{Figure 2}Sizes compositions from SISO program monitoring krill fishery by strata (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West). Red line represent recruit size" width="100%" />
-<p class="caption">(\#fig:Figure2)\label{Figure 2}Sizes compositions from SISO program monitoring krill fishery by strata (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West). Red line represent recruit size</p>
-</div>
+```{r Figure 2, echo=FALSE, out.width='100%', fig.cap="\\label{Figure 2}Sizes compositions from SISO program monitoring krill fishery by strata (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West). Red line represent recruit size"}
+knitr::include_graphics('tallastrata.png')
+```
 
 The information gaps (years without sizes composition data) are not calculated because there is no autocorrelation between years, but singular estimators over time.
 
-## Biological and fishery parameters krill
+## 2.3. Biological and fishery parameters krill
 
-
-```r
+```{r}
 #Create a new LB_pars Object
 #To create a new LB_pars object you use the new function:
 MyPars <- new("LB_pars")
@@ -144,8 +154,7 @@ The model needs specifications related to both biological and fishery parameters
 
 -Width of the length classes (`BinWidth`)
 
-
-```r
+```{r}
 MyPars <- new("LB_pars")
 ## A blank LB_pars object created
 ## Default values have been set for some parameters
@@ -172,10 +181,10 @@ MyPars@BinMin <- 0
 MyPars@L_units <- "mm"
 ```
 
-These parameters were taken from previous works about krill life history and fishery [@Thanassekos2014; @Maschette2020], which are described (Table \@ref(tab:Table1).
+These parameters were taken from previous works about krill life history and fishery [@Thanassekos2014; @Maschette2020], which are described (Table \ref{Table1}).
 
+```{r table_par}
 
-```r
 tablepar <-data.frame(Value=c(MyPars@Linf,
                        MyPars@L50 ,
                        MyPars@L95 ,
@@ -200,85 +209,19 @@ tablepar <-data.frame(Value=c(MyPars@Linf,
                                    "Bin Min",
                                    "Bin Max",
                                    "Units"))
-```
-
-
-
-```r
 kbl(tablepar, 
     longtable = F, 
     booktabs = T, 
-    caption = "\\label{Table1}Krill biological and fishery parameters") %>% 
-   kable_styling(latex_options = c("striped",  "hold_position"))
+    caption = "\\label{Table1}Krill biological and fishery parameters") 
 ```
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:Table1)\label{Table1}Krill biological and fishery parameters</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Value </th>
-   <th style="text-align:left;"> Descrption </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> 60 </td>
-   <td style="text-align:left;"> VB asymptotic length </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 34 </td>
-   <td style="text-align:left;"> Maturity 50% </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 55 </td>
-   <td style="text-align:left;"> Maturity 95% </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 0.889 </td>
-   <td style="text-align:left;"> M/K Ratio </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 40 </td>
-   <td style="text-align:left;"> Selectivity 50% </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 56 </td>
-   <td style="text-align:left;"> Seletivity 95% </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 0.75 </td>
-   <td style="text-align:left;"> SPR </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> a (Length-Weight Relation) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 3.0637 </td>
-   <td style="text-align:left;"> b (Length-Weight Relation) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 70 </td>
-   <td style="text-align:left;"> Bin Min </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> Bin Max </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> mm </td>
-   <td style="text-align:left;"> Units </td>
-  </tr>
-</tbody>
-</table>
-
-## Assessment of intrinsic productivity
+## 2.4. Assessment of intrinsic productivity
 
 The intrinsic productivity of krill was evaluated through a method that measures the reproductive potential of commercially exploited marine species known as LBSPR (Length Based Spawining Potential Ratio) and described by @Hordyk2016. The LBSPR method has been developed for data-limited fisheries, where few data are available other than a representative sample of the size structure of the vulnerable portion of the population (i.e., the catch) and an understanding of the life history of the species. The Length-Based Spawning Potential Ratio (LBSPR) method assumes the reproductive characteristics of the species based on the life history parameters, being able to establish management strategies for long-lived species with low reproductive output as well as highly reproductive species with a high growth constant such as krill [@Prince2018].
 
 LBSPR uses length-composition data and assumptions about biological parameters to make a rapid assessment of stock status relative to unfished levels assuming equilibrium conditions. While LBSPR can use multiple years of length data, status determination is based on one year of data at a time (i.e., estimates of status over multiple years are based on that year's length composition alone). Mean-length mortality estimators, first developed by @Beverton1957, assume that fishing mortality directly influences mean length of the catch and therefore in the reproductive potential of the species. Al l this concept about life history and implications in spawning potential ratio was revisited by @Jensen1996.
 
-## Model Estimation LBSPR
+## 2.5. Model Estimation LBSPR
 
 Recent work has shown that under equilibrium conditions (that is, constant F and no recruitment variability) and assuming the von Bertalanffy growth equation, constant natural mortality for all ages, and logistic or jack-knife selectivity, standardization of the composition of lengths of two populations with the same ratio of natural mortality to growth rate (*M/k*) and the same ratio of mortality by fishing to natural mortality (*F/M*) will be identical [@Hordyk2016]. Extension of this model to incorporate length-at-age variability and logistic selectivity confirms that, at equilibrium, the composition of the predicted duration of catch of an exploited population is primarily determined by the ratios of M/k and F/M. The analytical models developed in @Hordyk2014c suggest that with knowledge of the asymptotic von Bertalanffy length $L_{\infty}$ and the coefficient of variation in $CVL_{\infty}$, the ratio of total mortality to the von Bertalanffy growth coefficient (*Z/k*) for a given population can be estimated from a representative sample of the size structure of the catch. If *M/k* (or parameters) is also known, then the results of @Hordyk2016 suggest that it is possible to estimate F/M from the composition of the catch. Often the F/M ratio has been used as a biological reference point when is 1 [@Zhou2012].
 
@@ -315,10 +258,9 @@ $$
 
 where $O_i$ and $\hat{O}_i$ are the observed number and proportion in length class i, respectively, and $\hat{P}_i$ is the model estimate of the probability in length class i [@Hordyk2016].
 
-Like any assessment method, the LBSPR model relies on a number of simplifying assumptions. In particular, the LBSPR models are both equilibrium based and that the length composition data is representative of the exploited population at steady state [@Hordyk2014c; @Hordyk2016]. This methodology was implemented through the package [@Hordyk2014c] and this code and data could be visited in [LBSPRKrill](https://github.com/MauroMardones/LBSPR_Krill).
+Like any assessment method, the LBSPR model relies on a number of simplifying assumptions. In particular, the LBSPR models are both equilibrium based and that the length composition data is representative of the exploited population at steady state [@Hordyk2014c; @Hordyk2016]. This methodology was implemented through the package [@LBSPR2021; @Hordyk2014c] and this code and data could be visited in [LBSPRKrill](https://github.com/MauroMardones/LBSPR_Krill).
 
-## Biological References Point (PBR) in krill.
-
+## 2.6. Biological References Point (PBR) in krill.
 
 A constant challenge for krill has been to provide indicators of stock status that can be compared to predetermined biological reference points. The intrinsic productivity or SPR is commonly used to set the limit and target reference point [@Goodyear1993; @Mace2001; @Prince2014]. By definition, the SPR is equal to 100% in an unexploited stock, and zero in a non-spawning stock (eg all mature fish have been removed, or all females have been caught). The F40%, that is, the fishing mortality that allows an escape of 40% of the biomass to MSY, is the fishing mortality rate that translates into SPR = 40%, is considered a reference point to many species [@Clark2002]. Suitable SPR biological points can be derived from hypotheses about the steepness of the stock-recruit relationship [@Brooks2013; @Hordyk2016].
 
@@ -332,8 +274,8 @@ The LBSPR package can be used to generate the expected size composition, the SPR
 
 It is important to note that the F/M ratio reported in the LBSPR model refers to the apical F over the adult natural mortality rate. That is, the value for fishing mortality refers to the highest level of F experienced by any single size class [@Hordyk2014c]. If the selectivity pattern excludes all but the largest individuals from being exploited, it is possible to have a very high F/M ratio in a sustainable fishery (high SPR) and visceverse. Note that only the life history parameters need to be specified for the estimation model. The exploitation parameters will be estimated [@Hordyk2014c].
 
+```{r, message=FALSE, eval=FALSE}
 
-```r
 ## Plotting the Simulation
 
 MySim <- LBSPRsim(MyPars, 
@@ -352,16 +294,14 @@ plotSim(MySim, type="len.freq",
 
 Two objects are required to fit the LBSPR model to length data: life-history parameters (`LB_pars`) described previously (2.4. section) and size compositions (`LB_lengths`), which contains the length frequency data. We provide a set of global size data and also by strata, with which we will be able to identify the spatial differences of the potential.
 
-
-```r
+```{r eval=FALSE}
 MyLengths <- new("LB_lengths")
 slotNames(MyLengths)
 ```
 
 However, it is probably easier to create the `LB_lengths` object by directly reading in a `.csv`. A length frequency data of krill set with multiple years (2001-2020) by strata in 48.1 Subarea.
 
-
-```r
+```{r message=F}
 #Brainsflied Strata
 datdir <- setwd("~/DOCAS/LBSPR_Krill")
 Lenbs <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/Length_481_Krill_2.csv"), dataType="freq",sep=";",header=T)
@@ -375,8 +315,8 @@ Lenjo <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtJOIN.csv"
 Lenssiw <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtSSIW.csv"), dataType="freq",sep=";",header=T)
 ```
 
+```{r message=FALSE}
 
-```r
 ## 2.9. Fit the Model by strata
 
 # The LBSPR model is fitted by strata using the `LBSPRfit` function. 
@@ -387,12 +327,11 @@ fitjo <- LBSPRfit(MyPars, Lenjo)
 fitssiw <- LBSPRfit(MyPars, Lenssiw)
 ```
 
-## Sensitivity and perfomance analysis.
+## 2.7. Sensitivity and perfomance analysis.
 
-Ten sensitivity scenarios based on the upper and lower range for the asymptotic length von Bertalanffy $L_{\infty}$ (55 to 65 mm) used in the base model (60 mm) were tested to identify the impact of this parameter on the SPR estimation, given that it is the parameters exhibiting the high degree of variability and one of the factors that most determines the estimates. On the other hand, the interdependence between krill and their environment is a well-known and influential factor in population dynamics, ecosystem impacts, and fishery. This interdependence also affects the reproductive potential and consequently, to any management decision that takes into account population parameters of krill. To assess the impact of individual growth variability, three scenarios of the VB k parameter were tested, representing different growth types (low = 0.2, medium = 0.7, and high = 1.2). Figure \@ref(fig:Figure3) displays a theoretical growth curve for krill based on three scenarios that were tested using LBSPR.
+Ten sensitivity scenarios based on the upper and lower range for the asymptotic length von Bertalanffy $L_{\infty}$ (55 to 65 mm) used in the base model (60 mm) were tested to identify the impact of this parameter on the SPR estimation, given that it is the parameters exhibiting the high degree of variability and one of the factors that most determines the estimates. On the other hand, the interdependence between krill and their environment is a well-known and influential factor in population dynamics, ecosystem impacts, and fishery. This interdependence also affects the reproductive potential and consequently, to any management decision that takes into account population parameters of krill. To assess the impact of individual growth variability, three scenarios of the VB k parameter were tested, representing different growth types (low = 0.2, medium = 0.7, and high = 1.2). Figure \ref{Figure3} displays a theoretical growth curve for krill based on three scenarios that were tested using LBSPR.
 
-
-```r
+```{r Figure 3, fig.height=3, fig.width=4, fig.cap="\\label{Figure3}Theoretical growth scenarios to krill varability"}
 # Definir los parámetros del modelo de Von Bertalanffy
 L_inf <- 60
 k <- c(0.2, 0.7, 1.2)
@@ -424,50 +363,33 @@ sen <- ggplot(df, aes(x = edades,
 sen
 ```
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/Figure3-1.jpeg" alt="Theoretical growth scenarios to krill varability" width="70%" />
-<p class="caption">(\#fig:Figure3)Theoretical growth scenarios to krill varability</p>
-</div>
-
 After applying each scenario using each of the parameter setting, the results of scenarios are compared with the results provided by the methods based setting (Table 1), analyzing in this way the efect of underestimation/overestimation of the parameters $L_{\infty}$ and *k*.
 
+\newpage
 
-# RESULTS
+# 3. RESULTS
 
-## Model Perfomance
+## 3.1. Model Perfomance
 
-The results demonstrate good fits of the size structure distribution model for krill across the strata. The model accurately captures the distribution patterns of size classes, indicating its effectiveness in characterizing the population structure. The model successfully captures the variations in size distribution, reflecting the natural variability in krill populations across different strata. These findings suggest that the model can be utilized as a valuable tool for understanding and predicting size structure dynamics in krill populations (Figure \@ref(fig:Figure4)).
+The results demonstrate good fits of the size structure distribution model for krill across the strata. The model accurately captures the distribution patterns of size classes, indicating its effectiveness in characterizing the population structure. The model successfully captures the variations in size distribution, reflecting the natural variability in krill populations across different strata. These findings suggest that the model can be utilized as a valuable tool for understanding and predicting size structure dynamics in krill populations (Figure \ref{Figure4}).
 
-
-```r
+```{r fig.cap="\\label{Figure4}Fit of the model to the data of lengths in Braishfield strata", fig.height=5}
 plotSize(fitei,
          Title="Braisnfield strata")+
   My_theme
 ```
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/Figure4-1.jpeg" alt="Fit of the model to the data of lengths in Braishfield strata" width="80%" />
-<p class="caption">(\#fig:Figure4)Fit of the model to the data of lengths in Braishfield strata</p>
-</div>
+The Joinville strata exhibits the least model fits, supposedly attributed to the limited available size compositions data spanning only three years (Figure \ref{Figure5}).
 
-The Joinville strata exhibits the least model fits, supposedly attributed to the limited available size compositions data spanning only three years (Figure \@ref(fig:Figure5)).
-
-
-```r
+```{r fig.cap="\\label{Figure5}Fit of the model to the data of lengths in Joinville strata", fig.height=3, fig.width=4}
 plotSize(fitjo,
          Title="Joinville strata")+
   My_theme
 ```
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/Figure5-1.jpeg" alt="\label{Figure5}Fit of the model to the data of lengths in Joinville strata" width="60%" />
-<p class="caption">(\#fig:Figure5)\label{Figure5}Fit of the model to the data of lengths in Joinville strata</p>
-</div>
-
 For all the other strata (Extra, EI and SSWI) the model predict sizes compositions in a correct way for all the years (for details see [LBSPRKrill](https://github.com/MauroMardones/LBSPR_Krill)).
 
-
-```r
+```{r eval=FALSE}
 plotSize(fitei,
          Title="Elephan Island strata")
 plotSize(fitex,
@@ -478,10 +400,9 @@ plotSize(fitssiw,
          Title="SSWI strata")
 ```
 
-The difference between the observed accumulated size compositions for each stratum and compare it with the expected size composition at a target SPR (75% SPR). In the simulation of the structure in its virgin condition (without fishing), the red bars represent each stratum. Additionally, the overlap with the average structures observed during the years of fishery monitoring can be visualized. The SSWI Extra and EI strata exhibit the greatest differences from the simulated structure, possibly due to the significant contribution of juveniles in these strata. Conversely, the BS and JO strata demonstrate the closest resemblance to the simulated structure (Figure \@ref(fig:Figure6)).
+The difference between the observed accumulated size compositions for each stratum and compare it with the expected size composition at a target SPR (75% SPR). In the simulation of the structure in its virgin condition (without fishing), the red bars represent each stratum. Additionally, the overlap with the average structures observed during the years of fishery monitoring can be visualized. The SSWI Extra and EI strata exhibit the greatest differences from the simulated structure, possibly due to the significant contribution of juveniles in these strata. Conversely, the BS and JO strata demonstrate the closest resemblance to the simulated structure (Figure \ref{Figure6}).
 
-
-```r
+```{r, fig.cap="\\label{Figure6}Difference between the observed accumulated size structure for each stratum related SPR objective", fig.height=5, fig.width=5}
 yr <- 5 # first year of data
 
 bscom <- plotTarg(MyPars, Lenbs, yr=yr,
@@ -523,26 +444,55 @@ ggarrange(bscom, eicom + rremove("ylab"),
           common.legend = TRUE)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/Figure6-1.jpeg" alt="Difference between the observed accumulated size structure for each stratum related SPR objective" width="80%" />
-<p class="caption">(\#fig:Figure6)Difference between the observed accumulated size structure for each stratum related SPR objective</p>
-</div>
+Furthermore, ogive maturity curve specific to each stratum and year, as well as the estimated length selectivity curve, are presented in Figure \ref{Figure7}. These curves offer crucial insights into the fishery's impact on the population and its reproductive status, providing measures of the population's vulnerability to fishing mortality. Notably, the Braisnfield stratum stands out with a lower proportion of mature individuals, suggesting a higher prevalence of juveniles. It is important to note that the same maturity parameters were applied across all strata.
 
-Furthermore, ogive maturity curve specific to each stratum and year, as well as the estimated length selectivity curve, are presented in Figure \@ref(fig:curve_mat). These curves offer crucial insights into the fishery's impact on the population and its reproductive status, providing measures of the population's vulnerability to fishing mortality. Notably, the Braisnfield stratum stands out with a lower proportion of mature individuals, suggesting a higher prevalence of juveniles. It is important to note that the same maturity parameters were applied across all strata.
+```{r curve_mat, echo=FALSE, fig.cap= "\\label{Figure7}Maturity curves by strata", fig.height=7, fig.width=5}
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/curve_mat-1.jpeg" alt="Maturity curves by strata" width="80%" />
-<p class="caption">(\#fig:curve_mat)Maturity curves by strata</p>
-</div>
+bsmat <- plotMat(fitbs,
+        useSmooth = TRUE,
+        Title="BS")+
+  My_theme 
+eimat <-  plotMat(fitei,
+        useSmooth = TRUE,
+        Title="EI")+
+  My_theme 
+exmat <-  plotMat(fitex,
+        useSmooth = TRUE,
+        Title="Extra")+
+  My_theme 
+jomat <-  plotMat(fitjo,
+        useSmooth = TRUE,
+        Title="JOIN")+
+  My_theme 
+ssmat <-  plotMat(fitssiw,
+        useSmooth = TRUE,
+        Title="SSWI")+
+  My_theme 
 
+ggarrange(bsmat,
+          eimat + rremove("ylab"), 
+          exmat , 
+          jomat + rremove("ylab"), 
+          ssmat, 
+          ncol = 2, nrow = 3,
+          legend="right",
+          common.legend = TRUE)
+```
 
+```{r, eval=FALSE, echo=FALSE}
+plotEsts(fitbs,
+         pars = c("FM", "SPR"),
+  doSmooth = TRUE,
+  incL50 = FALSE,
+  CIcol = "blue",
+  L50col = "blue")
+```
 
-## Comparing producivity between years and Stratas
+## 3.2. Comparing producivity between years and Stratas
 
-The analysis of the krill population's reproductive potential across different years and strata reveals significant differences. Brainsfield and Extra strata exhibit a low reproductive potential below the proposed management target of 75% in the last year, with values of 0.121 and 0.085, respectively, falling even below the limit reference point. This condition arises from the concentration of a substantial number of immature individuals (juveniles) in these strata, which are being exploited by the fishery, thereby hindering their reproductive cycles from completing. On the contrary, the Elephant Island stratum demonstrates higher spawning potential ratio (SPR) levels in recent years, reaching 0.421 in 2019, which aligns closer to the management objective. This discrepancy is attributed to the spatial distribution of krill, as the Elephant Island stratum possesses a larger proportion of adult individuals compared to other strata. Figure \@ref(fig:Figura8) provides a visual representation of the SPR trends across years and strata, clearly indicating the references (yellow line = 75% SPR Objective and Red line = 20% Limit SPR).
+The analysis of the krill population's reproductive potential across different years and strata reveals significant differences. Brainsfield and Extra strata exhibit a low reproductive potential below the proposed management target of 75% in the last year, with values of 0.121 and 0.085, respectively, falling even below the limit reference point. This condition arises from the concentration of a substantial number of immature individuals (juveniles) in these strata, which are being exploited by the fishery, thereby hindering their reproductive cycles from completing. On the contrary, the Elephant Island stratum demonstrates higher spawning potential ratio (SPR) levels in recent years, reaching 0.421 in 2019, which aligns closer to the management objective. This discrepancy is attributed to the spatial distribution of krill, as the Elephant Island stratum possesses a larger proportion of adult individuals compared to other strata. Figure \ref{Figure8} provides a visual representation of the SPR trends across years and strata, clearly indicating the references (yellow line = 75% SPR Objective and Red line = 20% Limit SPR).
 
-
-```r
+```{r}
 # Get values estimated
 
 sprbs <- as.data.frame(cbind(fitbs@Years, 
@@ -582,10 +532,11 @@ allsprwide <- round(pivot_wider(allspr,
                           values_from = c(SPR, Var),
                           values_fill = NA,
                           names_sep = " ",),3)
+
 ```
 
+```{r warning=FALSE, fig.cap="\\label{Figure8}Krill Intrinsic Productivity (SPR) by strata and by year", fig.height=3, fig.width=7}
 
-```r
 allsprpl <- ggplot(allspr,
        aes(Year,
            SPR,
@@ -614,293 +565,25 @@ allsprpl <- ggplot(allspr,
 allsprpl
 ```
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/Figure8-1.jpeg" alt="Krill Intrinsic Productivity (SPR) by strata and by year"  />
-<p class="caption">(\#fig:Figure8)Krill Intrinsic Productivity (SPR) by strata and by year</p>
-</div>
-
 The Elephant Island stratum has exhibited a higher prevalence of adult fraction in fishing catches, leading to an increase in reproductive potential in recent years. Conversely, the Bransfield and Extra strata experience intense recruitment overfishing, with their reproductive potential falling significantly below the recommended target at 54% and 66.5%, respectively.
 
-All the estimated values of SPR and their associated variance by stratum and by year can be identified in  (Table \@ref(tab:Table2).
+All the estimated values of SPR and their associated variance by stratum and by year can be identified in Table \ref{Table2}.
 
-
-```r
+```{r}
 kbl(allsprwide, 
     longtable = F, 
     booktabs = T, 
-    caption = "\\label{Table2}Estimates SPR by Strata") %>% 
-  add_header_above(c(" ", "SPR" = 5, "Variance" = 5)) %>% 
-  kable_styling(latex_options = c("scale_down",  "hold_position"))
+    caption = "\\label{Table2}Estimates SPR by Strata") 
 ```
-
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:Table2)\label{Table2}Estimates SPR by Strata</caption>
- <thead>
-<tr>
-<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
-<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">SPR</div></th>
-<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Variance</div></th>
-</tr>
-  <tr>
-   <th style="text-align:right;"> Year </th>
-   <th style="text-align:right;"> SPR BS </th>
-   <th style="text-align:right;"> SPR EI </th>
-   <th style="text-align:right;"> SPR Extra </th>
-   <th style="text-align:right;"> SPR JOIN </th>
-   <th style="text-align:right;"> SPR SSWI </th>
-   <th style="text-align:right;"> Var BS </th>
-   <th style="text-align:right;"> Var EI </th>
-   <th style="text-align:right;"> Var Extra </th>
-   <th style="text-align:right;"> Var JOIN </th>
-   <th style="text-align:right;"> Var SSWI </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 2001 </td>
-   <td style="text-align:right;"> 0.339 </td>
-   <td style="text-align:right;"> 0.223 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.194 </td>
-   <td style="text-align:right;"> 0.025 </td>
-   <td style="text-align:right;"> 0.017 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.003 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2004 </td>
-   <td style="text-align:right;"> 0.209 </td>
-   <td style="text-align:right;"> 0.221 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.210 </td>
-   <td style="text-align:right;"> 0.003 </td>
-   <td style="text-align:right;"> 0.001 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.002 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2005 </td>
-   <td style="text-align:right;"> 0.325 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.254 </td>
-   <td style="text-align:right;"> 0.001 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2006 </td>
-   <td style="text-align:right;"> 0.314 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.152 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.353 </td>
-   <td style="text-align:right;"> 0.026 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.008 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.033 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2007 </td>
-   <td style="text-align:right;"> 0.372 </td>
-   <td style="text-align:right;"> 0.090 </td>
-   <td style="text-align:right;"> 0.069 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.274 </td>
-   <td style="text-align:right;"> 0.024 </td>
-   <td style="text-align:right;"> 0.002 </td>
-   <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.017 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2008 </td>
-   <td style="text-align:right;"> 0.125 </td>
-   <td style="text-align:right;"> 0.072 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.002 </td>
-   <td style="text-align:right;"> 0.001 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2009 </td>
-   <td style="text-align:right;"> 0.296 </td>
-   <td style="text-align:right;"> 0.319 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.234 </td>
-   <td style="text-align:right;"> 0.003 </td>
-   <td style="text-align:right;"> 0.011 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2010 </td>
-   <td style="text-align:right;"> 0.310 </td>
-   <td style="text-align:right;"> 0.424 </td>
-   <td style="text-align:right;"> 0.246 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.457 </td>
-   <td style="text-align:right;"> 0.006 </td>
-   <td style="text-align:right;"> 0.027 </td>
-   <td style="text-align:right;"> 0.019 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.013 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2011 </td>
-   <td style="text-align:right;"> 0.579 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.417 </td>
-   <td style="text-align:right;"> 0.010 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.014 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2012 </td>
-   <td style="text-align:right;"> 0.395 </td>
-   <td style="text-align:right;"> 0.176 </td>
-   <td style="text-align:right;"> 0.149 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.362 </td>
-   <td style="text-align:right;"> 0.061 </td>
-   <td style="text-align:right;"> 0.006 </td>
-   <td style="text-align:right;"> 0.001 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.017 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2013 </td>
-   <td style="text-align:right;"> 0.193 </td>
-   <td style="text-align:right;"> 0.182 </td>
-   <td style="text-align:right;"> 0.128 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.182 </td>
-   <td style="text-align:right;"> 0.001 </td>
-   <td style="text-align:right;"> 0.001 </td>
-   <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.003 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2014 </td>
-   <td style="text-align:right;"> 0.235 </td>
-   <td style="text-align:right;"> 0.157 </td>
-   <td style="text-align:right;"> 0.177 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.294 </td>
-   <td style="text-align:right;"> 0.001 </td>
-   <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> 0.001 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.002 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2015 </td>
-   <td style="text-align:right;"> 0.247 </td>
-   <td style="text-align:right;"> 0.385 </td>
-   <td style="text-align:right;"> 0.182 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.378 </td>
-   <td style="text-align:right;"> 0.005 </td>
-   <td style="text-align:right;"> 0.016 </td>
-   <td style="text-align:right;"> 0.001 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.023 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2016 </td>
-   <td style="text-align:right;"> 0.331 </td>
-   <td style="text-align:right;"> 0.317 </td>
-   <td style="text-align:right;"> 0.294 </td>
-   <td style="text-align:right;"> 0.331 </td>
-   <td style="text-align:right;"> 0.301 </td>
-   <td style="text-align:right;"> 0.029 </td>
-   <td style="text-align:right;"> 0.029 </td>
-   <td style="text-align:right;"> 0.003 </td>
-   <td style="text-align:right;"> 0.036 </td>
-   <td style="text-align:right;"> 0.026 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2017 </td>
-   <td style="text-align:right;"> 0.211 </td>
-   <td style="text-align:right;"> 1.000 </td>
-   <td style="text-align:right;"> 0.190 </td>
-   <td style="text-align:right;"> 0.254 </td>
-   <td style="text-align:right;"> 0.262 </td>
-   <td style="text-align:right;"> 0.008 </td>
-   <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> 0.015 </td>
-   <td style="text-align:right;"> 0.002 </td>
-   <td style="text-align:right;"> 0.007 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2018 </td>
-   <td style="text-align:right;"> 0.216 </td>
-   <td style="text-align:right;"> 0.330 </td>
-   <td style="text-align:right;"> 0.132 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.291 </td>
-   <td style="text-align:right;"> 0.002 </td>
-   <td style="text-align:right;"> 0.034 </td>
-   <td style="text-align:right;"> 0.001 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.033 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2019 </td>
-   <td style="text-align:right;"> 0.331 </td>
-   <td style="text-align:right;"> 0.421 </td>
-   <td style="text-align:right;"> 0.125 </td>
-   <td style="text-align:right;"> 0.345 </td>
-   <td style="text-align:right;"> 0.367 </td>
-   <td style="text-align:right;"> 0.010 </td>
-   <td style="text-align:right;"> 0.018 </td>
-   <td style="text-align:right;"> 0.002 </td>
-   <td style="text-align:right;"> 0.023 </td>
-   <td style="text-align:right;"> 0.002 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2020 </td>
-   <td style="text-align:right;"> 0.121 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.085 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.240 </td>
-   <td style="text-align:right;"> 0.002 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.001 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 0.001 </td>
-  </tr>
-</tbody>
-</table>
 
 \newpage
 
-## Sensitivity and perfomance analysis
+## 3.3. Sensitivity and perfomance analysis
 
-The results of the methods in the reference setting are compared to the obtained under overstimation/underestimation in intrinsic productivity regarding asymptotic length von Bertalanffy $L_{\infty}$ parameter in krill. First, it was possible to identify that for all strata, the impact of low $L_{\infty}$ ranges under the base model (60 mm) overestimates the level of reproductive potential krill with values between 42% and 32% (Bransfield and Elephant Island strata respectively). Regarding higher $L_{\infty}$ settings, the model tends to underestimate the reproductive potential with values between -25% and -30% (Extra and Joinville strata) Figure \@ref(Figure9),  Table \@ref(tab:Table3).
+The results of the methods in the reference setting are compared to the obtained under overstimation/underestimation in intrinsic productivity regarding asymptotic length von Bertalanffy $L_{\infty}$ parameter in krill. First, it was possible to identify that for all strata, the impact of low $L_{\infty}$ ranges under the base model (60 mm) overestimates the level of reproductive potential krill with values between 42% and 32% (Bransfield and Elephant Island strata respectively). Regarding higher $L_{\infty}$ settings, the model tends to underestimate the reproductive potential with values between -25% and -30% (Extra and Joinville strata) (Figure \ref{Figure9}, Table \ref{Table3}).
 
+```{r message=FALSE}
 
-```r
 for (i in 55:65) {
   nombre_objeto <- paste0("MyPars_", i)  # Crear un nombre único para cada objeto modificado
   objeto_modificado <- MyPars  # Crear una copia del objeto original
@@ -938,8 +621,8 @@ for (i in 55:65) {
 }
 ```
 
+```{r message=FALSE}
 
-```r
 # Recuerdo las bases de datos de lengths
 
 #Brainsflied Strata: Lenbs 
@@ -995,8 +678,7 @@ for (i in 55:65) {
 }
 ```
 
-
-```r
+```{r}
 #Genero lo que quiero comparar BS
 valbs <- as.data.frame(cbind(fitbs55@Years,
   fitbs55@SPR,
@@ -1121,10 +803,12 @@ valtodo <- rbind(valsswi_largo,
               valbs_largo,
               valei_largo,
               valex_largo)
+
+
+
 ```
 
-
-```r
+```{r warning=FALSE, fig.cap="\\label{Figure9}lSensitivity analysis by strata about asymptotic length VB", fig.height=3, fig.width=8}
 # plot all Linf
 sensto <- ggplot(valtodo %>%
          drop_na(),
@@ -1161,15 +845,17 @@ sensto <- ggplot(valtodo %>%
         panel.grid.minor = element_blank())+
   coord_flip()
 sensto
+# ggarrange(senbs , 
+#           senei + rremove("ylab"),
+#           senex + rremove("ylab"),
+#           senjo + rremove("ylab"),
+#           sensswi+ rremove("ylab"), 
+#           ncol=5,
+#           common.legend = TRUE)
+
 ```
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/Figure9-1.jpeg" alt="Sensitivity analysis by strata about asymptotic length VB"  />
-<p class="caption">(\#fig:Figure9)Sensitivity analysis by strata about asymptotic length VB</p>
-</div>
-
-
-```r
+```{r message=F}
 # Tables
 
 tablinf <- valtodo %>% 
@@ -1181,193 +867,15 @@ tablinf <- valtodo %>%
               names_sep = " ") %>% 
   rename( "VB scenario"="Parameter") %>% 
    mutate_if(is.numeric, round, 2)
+
+kable(tablinf, 
+    caption = "\\label{Table3}Estimated by asymptotyc lenght (VB) scenario")
 ```
 
+Regarding the three growth levels of the species (high, medium, low) referred to the parameter $k$, it was possible to identify that high and medium growth types result in very low SPR (spawning potential ratio) estimates compared to slow and medium growth. In fact, with high individual growth, the model estimates that SPR levels would be very close to the target management levels (75% SPR) and far from the limit reference level of 20% (Figure \ref{Figure10}, Table \ref{Table4}). 
 
+```{r message=FALSE}
 
-```r
-kbl(tablinf, 
-    longtable = F, 
-    booktabs = T, 
-    caption = "Estimated by asymptotyc lenght (VB) scenario") %>% 
-  add_header_above(c(" ", "Mean" = 5, "Variance" = 5)) %>% 
-  kable_styling(latex_options = c("scale_down",  "hold_position"),
-                font_size = 10)
-```
-
-<table class="table" style="font-size: 10px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:Table3)Estimated by asymptotyc lenght (VB) scenario</caption>
- <thead>
-<tr>
-<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
-<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Mean</div></th>
-<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Variance</div></th>
-</tr>
-  <tr>
-   <th style="text-align:left;"> VB scenario </th>
-   <th style="text-align:right;"> Median BS </th>
-   <th style="text-align:right;"> Median EI </th>
-   <th style="text-align:right;"> Median Extra </th>
-   <th style="text-align:right;"> Median JOIN </th>
-   <th style="text-align:right;"> Median SSWI </th>
-   <th style="text-align:right;"> Variance BS </th>
-   <th style="text-align:right;"> Variance EI </th>
-   <th style="text-align:right;"> Variance Extra </th>
-   <th style="text-align:right;"> Variance JOIN </th>
-   <th style="text-align:right;"> Variance SSWI </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Linf55 </td>
-   <td style="text-align:right;"> 0.50 </td>
-   <td style="text-align:right;"> 0.45 </td>
-   <td style="text-align:right;"> 0.26 </td>
-   <td style="text-align:right;"> 0.50 </td>
-   <td style="text-align:right;"> 0.47 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.02 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Linf56 </td>
-   <td style="text-align:right;"> 0.43 </td>
-   <td style="text-align:right;"> 0.41 </td>
-   <td style="text-align:right;"> 0.23 </td>
-   <td style="text-align:right;"> 0.45 </td>
-   <td style="text-align:right;"> 0.43 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.06 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.01 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Linf57 </td>
-   <td style="text-align:right;"> 0.39 </td>
-   <td style="text-align:right;"> 0.38 </td>
-   <td style="text-align:right;"> 0.21 </td>
-   <td style="text-align:right;"> 0.40 </td>
-   <td style="text-align:right;"> 0.39 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.01 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Linf58 </td>
-   <td style="text-align:right;"> 0.35 </td>
-   <td style="text-align:right;"> 0.35 </td>
-   <td style="text-align:right;"> 0.19 </td>
-   <td style="text-align:right;"> 0.37 </td>
-   <td style="text-align:right;"> 0.35 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.01 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Linf59 </td>
-   <td style="text-align:right;"> 0.31 </td>
-   <td style="text-align:right;"> 0.33 </td>
-   <td style="text-align:right;"> 0.18 </td>
-   <td style="text-align:right;"> 0.34 </td>
-   <td style="text-align:right;"> 0.32 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.01 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Linf60 </td>
-   <td style="text-align:right;"> 0.29 </td>
-   <td style="text-align:right;"> 0.31 </td>
-   <td style="text-align:right;"> 0.16 </td>
-   <td style="text-align:right;"> 0.31 </td>
-   <td style="text-align:right;"> 0.30 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.01 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Linf61 </td>
-   <td style="text-align:right;"> 0.26 </td>
-   <td style="text-align:right;"> 0.29 </td>
-   <td style="text-align:right;"> 0.15 </td>
-   <td style="text-align:right;"> 0.29 </td>
-   <td style="text-align:right;"> 0.28 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.01 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Linf62 </td>
-   <td style="text-align:right;"> 0.25 </td>
-   <td style="text-align:right;"> 0.27 </td>
-   <td style="text-align:right;"> 0.14 </td>
-   <td style="text-align:right;"> 0.27 </td>
-   <td style="text-align:right;"> 0.26 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.00 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Linf63 </td>
-   <td style="text-align:right;"> 0.23 </td>
-   <td style="text-align:right;"> 0.25 </td>
-   <td style="text-align:right;"> 0.13 </td>
-   <td style="text-align:right;"> 0.25 </td>
-   <td style="text-align:right;"> 0.24 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.00 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Linf64 </td>
-   <td style="text-align:right;"> 0.22 </td>
-   <td style="text-align:right;"> 0.23 </td>
-   <td style="text-align:right;"> 0.12 </td>
-   <td style="text-align:right;"> 0.24 </td>
-   <td style="text-align:right;"> 0.23 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.00 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Linf65 </td>
-   <td style="text-align:right;"> 0.21 </td>
-   <td style="text-align:right;"> 0.22 </td>
-   <td style="text-align:right;"> 0.12 </td>
-   <td style="text-align:right;"> 0.22 </td>
-   <td style="text-align:right;"> 0.22 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.00 </td>
-  </tr>
-</tbody>
-</table>
-
-Regarding the three growth levels of the species (high, medium, low) referred to the parameter $k$, it was possible to identify that high and medium growth types result in very low SPR (spawning potential ratio) estimates compared to slow and medium growth. In fact, with high individual growth, the model estimates that SPR levels would be very close to the target management levels (75% SPR) and far from the limit reference level of 20% (Figure \@ref(Figure10),  Table \@ref(tab:Table4)).
-
-
-```r
 for (i in c(2,0.5,0.3)) {
   nombre_objeto <- paste0("MyPars_", i)  # Crear un nombre único para cada objeto modificado
   objeto_modificado <- MyPars  # Crear una copia del objeto original
@@ -1405,8 +913,8 @@ for (i in c(2,0.5,0.3)) {
 }
 ```
 
+```{r message=FALSE}
 
-```r
 # Recuerdo las bases de datos de lengths
 
 #Brainsflied Strata: Lenbs 
@@ -1462,8 +970,7 @@ for (i in c(2,0.5,0.3)) {
 }
 ```
 
-
-```r
+```{r}
 #Genero lo que quiero comparar BS
 valprobs <- as.data.frame(cbind(fitbs0.3@Years,
                                 fitbs0.3@SPR,
@@ -1532,10 +1039,10 @@ valprotodo <- rbind(valprosswi_largo,
               valprobs_largo,
               valprojo_largo,
               valproex_largo)
+
 ```
 
-
-```r
+```{r warning=FALSE, fig.cap="\\label{Figure10}Sensitivity analysis by strata about krill growth type",  out.width='70%'}
 #plot
 # todo
 
@@ -1573,13 +1080,7 @@ sensproto <- ggplot(valprotodo %>%
 sensproto
 ```
 
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/Figure10-1.jpeg" alt="Sensitivity analysis by strata about krill growth type" width="70%" />
-<p class="caption">(\#fig:Figure10)Sensitivity analysis by strata about krill growth type</p>
-</div>
-
-
-```r
+```{r message=FALSE}
 tablk <- valprotodo %>% 
   group_by(Parameter, SPRstra) %>% 
   summarise(Median = mean(SPR),
@@ -1593,80 +1094,116 @@ tablk <- valprotodo %>%
 kbl(tablk, 
     longtable = F, 
     booktabs = T, 
-    caption = "Estimated by growth type scenario") %>% 
-  add_header_above(c(" ", "Mean" = 5, "Variance" = 5)) %>% 
-  kable_styling(latex_options = c("scale_down",  "hold_position"),
-                font_size = 10)
+    caption = "\\label{Table4}Estimated by growth type scenario") %>% 
+  add_header_above(c(" ", "Mean" = 5, "Variance" = 5))
 ```
 
-<table class="table" style="font-size: 10px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:Table4)Estimated by growth type scenario</caption>
- <thead>
-<tr>
-<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
-<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Mean</div></th>
-<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Variance</div></th>
-</tr>
-  <tr>
-   <th style="text-align:left;"> Growth scenario </th>
-   <th style="text-align:right;"> Median BS </th>
-   <th style="text-align:right;"> Median EI </th>
-   <th style="text-align:right;"> Median Extra </th>
-   <th style="text-align:right;"> Median JOIN </th>
-   <th style="text-align:right;"> Median SSWI </th>
-   <th style="text-align:right;"> Variance BS </th>
-   <th style="text-align:right;"> Variance EI </th>
-   <th style="text-align:right;"> Variance Extra </th>
-   <th style="text-align:right;"> Variance JOIN </th>
-   <th style="text-align:right;"> Variance SSWI </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Low </td>
-   <td style="text-align:right;"> 0.64 </td>
-   <td style="text-align:right;"> 0.60 </td>
-   <td style="text-align:right;"> 0.47 </td>
-   <td style="text-align:right;"> 0.71 </td>
-   <td style="text-align:right;"> 0.64 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.01 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Med </td>
-   <td style="text-align:right;"> 0.15 </td>
-   <td style="text-align:right;"> 0.17 </td>
-   <td style="text-align:right;"> 0.08 </td>
-   <td style="text-align:right;"> 0.16 </td>
-   <td style="text-align:right;"> 0.16 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.00 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> High </td>
-   <td style="text-align:right;"> 0.09 </td>
-   <td style="text-align:right;"> 0.10 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 0.09 </td>
-   <td style="text-align:right;"> 0.09 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.00 </td>
-  </tr>
-</tbody>
-</table>
+```{r eval=FALSE}
+## 3.7. Risk assessment
 
-# DISCUSION
+xn <-rnorm(1000, mean = 0.121, sd = 0.002)
+xn1  <-seq(min(xn),max(xn), 0.0005)
+yn  <-dnorm(xn1, mean = 0.121, sd = 0.002)
+qn <- as.data.frame(qnorm(c(0.1, 0.2, 0.3, 0.4,  0.5),
+                          mean = 0.121, sd = 0.002))
 
-## Changes in krill population structure
+brapro <- as.data.frame(cbind(xn1,yn)) %>% 
+  rename(fre=xn1,
+         value=yn)
+xnor <- ggplot()+
+  geom_line(aes(xn1, yn))+
+  geom_vline(xintercept=qn[1,1], col="#999999")+
+  geom_vline(xintercept=qn[2,1], col="#E69F00")+
+  geom_vline(xintercept=qn[3,1], col="#009E73")+
+  geom_vline(xintercept=qn[4,1], col="#56B4E9")+
+  geom_vline(xintercept=qn[5,1], col="#e66101")+
+   geom_text(aes(x=qn[1,1]+15, 
+                label=round(qn[1,1], 1),y=100),
+             colour="#999999", angle=90)+
+   geom_text(aes(x=qn[2,1], 
+                label=round(qn[2,1], 1),y=0.0020),
+             colour="#E69F00", angle=90)+
+   geom_text(aes(x=qn[3,1]+15, 
+                label=round(qn[3,1], 1),y=0.0020),
+             colour="#009E73", angle=90)+
+   geom_text(aes(x=qn[4,1]+15, 
+                label=round(qn[4,1], 1),y=0.0020),
+             colour="#56B4E9", angle=90)+
+   geom_text(aes(x=qn[5,1]+15, 
+                label=round(qn[5,1], 1),y=0.0020),
+             colour="#e66101", angle=90)+
+  ylab('')+
+  xlab('')+
+  lims(x=c(min(xn),max(xn)))+
+  ggtitle(" Riesgo X Norte F2022")+
+  My_theme
+xnor
+
+```
+
+```{r eval=FALSE}
+## 3.6 Simulating length data krill
+# Definir las edades
+
+longitudes <- seq(0,7)
+
+# Especificar las probabilidades de ocurrencia de cada edad
+probabilidades <- c(0.1, 0.05, 0.2, 0.15, 0.12, 0.1, 0.08, 0.1)
+
+# Realizar la simulación multinomial 200 veces
+n_simulaciones <- 200
+resultados <- matrix(0, nrow = n_simulaciones, ncol = length(longitudes))
+
+for (i in 1:n_simulaciones) {
+  resultados[i, ] <- rmultinom(1, size = 1, prob = probabilidades)
+}
+
+# Crear un data frame con los resultados
+tabla_resultados <- data.frame(longitudes = rep(longitudes, 
+                                                n_simulaciones),
+                               simulacion = rep(1:n_simulaciones, 
+                                                each = length(longitudes)),
+                               frecuencia = c(resultados))
+
+# Imprimir los primeros registros de la tabla de resultados
+print(head(tabla_resultados))
+
+# Graficar histograma
+hist(tabla_resultados$longitudes, 
+     breaks = length(longitudes), 
+     col = "skyblue", 
+     xlab = "longitudes", 
+     main = "Distribución de longitudes Simuladas")
+
+# Calcular la frecuencia por edad
+frecuencia_por_edad <- aggregate(frecuencia ~ longitudes, data = tabla_resultados, FUN = sum)
+
+# Graficar gráfico de barras
+barplot(frecuencia_por_edad$frecuencia, names.arg = frecuencia_por_edad$longitudes, col = "skyblue",
+        xlab = "longitudes", ylab = "Frecuencia", main = "Frecuencia de longitudes Simuladas")
+
+
+datos <- data.frame(edades = tabla_resultados$longitudes)
+
+# Crear el gráfico de densidad con cuantiles
+ggplot(datos, aes(x = edades)) +
+  geom_density(fill = "skyblue", alpha = 0.5) +
+  geom_quantile(quantiles = c(0.25, 0.5, 0.75), 
+                color = "red", 
+                linetype = "dashed") +
+  xlab("Edades") +
+  ylab("Densidad") +
+  ggtitle("Densidad de Edades Simuladas con Cuantiles")
+
+```
+
+\newpage
+
+\newpage
+
+# 4. DISCUSION
+
+## 4.1. Changes in krill population structure
 
 Identifying the population dynamics changes of krill in Subarea 48.1 has been one of the biggest challenges in recent years as temporal-spatial patterns of both concentration and productivity of catches has increased, as well environmental changes are already affecting the ecosystem [@McBride2021; @Hill2016]. Krill is a key species in the Antarctic environment and understanding its population dynamics is a basic element to visualize the impacts on the functioning of the food web, conservation of the resource and management of the fishery [@Hill2016]. For these reasons, it is key to assess the reproductive potential of the species at fine scales of space and time in subarea 48.1, because this area is where the fishery and resource have been concentrated for the last 20 years [@Atkinson2022; @SantaCruz2022] and the needs for advises for a sustainable management are currently required. In this method we determined the differences between the simulated krill size structures based on their life history parameters [@Maschette2020] and those resulting from the fishery, which allows us to know the difference between the virginal reproductive potential and that currently fishing mortality levels.
 
@@ -1674,11 +1211,11 @@ Our results identify this changes in spatio-temporal variability of krill in dif
 
 Changes in the dynamics and population structure of krill in the Antarctic Peninsula are manifested in various ways, such as distribution, biomass, recruitment, phenology, among others. The main drivers of these changes are associated with the changing behavior of the different environmental variables in the krill habitat [@Flores2012a; @Pinones2016; @Saba2014; @Veytia2021; @Flores2012; @Walsh2020]. Faced with this changing scenario, the intrinsic population productivity, that is, the reproductive potential of the species, has also undergone changes in the last decades [@Atkinson2022; @Perry2020; @McBride2021], both on the temporal scale as well as the spatial one. Similarly, the population structure of krill in the PA has been impacted by this type of environmental forcing [@Siegel2013; @Reiss2020]. While we understand that recruitment variability is influenced by environmental factors, including biomass, it is possible to identify the risk of fishing activity on the reproductive condition of the krill population over time and space, in other words, the risk of recruitment overfishing varies across years and strata in Antarctic Peninsula.
 
-## Fishery data as population indicators
+## 4.2. Fishery data as population indicators
 
-Krill in the PA have been harvested commercially since about 1970 and constitute the largest fishery in the Southern Ocean. The data on the fishing activity around krill have been systematically collected on board the fishing vessels through the SISO program, with which it has also been possible to identify changes in the population dynamics that have occurred during the last two decades and throughout the area of greater exploitation. The accurate representation of size distribution is crucial for assessing the overall health and productivity of krill populations and for informing effective management strategies in different geographical areas [@Thanassekos2014]. Changes in the availability, distribution, and concentration, performance of the resource have been reflected in this kind of data [@Hordyk2016; @Froese2018; @Canales2021]. To identify changes in the intrinsic productivity of the krill population, we used one of the most representative pieces of information on the population dynamics of exploited marine resources that exist in this type of fisheries monitoring program, in this case, frequency data of catch size [@Chong2019; @Prince2018]. This type of data is abundant and informative about signals status populations [@Canales2021], and makes it possible to cover a large temporal and spatial scale, in this case, from 1980 to 2020 and throughout subarea 48.1 (Figure \@ref(Figure 1)).
+Krill in the PA have been harvested commercially since about 1970 and constitute the largest fishery in the Southern Ocean. The data on the fishing activity around krill have been systematically collected on board the fishing vessels through the SISO program, with which it has also been possible to identify changes in the population dynamics that have occurred during the last two decades and throughout the area of greater exploitation. The accurate representation of size distribution is crucial for assessing the overall health and productivity of krill populations and for informing effective management strategies in different geographical areas [@Thanassekos2014]. Changes in the availability, distribution, and concentration, performance of the resource have been reflected in this kind of data [@Hordyk2016; @Froese2018; @Canales2021]. To identify changes in the intrinsic productivity of the krill population, we used one of the most representative pieces of information on the population dynamics of exploited marine resources that exist in this type of fisheries monitoring program, in this case, frequency data of catch size [@Chong2019; @Prince2018]. This type of data is abundant and informative about signals status populations [@Canales2021], and makes it possible to cover a large temporal and spatial scale, in this case, from 1980 to 2020 and throughout subarea 48.1 (Figure \ref{Figure 1}.
 
-## Spatial and Temporal differences in intrinsic krill productivity
+## 4.3. Spatial and Temporal differences in intrinsic krill productivity
 
 We verified that the reproductive potential of krill has had changes through the years and spaces. These changes were quantitatively measured through reproductive potential using a novel method commonly used in world fisheries that considers the use of life history parameters, such as maturity, growth and growth rate, size structures, and simulations based on invariant parameters. Elephant Island stratum has had an increase in reproductive potential, reaching levels of 56% by the year 2020. This situation has been mainly due to two aspects. The first is that the effect of recruitment, and therefore is a greater proportion of older individuals who are ensuring a reproductive potential for the population. In the opposite case, Extra strata has a zone where juvenile individuals (nursery) [@Perry2020; @Veytia2021] are more abundant. This situation affects that throughout these 20 years analyzed, the SPR is less compared to the other strata, with an average of 16 throughout the historical series with a 6% at least in 2007. This year is particularly interesting given the high levels of primary productivity concentration in this area that could have had an impact on a high level of recruitment [@Saba2014; @Walsh2020] and consequently, a decrease in reproductive potential at the population level. A large proportion of juvenile individuals is also identified in the Brainsfield strait sector, incorporating in recent years in an important way [@Perry2020; @Reiss2020], which has had an impact on the fact that the SPR has decreased in the last few years, reaching its lowest level in 2020 with 12%, which is below a limit reference level for this resource.
 
@@ -1686,13 +1223,13 @@ These results are consistent with other analyzes that identify these spatial cha
 
 One aspect to consider in this analysis was the use of fixed parameters taken from previous studies for the simulations of the krill virginal size structures. In relation to this, we believe it is necessary to obtain of specific life history and maturity parameters by stratum, which would allow us to better define these findings. In any case, we believe that sensitivity analyzes can help fill these existing information gaps.
 
-## Sensitivity analysis
+## 4.4. Sensitivity analysis
 
 This method is sensitive to biological information assumptions. Therefore, an analysis of sensitivity is crucial to understand the importance of growth parameters in a length-based assessment model for krill stocks [@Chong2019; @Carvalho2017; @Rudd2017a; @Hordyk2016] like LBSPR [@Hordyk2016; @Cousido-Rocha2022]. Indeed, few number of studies have performed parameter sensitivity analyses for these methods with real case studies, among which are @Cousido-Rocha2022 and @Hordyk2016. It helps determine the impact of growth parameters on the model's output and assesses the sensitivity analysis identifying even conditions of overestimated and underestimated with respect to the reference scenario, detects biases and improves accuracy and reliability [@Carvalho2017; @Cousido-Rocha2022]. Ultimately, it enhances understanding of krill stock dynamics and supports effective conservation and management efforts. Sensitivity analyses were 50 scenarios performed with respect to ten scenarios of $L_{\infty}$ (ten by strata) and 15 scenarios tested for the different levels of growth and their impact on. All analyses were performed in R version 4.2.1. [@RCRAN2022].
 
 According to our results, we were able to verify that an individual with a lower growth ($L_{\infty}$ 55), the estimates of SPR increases (Figure \ref{Figure8}). This was possible to observe through the sensitivity analysis for this parameter in all strata. This situation is repeated in the same way in all the strata, which confirms that the condition is between all them. spaces within SubArea 48.1. Regarding variability in growth krill, our study found that life history as expressed in the $k$ parameters was a factor with high influence of SPR estimators. This result supports those in previous studies of length-based analysis about growth type [@Cousido-Rocha2022; @Prince2018; @Rudd2017a], but it is the first time that this type of analysis has been carried out on krill.
 
-## Implications for fisheries management in CCAMLR context
+## 4.5. Implications for fisheries management in CCAMLR context
 
 Differences spatial and temporal in intrinsic productivity krill can significantly impact long-term conservation and sustainability in the Antarctic Peninsula. This feature directly influences population growth and abundance, which are crucial for maintaining ecosystem balance and species diversity [@Hill2016; @McBride2021]. Higher reproductive potential ensures a larger number of offspring, increasing the chances of population recovery after disturbances or by environmental fluctuations [@Saba2014; @Pinones2016]. Reduced reproductive output can lead to decreased food availability for dependent predators, disrupting the trophic cascade and affecting the entire ecosystem [@Kruger2019]. Krill is a key food source for a wide range of species, including penguins, seals, and whales, so fluctuations in reproductive potential can have cascading effects on their populations [@McBride2021]. Regarding fishery, the sustainability of commercial krill explotation relies on maintaining a healthy population through sustainable harvesting practices, which can be influenced by variations in reproductive potential. Understanding the changes in intrinsic productivity of krill population in SubArea 48.1 allows better management strategies such as implementation of size and catch limits to protect breeding areas of individuals (e.g. strata) and ensure sustainable catch levels. Climate change impacts on the Antarctic Peninsula, such as rising temperatures and changing sea ice dynamics, can directly affect intrinsic productivity of krill, further influencing long-term sustainability. Maintain a process for monitoring these changes in krill productivity provides valuable insights into the overall health and resilience of the Antarctic Peninsula ecosystem. We believe that this type of analysis can help to identify krill population characteristics and in turn give recommendations for management.
 
@@ -1702,7 +1239,7 @@ In this sense, incorporating the findings regarding the changes in krill intrins
 
 \newpage
 
-# CONCLUSION
+# 5. CONCLUSION
 
 -   This study show the first analisys about intrinsic productivity of Antarctic krill (*Euphausia superba*) in Antarctic Peninsula, SubArea 48.1 through a quantitative method called LBSPR.
 
@@ -1714,9 +1251,11 @@ In this sense, incorporating the findings regarding the changes in krill intrins
 
 -   Considering these differences in an eventual spatially explicit in the new management scheme could be beneficial to ensure sustainability of krill in subarea 48.1 and Antarctic Peninsula.
 
-# SUPLEMENTARY INFORMATION
+# 5. SUPLEMENTARY INFORMATION
 
 The methodology and data of this exercise can be found in the following link [LBSPR-Krill](https://github.com/MauroMardones/LBSPR_Krill)
 
+\newpage
 
-# REFERENCES
+# 6. REFERENCES
+

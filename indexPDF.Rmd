@@ -7,7 +7,7 @@ author:
   - César Cárdenas^[Instituto Antártico Chileno]
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 bibliography: LBSPR.bib
-csl: apa.csl
+csl: plosone.csl
 link-citations: yes
 linkcolor: blue
 always_allow_html: yes
@@ -58,6 +58,7 @@ library(stringr)
 library(ggpubr)
 library(kableExtra)
 library(hrbrthemes)
+library(ggthemes)
 ```
 
 ```{r}
@@ -207,8 +208,7 @@ tablepar <-data.frame(Value=c(MyPars@Linf,
 kbl(tablepar, 
     longtable = F, 
     booktabs = T, 
-    caption = "\\label{Table1}Krill biological and fishery parameters") %>% 
-   kable_styling(latex_options = c("striped",  "hold_position"))
+    caption = "\\label{Table1}Krill biological and fishery parameters") 
 ```
 
 ## 2.4. Assessment of intrinsic productivity
@@ -327,7 +327,7 @@ fitssiw <- LBSPRfit(MyPars, Lenssiw)
 
 Ten sensitivity scenarios based on the upper and lower range for the asymptotic length von Bertalanffy $L_{\infty}$ (55 to 65 mm) used in the base model (60 mm) were tested to identify the impact of this parameter on the SPR estimation, given that it is the parameters exhibiting the high degree of variability and one of the factors that most determines the estimates. On the other hand, the interdependence between krill and their environment is a well-known and influential factor in population dynamics, ecosystem impacts, and fishery. This interdependence also affects the reproductive potential and consequently, to any management decision that takes into account population parameters of krill. To assess the impact of individual growth variability, three scenarios of the VB k parameter were tested, representing different growth types (low = 0.2, medium = 0.7, and high = 1.2). Figure \ref{Figure3} displays a theoretical growth curve for krill based on three scenarios that were tested using LBSPR.
 
-```{r Figure 3, fig.height=3, fig.width=4, fig.cap="\\label{Figure3}Theoretical growth scenarios to krill varability"}
+```{r Figure 3, fig.height=5, fig.width=6, fig.cap="\\label{Figure3}Theoretical growth scenarios to krill varability"}
 # Definir los parámetros del modelo de Von Bertalanffy
 L_inf <- 60
 k <- c(0.2, 0.7, 1.2)
@@ -346,16 +346,17 @@ sen <- ggplot(df, aes(x = edades,
                y = crecimiento, 
                color = factor(k))) +
   geom_line(size=1.5) +
-  xlab("Years") +
+  xlab("Age") +
   ylab("Length (mm)") +
   ggtitle("") +
   theme(panel.background = element_rect(),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())+
   scale_color_viridis_d(option="C",
-                       name = "Theoretical growth",
+                       name = "Theorycal growth",
                        labels = c("Low", "Medium", "High"))+
   theme_few()
+sen
 ```
 
 After applying each scenario using each of the parameter setting, the results of scenarios are compared with the results provided by the methods based setting (Table 1), analyzing in this way the efect of underestimation/overestimation of the parameters $L_{\infty}$ and *k*.
@@ -530,7 +531,7 @@ allsprwide <- round(pivot_wider(allspr,
 
 ```
 
-```{r warning=FALSE, fig.cap="\\label{Figure8}Krill Intrinsic Productivity (SPR) by strata and by year", fig.height=3, fig.width=7}
+```{r warning=FALSE, fig.cap="\\label{Figure8}Krill Intrinsic Productivity (SPR) by strata and by year"}
 
 allsprpl <- ggplot(allspr,
        aes(Year,
@@ -538,7 +539,8 @@ allsprpl <- ggplot(allspr,
            color=SPRv))+
   geom_point(alpha=1.5)+
   stat_smooth(method = "lm",
-              alpha=0.3)+
+              alpha=0.3,
+              se=FALSE)+
   geom_hline(yintercept = 0.75,
              colour= '#006d2c',
              alpha=0.5,
@@ -555,7 +557,8 @@ allsprpl <- ggplot(allspr,
         axis.text.x = element_text(angle = 90, hjust = 2),
         panel.background = element_rect(),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())
+        panel.grid.minor = element_blank())+
+  ylim(0,0.9)
 
 allsprpl
 ```
@@ -570,7 +573,10 @@ kbl(allsprwide,
     booktabs = T, 
     caption = "\\label{Table2}Estimates SPR by Strata") %>% 
   add_header_above(c(" ", "SPR" = 5, "Variance" = 5)) %>% 
-  kable_styling(latex_options = c("scale_down",  "hold_position"))
+  kable_styling(full_width = T,
+                font_size = 10)
+
+write.csv(allsprwide, "SPRall.csv", sep="")
 
 ```
 
@@ -863,6 +869,7 @@ tablinf <- valtodo %>%
   pivot_wider(names_from= SPRstra, 
               values_from = c(Median, Variance),
               names_sep = " ") %>% 
+  mutate_all(~na_if(., is.na(.)) %>% ifelse(is.na(.), "-", .)) %>% 
   rename( "VB scenario"="Parameter") %>% 
    mutate_if(is.numeric, round, 2)
 
@@ -870,8 +877,8 @@ kbl(tablinf,
     longtable = F, 
     booktabs = T, 
     caption = "\\label{Table3}Estimated by asymptotyc lenght (VB) scenario") %>% 
-  add_header_above(c(" ", "Mean" = 5, "Variance" = 5)) %>% 
-  kable_styling(latex_options = c("scale_down",  "hold_position"),
+  add_header_above(c(" ", "SPR" = 5, "Variance" = 5))  %>% 
+  kable_styling(full_width = T,
                 font_size = 10)
 ```
 
@@ -1098,111 +1105,12 @@ kbl(tablk,
     longtable = F, 
     booktabs = T, 
     caption = "\\label{Table4}Estimated by growth type scenario") %>% 
-  add_header_above(c(" ", "Mean" = 5, "Variance" = 5)) %>% 
-  kable_styling(latex_options = c("scale_down",  "hold_position"),
+  add_header_above(c(" ", "SPR" = 5, "Variance" = 5)) %>%  
+  kable_styling(full_width = T,
                 font_size = 10)
 ```
 
-```{r eval=FALSE}
-## 3.7. Risk assessment
 
-xn <-rnorm(1000, mean = 0.121, sd = 0.002)
-xn1  <-seq(min(xn),max(xn), 0.0005)
-yn  <-dnorm(xn1, mean = 0.121, sd = 0.002)
-qn <- as.data.frame(qnorm(c(0.1, 0.2, 0.3, 0.4,  0.5),
-                          mean = 0.121, sd = 0.002))
-
-brapro <- as.data.frame(cbind(xn1,yn)) %>% 
-  rename(fre=xn1,
-         value=yn)
-xnor <- ggplot()+
-  geom_line(aes(xn1, yn))+
-  geom_vline(xintercept=qn[1,1], col="#999999")+
-  geom_vline(xintercept=qn[2,1], col="#E69F00")+
-  geom_vline(xintercept=qn[3,1], col="#009E73")+
-  geom_vline(xintercept=qn[4,1], col="#56B4E9")+
-  geom_vline(xintercept=qn[5,1], col="#e66101")+
-   geom_text(aes(x=qn[1,1]+15, 
-                label=round(qn[1,1], 1),y=100),
-             colour="#999999", angle=90)+
-   geom_text(aes(x=qn[2,1], 
-                label=round(qn[2,1], 1),y=0.0020),
-             colour="#E69F00", angle=90)+
-   geom_text(aes(x=qn[3,1]+15, 
-                label=round(qn[3,1], 1),y=0.0020),
-             colour="#009E73", angle=90)+
-   geom_text(aes(x=qn[4,1]+15, 
-                label=round(qn[4,1], 1),y=0.0020),
-             colour="#56B4E9", angle=90)+
-   geom_text(aes(x=qn[5,1]+15, 
-                label=round(qn[5,1], 1),y=0.0020),
-             colour="#e66101", angle=90)+
-  ylab('')+
-  xlab('')+
-  lims(x=c(min(xn),max(xn)))+
-  ggtitle(" Riesgo X Norte F2022")+
-  My_theme
-xnor
-
-```
-
-```{r eval=FALSE}
-## 3.6 Simulating length data krill
-# Definir las edades
-
-longitudes <- seq(0,7)
-
-# Especificar las probabilidades de ocurrencia de cada edad
-probabilidades <- c(0.1, 0.05, 0.2, 0.15, 0.12, 0.1, 0.08, 0.1)
-
-# Realizar la simulación multinomial 200 veces
-n_simulaciones <- 200
-resultados <- matrix(0, nrow = n_simulaciones, ncol = length(longitudes))
-
-for (i in 1:n_simulaciones) {
-  resultados[i, ] <- rmultinom(1, size = 1, prob = probabilidades)
-}
-
-# Crear un data frame con los resultados
-tabla_resultados <- data.frame(longitudes = rep(longitudes, 
-                                                n_simulaciones),
-                               simulacion = rep(1:n_simulaciones, 
-                                                each = length(longitudes)),
-                               frecuencia = c(resultados))
-
-# Imprimir los primeros registros de la tabla de resultados
-print(head(tabla_resultados))
-
-# Graficar histograma
-hist(tabla_resultados$longitudes, 
-     breaks = length(longitudes), 
-     col = "skyblue", 
-     xlab = "longitudes", 
-     main = "Distribución de longitudes Simuladas")
-
-# Calcular la frecuencia por edad
-frecuencia_por_edad <- aggregate(frecuencia ~ longitudes, data = tabla_resultados, FUN = sum)
-
-# Graficar gráfico de barras
-barplot(frecuencia_por_edad$frecuencia, names.arg = frecuencia_por_edad$longitudes, col = "skyblue",
-        xlab = "longitudes", ylab = "Frecuencia", main = "Frecuencia de longitudes Simuladas")
-
-
-datos <- data.frame(edades = tabla_resultados$longitudes)
-
-# Crear el gráfico de densidad con cuantiles
-ggplot(datos, aes(x = edades)) +
-  geom_density(fill = "skyblue", alpha = 0.5) +
-  geom_quantile(quantiles = c(0.25, 0.5, 0.75), 
-                color = "red", 
-                linetype = "dashed") +
-  xlab("Edades") +
-  ylab("Densidad") +
-  ggtitle("Densidad de Edades Simuladas con Cuantiles")
-
-```
-
-\newpage
 
 \newpage
 
