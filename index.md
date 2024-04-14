@@ -2,7 +2,7 @@
 title: "Searching Intrinsic Productivity Antarctic Krill "
 subtitle: "Alternative analysis to know productivity in Krill 48.1 SubArea based on invariants parametres and fishery lenghts structures"
 author: "Mardones, M; Watters, G.; Cárdenas, C."
-date:  "08 December, 2023"
+date:  "14 April, 2024"
 bibliography: LBSPR.bib
 csl: apa.csl
 link-citations: yes
@@ -411,7 +411,7 @@ sen <- ggplot(df, aes(x = edades,
                y = crecimiento, 
                color = factor(k))) +
   geom_line(size=1.5) +
-  xlab("Years") +
+  xlab("Ages") +
   ylab("Length (mm)") +
   ggtitle("") +
   theme(panel.background = element_rect(),

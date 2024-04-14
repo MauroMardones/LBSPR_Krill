@@ -13,18 +13,13 @@ linkcolor: blue
 always_allow_html: yes
 output:
   pdf_document
+header-includes:
+- \setcounter{tocdepth}{3}
+- \tableofcontents
+- \fontsize{12}{22}
+- \selectfont
 ---
 
-```{=tex}
-\fontsize{12}{16}
-\selectfont{}
-```
-\newpage
-
-```{=latex}
-\setcounter{tocdepth}{3}
-\tableofcontents
-```
 \newpage
 
 ```{r setup1, echo=FALSE}
@@ -231,7 +226,7 @@ EPR_{fished} =
 \begin{cases}
  E_{a},  a = 0  \\
  e^{-Z_{{a-1}}a} {E_a}, 0 < a  < a_\le{max}
- \end{cases}       
+\end{cases}       
 $$ where $Z_a$ = $M+F_a$, and $E$ is egg production at age assumed to be proportional to weight;
 
 $$E_a \in  Mat_a W_a$$ on the other hand, the calculation of the reproductive potential is the same as that of those captured without F; $$

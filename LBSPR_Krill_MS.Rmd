@@ -109,31 +109,16 @@ We then propose to identify differences in krill reproductive potential at the f
 
 The study area includes subarea 48.1, which is one of the sectors where today the largest amount of krill fishing is concentrated [@McBride2021; @Atkinson2022; @SantaCruz2022]. In order to have a finest spatial definition of krill dynamics population, we will analyze the differences between the management strata defined in WG-EMM-2021/05 Rev. (@Dornam2021), namely Brainsfield Strait, Elephant Island, Extra, Joinville Island and South West (hereafter BS, EI, Extra, JOIN and SSIW respectively) (Figure \ref{Figure 1})
 
-```{r Figure 1, echo=FALSE, out.width='60%', fig.cap="\\label{Figure 1} Subarea 48.1 and management strata considered in the spatio-temporal analysis of intrinsic productivity of Krill (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West)"}
-knitr::include_graphics('Strata2.png')
-```
 
 ## 2.2. Monitoring Data (SISO Program)
 
 For this analysis, data from the monitoring of the krill fishery were used, which have been systematically collected on board fishing vessels by the CCAMLR SISO (Scheme of International Scientific Observation) program. Krill sizes compositions were obtained from the entire area 48.1, which was combined in each management stratum defined at 2.1 section (Figure \ref{Figure 2}).
 
-```{r Figure 2, echo=FALSE, out.width='100%', fig.cap="\\label{Figure 2}Sizes compositions from SISO program monitoring krill fishery by strata (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West). Red line represent recruit size"}
-knitr::include_graphics('tallastrata.png')
-```
 
 The information gaps (years without sizes composition data) are not calculated because there is no autocorrelation between years, but singular estimators over time.
 
 ## 2.3. Biological and fishery parameters krill
 
-```{r}
-#Create a new LB_pars Object
-#To create a new LB_pars object you use the new function:
-MyPars <- new("LB_pars")
-
-#You can see the elements or slots of the LB_pars object using the
-#slotNames function:
-#slotNames(MyPars)
-```
 
 The model needs specifications related to both biological and fishery parameters according to species evaluated. In a descriptive way, the main parameter sets are described as follows;
 
@@ -154,66 +139,9 @@ The model needs specifications related to both biological and fishery parameters
 
 -Width of the length classes (`BinWidth`)
 
-```{r}
-MyPars <- new("LB_pars")
-## A blank LB_pars object created
-## Default values have been set for some parameters
-MyPars@Species <- "Euphausia superba"
-MyPars@Linf <- 60 
-MyPars@L50 <- 34 
-MyPars@L95 <- 55 # verrificar bibliografia
-MyPars@MK <- 0.4/0.45
-
-
-#Explotation
-MyPars@SL50 <- 40#numeric() #1
-MyPars@SL95 <- 56#numeric() #27
-MyPars@SPR <- 0.75 #numeric()# ###cambia el numero 0.4 a en blanco
-MyPars@BinWidth <- 1
-#MyPars@FM <- 1
-
-MyPars@Walpha <- 1
-MyPars@Wbeta <- 3.0637 #r2 = 0.9651
-
-MyPars@BinWidth <-1
-MyPars@BinMax <- 70
-MyPars@BinMin <- 0
-MyPars@L_units <- "mm"
-```
 
 These parameters were taken from previous works about krill life history and fishery [@Thanassekos2014; @Maschette2020], which are described (Table \ref{Table1}).
 
-```{r table_par}
-
-tablepar <-data.frame(Value=c(MyPars@Linf,
-                       MyPars@L50 ,
-                       MyPars@L95 ,
-                       round(MyPars@MK,3) ,
-                       MyPars@SL50 ,
-                       MyPars@SL95 ,
-                       MyPars@SPR ,
-                       MyPars@Walpha ,
-                       MyPars@Wbeta ,
-                       MyPars@BinMax,
-                       MyPars@BinMin ,
-                       MyPars@L_units),
-                      Descrption=c("VB asymptotic length",
-                                   "Maturity 50%",
-                                   "Maturity 95%",
-                                   "M/K Ratio",
-                                   "Selectivity 50%",
-                                   "Seletivity 95%",
-                                   "SPR",
-                                   "a (Length-Weight Relation)",
-                                   "b (Length-Weight Relation)",
-                                   "Bin Min",
-                                   "Bin Max",
-                                   "Units"))
-kbl(tablepar, 
-    longtable = F, 
-    booktabs = T, 
-    caption = "\\label{Table1}Krill biological and fishery parameters") 
-```
 
 ## 2.4. Assessment of intrinsic productivity
 
@@ -274,94 +202,18 @@ The LBSPR package can be used to generate the expected size composition, the SPR
 
 It is important to note that the F/M ratio reported in the LBSPR model refers to the apical F over the adult natural mortality rate. That is, the value for fishing mortality refers to the highest level of F experienced by any single size class [@Hordyk2014c]. If the selectivity pattern excludes all but the largest individuals from being exploited, it is possible to have a very high F/M ratio in a sustainable fishery (high SPR) and visceverse. Note that only the life history parameters need to be specified for the estimation model. The exploitation parameters will be estimated [@Hordyk2014c].
 
-```{r, message=FALSE, eval=FALSE}
 
-## Plotting the Simulation
-
-MySim <- LBSPRsim(MyPars, 
-                  Control=list(modtype="GTG"))
-
-# Plot with
-plotSim(MySim, type="len.freq",
-        Cols = NULL, 
-        size.axtex = 12, 
-        size.title = 14,
-        size.SPR = 4,
-        size.leg = 12,
-        inc.pts = TRUE, 
-        size.pt = 6)
-```
 
 Two objects are required to fit the LBSPR model to length data: life-history parameters (`LB_pars`) described previously (2.4. section) and size compositions (`LB_lengths`), which contains the length frequency data. We provide a set of global size data and also by strata, with which we will be able to identify the spatial differences of the potential.
 
-```{r eval=FALSE}
-MyLengths <- new("LB_lengths")
-slotNames(MyLengths)
-```
 
 However, it is probably easier to create the `LB_lengths` object by directly reading in a `.csv`. A length frequency data of krill set with multiple years (2001-2020) by strata in 48.1 Subarea.
 
-```{r message=F}
-#Brainsflied Strata
-datdir <- setwd("~/DOCAS/LBSPR_Krill")
-Lenbs <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/Length_481_Krill_2.csv"), dataType="freq",sep=";",header=T)
-#Elephan Island Strata
-Lenei <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtEI.csv"), dataType="freq",sep=";",header=T)
-#Extra Strata
-Lenex <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtExtra.csv"), dataType="freq",sep=";",header=T)
-#Join Strata
-Lenjo <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtJOIN.csv"), dataType="freq",sep=";",header=T)
-#SSIW Strata
-Lenssiw <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtSSIW.csv"), dataType="freq",sep=";",header=T)
-```
-
-```{r message=FALSE}
-
-## 2.9. Fit the Model by strata
-
-# The LBSPR model is fitted by strata using the `LBSPRfit` function. 
-fitbs <- LBSPRfit(MyPars, Lenbs)
-fitei <- LBSPRfit(MyPars, Lenei)
-fitex <- LBSPRfit(MyPars, Lenex)
-fitjo <- LBSPRfit(MyPars, Lenjo)
-fitssiw <- LBSPRfit(MyPars, Lenssiw)
-```
 
 ## 2.7. Sensitivity and perfomance analysis.
 
 Ten sensitivity scenarios based on the upper and lower range for the asymptotic length von Bertalanffy $L_{\infty}$ (55 to 65 mm) used in the base model (60 mm) were tested to identify the impact of this parameter on the SPR estimation, given that it is the parameters exhibiting the high degree of variability and one of the factors that most determines the estimates. On the other hand, the interdependence between krill and their environment is a well-known and influential factor in population dynamics, ecosystem impacts, and fishery. This interdependence also affects the reproductive potential and consequently, to any management decision that takes into account population parameters of krill. To assess the impact of individual growth variability, three scenarios of the VB k parameter were tested, representing different growth types (low = 0.2, medium = 0.7, and high = 1.2). Figure \ref{Figure3} displays a theoretical growth curve for krill based on three scenarios that were tested using LBSPR.
 
-```{r Figure 3, fig.height=3, fig.width=4, fig.cap="\\label{Figure3}Theoretical growth scenarios to krill varability"}
-# Definir los parámetros del modelo de Von Bertalanffy
-L_inf <- 60
-k <- c(0.2, 0.7, 1.2)
-t_0 <- 0
-# Crear un vector de edades
-edades <- seq(0, 8, by = 0.2)
-# Calcular los valores teóricos de crecimiento somático
-df <- data.frame(edades = rep(edades, 
-                              length(k)), 
-                 k = rep(k, each = length(edades)))
-
-df <- df %>% 
-  mutate(crecimiento = L_inf * (1 - exp(-k * (edades - t_0))))
-# Graficar la curva de crecimiento somático
-sen <- ggplot(df, aes(x = edades, 
-               y = crecimiento, 
-               color = factor(k))) +
-  geom_line(size=1.5) +
-  xlab("Years") +
-  ylab("Length (mm)") +
-  ggtitle("") +
-  theme(panel.background = element_rect(),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())+
-  scale_color_viridis_d(option="C",
-                       name = "Theoretical growth",
-                       labels = c("Low", "Medium", "High"))+
-  theme_few()
-sen
-```
 
 After applying each scenario using each of the parameter setting, the results of scenarios are compared with the results provided by the methods based setting (Table 1), analyzing in this way the efect of underestimation/overestimation of the parameters $L_{\infty}$ and *k*.
 
@@ -1258,4 +1110,84 @@ The methodology and data of this exercise can be found in the following link [LB
 \newpage
 
 # 6. REFERENCES
+
+# 7. FIGURES & TABLES
+
+
+```{r Figure 1, echo=FALSE, out.width='60%', fig.cap="\\label{Figure 1} Subarea 48.1 and management strata considered in the spatio-temporal analysis of intrinsic productivity of Krill (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West)"}
+knitr::include_graphics('Strata2.png')
+```
+
+
+```{r Figure 2, echo=FALSE, out.width='100%', fig.cap="\\label{Figure 2}Sizes compositions from SISO program monitoring krill fishery by strata (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West). Red line represent recruit size"}
+knitr::include_graphics('tallastrata.png')
+```
+
+
+```{r table_par}
+
+tablepar <-data.frame(Value=c(MyPars@Linf,
+                       MyPars@L50 ,
+                       MyPars@L95 ,
+                       round(MyPars@MK,3) ,
+                       MyPars@SL50 ,
+                       MyPars@SL95 ,
+                       MyPars@SPR ,
+                       MyPars@Walpha ,
+                       MyPars@Wbeta ,
+                       MyPars@BinMax,
+                       MyPars@BinMin ,
+                       MyPars@L_units),
+                      Descrption=c("VB asymptotic length",
+                                   "Maturity 50%",
+                                   "Maturity 95%",
+                                   "M/K Ratio",
+                                   "Selectivity 50%",
+                                   "Seletivity 95%",
+                                   "SPR",
+                                   "a (Length-Weight Relation)",
+                                   "b (Length-Weight Relation)",
+                                   "Bin Min",
+                                   "Bin Max",
+                                   "Units"))
+kbl(tablepar, 
+    longtable = F, 
+    booktabs = T, 
+    caption = "\\label{Table1}Krill biological and fishery parameters") 
+```
+
+
+
+```{r Figure 3, fig.height=3, fig.width=4, fig.cap="\\label{Figure3}Theoretical growth scenarios to krill varability"}
+# Definir los parámetros del modelo de Von Bertalanffy
+L_inf <- 60
+k <- c(0.2, 0.7, 1.2)
+t_0 <- 0
+# Crear un vector de edades
+edades <- seq(0, 8, by = 0.2)
+# Calcular los valores teóricos de crecimiento somático
+df <- data.frame(edades = rep(edades, 
+                              length(k)), 
+                 k = rep(k, each = length(edades)))
+
+df <- df %>% 
+  mutate(crecimiento = L_inf * (1 - exp(-k * (edades - t_0))))
+# Graficar la curva de crecimiento somático
+sen <- ggplot(df, aes(x = edades, 
+               y = crecimiento, 
+               color = factor(k))) +
+  geom_line(size=1.5) +
+  xlab("Years") +
+  ylab("Length (mm)") +
+  ggtitle("") +
+  theme(panel.background = element_rect(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())+
+  scale_color_viridis_d(option="C",
+                       name = "Theoretical growth",
+                       labels = c("Low", "Medium", "High"))+
+  theme_few()
+sen
+```
+
 
