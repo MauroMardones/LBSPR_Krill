@@ -327,7 +327,7 @@ fitssiw <- LBSPRfit(MyPars, Lenssiw)
 
 Ten sensitivity scenarios based on the upper and lower range for the asymptotic length von Bertalanffy $L_{\infty}$ (55 to 65 mm) used in the base model (60 mm) were tested to identify the impact of this parameter on the SPR estimation, given that it is the parameters exhibiting the high degree of variability and one of the factors that most determines the estimates. On the other hand, the interdependence between krill and their environment is a well-known and influential factor in population dynamics, ecosystem impacts, and fishery. This interdependence also affects the reproductive potential and consequently, to any management decision that takes into account population parameters of krill. To assess the impact of individual growth variability, three scenarios of the VB k parameter were tested, representing different growth types (low = 0.2, medium = 0.7, and high = 1.2). Figure \ref{Figure3} displays a theoretical growth curve for krill based on three scenarios that were tested using LBSPR.
 
-```{r Figure 3, fig.height=5, fig.width=6, fig.cap="\\label{Figure3}Theoretical growth scenarios to krill varability"}
+```{r Figure 3, fig.cap="\\label{Figure3}Theoretical growth scenarios to krill varability"}
 # Definir los parámetros del modelo de Von Bertalanffy
 L_inf <- 60
 k <- c(0.2, 0.7, 1.2)
@@ -349,14 +349,14 @@ sen <- ggplot(df, aes(x = edades,
   xlab("Age") +
   ylab("Length (mm)") +
   ggtitle("") +
+  theme_few()+
   theme(panel.background = element_rect(),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         legend.position="bottom")+
   scale_color_viridis_d(option="C",
                        name = "Theorycal growth",
-                       labels = c("Low", "Medium", "High"))+
-  theme_few()
+                       labels = c("Low", "Medium", "High"))
 sen
 ```
 
