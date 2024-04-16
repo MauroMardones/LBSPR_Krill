@@ -239,7 +239,9 @@ EPR_{fished} =
  E_{a},  a = 0  \\
  e^{-Z_{{a-1}}a} {E_a}, 0 < a  < a_\le{max}
  \end{cases}       
-$$ where $Z_a$ = $M+F_a$, and $E$ is egg production at age assumed to be proportional to weight;
+$$ 
+
+where $Z_a$ = $M+F_a$, and $E$ is egg production at age assumed to be proportional to weight;
 
 $$E_a \in  Mat_a W_a$$ on the other hand, the calculation of the reproductive potential is the same as that of those captured without F; $$
 EPR_{nofished} =
