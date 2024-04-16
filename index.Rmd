@@ -213,7 +213,9 @@ kbl(tablepar,
     longtable = F, 
     booktabs = T, 
     caption = "\\label{Table1}Krill biological and fishery parameters") %>% 
-   kable_styling(latex_options = c("striped",  "hold_position"))
+   kable_styling(latex_options = c("striped", 
+                                   "hold_position"),
+                 html_font = "arial")
 ```
 
 ## Assessment of intrinsic productivity
