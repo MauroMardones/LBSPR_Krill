@@ -2,7 +2,7 @@
 title: "Supplementary Material"
 subtitle: "Spatial and temporal variability in the intrinsic productivity of Antarctic krill (Euphausia superba) along the Western Antarctic Peninsula under different environmental and life history scenarios"
 author: "Mardones, M., Watters, G., Cárdenas, C. & Santa Cruz, F. "
-date:  "29 April, 2024"
+date:  "30 April, 2024"
 bibliography: LBSPR.bib
 csl: apa.csl
 link-citations: yes
@@ -82,17 +82,17 @@ This supplementary material with essential formulas, datasets, and code snippets
 The study area includes subarea 48.1, which is one of the sectors where today the largest amount of krill fishing is concentrated (Figure \@ref(fig:Figure1)).
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-html/Strata2.png" alt="Subarea 48.1 and management strata considered in the spatio-temporal analysis of intrinsic productivity of Krill (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West)" width="60%" />
-<p class="caption">(\#fig:Figure1)Subarea 48.1 and management strata considered in the spatio-temporal analysis of intrinsic productivity of Krill (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West)</p>
+<img src="index_files/figure-html/Map1.png" alt="Subarea 48.1 and management strata considered in the spatio-temporal analysis of intrinsic productivity of Krill (BS=Brainsfield Strait, EI= Elephant Island, GS= Gerlache Strait, JOIN= Joinville Island, SSWI= South West)" width="60%" />
+<p class="caption">(\#fig:Figure1)Subarea 48.1 and management strata considered in the spatio-temporal analysis of intrinsic productivity of Krill (BS=Brainsfield Strait, EI= Elephant Island, GS= Gerlache Strait, JOIN= Joinville Island, SSWI= South West)</p>
 </div>
 
 ## Monitoring Data (SISO Program)
 
-For this analysis, data from the monitoring of the krill fishery were used, which have been systematically collected on board fishing vessels by the CCAMLR SISO (Scheme of International Scientific Observation) program. Krill sizes compositions were obtained from the entire area 48.1, which was combined in each management stratum defined at 2.1 section (Figure \@ref(fig:Figure2)).
+For this analysis, data from the monitoring of the krill fishery were used, which have been systematically collected on board fishing vessels by the CCAMLR SISO (Scheme of International Scientific Observation) program. Krill sizes compositions were obtained from the entire area 48.1, which was combined in each management stratum defined at 2.1 section (Figure \@ref(fig:Figure2)). For this analysis, 1,266,267 krill individuals were measured from fishery activity, the majority (~75%) from the Bransfield, Elephant and SouthWest strata. 
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-html/tallastrata.png" alt="\label{Figure 2}Sizes compositions from SISO program monitoring krill fishery by strata (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West). Red line represent recruit size" width="100%" />
-<p class="caption">(\#fig:Figure2)\label{Figure 2}Sizes compositions from SISO program monitoring krill fishery by strata (BS=Brainsfield Strait, EI= Elephant Island, Extra= Extra, JOIN= Joinville Island, SSWI= South West). Red line represent recruit size</p>
+<img src="index_files/figure-html/tallastrata.png" alt="\label{Figure 2}Sizes compositions from SISO program monitoring krill fishery by strata (BS=Brainsfield Strait, EI= Elephant Island, GS= Gerlache Strait, JOIN= Joinville Island, SSWI= South West). Red line represent recruit size" width="100%" />
+<p class="caption">(\#fig:Figure2)\label{Figure 2}Sizes compositions from SISO program monitoring krill fishery by strata (BS=Brainsfield Strait, EI= Elephant Island, GS= Gerlache Strait, JOIN= Joinville Island, SSWI= South West). Red line represent recruit size</p>
 </div>
 
 The information gaps (years without sizes composition data) are not calculated because there is no autocorrelation between years, but singular estimators over time.
@@ -196,7 +196,7 @@ kbl(tablepar,
     caption = "\\label{Table1}Krill biological and fishery parameters") %>% 
    kable_styling(latex_options = c("striped", 
                                    "hold_position"),
-                 html_font = "arial")
+                 html_font = "arial") 
 ```
 
 <table class="table" style="color: black; font-family: arial; margin-left: auto; margin-right: auto;">
@@ -265,7 +265,7 @@ kbl(tablepar,
 
 Recent work has shown that under equilibrium conditions (that is, constant F and no recruitment variability) and assuming the von Bertalanffy growth equation, constant natural mortality for all ages, and logistic or jack-knife selectivity, standardization of the composition of lengths of two populations with the same ratio of natural mortality to growth rate (*M/k*) and the same ratio of mortality by fishing to natural mortality (*F/M*) will be identical [@Hordyk2016]. Extension of this model to incorporate length-at-age variability and logistic selectivity confirms that, at equilibrium, the composition of the predicted duration of catch of an exploited population is primarily determined by the ratios of M/k and F/M. The analytical models developed in @Hordyk2014c suggest that with knowledge of the asymptotic von Bertalanffy length $L_{\infty}$ and the coefficient of variation in $CVL_{\infty}$, the ratio of total mortality to the von Bertalanffy growth coefficient (*Z/k*) for a given population can be estimated from a representative sample of the size structure of the catch. If *M/k* (or parameters) is also known, then the results of @Hordyk2016 suggest that it is possible to estimate F/M from the composition of the catch. Often the F/M ratio has been used as a biological reference point when is 1 [@Zhou2012].
 
-The LBSPR model requires the following parameters: an estimate of the M/k ratio, $L_{\infty}$, $CVL_{\infty}$, and knowledge of maturity by length (maturity ogive), both set parameters know in krill. This model uses data on composition by catch sizes to estimate intrinsic productivity or Spawning Potential Ratio (SPR). This concept was extracted from @Goodyear1993, where the ratio of lifetime average egg production per recruit (EPR) was calculated for fish and non-fish resources. An algorithm route for the calculation of the SPR is the following;
+The LBSPR model requires the following parameters: an estimate of the M/k ratio, $L_{\infty}$, $CVL_{\infty}$, and knowledge of maturity by length (maturity ogive), both set parameters know in krill. This model uses data on composition by catch sizes to estimate intrinsic productivity or Spawning Potential Ratio (SPR). This concept was extracted from @Goodyear1993, where the ratio of lifetime average egg production per recruit (EPR) was calculated for fished and no fished (virgin condition) resources. An algorithm route for the calculation of the SPR is the following;
 
 $${SPR}=\frac{EPR_{fished}}{EPR_{nofished}}$$ where;
 
@@ -352,8 +352,8 @@ datdir <- setwd("~/DOCAS/LBSPR_Krill")
 Lenbs <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/Length_481_Krill_2.csv"), dataType="freq",sep=";",header=T)
 #Elephan Island Strata
 Lenei <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtEI.csv"), dataType="freq",sep=";",header=T)
-#Extra Strata
-Lenex <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtExtra.csv"), dataType="freq",sep=";",header=T)
+#Gerlache Strata
+Lengc <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtGerlache.csv"), dataType="freq",sep=";",header=T)
 #Join Strata
 Lenjo <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtJOIN.csv"), dataType="freq",sep=";",header=T)
 #SSIW Strata
@@ -367,7 +367,7 @@ Lenssiw <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtSSIW.cs
 # The LBSPR model is fitted by strata using the `LBSPRfit` function. 
 fitbs <- LBSPRfit(MyPars, Lenbs)
 fitei <- LBSPRfit(MyPars, Lenei)
-fitex <- LBSPRfit(MyPars, Lenex)
+fitgc <- LBSPRfit(MyPars, Lengc)
 fitjo <- LBSPRfit(MyPars, Lenjo)
 fitssiw <- LBSPRfit(MyPars, Lenssiw)
 ```
@@ -449,21 +449,21 @@ plotSize(fitjo,
 <p class="caption">(\#fig:Figure5)\label{Figure5}Fit of the model to the data of lengths in Joinville strata</p>
 </div>
 
-For all the other strata (Extra, EI and SSWI) the model predict sizes compositions in a correct way for all the years (for details see [LBSPRKrill](https://github.com/MauroMardones/LBSPR_Krill)).
+For all the other strata (Gerlache, EI and SSWI) the model predict sizes compositions in a correct way for all the years (for details see [LBSPRKrill](https://github.com/MauroMardones/LBSPR_Krill)).
 
 
 ```r
 plotSize(fitei,
          Title="Elephan Island strata")
-plotSize(fitex,
-         Title="Extra strata")
+plotSize(fitgc,
+         Title="Gerlache strata")
 plotSize(fitjo,
          Title="Joinville strata")
 plotSize(fitssiw,
          Title="SSWI strata")
 ```
 
-The difference between the observed accumulated size compositions for each stratum and compare it with the expected size composition at a target SPR (75% SPR). In the simulation of the structure in its virgin condition (without fishing), the red bars represent each stratum. Additionally, the overlap with the average structures observed during the years of fishery monitoring can be visualized. The SSWI Extra and EI strata exhibit the greatest differences from the simulated structure, possibly due to the significant contribution of juveniles in these strata. Conversely, the BS and JO strata demonstrate the closest resemblance to the simulated structure (Figure \@ref(fig:Figure6)).
+The difference between the observed accumulated size compositions for each stratum and compare it with the expected size composition at a target SPR (75% SPR). In the simulation of the structure in its virgin condition (without fishing), the red bars represent each stratum. Additionally, the overlap with the average structures observed during the years of fishery monitoring can be visualized. The SSWI Gerlache and EI strata exhibit the greatest differences from the simulated structure, possibly due to the significant contribution of juveniles in these strata. Conversely, the BS and JO strata demonstrate the closest resemblance to the simulated structure (Figure \@ref(fig:Figure6)).
 
 
 ```r
@@ -481,10 +481,10 @@ eicom <- plotTarg(MyPars, Lenei, yr=yr,
                   title="EI",
                   targtext = FALSE)+
   My_theme 
-excom <- plotTarg(MyPars, Lenex, yr=yr,
+gccom <- plotTarg(MyPars, Lengc, yr=yr,
                   Cols = c(2,4),
                   size.axtex = 8,
-                  title="Extra",
+                  title="GS",
                   targtext = FALSE)+
   My_theme 
 jocom <- plotTarg(MyPars, Lenjo, yr=1,
@@ -501,7 +501,7 @@ sscom <- plotTarg(MyPars, Lenssiw , yr=yr,
   My_theme 
 
 ggarrange(bscom, eicom + rremove("ylab"), 
-          excom + rremove("ylab"),
+          gccom + rremove("ylab"),
           jocom, sscom + rremove("ylab"), 
           ncol = 3, nrow = 2,
           legend="bottom",
@@ -525,9 +525,9 @@ eimat <-  plotMat(fitei,
         useSmooth = TRUE,
         Title="EI")+
   My_theme 
-exmat <-  plotMat(fitex,
+gcmat <-  plotMat(fitgc,
         useSmooth = TRUE,
-        Title="Extra")+
+        Title="GS")+
   My_theme 
 jomat <-  plotMat(fitjo,
         useSmooth = TRUE,
@@ -540,7 +540,7 @@ ssmat <-  plotMat(fitssiw,
 
 ggarrange(bsmat,
           eimat + rremove("ylab"), 
-          exmat , 
+          gcmat , 
           jomat + rremove("ylab"), 
           ssmat, 
           ncol = 2, nrow = 3,
@@ -557,7 +557,7 @@ ggarrange(bsmat,
 
 ## Comparing producivity between years and Stratas
 
-The analysis of the krill population's reproductive potential across different years and strata reveals significant differences. Brainsfield and Extra strata exhibit a low reproductive potential below the proposed management target of 75% in the last year, with values of 0.121 and 0.085, respectively, falling even below the limit reference point. This condition arises from the concentration of a substantial number of immature individuals (juveniles) in these strata, which are being exploited by the fishery, thereby hindering their reproductive cycles from completing. On the contrary, the Elephant Island stratum demonstrates higher spawning potential ratio (SPR) levels in recent years, reaching 0.421 in 2019, which aligns closer to the management objective. This discrepancy is attributed to the spatial distribution of krill, as the Elephant Island stratum possesses a larger proportion of adult individuals compared to other strata. Figure \@ref(fig:Figure8) provides a visual representation of the SPR trends across years and strata, clearly indicating the references (yellow line = 75% SPR Objective and Red line = 20% Limit SPR).
+The analysis of the krill population's reproductive potential across different years and strata reveals significant differences. Brainsfield and Gerlache strata exhibit a low reproductive potential below the proposed management target of 75% in the last year, with values of 0.121 and 0.085, respectively, falling even below the limit reference point. This condition arises from the concentration of a substantial number of immature individuals (juveniles) in these strata, which are being exploited by the fishery, thereby hindering their reproductive cycles from completing. On the contrary, the Elephant Island stratum demonstrates higher spawning potential ratio (SPR) levels in recent years, reaching 0.421 in 2019, which aligns closer to the management objective. This discrepancy is attributed to the spatial distribution of krill, as the Elephant Island stratum possesses a larger proportion of adult individuals compared to other strata. Figure \@ref(fig:Figure8) provides a visual representation of the SPR trends across years and strata, clearly indicating the references (yellow line = 75% SPR Objective and Red line = 20% Limit SPR).
 
 
 ```r
@@ -575,11 +575,11 @@ sprei <- as.data.frame(cbind(fitei@Years,
 colnames(sprei) <- c("Year","SPR", "Var")
 sprei$SPRv <- rep("EI", nrow(sprei))
 
-sprex <- as.data.frame(cbind(fitex@Years, 
-                             fitex@SPR,
-                             fitex@Vars[,4])) 
-colnames(sprex) <- c("Year","SPR", "Var")
-sprex$SPRv <- rep("Extra", nrow(sprex))
+sprgc <- as.data.frame(cbind(fitgc@Years, 
+                             fitgc@SPR,
+                             fitgc@Vars[,4])) 
+colnames(sprgc) <- c("Year","SPR", "Var")
+sprgc$SPRv <- rep("GS", nrow(sprgc))
 
 sprjo <- as.data.frame(cbind(fitjo@Years, 
                              fitjo@SPR,
@@ -593,7 +593,7 @@ sprssiw <- as.data.frame(cbind(fitssiw@Years,
 colnames(sprssiw) <- c("Year","SPR","Var")
 sprssiw$SPRv <- rep("SSWI", nrow(sprssiw))
 
-allspr <- rbind(sprbs, sprei, sprex, sprjo, sprssiw)
+allspr <- rbind(sprbs, sprei, sprgc, sprjo, sprssiw)
 
 allsprwide <- round(pivot_wider(allspr,
                           names_from = SPRv,
@@ -608,9 +608,10 @@ allsprpl <- ggplot(allspr,
        aes(Year,
            SPR,
            color=SPRv))+
-  geom_point(alpha=1.5)+
+  geom_point(alpha=3)+
   stat_smooth(method = "lm",
-              alpha=0.3)+
+              alpha=0.3,
+              se=FALSE)+
   geom_hline(yintercept = 0.75,
              colour= '#006d2c',
              alpha=0.5,
@@ -622,6 +623,7 @@ allsprpl <- ggplot(allspr,
   facet_wrap(.~SPRv, ncol = 5)+
   scale_color_viridis_d(option = "F")+
   xlim(2001,2021)+
+  ylim(0,1.2)+
   theme_minimal()+
   theme(legend.position = "none",
         axis.text.x = element_text(angle = 90, hjust = 2),
@@ -637,7 +639,7 @@ allsprpl
 <p class="caption">(\#fig:Figure8)Krill Intrinsic Productivity (SPR) by strata and by year</p>
 </div>
 
-The Elephant Island stratum has exhibited a higher prevalence of adult fraction in fishing catches, leading to an increase in reproductive potential in recent years. Conversely, the Bransfield and Extra strata experience intense recruitment overfishing, with their reproductive potential falling significantly below the recommended target at 54% and 66.5%, respectively.
+The Elephant Island stratum has exhibited a higher prevalence of adult fraction in fishing catches, leading to an increase in reproductive potential in recent years. Conversely, the Bransfield and Gerlache strata experience intense recruitment overfishing, with their reproductive potential falling significantly below the recommended target at 54% and 66.5%, respectively.
 
 All the estimated values of SPR and their associated variance by stratum and by year can be identified in  Table \@ref(tab:Table2).
 
@@ -663,12 +665,12 @@ kbl(allsprwide,
    <th style="text-align:right;"> Year </th>
    <th style="text-align:right;"> SPR BS </th>
    <th style="text-align:right;"> SPR EI </th>
-   <th style="text-align:right;"> SPR Extra </th>
+   <th style="text-align:right;"> SPR GS </th>
    <th style="text-align:right;"> SPR JOIN </th>
    <th style="text-align:right;"> SPR SSWI </th>
    <th style="text-align:right;"> Var BS </th>
    <th style="text-align:right;"> Var EI </th>
-   <th style="text-align:right;"> Var Extra </th>
+   <th style="text-align:right;"> Var GS </th>
    <th style="text-align:right;"> Var JOIN </th>
    <th style="text-align:right;"> Var SSWI </th>
   </tr>
@@ -915,7 +917,7 @@ kbl(allsprwide,
 
 ## Sensitivity and perfomance analysis
 
-The results of the methods in the reference setting are compared to the obtained under overstimation/underestimation in intrinsic productivity regarding asymptotic length von Bertalanffy $L_{\infty}$ parameter in krill. First, it was possible to identify that for all strata, the impact of low $L_{\infty}$ ranges under the base model (60 mm) overestimates the level of reproductive potential krill with values between 42% and 32% (Bransfield and Elephant Island strata respectively). Regarding higher $L_{\infty}$ settings, the model tends to underestimate the reproductive potential with values between -25% and -30% (Extra and Joinville strata) Figure \@ref(fig:Figure9),  Table \@ref(tab:Table3).
+The results of the methods in the reference setting are compared to the obtained under overstimation/underestimation in intrinsic productivity regarding asymptotic length von Bertalanffy $L_{\infty}$ parameter in krill. First, it was possible to identify that for all strata, the impact of low $L_{\infty}$ ranges under the base model (60 mm) overestimates the level of reproductive potential krill with values between 42% and 32% (Bransfield and Elephant Island strata respectively). Regarding higher $L_{\infty}$ settings, the model tends to underestimate the reproductive potential with values between -25% and -30% (Gerlache and Joinville strata) Figure \@ref(fig:Figure9),  Table \@ref(tab:Table3).
 
 
 ```r
@@ -962,7 +964,7 @@ for (i in 55:65) {
 
 #Brainsflied Strata: Lenbs 
 #Elephan Island Strata: Lenei 
-#Extra Strata:Lenex 
+#Gerlache Strata:Lenex 
 #Join Strata: Lenjo 
 #SSIW Strata: Lenssiw 
 
@@ -980,7 +982,7 @@ for (i in 55:65) {
 }
 
 
-# ciclo de ajuste para Extra
+# ciclo de ajuste para Gerlache
 for (i in 55:65) {
   nombre_objeto <- paste0("MyPars_", i)  
   nombre_variable <- paste0("fitei", i)  
@@ -988,12 +990,12 @@ for (i in 55:65) {
   assign(nombre_variable, LBSPRfit(objeto, Lenei), envir = .GlobalEnv)
 }
 
-# ciclo de ajuste para Extra
+# ciclo de ajuste para Gerlache
 for (i in 55:65) {
   nombre_objeto <- paste0("MyPars_", i)  
-  nombre_variable <- paste0("fitex", i)  
+  nombre_variable <- paste0("fitgc", i)  
   objeto <- get(nombre_objeto)
-  assign(nombre_variable, LBSPRfit(objeto, Lenex), envir = .GlobalEnv)
+  assign(nombre_variable, LBSPRfit(objeto, Lengc), envir = .GlobalEnv)
 }
 
 # ciclo de ajuste para JoinVIlle
@@ -1062,29 +1064,29 @@ valei_largo <- pivot_longer(valei,
                             names_to = "Parameter", 
                             values_to = "SPR")
 valei_largo$SPRstra <- rep("EI", nrow(valei_largo))
-#Genero lo que quiero comparar Extra
-valex <- as.data.frame(cbind(fitex55@Years,
-  fitex55@SPR,
-           fitex56@SPR,
-           fitex57@SPR,
-           fitex58@SPR,
-           fitex59@SPR,
-           fitex60@SPR,
-           fitex61@SPR,
-           fitex62@SPR,
-           fitex63@SPR,
-           fitex64@SPR,
-           fitex65@SPR))
-colnames(valex) <- c("Years", "Linf55","Linf56", "Linf57", "Linf58", 
+#Genero lo que quiero comparar Gerlache
+valgc <- as.data.frame(cbind(fitgc55@Years,
+  fitgc55@SPR,
+           fitgc56@SPR,
+           fitgc57@SPR,
+           fitgc58@SPR,
+           fitgc59@SPR,
+           fitgc60@SPR,
+           fitgc61@SPR,
+           fitgc62@SPR,
+           fitgc63@SPR,
+           fitgc64@SPR,
+           fitgc65@SPR))
+colnames(valgc) <- c("Years", "Linf55","Linf56", "Linf57", "Linf58", 
                      "Linf59", "Linf60", 
                       "Linf61", "Linf62" , "Linf63",  "Linf64",
                      "Linf65")
 
-valex_largo <- pivot_longer(valex, 
+valgc_largo <- pivot_longer(valgc, 
                             cols = c(2:12,), 
                             names_to = "Parameter", 
                             values_to = "SPR")
-valex_largo$SPRstra <- rep("Extra", nrow(valex_largo))
+valgc_largo$SPRstra <- rep("GS", nrow(valgc_largo))
 
 #Genero lo que quiero comparar JOin
 valjo <- as.data.frame(cbind(fitjo55@Years,
@@ -1138,7 +1140,7 @@ valtodo <- rbind(valsswi_largo,
               valjo_largo,
               valbs_largo,
               valei_largo,
-              valex_largo)
+              valgc_largo)
 ```
 
 
@@ -1225,12 +1227,12 @@ kbl(tablinf,
    <th style="text-align:left;"> VB scenario </th>
    <th style="text-align:right;"> Median BS </th>
    <th style="text-align:right;"> Median EI </th>
-   <th style="text-align:right;"> Median Extra </th>
+   <th style="text-align:right;"> Median GS </th>
    <th style="text-align:right;"> Median JOIN </th>
    <th style="text-align:right;"> Median SSWI </th>
    <th style="text-align:right;"> Variance BS </th>
    <th style="text-align:right;"> Variance EI </th>
-   <th style="text-align:right;"> Variance Extra </th>
+   <th style="text-align:right;"> Variance GS </th>
    <th style="text-align:right;"> Variance JOIN </th>
    <th style="text-align:right;"> Variance SSWI </th>
   </tr>
@@ -1429,7 +1431,7 @@ for (i in c(2,0.5,0.3)) {
 
 #Brainsflied Strata: Lenbs 
 #Elephan Island Strata: Lenei 
-#Extra Strata:Lenex 
+#Gerlache Strata:Lengc 
 #Join Strata: Lenjo 
 #SSIW Strata: Lenssiw 
 
@@ -1447,7 +1449,7 @@ for (i in c(2,0.5,0.3)) {
 }
 
 
-# ciclo de ajuste para Extra
+# ciclo de ajuste para Gerlache
 for (i in c(2,0.5,0.3)) {
   nombre_objeto <- paste0("MyPars_", i)  
   nombre_variable <- paste0("fitei", i)  
@@ -1455,12 +1457,12 @@ for (i in c(2,0.5,0.3)) {
   assign(nombre_variable, LBSPRfit(objeto, Lenei), envir = .GlobalEnv)
 }
 
-# ciclo de ajuste para Extra
+# ciclo de ajuste para Gerlache
 for (i in c(2,0.5,0.3)) {
   nombre_objeto <- paste0("MyPars_", i)  
-  nombre_variable <- paste0("fitex", i)  
+  nombre_variable <- paste0("fitgc", i)  
   objeto <- get(nombre_objeto)
-  assign(nombre_variable, LBSPRfit(objeto, Lenex), envir = .GlobalEnv)
+  assign(nombre_variable, LBSPRfit(objeto, Lengc), envir = .GlobalEnv)
 }
 
 # ciclo de ajuste para JoinVIlle
@@ -1507,18 +1509,18 @@ valproei_largo <- pivot_longer(valproei,
                             names_to = "Parameter", 
                             values_to = "SPR")
 valproei_largo$SPRstra <- rep("EI", nrow(valproei_largo))
-#Genero lo que quiero comparar Extra
-valproex <- as.data.frame(cbind(fitex0.3@Years,
-                              fitex0.3@SPR,
-                             fitex0.5@SPR,
-                             fitex2@SPR))
-colnames(valproex) <- c("Years", "High","Med", "Low")
+#Genero lo que quiero comparar Gerlache
+valprogc <- as.data.frame(cbind(fitgc0.3@Years,
+                              fitgc0.3@SPR,
+                             fitgc0.5@SPR,
+                             fitgc2@SPR))
+colnames(valprogc) <- c("Years", "High","Med", "Low")
 
-valproex_largo <- pivot_longer(valproex, 
+valprogc_largo <- pivot_longer(valprogc, 
                             cols = c(2:4,), 
                             names_to = "Parameter", 
                             values_to = "SPR")
-valproex_largo$SPRstra <- rep("Extra", nrow(valproex_largo))
+valprogc_largo$SPRstra <- rep("GS", nrow(valprogc_largo))
 #Genero lo que quiero comparar JOin
 valprojo <- as.data.frame(cbind(fitjo0.3@Years,
                               fitjo0.3@SPR,
@@ -1549,7 +1551,7 @@ valprotodo <- rbind(valprosswi_largo,
               valproei_largo,
               valprobs_largo,
               valprojo_largo,
-              valproex_largo)
+              valprogc_largo)
 ```
 
 
@@ -1629,12 +1631,12 @@ kbl(tablk,
    <th style="text-align:left;"> Growth scenario </th>
    <th style="text-align:right;"> Median BS </th>
    <th style="text-align:right;"> Median EI </th>
-   <th style="text-align:right;"> Median Extra </th>
+   <th style="text-align:right;"> Median GS </th>
    <th style="text-align:right;"> Median JOIN </th>
    <th style="text-align:right;"> Median SSWI </th>
    <th style="text-align:right;"> Variance BS </th>
    <th style="text-align:right;"> Variance EI </th>
-   <th style="text-align:right;"> Variance Extra </th>
+   <th style="text-align:right;"> Variance GS </th>
    <th style="text-align:right;"> Variance JOIN </th>
    <th style="text-align:right;"> Variance SSWI </th>
   </tr>
