@@ -33,6 +33,7 @@ Various approaches have been employed to comprehend the spatio-temporal dynamic 
 
 *Keywords: Krill, length compositions, Spawning Potential Ratio (SPR), LBSPR model, spatial heterogeneity,  management procedure, CCAMLR.*
 
+
 \newpage
 
 # INTRODUCTION
@@ -63,7 +64,7 @@ According to what was previously described, any proposal for a management proced
 
 ## Study area
 
-The study area includes Subarea 48.1 in the WAP, which is one of the sectors that where a large part of the fishing activity of this species occurs. In order to have the finest spatial definition of krill population dynamics and analysis, we analyze data considering five  strata currently used by  CCAMLR for the new management strategy defined in @WGEMM2021 and @Zhao2023, namely Bransfield Strait, Elephant Island, Gerlache Strait, Joinville Island and South West (Fig. \@ref(fig:Figure1)).
+The study area includes Subarea 48.1 in the WAP, which is one of the sectors that where a large part of the fishing activity of this species occurs. In order to have the finest spatial definition of krill population dynamics and analysis, we analyze data considering five  strata currently used by  CCAMLR for the new management strategy defined in @Dornam2021 and @Zhao2023, namely Bransfield Strait, Elephant Island, Gerlache Strait, Joinville Island and South West (Fig. \@ref(fig:Figure1)).
 
 
 ## Monitoring Data (SISO Program)
@@ -174,7 +175,7 @@ INACH "Marine Protected Areas" Program (2403052), ANID/Millennium Science Initia
 **Formal Analysis**: Mauricio Mardones
 **Methodology**: Mauricio Mardones, César Cárdenas
 **Visualization**: Mauricio Mardones
-**Writing – Original Draft Preparation**: Mauricio Mardones, César Cárdenas, Francisco Santa Cruz
+**Writing – Original Draft Preparation**: Mauricio Mardones, César Cárdenas
 **Writing– review & editing**: Mauricio Mardones, César Cárdenas, Francisco Santa Cruz
 
 
@@ -182,7 +183,7 @@ INACH "Marine Protected Areas" Program (2403052), ANID/Millennium Science Initia
 
 - Supporting Information 1. 
 
-Main equiations and guide to apply LBSPR in krill could be founded in corresponding author Github Repo [LBSPRKrill](https://mauromardones.github.io/LBSPR_Krill/).
+Main equations and guide to apply LBSPR in krill could be found in corresponding author Github Repo [LBSPRKrill](https://mauromardones.github.io/LBSPR_Krill/).
 
 - Supporting Information 2. 
 
@@ -253,6 +254,9 @@ knitr::include_graphics('index_files/figure-html/Figure10-1.jpeg')
 knitr::include_graphics('index_files/figure-html/table3.png')
 ```
 
+```{r GraphAbstr, echo=FALSE, out.width='50%',fig.cap="Graphical abstract SPR Krill"}
+knitr::include_graphics('index_files/figure-html/graphabstra.png')
+```
 
 \newpage
 
