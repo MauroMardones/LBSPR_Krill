@@ -1,8 +1,8 @@
 ---
-title: "Supplementary Material"
+title: "Supporting Information 1"
 subtitle: "Spatial and temporal variability in the intrinsic productivity of Antarctic krill (Euphausia superba) along the Western Antarctic Peninsula under different environmental and life history scenarios"
 author: "Mardones, M., Watters, G., Cárdenas, C. & Santa Cruz, F. "
-date:  "30 April, 2024"
+date:  "02 May, 2024"
 bibliography: LBSPR.bib
 csl: apa.csl
 link-citations: yes
