@@ -30,6 +30,7 @@ editor_options:
 
 
 ```{r setup1, echo=FALSE}
+set.seed(999)
 rm(list = ls())
 knitr::opts_chunk$set(message = FALSE,
                       warning = FALSE,
@@ -529,8 +530,9 @@ allsprpl <- ggplot(allspr,
            color=SPRv))+
   geom_point(alpha=3)+
   stat_smooth(method = "lm",
-              alpha=0.3,
-              se=FALSE)+
+              alpha=0.1,
+              se=TRUE,
+              col="gray")+
   geom_hline(yintercept = 0.75,
              colour= '#006d2c',
              alpha=0.5,
@@ -542,7 +544,7 @@ allsprpl <- ggplot(allspr,
   facet_wrap(.~SPRv, ncol = 5)+
   scale_color_viridis_d(option = "F")+
   xlim(2001,2021)+
-  ylim(0,1.2)+
+  ylim(0,.9)+
   theme_minimal()+
   theme(legend.position = "none",
         axis.text.x = element_text(angle = 90, hjust = 2),
