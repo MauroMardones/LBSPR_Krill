@@ -282,7 +282,7 @@ plotSim(MySim, type="len.freq",
 
 Two objects are required to fit the LBSPR model to length data: life-history parameters (`LB_pars`) described previously (2.4. section) and size compositions (`LB_lengths`), which contains the length frequency data. We provide a set of global size data and also by strata, with which we will be able to identify the spatial differences of the potential.
 
-```{r eval=FALSE}
+```{r}
 MyLengths <- new("LB_lengths")
 slotNames(MyLengths)
 ```
@@ -292,15 +292,40 @@ However, it is probably easier to create the `LB_lengths` object by directly rea
 ```{r message=F}
 #Brainsflied Strata
 datdir <- setwd("~/DOCAS/LBSPR_Krill")
-Lenbs <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/Length_481_Krill_2.csv"), dataType="freq",sep=";",header=T)
+Lenbs <- new("LB_lengths", 
+             LB_pars=MyPars, 
+             file=paste0(datdir, "/lenghtBS_nochina.csv"), 
+             dataType="freq",
+             sep=",",
+             header=T)
 #Elephan Island Strata
-Lenei <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtEI.csv"), dataType="freq",sep=";",header=T)
+Lenei <- new("LB_lengths", 
+             LB_pars=MyPars, 
+             file=paste0(datdir, "/lenghtEI_nochina.csv"),
+             dataType="freq",
+             sep=",",
+             header=T)
 #Gerlache Strata
-Lengc <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtGerlache.csv"), dataType="freq",sep=";",header=T)
+Lengc <- new("LB_lengths", 
+             LB_pars=MyPars, 
+             file=paste0(datdir, "/lenghtExtra_nochina.csv"), 
+             dataType="freq",
+             sep=",",
+             header=T)
 #Join Strata
-Lenjo <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtJOIN.csv"), dataType="freq",sep=";",header=T)
+Lenjo <- new("LB_lengths", 
+             LB_pars=MyPars, 
+             file=paste0(datdir, "/lenghtJOIN_nochina.csv"), 
+             dataType="freq",
+             sep=",",
+             header=T)
 #SSIW Strata
-Lenssiw <- new("LB_lengths", LB_pars=MyPars, file=paste0(datdir, "/lenghtSSIW.csv"), dataType="freq",sep=";",header=T)
+Lenssiw <- new("LB_lengths", 
+               LB_pars=MyPars, 
+               file=paste0(datdir, "/lenghtSSIW_nochina.csv"), 
+               dataType="freq",
+               sep=",",
+               header=T)
 ```
 
 ```{r message=FALSE}
@@ -467,7 +492,7 @@ ggarrange(bsmat,
 ```
 
 ```{r, eval=FALSE, echo=FALSE}
-plotEsts(fitbs,
+plotEsts(fitssiw,
          pars = c("FM", "SPR"),
   doSmooth = TRUE,
   incL50 = FALSE,
@@ -526,26 +551,26 @@ allsprwide <- round(pivot_wider(allspr,
 
 allsprpl <- ggplot(allspr,
        aes(Year,
-           SPR,
-           color=SPRv))+
+           SPR))+
   geom_point(alpha=3)+
   stat_smooth(method = "lm",
-              alpha=0.1,
+              alpha=0.3,
               se=TRUE,
-              col="gray")+
+              col="black")+
   geom_hline(yintercept = 0.75,
              colour= '#006d2c',
              alpha=0.5,
-             linewidth=1.2)+
+             linewidth=1.2,
+             linetype=2)+
   geom_hline(yintercept = 0.20, 
              colour= '#bd0026',
              alpha=0.5,
              linewidth=1.2)+
   facet_wrap(.~SPRv, ncol = 5)+
-  scale_color_viridis_d(option = "F")+
+  #scale_color_viridis_d(option = "F")+
   xlim(2001,2021)+
   ylim(0,.9)+
-  theme_minimal()+
+  theme_few()+
   theme(legend.position = "none",
         axis.text.x = element_text(angle = 90, hjust = 2),
         panel.background = element_rect(),
@@ -808,11 +833,11 @@ sensto <- ggplot(valtodo %>%
        aes(x = Parameter,
            y = SPR,
            fill=SPRstra)) +
-  geom_violin(trim=FALSE)+
+  #geom_violin(trim=FALSE)+
   geom_jitter(height = 0,
-              width = 0.3,
-              alpha=0.4,
-              color="grey")+
+              width = 0.1,
+              alpha=0.7,
+              color="black")+
   scale_fill_viridis_d(option="F")+
   facet_wrap(~SPRstra,
              ncol=5)+
@@ -825,9 +850,8 @@ sensto <- ggplot(valtodo %>%
   geom_hline(yintercept = 0.20, 
              colour= '#bd0026',
              alpha=0.5,
-             linetype=2,
              linewidth=1.2)+
-  stat_summary(fun.y=mean, geom="point", size=1.1, color="red")+
+  stat_summary(fun.y=mean, geom="point", size=1.5, color="red")+
   labs(y="SPR Mean",
        x="VB Parameters tested")+
   theme_minimal()+
@@ -1056,14 +1080,13 @@ sensproto <- ggplot(valprotodo %>%
              linetype="dashed")+
   geom_hline(yintercept = 0.20, 
              colour= '#bd0026',
-             alpha=0.5,
-             linetype="dashed")+
+             alpha=0.5)+
   #geom_jitter(alpha=0.4,
    #           color="black")+
   #facet_wrap(~SPRstra,
             # ncol=5)+
   labs(y="SPR Mean",
-       x="Growth tested")+
+       x="Growth Scenario")+
   theme_minimal()+
   theme(legend.position="top",
         panel.background = element_rect(),
@@ -1088,7 +1111,7 @@ tablk <- valprotodo %>%
 kbl(tablk, 
     longtable = F, 
     booktabs = T, 
-    caption = "Estimated by growth type scenario") %>% 
+    caption = "Estimated by Growth scenario") %>% 
   add_header_above(c(" ", "Mean" = 5, "Variance" = 5)) %>% 
   kable_styling(latex_options = c("scale_down",  "hold_position"),
                 font_size = 10)
