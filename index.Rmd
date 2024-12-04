@@ -585,7 +585,7 @@ allsprpl <- ggplot(allspr,
 
 allsprpl
 ```
-```{r}
+```{r  warning=FALSE, fig.cap="Krill Intrinsic Productivity (SPR) by strata and by year", fig.height=3, fig.width=7}
 allsprpl2 <- ggplot(allspr, aes(Year, SPR)) +
   geom_point(alpha = 0.8) +  # Puntos de datos
   geom_errorbar(aes(ymin = SPR - SD, ymax = SPR + SD),  # Barras de error
@@ -619,6 +619,7 @@ allsprpl2 <- ggplot(allspr, aes(Year, SPR)) +
 
 allsprpl2
 
+
 ```
 
 The Elephant Island stratum has exhibited a higher prevalence of adult fraction in fishing catches, leading to an increase in reproductive potential in recent years. Conversely, the Bransfield and Gerlache strata experience intense recruitment overfishing, with their reproductive potential falling significantly below the recommended target at 54% and 66.5%, respectively.
@@ -635,13 +636,14 @@ allsprwide_reorganizado <- allsprwide %>%
     `JOIN` = ifelse(!is.na(`SPR JOIN`), paste0(`SPR JOIN`, " (", `SD JOIN`, ")"), NA),
     `SSWI` = ifelse(!is.na(`SPR SSWI`), paste0(`SPR SSWI`, " (", `SD SSWI`, ")"), NA)
   ) %>%
-  select(Year, `BS`, `EI`, `GS`, `JOIN`, `SSWI`)
+  select(Year, `BS`, `EI`, `GS`, `JOIN`, `SSWI`) %>% 
+  arrange(Year)
 
 # Ver la tabla reorganizada
 print(allsprwide_reorganizado)
 
 # guardo
-#write_csv(allsprwide_reorganizado, "SPR_Total.csv")
+write_csv(allsprwide_reorganizado, "SPR_Total.csv")
 
 kbl(allsprwide_reorganizado, 
     longtable = FALSE, 
@@ -918,13 +920,11 @@ sensto <- ggplot(valtodo %>%
         panel.background = element_rect(),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())+
-  coord_flip()+
-  ylim(0, 1)
-sensto
+  coord_flip()
 ```
 
 
-```{r Figure9, warning=FALSE, fig.cap="Sensitivity analysis by strata about asymptotic length VB", fig.height=3, fig.width=8}
+```{r Figure9_1, warning=FALSE, fig.cap="Sensitivity analysis by strata about asymptotic length VB", ig.height=3, fig.width=7}
 sensprototest <- ggplot(valtodo %>%
          drop_na() %>% 
            filter(SPR < 0.65),
@@ -936,12 +936,10 @@ sensprototest <- ggplot(valtodo %>%
    geom_vline(xintercept = 0.75,
              colour= '#006d2c',
              alpha=0.5,
-             linetype=2,
-             linewidth=1.2)+
+             linetype=2)+
   geom_vline(xintercept = 0.20, 
              colour= '#bd0026',
-             alpha=0.5,
-             linewidth=1.2)+
+             alpha=0.5)+
   geom_jitter(alpha=0.4,
               color="black",
               height = 0,
@@ -962,7 +960,6 @@ sensprototest
 
 ```{r message=F}
 # Tables
-
 tablinf <- valtodo %>% 
   group_by(Parameter, SPRstra) %>% 
   summarise(Median = mean(SPR),
@@ -988,7 +985,7 @@ tablinf_reorganizado <- tablinf %>%
 # Ver la tabla reorganizada
 print(tablinf_reorganizado)
 
-write_csv(tablinf_reorganizado, "SPR_Linf.csv")
+#write_csv(tablinf_reorganizado, "SPR_Linf.csv")
 ```
 
 
@@ -1212,6 +1209,7 @@ Otro tipo
 
 ```{r}
 sensproto2 <- ggplot(valprotodo %>% 
+                       filter(SPR < 0.99) %>% 
                        drop_na(),
                     aes(x = Parameter,
                         y = SPR)) +
@@ -1270,7 +1268,7 @@ kbl(tablk_reorganizado,
     caption = "\\label{Table4}Estimates of SPR by Growth Scenario (values in parentheses represent the standard deviation)") %>%
   kable_styling(latex_options = c("scale_down", "hold_position"))
 
-write_csv(tablk_reorganizado, "SPR_K.csv")
+#write_csv(tablk_reorganizado, "SPR_K.csv")
 ```
 
 # CODE REPOSITORY
