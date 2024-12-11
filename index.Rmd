@@ -101,7 +101,7 @@ knitr::include_graphics('index_files/figure-html/Map1.png')
 For this analysis, data from the monitoring of the krill fishery were used, which have been systematically collected on board fishing vessels by the CCAMLR SISO (Scheme of International Scientific Observation) program. Krill sizes compositions were obtained from the entire area 48.1, which was combined in each management stratum defined at 2.1 section (Figure \@ref(fig:Figure2)). For this analysis, 1,266,267 krill individuals were measured from fishery activity, the majority (~75%) from the Bransfield, Elephant and SouthWest strata. 
 
 ```{r Figure2, echo=FALSE, out.width='100%', fig.cap="\\label{Figure 2}Sizes compositions from SISO program monitoring krill fishery by strata (BS=Brainsfield Strait, EI= Elephant Island, GS= Gerlache Strait, JOIN= Joinville Island, SSWI= South West). Red line represent recruit size"}
-knitr::include_graphics('index_files/figure-html/tallastrata.png')
+knitr::include_graphics('index_files/figure-html/Strata_Nochina.png')
 ```
 
 The information gaps (years without sizes composition data) are not calculated because there is no autocorrelation between years, but singular estimators over time.
@@ -138,7 +138,7 @@ The model needs specifications related to both biological and fishery parameters
 -Width of the length classes (`BinWidth`)
 
 ```{r}
-MyPars <- new("LB_pars")
+#MyPars <- new("LB_pars")
 ## A blank LB_pars object created
 ## Default values have been set for some parameters
 MyPars@Species <- "Euphausia superba"
@@ -339,6 +339,41 @@ fitgc <- LBSPRfit(MyPars, Lengc)
 fitjo <- LBSPRfit(MyPars, Lenjo)
 fitssiw <- LBSPRfit(MyPars, Lenssiw)
 ```
+
+
+## 48 Completa
+
+```{r}
+datdir <- setwd("~/DOCAS/LBSPR_Krill")
+Len481 <- new("LB_lengths", 
+             LB_pars=MyPars, 
+             file=paste0(datdir, "/lenght481_nochina.csv"), 
+             dataType="freq",
+             sep=",",
+             header=T)
+
+Len482 <- new("LB_lengths", 
+             LB_pars=MyPars, 
+             file=paste0(datdir, "/lenght482_nochina.csv"),
+             dataType="freq",
+             sep=",",
+             header=T)
+
+Len483 <- new("LB_lengths", 
+             LB_pars=MyPars, 
+             file=paste0(datdir, "/lenght483_nochina.csv"), 
+             dataType="freq",
+             sep=",",
+             header=T)
+
+
+# The LBSPR model is fitted by strata using the `LBSPRfit` function. 
+fit481 <- LBSPRfit(MyPars, Len481)
+fit482 <- LBSPRfit(MyPars, Len482)
+fit483 <- LBSPRfit(MyPars, Len483)
+```
+
+
 
 ## Sensitivity and perfomance analysis metohodology.
 
@@ -653,6 +688,145 @@ kbl(allsprwide_reorganizado,
 
 ```
 
+## 48 completa Resultados
+
+fit481 
+
+```{r}
+# Get values estimated
+
+spr481 <- as.data.frame(cbind(fit481 @Years, 
+                             fit481 @SPR,
+                             fit481 @Vars[,4])) 
+colnames(spr481) <- c("Year","SPR", "Var")
+spr481$SPRv <- rep("481", nrow(spr481))
+
+spr482 <- as.data.frame(cbind(fit482 @Years, 
+                             fit482 @SPR,
+                             fit482 @Vars[,4])) 
+colnames(spr482) <- c("Year","SPR", "Var")
+spr482$SPRv <- rep("482", nrow(spr482))
+
+spr483 <- as.data.frame(cbind(fit483 @Years, 
+                             fit483 @SPR,
+                             fit483 @Vars[,4])) 
+colnames(spr483) <- c("Year","SPR", "Var")
+spr483$SPRv <- rep("483", nrow(spr483))
+
+
+spr48 <- rbind(spr481,
+               spr482,
+               spr483)
+
+spr48 <- spr48 %>%
+  mutate(SD = sqrt(Var))
+
+
+spr48wide <- round(pivot_wider(spr48,
+                          names_from = SPRv,
+                          values_from = c(SPR, Var, SD),
+                          values_fill = NA,
+                          names_sep = " ",),3)
+
+```
+
+plot 48 
+
+```{r}
+spr48plot <- ggplot(spr48, aes(Year, SPR)) +
+  geom_point(alpha = 0.8) +  # Puntos de datos
+  geom_errorbar(aes(ymin = SPR - SD, ymax = SPR + SD),  # Barras de error
+                width = 0.2,  # Ancho de la barra horizontal
+                alpha = 0.5) +
+  geom_smooth(method = "lm",
+              alpha=0.3,
+              se=TRUE,
+              col="black",
+              level = 0.75)+
+  geom_hline(yintercept = 0.75,
+             colour = '#006d2c',
+             alpha = 0.5,
+             linetype = 2) +
+  geom_hline(yintercept = 0.20,
+             colour = '#bd0026',
+             alpha = 0.5) +
+  facet_wrap(. ~ SPRv, ncol = 5) +
+  xlim(2001, 2021) +
+  ylim(0, 0.9) +
+  theme_few() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 90, hjust = 1),
+    panel.background = element_rect(fill = "white"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  )
+
+spr48plot
+
+```
+
+solo la 48.1 
+
+```{r}
+spr481plot <- ggplot(spr48 %>% 
+                       filter(SPRv == "481"), aes(Year, SPR)) +
+  geom_point(alpha = 0.8) +  # Puntos de datos
+  geom_errorbar(aes(ymin = SPR - SD, ymax = SPR + SD),  # Barras de error
+                width = 0.2,  # Ancho de la barra horizontal
+                alpha = 0.5) +
+  geom_smooth(method = "lm",
+              alpha=0.3,
+              se=TRUE,
+              col="black",
+              level = 0.75)+
+  geom_hline(yintercept = 0.75,
+             colour = '#006d2c',
+             alpha = 0.5,
+             linetype = 2) +
+  geom_hline(yintercept = 0.20,
+             colour = '#bd0026',
+             alpha = 0.5) +
+  xlim(2001, 2021) +
+  ylim(0, 0.9) +
+  theme_few() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 90, hjust = 1),
+    panel.background = element_rect(fill = "white"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  )
+
+spr481plot
+
+```
+Tabla 48
+```{r Table48}
+
+spr48wide_reorganizado <- spr48wide %>%
+  mutate(
+    `481` = ifelse(!is.na(`SPR 481`), paste0(`SPR 481`, " (", `SD 481`, ")"), NA),
+    `482` = ifelse(!is.na(`SPR 482`), paste0(`SPR 482`, " (", `SD 482`, ")"), NA),
+    `483` = ifelse(!is.na(`SPR 483`), paste0(`SPR 483`, " (", `SD 483`, ")"), NA)
+  ) %>%
+  select(Year, `481`, `482`, `483`) %>% 
+  arrange(Year)
+
+# Ver la tabla reorganizada
+print(spr48wide_reorganizado)
+
+# guardo
+#write_csv(spr48wide_reorganizado, "SPR_all_48.csv")
+
+kbl(spr48wide_reorganizado, 
+    longtable = FALSE, 
+    booktabs = TRUE, 
+    caption = "\\label{Table2}Estimates of SPR by SubArea (parentheses represent the standard deviation)") %>% 
+    kable_styling(latex_options = c("scale_down", "hold_position"))
+
+```
+
 \newpage
 
 ## Sensitivity and perfomance analysis
@@ -752,6 +926,22 @@ for (i in 55:65) {
   nombre_variable <- paste0("fitsswi", i) 
   objeto <- get(nombre_objeto)
   assign(nombre_variable, LBSPRfit(objeto, Lenssiw), envir = .GlobalEnv)
+}
+```
+
+
+## Ajustes para 48.1
+
+
+Len481
+
+```{r message=FALSE}
+# ciclo de ajuste para 481
+for (i in 55:65) {
+  nombre_objeto <- paste0("MyPars_", i) 
+  nombre_variable <- paste0("fit481", i) 
+  objeto <- get(nombre_objeto)
+  assign(nombre_variable, LBSPRfit(objeto, Len481), envir = .GlobalEnv)
 }
 ```
 
@@ -885,6 +1075,35 @@ valtodo <- rbind(valsswi_largo,
 
 ```
 
+48.1 
+
+```{r}
+#Genero lo que quiero comparar BS
+val481 <- as.data.frame(cbind(fit48155@Years,
+  fit48155@SPR,
+           fit48156@SPR,
+           fit48157@SPR,
+           fit48158@SPR,
+           fit48159@SPR,
+           fit48160@SPR,
+           fit48161@SPR,
+           fit48162@SPR,
+           fit48163@SPR,
+           fit48164@SPR,
+           fit48165@SPR))
+colnames(val481) <- c("Years", "Linf55","Linf56", "Linf57", "Linf58", 
+                     "Linf59", "Linf60", 
+                      "Linf61", "Linf62" , "Linf63",  "Linf64",
+                     "Linf65")
+
+val481_largo <- pivot_longer(val481, 
+                            cols = c(2:12,), 
+                            names_to = "Parameter", 
+                            values_to = "SPR")
+val481_largo$SPRstra <- rep("481", nrow(val481_largo))
+```
+
+
 ```{r Figure9, warning=FALSE, fig.cap="Sensitivity analysis by strata about asymptotic length VB", fig.height=3, fig.width=8}
 # plot all Linf
 sensto <- ggplot(valtodo %>%
@@ -901,6 +1120,44 @@ sensto <- ggplot(valtodo %>%
   scale_fill_viridis_d(option="F")+
   facet_wrap(~SPRstra,
              ncol=5)+
+  geom_vline(xintercept = 6,color = "black")+
+  geom_hline(yintercept = 0.75,
+             colour= '#006d2c',
+             alpha=0.5,
+             linetype=2,
+             linewidth=1.2)+
+  geom_hline(yintercept = 0.20, 
+             colour= '#bd0026',
+             alpha=0.5,
+             linewidth=1.2)+
+  stat_summary(fun.y=mean, geom="point", size=1.5, color="red")+
+  labs(y="SPR",
+       x="VB Parameters tested")+
+  theme_minimal()+
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 90, hjust = 2),
+        panel.background = element_rect(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())+
+  coord_flip()
+```
+plot para la 481
+
+
+```{r Figure9_1_1, warning=FALSE, fig.cap="Sensitivity analysis 48.1 about asymptotic length VB", fig.height=3, fig.width=8}
+# plot all Linf
+sens481 <- ggplot(val481_largo %>%
+         drop_na() %>% 
+           filter(SPR < 0.65),
+       aes(x = Parameter,
+           y = SPR,
+           fill=SPRstra)) +
+  #geom_violin(trim=FALSE)+
+  geom_jitter(height = 0,
+              width = 0.1,
+              alpha=0.7,
+              color="black")+
+  scale_fill_viridis_d(option="F")+
   geom_vline(xintercept = 6,color = "black")+
   geom_hline(yintercept = 0.75,
              colour= '#006d2c',
@@ -957,6 +1214,42 @@ sensprototest <- ggplot(valtodo %>%
   xlim(0, 1)
 sensprototest
 ```
+
+
+box plot para la 481
+
+```{r Figure9_12, warning=FALSE, fig.cap="Sensitivity analysis by strata about asymptotic length VB", ig.height=3, fig.width=7}
+sensprototest481 <- ggplot(val481_largo %>%
+         drop_na() %>% 
+           filter(SPR < 0.65),
+       aes(x = SPR,
+           y = Parameter)) +
+  geom_boxplot(trim=TRUE,
+                position=position_dodge(0.9),
+              adjust = 1/5)+
+   geom_vline(xintercept = 0.75,
+             colour= '#006d2c',
+             alpha=0.5,
+             linetype=2)+
+  geom_vline(xintercept = 0.20, 
+             colour= '#bd0026',
+             alpha=0.5)+
+  geom_jitter(alpha=0.4,
+              color="black",
+              height = 0,
+              width = 0.1)+
+  labs(x="SPR",
+       y="VB Parameters tested")+
+  theme_minimal()+
+  theme(legend.position="top",
+        axis.text.x = element_text(angle = 90, hjust = 2),
+        panel.background = element_rect(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())+
+  xlim(0, 1)
+sensprototest481
+```
+
 
 ```{r message=F}
 # Tables
@@ -1096,6 +1389,25 @@ for (i in c(2,0.5,0.3)) {
 }
 ```
 
+
+K para 48.1
+
+```{r}
+# ciclo de ajuste para 481
+for (i in c(2,0.5,0.3)) {
+  nombre_objeto <- paste0("MyPars_", i)  # Nombre del objeto S4 en cada iteración
+  nombre_variable <- paste0("fit481", i)  # Nuevo nombre para el resultado
+  
+  # Obtener el objeto S4 correspondiente
+  objeto <- get(nombre_objeto)
+  
+  # Ejecutar LBSPRfit() y asignar el resultado a una nueva variable con nombre único
+  assign(nombre_variable, LBSPRfit(objeto, Len481), envir = .GlobalEnv)
+}
+
+```
+
+
 ```{r}
 #Genero lo que quiero comparar BS
 valprobs <- as.data.frame(cbind(fitbs0.3@Years,
@@ -1168,6 +1480,25 @@ valprotodo <- rbind(valprosswi_largo,
 
 ```
 
+
+asigno para 48.1 
+
+```{r}
+#Genero lo que quiero comparar BS
+valpro481 <- as.data.frame(cbind(fit4810.3@Years,
+                                fit4810.3@SPR,
+                             fit4810.5@SPR,
+                             fit4812@SPR))
+colnames(valpro481) <- c("Years", "High","Med", "Low")
+
+valpro481_largo <- pivot_longer(valpro481, 
+                            cols = c(2:4,), 
+                            names_to = "Parameter", 
+                            values_to = "SPR")
+valpro481_largo$SPRstra <- rep("481", nrow(valpro481_largo))
+```
+
+
 ```{r Figure10, warning=FALSE, fig.cap="Sensitivity analysis by strata about krill growth type",  out.width='70%'}
 #plot
 # todo
@@ -1237,6 +1568,52 @@ sensproto2 <- ggplot(valprotodo %>%
                        name="Strata")
 sensproto2
 ```
+
+
+
+
+para 48.1
+
+
+```{r}
+senspro481 <- ggplot(valpro481_largo %>% 
+                       filter(SPR < 0.99) %>% 
+                       drop_na(),
+                    aes(x = Parameter,
+                        y = SPR)) +
+  geom_boxplot()+
+  geom_hline(yintercept = 0.75,
+             colour= '#006d2c',
+             alpha=0.5,
+             linetype="dashed")+
+  geom_hline(yintercept = 0.20, 
+             colour= '#bd0026',
+             alpha=0.5)+
+  geom_jitter(alpha=0.4,
+             color="black",
+             width=0.1)+
+  labs(y="SPR",
+       x="Growth Scenario")+
+  scale_x_discrete(limits = c("Low", "Med", "High"))+ 
+  theme_minimal()+
+  theme(legend.position="none",
+        panel.background = element_rect(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())+
+  scale_fill_viridis_d(option="F",
+                       name="Strata")
+senspro481
+```
+## Tres plot juntos de la 481, esto es `spr481plot`, `sensprototest481`, `senspro481`
+
+
+```{r}
+ggarrange(spr481plot,
+          sensprototest481,
+          senspro481,
+          ncol=3)
+```
+
 
 ```{r Table4, message=FALSE}
 tablk <- valprotodo %>% 
