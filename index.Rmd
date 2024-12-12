@@ -1,7 +1,7 @@
 ---
 title: "Supporting Information 1"
-subtitle: "Spatial and temporal variability in the intrinsic productivity of Antarctic krill (Euphausia superba) along the Western Antarctic Peninsula under different environmental and life history scenarios"
-author: "Mardones, M., Watters, G., Cárdenas, C. & Santa Cruz, F. "
+subtitle: "Spatial and temporal variability in the intrinsic productivity of Antarctic krill (Euphausia superba) along the Western Antarctic Peninsula under environmental and life history scenarios"
+author: "Mardones, M; Jarvis Mason, E.T.;  Santa Cruz, F.; Watters, G.; Cárdenas, C.A"
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 bibliography: LBSPR.bib
 csl: apa.csl
@@ -95,7 +95,6 @@ The study area includes subarea 48.1, which is one of the sectors where today th
 ```{r Figure1, echo=FALSE, out.width='60%', fig.cap= "Subarea 48.1 and management strata considered in the spatio-temporal analysis of intrinsic productivity of Krill (BS=Brainsfield Strait, EI= Elephant Island, GS= Gerlache Strait, JOIN= Joinville Island, SSWI= South West)"}
 knitr::include_graphics('index_files/figure-html/Map1.png')
 ```
-
 ## Monitoring Data (SISO Program)
 
 For this analysis, data from the monitoring of the krill fishery were used, which have been systematically collected on board fishing vessels by the CCAMLR SISO (Scheme of International Scientific Observation) program. Krill sizes compositions were obtained from the entire area 48.1, which was combined in each management stratum defined at 2.1 section (Figure \@ref(fig:Figure2)). For this analysis, 1,266,267 krill individuals were measured from fishery activity, the majority (~75%) from the Bransfield, Elephant and SouthWest strata. 
@@ -105,6 +104,19 @@ knitr::include_graphics('index_files/figure-html/Strata_Nochina.png')
 ```
 
 The information gaps (years without sizes composition data) are not calculated because there is no autocorrelation between years, but singular estimators over time.
+
+
+```{r Figure4, echo=FALSE, out.width='50%', fig.cap="Pearson correlation between krill length and temporal (years) and environmental factors in the WAP"}
+knitr::include_graphics('index_files/figure-html/corr_length.png')
+```
+
+
+
+```{r Figure5, echo=FALSE,  out.width='70%', fig.cap="Random effects of location (cell) and fixed effects of environmental variables on krill length, with scattered points indicating variability in impact in estimates of the main variable."}
+knitr::include_graphics('index_files/figure-html/glmm.png')
+```
+
+
 
 ## Biological and fishery parameters krill
 
@@ -262,24 +274,6 @@ The LBSPR package can be used to generate the expected size composition, the SPR
 
 It is important to note that the F/M ratio reported in the LBSPR model refers to the apical F over the adult natural mortality rate. That is, the value for fishing mortality refers to the highest level of F experienced by any single size class [@Hordyk2014c]. If the selectivity pattern excludes all but the largest individuals from being exploited, it is possible to have a very high F/M ratio in a sustainable fishery (high SPR) and visceverse. Note that only the life history parameters need to be specified for the estimation model. The exploitation parameters will be estimated [@Hordyk2014c].
 
-```{r, message=FALSE, eval=FALSE}
-
-## Plotting the Simulation
-
-MySim <- LBSPRsim(MyPars, 
-                  Control=list(modtype="GTG"))
-
-# Plot with
-plotSim(MySim, type="len.freq",
-        Cols = NULL, 
-        size.axtex = 12, 
-        size.title = 14,
-        size.SPR = 4,
-        size.leg = 12,
-        inc.pts = TRUE, 
-        size.pt = 6)
-```
-
 Two objects are required to fit the LBSPR model to length data: life-history parameters (`LB_pars`) described previously (2.4. section) and size compositions (`LB_lengths`), which contains the length frequency data. We provide a set of global size data and also by strata, with which we will be able to identify the spatial differences of the potential.
 
 ```{r}
@@ -341,7 +335,7 @@ fitssiw <- LBSPRfit(MyPars, Lenssiw)
 ```
 
 
-## 48 Completa
+## 48.1, 48.2 and 48.3
 
 ```{r}
 datdir <- setwd("~/DOCAS/LBSPR_Krill")
@@ -379,7 +373,8 @@ fit483 <- LBSPRfit(MyPars, Len483)
 
 Ten sensitivity scenarios based on the upper and lower range for the asymptotic length von Bertalanffy $L_{\infty}$ (55 to 65 mm) used in the base model (60 mm) were tested to identify the impact of this parameter on the SPR estimation, given that it is the parameters exhibiting the high degree of variability and one of the factors that most determines the estimates. On the other hand, the interdependence between krill and their environment is a well-known and influential factor in population dynamics, ecosystem impacts, and fishery. This interdependence also affects the reproductive potential and consequently, to any management decision that takes into account population parameters of krill. To assess the impact of individual growth variability, three scenarios of the VB k parameter were tested, representing different growth types (low = 0.2, medium = 0.7, and high = 1.2). Figure \@ref(fig:Figure3) displays a theoretical growth curve for krill based on three scenarios that were tested using LBSPR.
 
-```{r Figure3, out.width="70%", fig.cap="Theoretical growth scenarios to krill varability"}
+
+```{r Figure3, out.width="70%", fig.cap="Theoretical growth curves for krill based on three SPR sensitivity scenarios that were tested using LBSPR."}
 # Definir los parámetros del modelo de Von Bertalanffy
 L_inf <- 60
 k <- c(0.2, 0.7, 1.2)
