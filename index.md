@@ -1568,7 +1568,9 @@ kbl(tablk_reorganizado,
 ``` r
 sensproto2 <- ggplot(valprotodo %>% 
                        filter(SPR < 0.99) %>% 
-                       drop_na(),
+                       drop_na() %>% 
+                       mutate(Parameter = factor(Parameter, 
+                                                 levels = c("Low", "Med", "High"))), # Orden deseado,
                     aes(x = Parameter,
                         y = SPR)) +
   geom_boxplot()+
@@ -1597,11 +1599,11 @@ sensproto2
 ```
 
 <div class="figure" style="text-align: center">
-<img src="index_files/figure-html/Figure10-1.jpeg" alt="Sensitivity analysis by strata about krill growth type" width="70%" />
+<img src="index_files/figure-html/Figure10-1.jpeg" alt="Sensitivity analysis by strata about krill growth type"  />
 <p class="caption">(\#fig:Figure10)Sensitivity analysis by strata about krill growth type</p>
 </div>
 
-## Analysis to four Subareas Outputs (48.1, 48.2 and 48.3)
+## Analysis to three Subareas (48.1, 48.2 and 48.3)
 
 Reading data
 
@@ -1717,45 +1719,7 @@ spr48plot
 <img src="index_files/figure-html/Figure11-1.jpeg" alt="Krill Intrinsic Productivity (SPR) by subarea and by year"  />
 <p class="caption">(\#fig:Figure11)Krill Intrinsic Productivity (SPR) by subarea and by year</p>
 </div>
-Now, just 48.1 (Figure \@ref(fig:Figure12)).
 
-
-``` r
-spr481plot <- ggplot(spr48 %>% 
-                       filter(SPRv == "481"), aes(Year, SPR)) +
-  geom_point(alpha = 0.8) +  # Puntos de datos
-  geom_errorbar(aes(ymin = SPR - SD, ymax = SPR + SD),  # Barras de error
-                width = 0.2,  # Ancho de la barra horizontal
-                alpha = 0.5) +
-  geom_smooth(method = "lm",
-              alpha=0.3,
-              se=TRUE,
-              col="black",
-              level = 0.75)+
-  geom_hline(yintercept = 0.75,
-             colour = '#006d2c',
-             alpha = 0.5,
-             linetype = 2) +
-  geom_hline(yintercept = 0.20,
-             colour = '#bd0026',
-             alpha = 0.5) +
-  xlim(2001, 2021) +
-  ylim(0, 0.9) +
-  theme_few() +
-  theme(
-    legend.position = "none",
-    axis.text.x = element_text(angle = 90, hjust = 1),
-    panel.background = element_rect(fill = "white"),
-    panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank()
-  )
-spr481plot
-```
-
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/Figure12-1.jpeg" alt="Krill Intrinsic Productivity (SPR) in 48.1 by year"  />
-<p class="caption">(\#fig:Figure12)Krill Intrinsic Productivity (SPR) in 48.1 by year</p>
-</div>
 Main outputs in Table \@ref(tab:Table6).
 
 ``` r
@@ -1922,6 +1886,46 @@ kbl(spr48wide_reorganizado,
   </tr>
 </tbody>
 </table>
+Now, just 48.1 (Figure \@ref(fig:Figure12)).
+
+
+``` r
+spr481plot <- ggplot(spr48 %>% 
+                       filter(SPRv == "481"), aes(Year, SPR)) +
+  geom_point(alpha = 0.8) +  # Puntos de datos
+  geom_errorbar(aes(ymin = SPR - SD, ymax = SPR + SD),  # Barras de error
+                width = 0.2,  # Ancho de la barra horizontal
+                alpha = 0.5) +
+  geom_smooth(method = "lm",
+              alpha=0.3,
+              se=TRUE,
+              col="black",
+              level = 0.75)+
+  geom_hline(yintercept = 0.75,
+             colour = '#006d2c',
+             alpha = 0.5,
+             linetype = 2) +
+  geom_hline(yintercept = 0.20,
+             colour = '#bd0026',
+             alpha = 0.5) +
+  xlim(2001, 2021) +
+  ylim(0, 0.9) +
+  theme_few() +
+  theme(
+    legend.position = "none",
+    axis.text.x = element_text(angle = 90, hjust = 1),
+    panel.background = element_rect(fill = "white"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  )
+spr481plot
+```
+
+<div class="figure" style="text-align: center">
+<img src="index_files/figure-html/Figure12-1.jpeg" alt="Krill Intrinsic Productivity (SPR) in 48.1 by year"  />
+<p class="caption">(\#fig:Figure12)Krill Intrinsic Productivity (SPR) in 48.1 by year</p>
+</div>
+
 
 sensitivity analysis to L~inf~ to 48.1
 

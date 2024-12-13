@@ -1175,10 +1175,12 @@ kbl(tablk_reorganizado,
 #write_csv(tablk_reorganizado, "SPR_K.csv")
 ```
 
-```{r Figure10, warning=FALSE, fig.cap="Sensitivity analysis by strata about krill growth type",  out.width='70%'}
+```{r Figure10, warning=FALSE, fig.cap="Sensitivity analysis by strata about krill growth type", fig.height=4, fig.width=8}
 sensproto2 <- ggplot(valprotodo %>% 
                        filter(SPR < 0.99) %>% 
-                       drop_na(),
+                       drop_na() %>% 
+                       mutate(Parameter = factor(Parameter, 
+                                                 levels = c("Low", "Med", "High"))), # Orden deseado,
                     aes(x = Parameter,
                         y = SPR)) +
   geom_boxplot()+
@@ -1206,7 +1208,7 @@ sensproto2 <- ggplot(valprotodo %>%
 sensproto2
 ```
 
-## Analysis to four Subareas Outputs (48.1, 48.2 and 48.3)
+## Analysis to three Subareas (48.1, 48.2 and 48.3)
 
 Reading data
 
@@ -1315,6 +1317,27 @@ spr48plot <- ggplot(spr48, aes(Year, SPR)) +
   )
 spr48plot
 ```
+
+Main outputs in Table \@ref(tab:Table6).
+```{r Table6}
+spr48wide_reorganizado <- spr48wide %>%
+  mutate(
+    `481` = ifelse(!is.na(`SPR 481`), paste0(`SPR 481`, " (", `SD 481`, ")"), NA),
+    `482` = ifelse(!is.na(`SPR 482`), paste0(`SPR 482`, " (", `SD 482`, ")"), NA),
+    `483` = ifelse(!is.na(`SPR 483`), paste0(`SPR 483`, " (", `SD 483`, ")"), NA)
+  ) %>%
+  select(Year, `481`, `482`, `483`) %>% 
+  arrange(Year)
+
+#write_csv(spr48wide_reorganizado, "SPR_all_48.csv")
+
+kbl(spr48wide_reorganizado, 
+    longtable = FALSE, 
+    booktabs = TRUE, 
+    caption = "\\label{Table6}Estimates of SPR by SubArea (parentheses represent the standard deviation)") %>% 
+    kable_styling(latex_options = c("scale_down", "hold_position"))
+
+```
 Now, just 48.1 (Figure \@ref(fig:Figure12)).
 
 ```{r Figure12, warning=FALSE, fig.cap="Krill Intrinsic Productivity (SPR) in 48.1 by year"}
@@ -1348,26 +1371,7 @@ spr481plot <- ggplot(spr48 %>%
   )
 spr481plot
 ```
-Main outputs in Table \@ref(tab:Table6).
-```{r Table6}
-spr48wide_reorganizado <- spr48wide %>%
-  mutate(
-    `481` = ifelse(!is.na(`SPR 481`), paste0(`SPR 481`, " (", `SD 481`, ")"), NA),
-    `482` = ifelse(!is.na(`SPR 482`), paste0(`SPR 482`, " (", `SD 482`, ")"), NA),
-    `483` = ifelse(!is.na(`SPR 483`), paste0(`SPR 483`, " (", `SD 483`, ")"), NA)
-  ) %>%
-  select(Year, `481`, `482`, `483`) %>% 
-  arrange(Year)
 
-#write_csv(spr48wide_reorganizado, "SPR_all_48.csv")
-
-kbl(spr48wide_reorganizado, 
-    longtable = FALSE, 
-    booktabs = TRUE, 
-    caption = "\\label{Table6}Estimates of SPR by SubArea (parentheses represent the standard deviation)") %>% 
-    kable_styling(latex_options = c("scale_down", "hold_position"))
-
-```
 
 sensitivity analysis to L~inf~ to 48.1
 
@@ -1412,7 +1416,7 @@ val481_largo$SPRstra <- rep("481", nrow(val481_largo))
 Now, boxplot just 48.1 (Figure \@ref(fig:Figure13)).
 
 
-```{r Figure13, warning=FALSE, fig.cap="Sensitivity analysis to 48.1 about asymptotic length VB", fig.height=3, fig.width=7}
+```{r Figure13, warning=FALSE, fig.cap="Sensitivity analysis to 48.1 about asymptotic length VB"}
 sensprototest481 <- ggplot(val481_largo %>%
          drop_na() %>% 
            filter(SPR < 0.65),
@@ -1482,7 +1486,7 @@ valprofit481_largo$SPRstra <- rep("481", nrow(valprofit481_largo))
 And, plot to  k scenarios (Figure \@ref(fig:Figure14)).
 
 
-```{r Figure14, warning=FALSE, fig.cap="Sensitivity analysis to 48.1 about k", fig.height=3, fig.width=7}
+```{r Figure14, warning=FALSE, fig.cap="Sensitivity analysis to 48.1 about k"}
 senspr481 <- ggplot(valprofit481_largo %>% 
                        filter(SPR < 0.99) %>% 
                        drop_na()%>%
