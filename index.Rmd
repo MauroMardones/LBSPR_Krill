@@ -907,37 +907,49 @@ Figure \@ref(fig:Figure9) provides a plot by strata with scenarios of L~inf~ of 
 
 
 ```{r Figure9, warning=FALSE, fig.cap="Sensitivity analysis by strata about asymptotic length VB", fig.height=3, fig.width=8}
+# Crear una nueva columna para identificar los puntos de Linf60
+valtodo <- valtodo %>%
+  mutate(Highlight = ifelse(Parameter == "Linf60", "Highlighted", "Normal"))
+
+# Crear el gráfico con jitter coloridos y boxplots vacíos con borde negro
 sensproto <- ggplot(valtodo %>%
-         drop_na() %>% 
-           filter(SPR < 0.65),
-       aes(x = SPR,
-           y = Parameter)) +
-  geom_boxplot(trim=TRUE,
-                position=position_dodge(0.9),
-              adjust = 1/5)+
-   geom_vline(xintercept = 0.75,
-             colour= '#006d2c',
-             alpha=0.5,
-             linetype=2)+
-  geom_vline(xintercept = 0.20, 
-             colour= '#bd0026',
-             alpha=0.5)+
-  geom_jitter(alpha=0.4,
-              color="black",
+                      drop_na() %>%
+                      filter(SPR < 0.65),
+                    aes(x = SPR,
+                        y = Parameter)) +
+  geom_boxplot(aes(fill = ifelse(Parameter == "Linf60", "red", NA)),  # Destacar el boxplot de Linf60 en rojo
+               trim = TRUE,
+               color = "black",  # Borde negro
+               position = position_dodge(0.9),
+               adjust = 1/5) +
+  geom_vline(xintercept = 0.75,
+             colour = '#006d2c',
+             alpha = 0.5,
+             linetype = 2) +
+  geom_vline(xintercept = 0.20,
+             colour = '#bd0026',
+             alpha = 0.5) +
+  geom_jitter(aes(fill = ifelse(Parameter == "Linf60", "red", NA)),  # Destacar los puntos de Linf60 en rojo
+              shape = 21,  # Forma de puntos vacíos con borde
+              color = "black",  # Borde negro para todos los puntos
+              alpha = 0.5,  # Transparencia
               height = 0,
-              width = 0.1)+
+              width = 0.1) +
   facet_wrap(~SPRstra,
-             ncol=11)+
-  labs(x="SPR",
-       y="VB Parameters tested")+
-  theme_minimal()+
-  theme(legend.position="top",
+             ncol = 11) +
+  labs(x = "SPR",
+       y = "VB Parameters tested") +
+  theme_minimal() +
+  theme(legend.position = "none",  # Ocultamos la leyenda
         axis.text.x = element_text(angle = 90, hjust = 2),
         panel.background = element_rect(),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())+
-  xlim(0, 1)
+        panel.grid.minor = element_blank()) +
+  xlim(0, 1) +
+  scale_fill_identity()  # Usar el color definido en aes(fill) directamente
+
 sensproto
+
 ```
 
 
@@ -1176,36 +1188,37 @@ kbl(tablk_reorganizado,
 ```
 
 ```{r Figure10, warning=FALSE, fig.cap="Sensitivity analysis by strata about krill growth type", fig.height=4, fig.width=8}
+# Crear el gráfico con los elementos resaltados para Parameter == "Med"
 sensproto2 <- ggplot(valprotodo %>% 
                        filter(SPR < 0.99) %>% 
                        drop_na() %>% 
                        mutate(Parameter = factor(Parameter, 
-                                                 levels = c("Low", "Med", "High"))), # Orden deseado,
-                    aes(x = Parameter,
-                        y = SPR)) +
-  geom_boxplot()+
-  geom_hline(yintercept = 0.75,
-             colour= '#006d2c',
-             alpha=0.5,
-             linetype="dashed")+
-  geom_hline(yintercept = 0.20, 
-             colour= '#bd0026',
-             alpha=0.5)+
-  geom_jitter(alpha=0.4,
-             color="black",
-             width=0.1)+
-  facet_wrap(~SPRstra,
-            ncol=5)+
-  labs(y="SPR",
-       x="Growth Scenario")+
-  theme_minimal()+
-  theme(legend.position="none",
+                                                 levels = c("Low", "Med", "High"))), # Orden deseado
+                     aes(x = Parameter, y = SPR)) +
+  # Boxplot con color condicional
+  geom_boxplot(aes(fill = Parameter), alpha = 0.6) +
+  # Líneas horizontales de referencia
+  geom_hline(yintercept = 0.75, colour= '#006d2c', alpha=0.5, linetype="dashed") +
+  geom_hline(yintercept = 0.20, colour= '#bd0026', alpha=0.5) +
+  # Jitter con color condicional
+  geom_jitter(aes(color = Parameter), alpha = 0.5, width = 0.1) +
+  # Facet por SPRstra
+  facet_wrap(~SPRstra, ncol = 5) +
+  # Etiquetas
+  labs(y = "SPR", x = "Growth Scenario") +
+  # Tema minimalista
+  theme_minimal() +
+  theme(legend.position = "none",
         panel.background = element_rect(),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())+
-  scale_fill_viridis_d(option="F",
-                       name="Strata")
+        panel.grid.minor = element_blank()) +
+  # Especificar colores manualmente para Parameter
+  scale_fill_manual(values = c("Low" = "white", "Med" = "red", "High" = "white")) +
+  scale_color_manual(values = c("Low" = "black", "Med" = "red", "High" = "black"))
+
+# Mostrar el gráfico
 sensproto2
+
 ```
 
 ## Analysis to three Subareas (48.1, 48.2 and 48.3)
@@ -1422,29 +1435,33 @@ sensprototest481 <- ggplot(val481_largo %>%
            filter(SPR < 0.65),
        aes(x = SPR,
            y = Parameter)) +
-  geom_boxplot(trim=TRUE,
-                position=position_dodge(0.9),
-              adjust = 1/5)+
-   geom_vline(xintercept = 0.75,
+  geom_boxplot(aes(fill = ifelse(Parameter == "Linf60", "red", "white")),  # Destacar el boxplot de Linf60 en rojo
+               trim=TRUE,
+               position=position_dodge(0.9),
+               adjust = 1/5) +
+  geom_vline(xintercept = 0.75,
              colour= '#006d2c',
              alpha=0.5,
-             linetype=2)+
+             linetype=2) +
   geom_vline(xintercept = 0.20, 
              colour= '#bd0026',
-             alpha=0.5)+
-  geom_jitter(alpha=0.4,
-              color="black",
+             alpha=0.5) +
+  geom_jitter(aes(color = ifelse(Parameter == "Linf60", "red", "black")),  # Destacar los puntos de Linf60 en rojo
+              alpha=0.4,
               height = 0,
-              width = 0.1)+
+              width = 0.1) +
   labs(x="SPR",
-       y="VB Parameters tested")+
-  theme_minimal()+
+       y="VB Parameters tested") +
+  theme_minimal() +
   theme(legend.position="top",
         axis.text.x = element_text(angle = 90, hjust = 2),
         panel.background = element_rect(),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())+
-  xlim(0, 1)
+        panel.grid.minor = element_blank()) +
+  xlim(0, 1) +
+  scale_fill_identity() +  # Usar el color definido en aes(fill) directamente
+  scale_color_identity()   # Usar el color definido en aes(color) directamente
+
 sensprototest481
 ```
 
@@ -1489,31 +1506,33 @@ And, plot to  k scenarios (Figure \@ref(fig:Figure14)).
 ```{r Figure14, warning=FALSE, fig.cap="Sensitivity analysis to 48.1 about k"}
 senspr481 <- ggplot(valprofit481_largo %>% 
                        filter(SPR < 0.99) %>% 
-                       drop_na()%>%
+                       drop_na() %>%
                        mutate(Parameter = factor(Parameter, 
                                                  levels = c("Low", "Med", "High"))), # Orden deseado
                     aes(x = Parameter, 
                         y = SPR)) +
-  geom_boxplot()+
+  geom_boxplot(aes(fill = ifelse(Parameter == "Med", "red", "white")),  # Destacar el boxplot de "Med" en rojo
+               color = "black") +  # Color del borde del boxplot
   geom_hline(yintercept = 0.75,
              colour= '#006d2c',
              alpha=0.5,
-             linetype="dashed")+
+             linetype="dashed") +
   geom_hline(yintercept = 0.20, 
              colour= '#bd0026',
-             alpha=0.5)+
-  geom_jitter(alpha=0.4,
-             color="black",
-             width=0.1)+
+             alpha=0.5) +
+  geom_jitter(aes(color = ifelse(Parameter == "Med", "red", "black")),  # Destacar los puntos de "Med" en rojo
+              alpha=0.4,
+              width=0.1) +
   labs(y="SPR",
-       x="Growth Scenario")+
-  theme_minimal()+
+       x="Growth Scenario") +
+  theme_minimal() +
   theme(legend.position="none",
         panel.background = element_rect(),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())+
-  scale_fill_viridis_d(option="F",
-                       name="Strata")
+        panel.grid.minor = element_blank()) +
+  scale_fill_identity() +  # Usar el color definido en aes(fill) directamente
+  scale_color_identity()   # Usar el color definido en aes(color) directamente
+
 senspr481
 ```                      
 
@@ -1524,7 +1543,8 @@ Finally, join plot to 48.1 analysis; `spr481plot`, `sensprototest481`, `senspro4
 ggarrange(spr481plot,
           sensprototest481,
           senspr481,
-          ncol=3)
+          ncol=3,
+          labels = c("A", "B", "C"))
 ```        
 
 # CODE REPOSITORY
