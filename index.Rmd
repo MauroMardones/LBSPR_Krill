@@ -98,110 +98,7 @@ knitr::include_graphics('index_files/figure-html/Strata_Nochina.png')
 
 The information gaps (years without sizes composition data) are not calculated because there is no autocorrelation between years, but singular estimators over time.
 
-## Correlation Analysis
 
-Regarding difference between `Spearman` and `pearson`, both, the
-Spearman test and the Pearson test are statistical methods used to
-assess the correlation between two variables. The main difference
-between them is that the Pearson test evaluates the linear correlation
-between two continuous variables, while the Spearman test evaluates the
-monotonic correlation between two continuous or order variables.
-
-In the case of the Pearson test, the degree of association between two
-continuous variables is measured through a correlation coefficient that
-varies between -1 and 1. A value of 1 indicates a perfectly positive
-correlation, a value of -1 indicates a perfectly negative correlation,
-and a value of 0 indicates no correlation between the two variables.
-
-On the other hand, the Spearman test is based on the range of the
-variables, instead of the actual values. In other words, this test
-evaluates the correlation between two order variables, where the values
-of each variable are ranked from lowest to highest, and ranges are used
-instead of actual values. Spearman's correlation coefficient also varies
-between -1 and 1, but it measures the monotonic correlation between two
-variables, that is, if one variable increases, the other variable also
-increases or decreases[@McCulloch2001].
-
-In summary, the main difference between the Spearman test and the
-Pearson test is that the former is used to assess the monotonic
-correlation between two order variables, while the latter is used to
-assess the linear correlation between two continuous variables.
-
--   Spearman's Rank Correlation Coefficient
-
-This coefficient is used to see if there is any significant relationship
-between the two datasets, and operates under the assumption that the
-data being used is ordinal, which here means that the numbers do not
-indicate quantity, but rather they signify a position of place of the
-subject's standing (e.g. 1st, 2nd, 3rd, etc.)
-
-$\begin{aligned} r_s = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2}\sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}} \end{aligned}$
-
--   Pearson Product-Moment Coefficient
-
-This is the most widely used correlation analysis formula, which
-measures the strength of the 'linear' relationships between the raw data
-from both variables, rather than their ranks. This is an dimensionless
-coefficient, meaning that there are no data-related boundaries to be
-considered when conducting analyses with this formula, which is a reason
-why this coefficient is the first formula researchers try.
-
-$\begin{aligned} r = 1- \frac{6\sum_{i=1}^n D_{i}^n}{n (n^2 - 1)}\end{aligned}$
-
-
-We can identify through a correlation matrix the data of our set, whether it is positive or negative. The main outputs are displayed in Figure \@ref(fig:Figure2). The comprehensive analysis with methodological routine can be follow in author Github repository [Lenght-Enviromental_Krill](https://github.com/MauroMardones/Krill_Length_Cor.git)
-
-```{r Figure2, echo=FALSE, out.width='80%', fig.cap="Pearson correlation between krill length and temporal (years) and environmental factors in the WAP"}
-knitr::include_graphics('index_files/figure-html/corr_length.png')
-```
-## GLMM models
-
-Random effects are a way to model variability in data that comes from
-factors that cannot be directly measured or controlled. In the context
-of statistical models, random effects refer to variables that are
-assumed to have an unknown probability distribution, and are included in
-the model to explain some of the variation in the data.
-
-For example, in a study comparing the test scores of students at
-different schools, random effects refer to differences between schools
-that cannot be explained by variables measured in the study, such as
-students' socioeconomic status. These differences may be caused by
-factors such as the quality of teaching, school culture, or geographic
-location.
-
-Random effects are often modeled by using mixed effects models, which
-combine random and fixed effects in the same model. Fixed effects are
-those that are assumed to be constant for all study units and are
-directly measured, while random effects are those that are assumed to
-vary randomly across study units and cannot be directly measured.
-
-In short, random effects are a way of modeling variability in data that
-cannot be directly explained by the variables measured in the study, and
-are included in the model to improve the precision of the estimates and
-reduce the potential for bias [@McCulloch2001].
-
-In this analysis we try test spatial componentent in `cellid` variable like
-random effects with `lme4` package [@Bates2015] 
-
-We fitted two linear mixed-effects models to evaluate the influence of environmental variables on krill length:
-
-1. Model 1:  
-\[
-\text{Length} = \beta_0 + \beta_1 \cdot \text{Year} + \beta_2 \cdot \text{Chl} + \beta_3 \cdot \text{SIC} + \beta_4 \cdot \text{SST} + \text{Random Effect}_{\text{cellid}}
-\]
-
-2. Model 2:  
-\[
-\text{Length} = \beta_0 + \beta_1 \cdot \text{Year} + \beta_2 \cdot \text{Chl} + \beta_3 \cdot \text{SIC} + \beta_4 \cdot \text{SST} + \text{Random Effect}_{\text{Year}}
-\]
-
-Here, \(\beta_0\) is the intercept, \(\beta_1, \beta_2, \beta_3, \beta_4\) are the fixed-effect coefficients for the variables *Year*, *Chl*, *SIC*, and *SST*, respectively, and the random effects are specified at the *cellid* and *Year* levels in the respective models.
-
-Main outpus displayed in Figure \@ref(fig:Figure3).
-
-```{r Figure3, echo=FALSE,  out.width='80%', fig.cap="Random effects of location (cell) and fixed effects of environmental variables on krill length, with scattered points indicating variability in impact in estimates of the main variable."}
-knitr::include_graphics('index_files/figure-html/glmm.png')
-```
 ## LBSPR Modeling
 
 ### Biological and fishery parameters krill
@@ -1351,7 +1248,6 @@ kbl(spr48wide_reorganizado,
     kable_styling(latex_options = c("scale_down", "hold_position"))
 
 ```
-Now, just 48.1 (Figure \@ref(fig:Figure12)).
 
 ```{r Figure12, warning=FALSE, fig.cap="Krill Intrinsic Productivity (SPR) in 48.1 by year"}
 spr481plot <- ggplot(spr48 %>% 
@@ -1382,7 +1278,6 @@ spr481plot <- ggplot(spr48 %>%
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank()
   )
-spr481plot
 ```
 
 
@@ -1426,8 +1321,6 @@ val481_largo$SPRstra <- rep("481", nrow(val481_largo))
 ```
 
 
-Now, boxplot just 48.1 (Figure \@ref(fig:Figure13)).
-
 
 ```{r Figure13, warning=FALSE, fig.cap="Sensitivity analysis to 48.1 about asymptotic length VB"}
 sensprototest481 <- ggplot(val481_largo %>%
@@ -1462,7 +1355,6 @@ sensprototest481 <- ggplot(val481_largo %>%
   scale_fill_identity() +  # Usar el color definido en aes(fill) directamente
   scale_color_identity()   # Usar el color definido en aes(color) directamente
 
-sensprototest481
 ```
 
 
@@ -1500,7 +1392,6 @@ valprofit481_largo$SPRstra <- rep("481", nrow(valprofit481_largo))
 
 ```
 
-And, plot to  k scenarios (Figure \@ref(fig:Figure14)).
 
 
 ```{r Figure14, warning=FALSE, fig.cap="Sensitivity analysis to 48.1 about k"}
@@ -1533,7 +1424,6 @@ senspr481 <- ggplot(valprofit481_largo %>%
   scale_fill_identity() +  # Usar el color definido en aes(fill) directamente
   scale_color_identity()   # Usar el color definido en aes(color) directamente
 
-senspr481
 ```                      
 
 Finally, join plot to 48.1 analysis; `spr481plot`, `sensprototest481`, `senspro481` (Figure \@ref(fig:Figure15)).

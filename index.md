@@ -2,7 +2,7 @@
 title: "Supporting Information 1"
 subtitle: "Spatial and temporal variability in the intrinsic productivity of Antarctic krill (Euphausia superba) along the Western Antarctic Peninsula under environmental and life history scenarios"
 author: "Mardones, M; Jarvis Mason, E.T.;  Santa Cruz, F.; Watters, G.; Cárdenas, C.A"
-date:  "13 December, 2024"
+date:  "04 March, 2025"
 bibliography: LBSPR.bib
 csl: apa.csl
 link-citations: yes
@@ -73,112 +73,7 @@ For this analysis, data from the monitoring of the krill fishery were used, whic
 
 The information gaps (years without sizes composition data) are not calculated because there is no autocorrelation between years, but singular estimators over time.
 
-## Correlation Analysis
 
-Regarding difference between `Spearman` and `pearson`, both, the
-Spearman test and the Pearson test are statistical methods used to
-assess the correlation between two variables. The main difference
-between them is that the Pearson test evaluates the linear correlation
-between two continuous variables, while the Spearman test evaluates the
-monotonic correlation between two continuous or order variables.
-
-In the case of the Pearson test, the degree of association between two
-continuous variables is measured through a correlation coefficient that
-varies between -1 and 1. A value of 1 indicates a perfectly positive
-correlation, a value of -1 indicates a perfectly negative correlation,
-and a value of 0 indicates no correlation between the two variables.
-
-On the other hand, the Spearman test is based on the range of the
-variables, instead of the actual values. In other words, this test
-evaluates the correlation between two order variables, where the values
-of each variable are ranked from lowest to highest, and ranges are used
-instead of actual values. Spearman's correlation coefficient also varies
-between -1 and 1, but it measures the monotonic correlation between two
-variables, that is, if one variable increases, the other variable also
-increases or decreases[@McCulloch2001].
-
-In summary, the main difference between the Spearman test and the
-Pearson test is that the former is used to assess the monotonic
-correlation between two order variables, while the latter is used to
-assess the linear correlation between two continuous variables.
-
--   Spearman's Rank Correlation Coefficient
-
-This coefficient is used to see if there is any significant relationship
-between the two datasets, and operates under the assumption that the
-data being used is ordinal, which here means that the numbers do not
-indicate quantity, but rather they signify a position of place of the
-subject's standing (e.g. 1st, 2nd, 3rd, etc.)
-
-$\begin{aligned} r_s = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2}\sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}} \end{aligned}$
-
--   Pearson Product-Moment Coefficient
-
-This is the most widely used correlation analysis formula, which
-measures the strength of the 'linear' relationships between the raw data
-from both variables, rather than their ranks. This is an dimensionless
-coefficient, meaning that there are no data-related boundaries to be
-considered when conducting analyses with this formula, which is a reason
-why this coefficient is the first formula researchers try.
-
-$\begin{aligned} r = 1- \frac{6\sum_{i=1}^n D_{i}^n}{n (n^2 - 1)}\end{aligned}$
-
-
-We can identify through a correlation matrix the data of our set, whether it is positive or negative. The main outputs are displayed in Figure \@ref(fig:Figure2). The comprehensive analysis with methodological routine can be follow in author Github repository [Lenght-Enviromental_Krill](https://github.com/MauroMardones/Krill_Length_Cor.git)
-
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/corr_length.png" alt="Pearson correlation between krill length and temporal (years) and environmental factors in the WAP" width="80%" />
-<p class="caption">(\#fig:Figure2)Pearson correlation between krill length and temporal (years) and environmental factors in the WAP</p>
-</div>
-## GLMM models
-
-Random effects are a way to model variability in data that comes from
-factors that cannot be directly measured or controlled. In the context
-of statistical models, random effects refer to variables that are
-assumed to have an unknown probability distribution, and are included in
-the model to explain some of the variation in the data.
-
-For example, in a study comparing the test scores of students at
-different schools, random effects refer to differences between schools
-that cannot be explained by variables measured in the study, such as
-students' socioeconomic status. These differences may be caused by
-factors such as the quality of teaching, school culture, or geographic
-location.
-
-Random effects are often modeled by using mixed effects models, which
-combine random and fixed effects in the same model. Fixed effects are
-those that are assumed to be constant for all study units and are
-directly measured, while random effects are those that are assumed to
-vary randomly across study units and cannot be directly measured.
-
-In short, random effects are a way of modeling variability in data that
-cannot be directly explained by the variables measured in the study, and
-are included in the model to improve the precision of the estimates and
-reduce the potential for bias [@McCulloch2001].
-
-In this analysis we try test spatial componentent in `cellid` variable like
-random effects with `lme4` package [@Bates2015] 
-
-We fitted two linear mixed-effects models to evaluate the influence of environmental variables on krill length:
-
-1. Model 1:  
-\[
-\text{Length} = \beta_0 + \beta_1 \cdot \text{Year} + \beta_2 \cdot \text{Chl} + \beta_3 \cdot \text{SIC} + \beta_4 \cdot \text{SST} + \text{Random Effect}_{\text{cellid}}
-\]
-
-2. Model 2:  
-\[
-\text{Length} = \beta_0 + \beta_1 \cdot \text{Year} + \beta_2 \cdot \text{Chl} + \beta_3 \cdot \text{SIC} + \beta_4 \cdot \text{SST} + \text{Random Effect}_{\text{Year}}
-\]
-
-Here, \(\beta_0\) is the intercept, \(\beta_1, \beta_2, \beta_3, \beta_4\) are the fixed-effect coefficients for the variables *Year*, *Chl*, *SIC*, and *SST*, respectively, and the random effects are specified at the *cellid* and *Year* levels in the respective models.
-
-Main outpus displayed in Figure \@ref(fig:Figure3).
-
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/glmm.png" alt="Random effects of location (cell) and fixed effects of environmental variables on krill length, with scattered points indicating variability in impact in estimates of the main variable." width="80%" />
-<p class="caption">(\#fig:Figure3)Random effects of location (cell) and fixed effects of environmental variables on krill length, with scattered points indicating variability in impact in estimates of the main variable.</p>
-</div>
 ## LBSPR Modeling
 
 ### Biological and fishery parameters krill
@@ -1143,36 +1038,47 @@ Figure \@ref(fig:Figure9) provides a plot by strata with scenarios of L~inf~ of 
 
 
 ``` r
+# Crear una nueva columna para identificar los puntos de Linf60
+valtodo <- valtodo %>%
+  mutate(Highlight = ifelse(Parameter == "Linf60", "Highlighted", "Normal"))
+
+# Crear el gráfico con jitter coloridos y boxplots vacíos con borde negro
 sensproto <- ggplot(valtodo %>%
-         drop_na() %>% 
-           filter(SPR < 0.65),
-       aes(x = SPR,
-           y = Parameter)) +
-  geom_boxplot(trim=TRUE,
-                position=position_dodge(0.9),
-              adjust = 1/5)+
-   geom_vline(xintercept = 0.75,
-             colour= '#006d2c',
-             alpha=0.5,
-             linetype=2)+
-  geom_vline(xintercept = 0.20, 
-             colour= '#bd0026',
-             alpha=0.5)+
-  geom_jitter(alpha=0.4,
-              color="black",
+                      drop_na() %>%
+                      filter(SPR < 0.65),
+                    aes(x = SPR,
+                        y = Parameter)) +
+  geom_boxplot(aes(fill = ifelse(Parameter == "Linf60", "red", NA)),  # Destacar el boxplot de Linf60 en rojo
+               trim = TRUE,
+               color = "black",  # Borde negro
+               position = position_dodge(0.9),
+               adjust = 1/5) +
+  geom_vline(xintercept = 0.75,
+             colour = '#006d2c',
+             alpha = 0.5,
+             linetype = 2) +
+  geom_vline(xintercept = 0.20,
+             colour = '#bd0026',
+             alpha = 0.5) +
+  geom_jitter(aes(fill = ifelse(Parameter == "Linf60", "red", NA)),  # Destacar los puntos de Linf60 en rojo
+              shape = 21,  # Forma de puntos vacíos con borde
+              color = "black",  # Borde negro para todos los puntos
+              alpha = 0.5,  # Transparencia
               height = 0,
-              width = 0.1)+
+              width = 0.1) +
   facet_wrap(~SPRstra,
-             ncol=11)+
-  labs(x="SPR",
-       y="VB Parameters tested")+
-  theme_minimal()+
-  theme(legend.position="top",
+             ncol = 11) +
+  labs(x = "SPR",
+       y = "VB Parameters tested") +
+  theme_minimal() +
+  theme(legend.position = "none",  # Ocultamos la leyenda
         axis.text.x = element_text(angle = 90, hjust = 2),
         panel.background = element_rect(),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())+
-  xlim(0, 1)
+        panel.grid.minor = element_blank()) +
+  xlim(0, 1) +
+  scale_fill_identity()  # Usar el color definido en aes(fill) directamente
+
 sensproto
 ```
 
@@ -1566,35 +1472,35 @@ kbl(tablk_reorganizado,
 
 
 ``` r
+# Crear el gráfico con los elementos resaltados para Parameter == "Med"
 sensproto2 <- ggplot(valprotodo %>% 
                        filter(SPR < 0.99) %>% 
                        drop_na() %>% 
                        mutate(Parameter = factor(Parameter, 
-                                                 levels = c("Low", "Med", "High"))), # Orden deseado,
-                    aes(x = Parameter,
-                        y = SPR)) +
-  geom_boxplot()+
-  geom_hline(yintercept = 0.75,
-             colour= '#006d2c',
-             alpha=0.5,
-             linetype="dashed")+
-  geom_hline(yintercept = 0.20, 
-             colour= '#bd0026',
-             alpha=0.5)+
-  geom_jitter(alpha=0.4,
-             color="black",
-             width=0.1)+
-  facet_wrap(~SPRstra,
-            ncol=5)+
-  labs(y="SPR",
-       x="Growth Scenario")+
-  theme_minimal()+
-  theme(legend.position="none",
+                                                 levels = c("Low", "Med", "High"))), # Orden deseado
+                     aes(x = Parameter, y = SPR)) +
+  # Boxplot con color condicional
+  geom_boxplot(aes(fill = Parameter), alpha = 0.6) +
+  # Líneas horizontales de referencia
+  geom_hline(yintercept = 0.75, colour= '#006d2c', alpha=0.5, linetype="dashed") +
+  geom_hline(yintercept = 0.20, colour= '#bd0026', alpha=0.5) +
+  # Jitter con color condicional
+  geom_jitter(aes(color = Parameter), alpha = 0.5, width = 0.1) +
+  # Facet por SPRstra
+  facet_wrap(~SPRstra, ncol = 5) +
+  # Etiquetas
+  labs(y = "SPR", x = "Growth Scenario") +
+  # Tema minimalista
+  theme_minimal() +
+  theme(legend.position = "none",
         panel.background = element_rect(),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())+
-  scale_fill_viridis_d(option="F",
-                       name="Strata")
+        panel.grid.minor = element_blank()) +
+  # Especificar colores manualmente para Parameter
+  scale_fill_manual(values = c("Low" = "white", "Med" = "red", "High" = "white")) +
+  scale_color_manual(values = c("Low" = "black", "Med" = "red", "High" = "black"))
+
+# Mostrar el gráfico
 sensproto2
 ```
 
@@ -1886,7 +1792,6 @@ kbl(spr48wide_reorganizado,
   </tr>
 </tbody>
 </table>
-Now, just 48.1 (Figure \@ref(fig:Figure12)).
 
 
 ``` r
@@ -1918,13 +1823,7 @@ spr481plot <- ggplot(spr48 %>%
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank()
   )
-spr481plot
 ```
-
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/Figure12-1.jpeg" alt="Krill Intrinsic Productivity (SPR) in 48.1 by year"  />
-<p class="caption">(\#fig:Figure12)Krill Intrinsic Productivity (SPR) in 48.1 by year</p>
-</div>
 
 
 sensitivity analysis to L~inf~ to 48.1
@@ -1969,8 +1868,6 @@ val481_largo$SPRstra <- rep("481", nrow(val481_largo))
 ```
 
 
-Now, boxplot just 48.1 (Figure \@ref(fig:Figure13)).
-
 
 
 ``` r
@@ -1979,36 +1876,33 @@ sensprototest481 <- ggplot(val481_largo %>%
            filter(SPR < 0.65),
        aes(x = SPR,
            y = Parameter)) +
-  geom_boxplot(trim=TRUE,
-                position=position_dodge(0.9),
-              adjust = 1/5)+
-   geom_vline(xintercept = 0.75,
+  geom_boxplot(aes(fill = ifelse(Parameter == "Linf60", "red", "white")),  # Destacar el boxplot de Linf60 en rojo
+               trim=TRUE,
+               position=position_dodge(0.9),
+               adjust = 1/5) +
+  geom_vline(xintercept = 0.75,
              colour= '#006d2c',
              alpha=0.5,
-             linetype=2)+
+             linetype=2) +
   geom_vline(xintercept = 0.20, 
              colour= '#bd0026',
-             alpha=0.5)+
-  geom_jitter(alpha=0.4,
-              color="black",
+             alpha=0.5) +
+  geom_jitter(aes(color = ifelse(Parameter == "Linf60", "red", "black")),  # Destacar los puntos de Linf60 en rojo
+              alpha=0.4,
               height = 0,
-              width = 0.1)+
+              width = 0.1) +
   labs(x="SPR",
-       y="VB Parameters tested")+
-  theme_minimal()+
+       y="VB Parameters tested") +
+  theme_minimal() +
   theme(legend.position="top",
         axis.text.x = element_text(angle = 90, hjust = 2),
         panel.background = element_rect(),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())+
-  xlim(0, 1)
-sensprototest481
+        panel.grid.minor = element_blank()) +
+  xlim(0, 1) +
+  scale_fill_identity() +  # Usar el color definido en aes(fill) directamente
+  scale_color_identity()   # Usar el color definido en aes(color) directamente
 ```
-
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/Figure13-1.jpeg" alt="Sensitivity analysis to 48.1 about asymptotic length VB"  />
-<p class="caption">(\#fig:Figure13)Sensitivity analysis to 48.1 about asymptotic length VB</p>
-</div>
 
 
 Now, sensitivity analysis to *k* to 48.1
@@ -2046,45 +1940,39 @@ valprofit481_largo <- pivot_longer(valprofit481,
 valprofit481_largo$SPRstra <- rep("481", nrow(valprofit481_largo))
 ```
 
-And, plot to  k scenarios (Figure \@ref(fig:Figure14)).
 
 
 
 ``` r
 senspr481 <- ggplot(valprofit481_largo %>% 
                        filter(SPR < 0.99) %>% 
-                       drop_na()%>%
+                       drop_na() %>%
                        mutate(Parameter = factor(Parameter, 
                                                  levels = c("Low", "Med", "High"))), # Orden deseado
                     aes(x = Parameter, 
                         y = SPR)) +
-  geom_boxplot()+
+  geom_boxplot(aes(fill = ifelse(Parameter == "Med", "red", "white")),  # Destacar el boxplot de "Med" en rojo
+               color = "black") +  # Color del borde del boxplot
   geom_hline(yintercept = 0.75,
              colour= '#006d2c',
              alpha=0.5,
-             linetype="dashed")+
+             linetype="dashed") +
   geom_hline(yintercept = 0.20, 
              colour= '#bd0026',
-             alpha=0.5)+
-  geom_jitter(alpha=0.4,
-             color="black",
-             width=0.1)+
+             alpha=0.5) +
+  geom_jitter(aes(color = ifelse(Parameter == "Med", "red", "black")),  # Destacar los puntos de "Med" en rojo
+              alpha=0.4,
+              width=0.1) +
   labs(y="SPR",
-       x="Growth Scenario")+
-  theme_minimal()+
+       x="Growth Scenario") +
+  theme_minimal() +
   theme(legend.position="none",
         panel.background = element_rect(),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())+
-  scale_fill_viridis_d(option="F",
-                       name="Strata")
-senspr481
+        panel.grid.minor = element_blank()) +
+  scale_fill_identity() +  # Usar el color definido en aes(fill) directamente
+  scale_color_identity()   # Usar el color definido en aes(color) directamente
 ```
-
-<div class="figure" style="text-align: center">
-<img src="index_files/figure-html/Figure14-1.jpeg" alt="Sensitivity analysis to 48.1 about k"  />
-<p class="caption">(\#fig:Figure14)Sensitivity analysis to 48.1 about k</p>
-</div>
 
 Finally, join plot to 48.1 analysis; `spr481plot`, `sensprototest481`, `senspro481` (Figure \@ref(fig:Figure15)).
 
@@ -2094,7 +1982,8 @@ Finally, join plot to 48.1 analysis; `spr481plot`, `sensprototest481`, `senspro4
 ggarrange(spr481plot,
           sensprototest481,
           senspr481,
-          ncol=3)
+          ncol=3,
+          labels = c("A", "B", "C"))
 ```
 
 <div class="figure" style="text-align: center">
