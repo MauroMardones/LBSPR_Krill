@@ -179,12 +179,11 @@ This research was supported by the following funding sources: the INACH "Marine 
 
 - Supporting Information 1. 
 
-Main equations and guide to apply LBSPR in krill could be found in corresponding author Github repository. [LBSPRKrill](https://mauromardones.github.io/LBSPR_Krill/).
+Essential formulas, figures and code snippets for the application of the LBSPR model in studying krill populations within the West Antarctic Peninsula (WAP) region in this link [LBSPRKrill](https://mauromardones.github.io/LBSPR_Krill/).
 
 - Supporting Information 2. 
 
-Templates data and raw codes in [Repo LBSPR Assessment Model](https://github.com/MauroMardones/LBSPR_Krill?tab=readme-ov-file)
-
+Code and analysis to identified environmental influences on krill length using mixed-effects models across spatial and temporal scale in this link [Repo LBSPR Assessment Model](https://mauromardones.github.io/Krill_Length_Cor/)
 
 \newpage
 
