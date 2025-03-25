@@ -1084,7 +1084,7 @@ kbl(tablk_reorganizado,
 #write_csv(tablk_reorganizado, "SPR_K.csv")
 ```
 
-```{r Figure10, warning=FALSE, fig.cap="Sensitivity analysis by strata about krill growth type", fig.height=4, fig.width=8}
+```{r Figure10, warning=FALSE, fig.cap="Sensitivity analysis by strata about krill growth type", fig.height=3, fig.width=8}
 # Crear el gráfico con los elementos resaltados para Parameter == "Med"
 sensproto2 <- ggplot(valprotodo %>% 
                        filter(SPR < 0.99) %>% 
@@ -1429,7 +1429,7 @@ senspr481 <- ggplot(valprofit481_largo %>%
 Finally, join plot to 48.1 analysis; `spr481plot`, `sensprototest481`, `senspro481` (Figure \@ref(fig:Figure15)).
 
 
-```{r Figure15, warning=FALSE, fig.cap="Plot to SPR in different context to 48.1 subarea", fig.height=4, fig.width=8}
+```{r Figure15, warning=FALSE, fig.cap="Plot to SPR in different context to 48.1 subarea", fig.height=3, fig.width=8}
 ggarrange(spr481plot,
           sensprototest481,
           senspr481,

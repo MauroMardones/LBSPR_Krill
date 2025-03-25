@@ -2,7 +2,7 @@
 title: "Supporting Information 1"
 subtitle: "Disparate estimates of intrinsic productivity for Antarctic krill (Euphausia superba) across small spatial scales, under a rapidly changing ocean."
 author: "Mardones, M; Jarvis Mason, E.T.;  Santa Cruz, F.; Watters, G.; Cárdenas, C.A"
-date:  "04 March, 2025"
+date:  "11 March, 2025"
 bibliography: LBSPR.bib
 csl: apa.csl
 link-citations: yes
