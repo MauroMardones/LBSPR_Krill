@@ -157,7 +157,10 @@ evaluate_LBSPR <- function(F) {
   LB_fit <- LBSPRfit(LB_obj, LB_data)
   
   # Guardar resultados
-  return(data.frame(F_real = F, F_est = LB_fit@FM, SPR_real = exp(-F), SPR_est = LB_fit@SPR))
+  return(data.frame(F_real = F, 
+                    F_est = LB_fit@FM, 
+                    SPR_real = exp(-F), 
+                    SPR_est = LB_fit@SPR))
 }
 
 
