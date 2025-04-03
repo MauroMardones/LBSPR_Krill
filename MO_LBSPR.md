@@ -1,0 +1,404 @@
+---
+title: "Supporting Information 3"
+subtitle: "Disparate estimates of intrinsic productivity for Antarctic krill (Euphausia superba) across small spatial scales, under a rapidly changing ocean."
+author: "Mardones, M; Jarvis Mason, E.T.;  Santa Cruz, F.; Watters, G.; Cárdenas, C.A"
+date:  "03 April, 2025"
+bibliography: LBSPR.bib
+csl: apa.csl
+link-citations: yes
+linkcolor: blue
+output:
+  bookdown::html_document2:
+    fig_caption: yes
+    keep_md: true
+    toc: true
+    toc_deep: 3
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    theme: cosmo
+    fontsize: 0.9em
+    linestretch: 1.7
+    html-math-method: katex
+    self-contained: true
+    code-tools: true
+    number_sections: false
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+
+
+
+
+``` r
+# Cargar paquetes necesarios
+library(LBSPR)
+library(dplyr)
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+``` r
+library(ggplot2)
+library(egg)
+```
+
+```
+## Loading required package: gridExtra
+```
+
+```
+## 
+## Attaching package: 'gridExtra'
+```
+
+```
+## The following object is masked from 'package:dplyr':
+## 
+##     combine
+```
+
+
+# Methodological Approach: Operating Model Construction  
+
+To evaluate the performance of the Length-Based Spawning Potential Ratio (LBSPR) model in estimating fishing mortality (*F*) and Spawning Potential Ratio (*SPR*) in krill (*Euphausia superba*), we developed an Operating Model (OM) that simulates population dynamics under different fishing pressures. The OM provides a controlled environment to generate synthetic length-frequency data, allowing us to assess the accuracy and bias of LBSPR estimates.  
+
+
+
+### Population Dynamics Simulation  
+The population was modeled using a size-structured framework based on the von Bertalanffy growth function (VBGF):  
+
+\[
+L_t = L_{\infty} \left(1 - e^{-k(t - t_0)}\right)
+\]
+
+where:  
+- \( L_t \) is the length at age \( t \),  
+- \( L_{\infty} \) is the asymptotic maximum length,  
+- \( k \) is the growth coefficient,  
+- \( t_0 \) is the theoretical age at length zero.  
+
+Natural mortality (\( M \)) was assumed constant and taken from the literature. Recruitment followed a Beverton-Holt stock-recruitment relationship, and selectivity was modeled as a logistic function.  
+
+### Fishing Scenarios  
+We simulated multiple fishing mortality scenarios (\( F \)) to assess the robustness of LBSPR estimates:  
+- Low exploitation: \( F = 0.2 \)  
+- Moderate exploitation: \( F = 0.5 \)  
+- High exploitation: \( F = 1.0 \)  
+- Overexploitation: \( F = 1.5 \)  
+
+For each scenario, a length-based catch-at-size distribution was generated using a deterministic fishing process combined with stochastic recruitment.  
+
+### Generation of Length-Frequency Data  
+The OM generated synthetic length-frequency data by sampling individuals from the simulated population at different time steps. The sampling process mimicked empirical fisheries-dependent and fisheries-independent data collection.   
+
+We applied sampling variability to reflect realistic observation errors and deviations due to gear selectivity.  
+
+
+
+### Estimation Procedure Using LBSPR  
+
+The synthetic length data were analyzed using the LBSPR framework (R package *LBSPR*). The model estimated:  
+1. Fishing mortality (*F*)  
+2. Spawning Potential Ratio (*SPR*)  
+
+The estimated values were compared against true values from the OM to assess bias and accuracy.  
+
+### Performance Evaluation Metrics  
+
+To quantify the performance of LBSPR, we used:  
+- Bias: \( Bias = \frac{F_{est} - F_{true}}{F_{true}} \)  
+- Mean Absolute Error (MAE): \( MAE = \frac{1}{n} \sum |F_{est} - F_{true}| \)  
+- Root Mean Squared Error (RMSE): \( RMSE = \sqrt{\frac{1}{n} \sum (F_{est} - F_{true})^2} \)  
+
+Additionally, we plotted estimated vs. true values to visualize systematic deviations in LBSPR estimates.  
+
+### Interpretation of Results  
+- If estimates align with true values, LBSPR is accurate and unbiased.  
+- If estimates consistently overestimate or underestimate \( F \) and \( SPR \), LBSPR exhibits systematic bias.  
+- Performance under different exploitation levels highlights the robustness of LBSPR in krill stock assessments.  
+
+
+## MO 
+
+
+``` r
+# Definir Parámetros del Krill
+set.seed(123)
+Linf <- 60     # Longitud asintótica (mm)
+k <- 0.4       # Coeficiente de crecimiento
+t0 <- -0.5     # Edad a L=0
+M <- 0.4       # Mortalidad natural
+F_scenarios <- seq(0,1.5,0.5)  # Diferentes niveles de explotación
+years <- 30    # Simular 30 años
+
+# 2️⃣ Función para Simular Población
+simulate_population <- function(F, years) {
+  ages <- sample(seq(0, 8, by = 0.1), size = 5000, replace = TRUE)  # Distribución de edades
+  lengths <- Linf * (1 - exp(-k * (ages - t0)))  # Crecimiento
+  survival <- exp(- (M + F) * ages)  # Mortalidad natural + pesca
+  
+  # Generar estructura de tallas final
+  krill_pop <- data.frame(Age = ages, Length = lengths, Survival = survival) %>%
+    filter(runif(n()) < Survival)  # Muestreo de supervivientes
+  
+  return(krill_pop)
+}
+
+# 3️⃣ Aplicar Modelo LBSPR y Evaluar Sesgo
+evaluate_LBSPR <- function(F) {
+  krill_data <- simulate_population(F, years)  # Simula población
+  
+  # Simular muestreo de captura
+  sampled_data <- krill_data %>% sample_n(300)
+  
+  # Configurar parámetros del modelo LBSPR
+  LB_obj <- new("LB_pars")
+  LB_obj@Linf <- Linf
+  LB_obj@MK <- M / k  
+  LB_obj@L50 <- 35  # Longitud media de madurez
+  LB_obj@L95 <- 50  # Longitud al 95% de madurez
+  
+  # Crear objeto de longitudes
+  LB_data <- new("LB_lengths")
+  LB_data@LMids <- seq(0, Linf, by = 2)
+  
+  # Crear histograma de longitudes
+  hist_data <- hist(sampled_data$Length, breaks = LB_data@LMids, plot = FALSE)$counts
+  LB_data@LData <- matrix(hist_data, ncol = 1)
+  
+  # 🔹 Solución del error de "Years must be numeric"
+  LB_data@Years <- 1  # Definir número de años
+  LB_data@NYears <- 1
+  
+  # Ajustar modelo LBSPR
+  LB_fit <- LBSPRfit(LB_obj, LB_data)
+  
+  # Guardar resultados
+  return(data.frame(F_real = F, F_est = LB_fit@FM, SPR_real = exp(-F), SPR_est = LB_fit@SPR))
+}
+
+
+
+# 4️⃣ Evaluar Sesgo en Distintos Escenarios
+results <- lapply(F_scenarios, evaluate_LBSPR) %>% bind_rows()
+```
+
+```
+## A blank LB_pars object created
+```
+
+```
+## Default values have been set for some parameters
+```
+
+```
+## File not found. A blank LB_lengths object created
+```
+
+```
+## Fitting model
+```
+
+```
+## Year:
+```
+
+```
+## 1
+```
+
+```
+## A blank LB_pars object created
+```
+
+```
+## Default values have been set for some parameters
+```
+
+```
+## File not found. A blank LB_lengths object created
+```
+
+```
+## Fitting model
+```
+
+```
+## Year:
+```
+
+```
+## 1
+```
+
+```
+## A blank LB_pars object created
+```
+
+```
+## Default values have been set for some parameters
+```
+
+```
+## File not found. A blank LB_lengths object created
+```
+
+```
+## Fitting model
+```
+
+```
+## Year:
+```
+
+```
+## 1
+```
+
+```
+## A blank LB_pars object created
+```
+
+```
+## Default values have been set for some parameters
+```
+
+```
+## File not found. A blank LB_lengths object created
+```
+
+```
+## Fitting model
+```
+
+```
+## Year:
+```
+
+```
+## 1
+```
+
+
+
+``` r
+# 5️⃣ Visualizar Resultados
+Fses <- ggplot(results, aes(x = F_real, y = F_est)) +
+  geom_point() +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
+  labs(x = "F Real", y = "F Estimado (LBSPR)", title = "") +
+  theme_minimal()
+Fses
+```
+
+![](MO_LBSPR_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+
+  ¿Qué representa el gráfico?  
+- Eje X (F Real): Valores reales de la mortalidad por pesca utilizados en la simulación.  
+- Eje Y (F Estimado - LBSPR): Valores de F estimados por el modelo LBSPR.  
+- Línea discontinua: Representa la relación ideal `F estimado = F real`, es decir, una estimación sin sesgo.  
+
+
+
+  ¿Cómo interpretar la relación entre los puntos y la línea?  
+- Si los puntos están sobre la línea, LBSPR estima correctamente F.  
+- Si los puntos están por debajo de la línea, LBSPR subestima F.  
+- Si los puntos están por encima de la línea, LBSPR sobreestima F.  
+
+
+  ¿Qué se observa en este gráfico?  
+- Para valores bajos de F (~0 - 0.5), LBSPR parece estimar correctamente F o con una ligera sobreestimación.  
+- Para valores medios y altos de F (>0.5), LBSPR sobrestima fuertemente F.   
+  - Para `F real = 1.0`, la estimación de LBSPR es aproximadamente 3.0.  
+  - Para `F real = 1.5`, la estimación de LBSPR es casi 4.0.  
+
+
+ Posibles causas del sesgo en la estimación de F  
+Este sesgo creciente sugiere que LBSPR sobrestima la mortalidad por pesca cuando la explotación es alta. Algunas posibles razones:  
+
+1. Selección errónea de parámetros de crecimiento y longevidad  
+   - Si la población simulada tiene crecimiento más rápido o longevidad mayor a la asumida en LBSPR, el modelo puede interpretar que hay una mortalidad por pesca mayor de la real.  
+
+2. Errores en la distribución de tallas de la muestra  
+   - Si la muestra tiene un sesgo hacia individuos pequeños, LBSPR puede interpretar que la mortalidad por pesca es mayor de la real, ya que ve menos individuos grandes.  
+
+3. LBSPR puede no funcionar bien en escenarios de alta explotación  
+   - LBSPR está diseñado para poblaciones en equilibrio. En escenarios de sobrepesca extrema, puede no capturar bien la dinámica de la población y exagerar la mortalidad por pesca.  
+
+---
+
+### Conclusión y recomendaciones  
+- LBSPR funciona bien con F bajas pero sobrestima F en escenarios de alta explotación.  
+- Posibles soluciones:  
+  - Ajustar la distribución de tallas de la muestra para ver si el sesgo disminuye.  
+  - Probar con diferentes valores de L∞, k y M en la simulación para evaluar sensibilidad.  
+  - Usar métodos alternativos para estimar F en escenarios de alta explotación, como modelos basados en captura-edad o análisis de cohortes.  
+
+
+
+``` r
+sprses <- ggplot(results, aes(x = SPR_real, y = SPR_est)) +
+  geom_point() +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
+  labs(x = "SPR Real", y = "SPR Estimado (LBSPR)", title = "") +
+  theme_minimal()
+sprses
+```
+
+![](MO_LBSPR_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+
+
+
+Este gráfico muestra el sesgo en la estimación del Spawning Potential Ratio (SPR) usando el modelo LBSPR. Vamos a interpretarlo:
+
+  ¿Qué representa el gráfico?
+- Eje X (SPR Real): Valores reales de SPR usados en la simulación.
+- Eje Y (SPR Estimado - LBSPR): Valores de SPR estimados por el modelo LBSPR.
+- Línea discontinua: Representa la relación ideal donde `SPR estimado = SPR real`, es decir, sin sesgo.
+
+ ¿Cómo interpretar la relación entre los puntos y la línea diagonal?
+- Si los puntos están sobre la línea, LBSPR estima correctamente el SPR.
+- Si los puntos están por debajo de la línea, significa que LBSPR subestima el SPR.
+- Si los puntos están por encima de la línea, LBSPR sobreestima el SPR.
+
+ ¿Qué se observa en este gráfico?
+- Para SPR alto (~1.0), LBSPR estima bien el valor (el punto cae sobre la línea).
+- Para valores intermedios de SPR (~0.6 - 0.4), LBSPR subestima el SPR.
+- Para valores bajos de SPR (< 0.3), LBSPR subestima drásticamente, llegando a valores cercanos a 0.
+
+Interpretación y Posibles Causas del Sesgo
+La subestimación del SPR en valores bajos puede deberse a:
+1. Problemas con la selectividad de la pesca: Si los datos de tallas tienen pocos individuos grandes, el modelo puede inferir erróneamente que la población está más explotada de lo que realmente está.
+2. Suposiciones del modelo LBSPR: LBSPR asume una estructura de crecimiento y selectividad fija. Si la realidad es diferente (por ejemplo, crecimiento más rápido o selectividad variable), esto puede inducir sesgo.
+3. Tamaño de muestra insuficiente: Si hay poca información sobre individuos maduros en los datos simulados, LBSPR podría malinterpretar la relación longitud-madurez y subestimar el SPR.
+4. Efecto de una mortalidad por pesca alta: En escenarios donde la mortalidad por pesca es alta, el modelo puede interpretar erróneamente que la población tiene menor capacidad reproductiva de lo que realmente tiene.
+
+Conclusión
+- LBSPR estima bien el SPR en valores altos pero subestima fuertemente en valores bajos.
+- Este sesgo implica que en poblaciones sobreexplotadas LBSPR podría indicar una situación peor de la real, lo que podría llevar a una sobreestimación de la necesidad de reducción de esfuerzo pesquero.
+- Es importante hacer pruebas de sensibilidad variando:
+  - Selectividad y mortalidad por pesca en las simulaciones.
+  - Distribución de tallas en la muestra.
+  - Número de iteraciones para evaluar estabilidad de las estimaciones.
+
+
+
+
