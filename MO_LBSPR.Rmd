@@ -73,11 +73,11 @@ We simulated multiple fishing mortality scenarios (\( F \)) to assess the robust
 For each scenario, a length-based catch-at-size distribution was generated using a deterministic fishing process combined with stochastic recruitment.  
 
 ### Generation of Length-Frequency Data  
+
+
 The OM generated synthetic length-frequency data by sampling individuals from the simulated population at different time steps. The sampling process mimicked empirical fisheries-dependent and fisheries-independent data collection.   
 
 We applied sampling variability to reflect realistic observation errors and deviations due to gear selectivity.  
-
-
 
 ### Estimation Procedure Using LBSPR  
 
@@ -111,7 +111,7 @@ Linf <- 60     # Longitud asintótica (mm)
 k <- 0.4       # Coeficiente de crecimiento
 t0 <- -0.5     # Edad a L=0
 M <- 0.4       # Mortalidad natural
-F_scenarios <- seq(0,1.5,0.5)  # Diferentes niveles de explotación
+F_scenarios <- seq(0,1.5,0.1)  # Diferentes niveles de explotación
 years <- 30    # Simular 30 años
 
 # 2️⃣ Función para Simular Población
