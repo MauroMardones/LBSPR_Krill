@@ -1,6 +1,6 @@
 ---
 title: "Supporting Information 1"
-subtitle: "Disparate estimates of intrinsic productivity for Antarctic krill (Euphausia superba) across small spatial scales, under a rapidly changing ocean."
+subtitle: "Disparate estimates of intrinsic productivity for Antarctic krill (Euphausia superba) across small spatial scales under a rapidly changing ocean."
 author: "Mardones, M; Jarvis Mason, E.T.;  Santa Cruz, F.; Watters, G.; Cárdenas, C.A"
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 bibliography: LBSPR.bib
@@ -8,7 +8,7 @@ csl: apa.csl
 link-citations: yes
 linkcolor: blue
 output:
-  bookdown::html_document2:
+  bookdown::pdf_document2:
     fig_caption: yes
     keep_md: true
     toc: true
@@ -32,17 +32,23 @@ editor_options:
 ```{r setup1, echo=FALSE}
 set.seed(999)
 rm(list = ls())
-knitr::opts_chunk$set(message = FALSE,
+knitr::opts_chunk$set(echo=FALSE,
+                      message = FALSE,
                       warning = FALSE,
                       fig.align = 'center',
                       fig.pos = "H",
                       dev = 'jpeg',
-                      dpi = 300)
+                      dpi = 300,
+                      tidy = TRUE,
+                      tidy.opts = list(width.cutoff = 60)
+)
 #XQuartz is a mess, put this in your onload to default to cairo instead
 options(bitmapType = "cairo") 
 # (https://github.com/tidyverse/ggplot2/issues/2655)
 # Lo mapas se hacen mas rapido
 ```
+
+\pagebreak
 
 ```{r message=FALSE}
 ## Installing the Package
