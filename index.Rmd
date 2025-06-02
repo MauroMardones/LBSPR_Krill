@@ -1,14 +1,14 @@
 ---
 title: "Supporting Information 1"
 subtitle: "Disparate estimates of intrinsic productivity for Antarctic krill (Euphausia superba) across small spatial scales under a rapidly changing ocean."
-author: "Mardones, M; Jarvis Mason, E.T.;  Santa Cruz, F.; Watters, G.; Cárdenas, C.A"
+#author: "Mardones, M; Jarvis Mason, E.T.;  Santa Cruz, F.; Watters, G.; Cárdenas, C.A"
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
 bibliography: LBSPR.bib
 csl: apa.csl
 link-citations: yes
 linkcolor: blue
 output:
-  bookdown::pdf_document2:
+  bookdown::html_document2:
     fig_caption: yes
     keep_md: true
     toc: true
@@ -28,11 +28,12 @@ editor_options:
     wrap: 72
 ---
 
+\pagebreak
 
 ```{r setup1, echo=FALSE}
 set.seed(999)
 rm(list = ls())
-knitr::opts_chunk$set(echo=FALSE,
+knitr::opts_chunk$set(echo=TRUE,
                       message = FALSE,
                       warning = FALSE,
                       fig.align = 'center',
@@ -48,7 +49,7 @@ options(bitmapType = "cairo")
 # Lo mapas se hacen mas rapido
 ```
 
-\pagebreak
+
 
 ```{r message=FALSE}
 ## Installing the Package
@@ -86,11 +87,12 @@ thememau <- theme(axis.text.y = element_blank(),
                                                   size = 0.1))
 ```
 
+\pagebreak
+
 # CONTEXT
 
 This supplementary material with essential formulas, datasets, and code snippets is delivered for the application of the LBSPR model in studying krill populations within the West Antarctic Peninsula (WAP) region. The LBSPR model, pivotal for unraveling krill dynamics, is reinforced by mathematical expressions elucidating key parameters and environmental influences. Curated datasets provide valuable insights into factors shaping krill habitats. With a strong emphasis on reproducibility, this resource ensures that findings can undergo independent validation, fostering trust in scientific outcomes. Transparent documentation of methods and assumptions promotes understanding and scrutiny of the analysis process by peers.
 
-\newpage
 
 # METHODOLOGY
 
@@ -352,6 +354,7 @@ sen
 
 After applying each scenario using each of the parameter setting, the results of scenarios are compared with the results provided by the methods based setting (Table 1), analyzing in this way the efect of underestimation/overestimation of the parameters $L_{\infty}$ and *k*.
 
+\newpage
 
 # RESULTS
 
@@ -521,9 +524,9 @@ Figure \@ref(fig:Figure8) provides a visual representation of the SPR trends acr
 
 ```{r Figure8, warning=FALSE, fig.cap="Krill Intrinsic Productivity (SPR) by strata and by year", fig.height=3, fig.width=7}
 allsprpl2 <- ggplot(allspr, aes(Year, SPR)) +
-  geom_point(alpha = 0.8) +  # Puntos de datos
-  geom_errorbar(aes(ymin = SPR - SD, ymax = SPR + SD),  # Barras de error
-                width = 0.2,  # Ancho de la barra horizontal
+  geom_point(alpha = 0.8) + 
+  geom_errorbar(aes(ymin = SPR - SD, ymax = SPR + SD),  
+                width = 0.2,  
                 alpha = 0.5) +
   geom_smooth(method = "lm",
               alpha=0.3,
@@ -810,19 +813,16 @@ Figure \@ref(fig:Figure9) provides a plot by strata with scenarios of L~inf~ of 
 
 
 ```{r Figure9, warning=FALSE, fig.cap="Sensitivity analysis by strata about asymptotic length VB", fig.height=3, fig.width=8}
-# Crear una nueva columna para identificar los puntos de Linf60
 valtodo <- valtodo %>%
   mutate(Highlight = ifelse(Parameter == "Linf60", "Highlighted", "Normal"))
-
-# Crear el gráfico con jitter coloridos y boxplots vacíos con borde negro
 sensproto <- ggplot(valtodo %>%
                       drop_na() %>%
                       filter(SPR < 0.65),
                     aes(x = SPR,
                         y = Parameter)) +
-  geom_boxplot(aes(fill = ifelse(Parameter == "Linf60", "red", NA)),  # Destacar el boxplot de Linf60 en rojo
+  geom_boxplot(aes(fill = ifelse(Parameter == "Linf60", "red", NA)),  
                trim = TRUE,
-               color = "black",  # Borde negro
+               color = "black",  
                position = position_dodge(0.9),
                adjust = 1/5) +
   geom_vline(xintercept = 0.75,
@@ -832,10 +832,10 @@ sensproto <- ggplot(valtodo %>%
   geom_vline(xintercept = 0.20,
              colour = '#bd0026',
              alpha = 0.5) +
-  geom_jitter(aes(fill = ifelse(Parameter == "Linf60", "red", NA)),  # Destacar los puntos de Linf60 en rojo
-              shape = 21,  # Forma de puntos vacíos con borde
-              color = "black",  # Borde negro para todos los puntos
-              alpha = 0.5,  # Transparencia
+  geom_jitter(aes(fill = ifelse(Parameter == "Linf60", "red", NA)),  
+              shape = 21,  
+              color = "black", 
+              alpha = 0.5,  
               height = 0,
               width = 0.1) +
   facet_wrap(~SPRstra,
@@ -843,13 +843,13 @@ sensproto <- ggplot(valtodo %>%
   labs(x = "SPR",
        y = "VB Parameters tested") +
   theme_minimal() +
-  theme(legend.position = "none",  # Ocultamos la leyenda
+  theme(legend.position = "none",  
         axis.text.x = element_text(angle = 90, hjust = 2),
         panel.background = element_rect(),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank()) +
   xlim(0, 1) +
-  scale_fill_identity()  # Usar el color definido en aes(fill) directamente
+  scale_fill_identity()  
 
 sensproto
 
@@ -857,7 +857,7 @@ sensproto
 
 
 ```{r message=F}
-# Tables
+
 tablinf <- valtodo %>% 
   group_by(Parameter, SPRstra) %>% 
   summarise(Median = mean(SPR),
@@ -869,7 +869,7 @@ tablinf <- valtodo %>%
    mutate_if(is.numeric, round, 2)
 
 
-# Reorganizar la tabla combinando Median y Variance
+
 tablinf_reorganizado <- tablinf %>%
   mutate(
     `BS` = paste0(`Median BS`, " (", `Variance BS`, ")"),
@@ -1091,35 +1091,29 @@ kbl(tablk_reorganizado,
 ```
 
 ```{r Figure10, warning=FALSE, fig.cap="Sensitivity analysis by strata about krill growth type", fig.height=3, fig.width=8}
-# Crear el gráfico con los elementos resaltados para Parameter == "Med"
 sensproto2 <- ggplot(valprotodo %>% 
                        filter(SPR < 0.99) %>% 
                        drop_na() %>% 
                        mutate(Parameter = factor(Parameter, 
-                                                 levels = c("Low", "Med", "High"))), # Orden deseado
+                                                 levels = c("Low",
+                                                            "Med",
+                                                            "High"))), 
                      aes(x = Parameter, y = SPR)) +
-  # Boxplot con color condicional
   geom_boxplot(aes(fill = Parameter), alpha = 0.6) +
-  # Líneas horizontales de referencia
   geom_hline(yintercept = 0.75, colour= '#006d2c', alpha=0.5, linetype="dashed") +
   geom_hline(yintercept = 0.20, colour= '#bd0026', alpha=0.5) +
-  # Jitter con color condicional
   geom_jitter(aes(color = Parameter), alpha = 0.5, width = 0.1) +
-  # Facet por SPRstra
   facet_wrap(~SPRstra, ncol = 5) +
-  # Etiquetas
   labs(y = "SPR", x = "Growth Scenario") +
-  # Tema minimalista
   theme_minimal() +
   theme(legend.position = "none",
         panel.background = element_rect(),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank()) +
-  # Especificar colores manualmente para Parameter
   scale_fill_manual(values = c("Low" = "white", "Med" = "red", "High" = "white")) +
   scale_color_manual(values = c("Low" = "black", "Med" = "red", "High" = "black"))
 
-# Mostrar el gráfico
+
 sensproto2
 
 ```
@@ -1204,9 +1198,9 @@ Figure \@ref(fig:Figure11) show the SPR trends across years to 48.1, 48.2 and 48
 
 ```{r Figure11, warning=FALSE, fig.cap="Krill Intrinsic Productivity (SPR) by subarea and by year", fig.height=3, fig.width=7}
 spr48plot <- ggplot(spr48, aes(Year, SPR)) +
-  geom_point(alpha = 0.8) +  # Puntos de datos
-  geom_errorbar(aes(ymin = SPR - SD, ymax = SPR + SD),  # Barras de error
-                width = 0.2,  # Ancho de la barra horizontal
+  geom_point(alpha = 0.8) +  
+  geom_errorbar(aes(ymin = SPR - SD, ymax = SPR + SD), 
+                width = 0.2, 
                 alpha = 0.5) +
   geom_smooth(method = "lm",
               alpha=0.3,
@@ -1258,9 +1252,9 @@ kbl(spr48wide_reorganizado,
 ```{r Figure12, warning=FALSE, fig.cap="Krill Intrinsic Productivity (SPR) in 48.1 by year"}
 spr481plot <- ggplot(spr48 %>% 
                        filter(SPRv == "481"), aes(Year, SPR)) +
-  geom_point(alpha = 0.8) +  # Puntos de datos
-  geom_errorbar(aes(ymin = SPR - SD, ymax = SPR + SD),  # Barras de error
-                width = 0.2,  # Ancho de la barra horizontal
+  geom_point(alpha = 0.8) +  
+  geom_errorbar(aes(ymin = SPR - SD, ymax = SPR + SD), 
+                width = 0.2, 
                 alpha = 0.5) +
   geom_smooth(method = "lm",
               alpha=0.3,
@@ -1334,7 +1328,7 @@ sensprototest481 <- ggplot(val481_largo %>%
            filter(SPR < 0.65),
        aes(x = SPR,
            y = Parameter)) +
-  geom_boxplot(aes(fill = ifelse(Parameter == "Linf60", "red", "white")),  # Destacar el boxplot de Linf60 en rojo
+  geom_boxplot(aes(fill = ifelse(Parameter == "Linf60", "red", "white")), 
                trim=TRUE,
                position=position_dodge(0.9),
                adjust = 1/5) +
@@ -1345,7 +1339,7 @@ sensprototest481 <- ggplot(val481_largo %>%
   geom_vline(xintercept = 0.20, 
              colour= '#bd0026',
              alpha=0.5) +
-  geom_jitter(aes(color = ifelse(Parameter == "Linf60", "red", "black")),  # Destacar los puntos de Linf60 en rojo
+  geom_jitter(aes(color = ifelse(Parameter == "Linf60", "red", "black")), 
               alpha=0.4,
               height = 0,
               width = 0.1) +
@@ -1358,9 +1352,8 @@ sensprototest481 <- ggplot(val481_largo %>%
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank()) +
   xlim(0, 1) +
-  scale_fill_identity() +  # Usar el color definido en aes(fill) directamente
-  scale_color_identity()   # Usar el color definido en aes(color) directamente
-
+  scale_fill_identity() + 
+  scale_color_identity()  
 ```
 
 
@@ -1383,7 +1376,6 @@ for (i in c(2,0.5,0.3)) {
 
 
 ```{r}
-#Genero lo que quiero comparar BS
 valprofit481 <- as.data.frame(cbind(fit4810.3@Years,
                                 fit4810.3@SPR,
                              fit4810.5@SPR,
@@ -1405,11 +1397,13 @@ senspr481 <- ggplot(valprofit481_largo %>%
                        filter(SPR < 0.99) %>% 
                        drop_na() %>%
                        mutate(Parameter = factor(Parameter, 
-                                                 levels = c("Low", "Med", "High"))), # Orden deseado
+                                                 levels = c("Low", 
+                                                            "Med",
+                                                            "High"))), 
                     aes(x = Parameter, 
                         y = SPR)) +
-  geom_boxplot(aes(fill = ifelse(Parameter == "Med", "red", "white")),  # Destacar el boxplot de "Med" en rojo
-               color = "black") +  # Color del borde del boxplot
+  geom_boxplot(aes(fill = ifelse(Parameter == "Med", "red", "white")), 
+               color = "black") +  
   geom_hline(yintercept = 0.75,
              colour= '#006d2c',
              alpha=0.5,
@@ -1417,7 +1411,7 @@ senspr481 <- ggplot(valprofit481_largo %>%
   geom_hline(yintercept = 0.20, 
              colour= '#bd0026',
              alpha=0.5) +
-  geom_jitter(aes(color = ifelse(Parameter == "Med", "red", "black")),  # Destacar los puntos de "Med" en rojo
+  geom_jitter(aes(color = ifelse(Parameter == "Med", "red", "black")), 
               alpha=0.4,
               width=0.1) +
   labs(y="SPR",
@@ -1427,8 +1421,8 @@ senspr481 <- ggplot(valprofit481_largo %>%
         panel.background = element_rect(),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank()) +
-  scale_fill_identity() +  # Usar el color definido en aes(fill) directamente
-  scale_color_identity()   # Usar el color definido en aes(color) directamente
+  scale_fill_identity() +  
+  scale_color_identity()
 
 ```                      
 
@@ -1442,6 +1436,8 @@ ggarrange(spr481plot,
           ncol=3,
           labels = c("A", "B", "C"))
 ```        
+
+\newpage
 
 # CODE REPOSITORY
 
