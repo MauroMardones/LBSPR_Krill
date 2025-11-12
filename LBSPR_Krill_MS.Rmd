@@ -206,7 +206,7 @@ library(flextable)
 ```
 
 
-```{r Figure1, echo=FALSE,  fig.cap="Subarea 48.1 and the WAP management strata considered in the spatio-temporal analysis of intrinsic productivity of krill (BS=Bransfield Strait, EI= Elephant Island, GS= Gerlache Strait, JOIN= Joinville Island, SSWI= South West) and length composition by strata. Red line is length recruit (36 mm)"}
+```{r Figure1, echo=FALSE,  fig.cap="Antartica and the FAO statistical areas and detailed of Subarea 48.1 and management strata considered in the spatio-temporal analysis of intrinsic productivity of krill (BS=Bransfield Strait, EI= Elephant Island, GS= Gerlache Strait, JOIN= Joinville Island, SSWI= South West) and length composition by strata. Red line is length recruit (36 mm)"}
 knitr::include_graphics('index_files/figure-html/Fig1.tiff')
 ```
 
