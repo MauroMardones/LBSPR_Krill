@@ -8,7 +8,7 @@ csl: apa.csl
 link-citations: yes
 linkcolor: blue
 output:
-  bookdown::html_document2:
+  bookdown::pdf_document2:
     fig_caption: yes
     keep_md: true
     toc: true
@@ -1436,6 +1436,101 @@ ggarrange(spr481plot,
           ncol=3,
           labels = c("A", "B", "C"))
 ```        
+
+\newpage
+
+# GLOSSARY OF TECHNICAL TERMS
+
+```{r glossary, results='asis', echo=FALSE}
+
+glossary <- tribble(
+  ~Term, ~Definition,
+
+  # Biological & life-history terms
+    "SPR", "Spawning Potential Ratio. Ratio of egg production per recruit under fishing to unfished conditions; key BRP.",
+  "Intrinsic Productivity", "Capacity of a population to replenish itself through growth and reproduction.",
+  "VBGF", "Von Bertalanffy Growth Function. Growth model describing length-at-age through parameters Linf, k, and t0.",
+  "Linf", "Asymptotic length; theoretical maximum body size.",
+  "k", "Growth coefficient; rate at which individuals approach Linf.",
+  "M/k", "Life-history invariant representing growth–mortality balance and productivity.",
+  "M", "Natural Mortality. Instantaneous mortality in the absence of fishing.",
+  "F/M", "Relative measure of fishing mortality compared to natural mortality.",
+  "Maturity Ogive", "Logistic function describing proportion of mature individuals by length.",
+  "L50", "Length at which half the population is mature.",
+  "L95", "Length where 95% of individuals are mature.",
+  "CVL", "Coefficient of variation in length used in LBSPR.",
+  "Recruitment", "Entry of new individuals into the population or fishery.",
+  "Recruitment Variability", "Temporal fluctuation in the number of recruits influencing productivity.",
+  "EPR", "Egg Production per Recruit. Lifetime reproductive output of a recruit, fished or unfished.",
+  "Growth Proxy", "Use of length metrics as indicators of environmental and physiological conditions.",
+  "LBSPR", "Length-Based Spawning Potential Ratio model used to estimate stock status from length data.",
+
+  # Fishery, selectivity & stock assessment
+  "Length Composition", "Frequency distribution of observed total lengths from fishery-dependent data.",
+  "Selectivity", "Probability that an individual of a given size enters the fishery.",
+  "SL50", "Lengths at 50% and 95% probability of gear selectivity.",
+  "SL95", "Length at 95% probability of gear selectivity.",
+  "Fishery-Dependent Data", "Data collected onboard vessels such as SISO length compositions.",
+  "Steady-State Distribution", "Expected equilibrium length distribution under constant F and M.",
+  "BRP", "Biological Reference Point. Benchmark to evaluate stock status (e.g., SPR20%, SPR75%).",
+  "LRP", "Limit Reference Point. Threshold below which the stock status is considered impaired (SPR20%).",
+  "TRP", "Target Reference Point. Desired stock status objective (SPR75% for krill).",
+  "MSY", "Maximum long-term average catch achievable without harming stock productivity.",
+  "Hockey-Stick HCR", "Piecewise-linear harvest control rule used in fisheries management.",
+  "Pseudo-Cohort Analysis", "Length-based analytical approach using multiple length frequencies (LBPA).",
+  "Data-Poor Assessment", "Stock assessment using limited inputs, often only length data.",
+  "Integrated Assessment Model", "Model synthesizing multiple data types within a unified population framework.",
+  "MP", "Management Procedure. Pre-agreed algorithm determining harvest decisions under uncertainty.",
+  "HCR", "Harvest Control Rule. Algorithm linking observed indicators (e.g., SPR) to allowed catch.",
+  "Trigger Level", "Catch limit threshold initiating spatial allocation under CM 51-07.",
+
+  # CCAMLR & spatial management
+  "CCAMLR", "Commission for the Conservation of Antarctic Marine Living Resources.",
+  "SISO", "CCAMLR’s Scheme of International Scientific Observation providing fishery monitoring data.",
+  "Subarea 48.1", "Main krill fishing area along the Western Antarctic Peninsula.",
+  "Management Strata", "Spatial units in 48.1 (BS, EI, GS, JOIN, SSWI).",
+  "SSMU", "Small-Scale Management Unit used for ecosystem-based krill management.",
+  "CM 51-07", "Conservation Measure specifying spatial distribution of the trigger level; expired in 2024.",
+  "Adaptive Allocation", "Adjustment of catch limits across strata based on population indicators.",
+  "Spatial Heterogeneity", "Differences in productivity or population structure across regions.",
+
+  # Oceanographic & environmental variables
+  "WAP", "Western Antarctic Peninsula, a region experiencing rapid warming and sea-ice decline.",
+  "SST", "Sea Surface Temperature; key environmental driver affecting krill growth and productivity.",
+  "SIC", "Sea Ice Concentration derived from Nimbus-7; influences recruitment.",
+  "Chlorophyll-a", "Proxy for primary productivity and food availability.",
+  "Environmental Covariate", "External variable influencing krill growth dynamics.",
+  "Growth Habitat", "Environmental conditions associated with krill somatic growth potential.",
+
+  # Modeling, statistics & computation
+  "GLMM", "Mixed-effects model incorporating fixed effects and random structure.",
+  "Pearson Correlation", "Correlation metric assessing relationship between length and environmental variables.",
+  "Rasterization", "Conversion of spatial satellite data to uniform grids.",
+  "sf", "R package for handling spatial vector data.",
+  "ncdf4", "R interface for working with NetCDF satellite and oceanographic data."
+)
+
+```
+
+```{r kable-version, results='asis', echo=TRUE}
+library(kableExtra)
+library(dplyr)
+
+glossary %>%
+  kbl(
+    booktabs = TRUE,
+    caption = "Glossary of Technical Terms",
+    longtable = TRUE,
+  ) %>%
+   kable_styling(latex_options = c("striped", 
+                                   "hold_position"),
+                 html_font = "arial",
+                 repeat_header_text = T) %>%
+  column_spec(1, width = "3cm", bold = TRUE) %>%
+  column_spec(2, width = "10cm") %>%
+  row_spec(0, bold = TRUE)
+
+```
 
 \newpage
 
