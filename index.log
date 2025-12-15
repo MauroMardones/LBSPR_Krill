@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2025.7.14)  28 NOV 2025 11:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2025.7.14)  12 DEC 2025 10:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -641,152 +641,143 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 [1
 
 {/Users/mauriciomardones/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 182.
+<index_files/figure-html/Strata_Nochina.png, id=40, 477.785pt x 334.24875pt>
+File: index_files/figure-html/Strata_Nochina.png Graphic file (type png)
+<use index_files/figure-html/Strata_Nochina.png>
+Package pdftex.def Info: index_files/figure-html/Strata_Nochina.png  used on input line 198.
+(pdftex.def)             Requested size: 281.85425pt x 197.17955pt.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 214.
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 183.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 215.
 
 LaTeX Font Warning: Font shape `T1/lmtt/bx/it' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 183.
+(Font)              Font shape `T1/lmtt/b/sl' tried instead on input line 215.
 
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 184.
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 216.
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
 LaTeX Font Warning: Font shape `TS1/lmtt/bx/it' in size <10> not available
-(Font)              Font shape `TS1/lmtt/b/sl' tried instead on input line 184.
+(Font)              Font shape `TS1/lmtt/b/sl' tried instead on input line 216.
 
-[2]
-<index_files/figure-html/Strata_Nochina.png, id=49, 477.785pt x 334.24875pt>
-File: index_files/figure-html/Strata_Nochina.png Graphic file (type png)
-<use index_files/figure-html/Strata_Nochina.png>
-Package pdftex.def Info: index_files/figure-html/Strata_Nochina.png  used on input line 219.
-(pdftex.def)             Requested size: 281.85425pt x 197.17955pt.
-[3 <./index_files/figure-html/Strata_Nochina.png>]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 252.
+[2 <./index_files/figure-html/Strata_Nochina.png>]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 255.
 (/Users/mauriciomardones/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [4] [5] [6]
-<index_files/figure-latex/Figure4-1.jpeg, id=109, 469.755pt x 325.215pt>
+) [3] [4] [5] [6]
+<index_files/figure-latex/Figure4-1.jpeg, id=116, 469.755pt x 325.215pt>
 File: index_files/figure-latex/Figure4-1.jpeg Graphic file (type jpg)
 <use index_files/figure-latex/Figure4-1.jpeg>
-Package pdftex.def Info: index_files/figure-latex/Figure4-1.jpeg  used on input line 483.
+Package pdftex.def Info: index_files/figure-latex/Figure4-1.jpeg  used on input line 466.
 (pdftex.def)             Requested size: 328.82626pt x 227.64894pt.
-[7] [8 <./index_files/figure-latex/Figure4-1.jpeg>]
-<index_files/figure-latex/Figure5-1.jpeg, id=125, 361.35pt x 1300.86pt>
+[7 <./index_files/figure-latex/Figure4-1.jpeg>]
+<index_files/figure-latex/Figure5-1.jpeg, id=123, 361.35pt x 1300.86pt>
 File: index_files/figure-latex/Figure5-1.jpeg Graphic file (type jpg)
 <use index_files/figure-latex/Figure5-1.jpeg>
-Package pdftex.def Info: index_files/figure-latex/Figure5-1.jpeg  used on input line 520.
+Package pdftex.def Info: index_files/figure-latex/Figure5-1.jpeg  used on input line 503.
 (pdftex.def)             Requested size: 180.68007pt x 650.44826pt.
-[9]
+[8]
 Overfull \vbox (23.96268pt too high) has occurred while \output is active []
 
-[10 <./index_files/figure-latex/Figure5-1.jpeg>]
-<index_files/figure-latex/Figure6-1.jpeg, id=138, 469.755pt x 325.215pt>
+[9 <./index_files/figure-latex/Figure5-1.jpeg>]
+<index_files/figure-latex/Figure6-1.jpeg, id=136, 469.755pt x 325.215pt>
 File: index_files/figure-latex/Figure6-1.jpeg Graphic file (type jpg)
 <use index_files/figure-latex/Figure6-1.jpeg>
-Package pdftex.def Info: index_files/figure-latex/Figure6-1.jpeg  used on input line 552.
+Package pdftex.def Info: index_files/figure-latex/Figure6-1.jpeg  used on input line 535.
 (pdftex.def)             Requested size: 375.80452pt x 260.17235pt.
-[11 <./index_files/figure-latex/Figure6-1.jpeg>]
-<index_files/figure-latex/Figure7-1.jpeg, id=146, 469.755pt x 325.215pt>
+[10 <./index_files/figure-latex/Figure6-1.jpeg>]
+<index_files/figure-latex/Figure7-1.jpeg, id=144, 469.755pt x 325.215pt>
 File: index_files/figure-latex/Figure7-1.jpeg Graphic file (type jpg)
 <use index_files/figure-latex/Figure7-1.jpeg>
-Package pdftex.def Info: index_files/figure-latex/Figure7-1.jpeg  used on input line 577.
+Package pdftex.def Info: index_files/figure-latex/Figure7-1.jpeg  used on input line 560.
 (pdftex.def)             Requested size: 375.80452pt x 260.17235pt.
-[12 <./index_files/figure-latex/Figure7-1.jpeg>]
-<index_files/figure-latex/Figure8-1.jpeg, id=153, 505.89pt x 216.81pt>
+[11 <./index_files/figure-latex/Figure7-1.jpeg>]
+<index_files/figure-latex/Figure8-1.jpeg, id=151, 505.89pt x 216.81pt>
 File: index_files/figure-latex/Figure8-1.jpeg Graphic file (type jpg)
 <use index_files/figure-latex/Figure8-1.jpeg>
-Package pdftex.def Info: index_files/figure-latex/Figure8-1.jpeg  used on input line 648.
+Package pdftex.def Info: index_files/figure-latex/Figure8-1.jpeg  used on input line 631.
 (pdftex.def)             Requested size: 469.76265pt x 201.32684pt.
-[13]
+[12] [13 <./index_files/figure-latex/Figure8-1.jpeg>]
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[14 <./index_files/figure-latex/Figure8-1.jpeg>]
-
-LaTeX Warning: Reference `tab:Table3' on page 15 undefined on input line 717.
+LaTeX Warning: Reference `tab:Table3' on page 14 undefined on input line 679.
 
 
-Underfull \vbox (badness 10000) detected at line 756
+Underfull \vbox (badness 10000) detected at line 768
+ []
+
+[14]
+Underfull \vbox (badness 10000) detected at line 835
  []
 
 [15]
-Underfull \vbox (badness 10000) detected at line 806
+Underfull \vbox (badness 3291) detected at line 860
  []
 
 [16]
-Underfull \vbox (badness 10000) detected at line 873
- []
-
-[17]
-<index_files/figure-latex/Figure9-1.jpeg, id=184, 578.16pt x 216.81pt>
+<index_files/figure-latex/Figure9-1.jpeg, id=182, 578.16pt x 216.81pt>
 File: index_files/figure-latex/Figure9-1.jpeg Graphic file (type jpg)
 <use index_files/figure-latex/Figure9-1.jpeg>
-Package pdftex.def Info: index_files/figure-latex/Figure9-1.jpeg  used on input line 902.
+Package pdftex.def Info: index_files/figure-latex/Figure9-1.jpeg  used on input line 864.
 (pdftex.def)             Requested size: 469.75385pt x 176.15768pt.
-[18]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[19 <./index_files/figure-latex/Figure9-1.jpeg>]
-Underfull \vbox (badness 10000) detected at line 1058
+[17 <./index_files/figure-latex/Figure9-1.jpeg>]
+Underfull \vbox (badness 10000) detected at line 962
+ []
+
+[18]
+Underfull \vbox (badness 10000) detected at line 1062
+ []
+
+[19]
+Underfull \vbox (badness 8000) detected at line 1101
  []
 
 [20]
-Underfull \vbox (badness 10000) detected at line 1108
- []
-
-[21]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[22]
-<index_files/figure-latex/Figure10-1.jpeg, id=213, 578.16pt x 216.81pt>
+<index_files/figure-latex/Figure10-1.jpeg, id=207, 578.16pt x 216.81pt>
 File: index_files/figure-latex/Figure10-1.jpeg Graphic file (type jpg)
 <use index_files/figure-latex/Figure10-1.jpeg>
-Package pdftex.def Info: index_files/figure-latex/Figure10-1.jpeg  used on input line 1181.
+Package pdftex.def Info: index_files/figure-latex/Figure10-1.jpeg  used on input line 1105.
 (pdftex.def)             Requested size: 469.75385pt x 176.15768pt.
-[23 <./index_files/figure-latex/Figure10-1.jpeg>] [24]
-<index_files/figure-latex/Figure11-1.jpeg, id=225, 505.89pt x 216.81pt>
+[21 <./index_files/figure-latex/Figure10-1.jpeg>]
+<index_files/figure-latex/Figure11-1.jpeg, id=214, 505.89pt x 216.81pt>
 File: index_files/figure-latex/Figure11-1.jpeg Graphic file (type jpg)
 <use index_files/figure-latex/Figure11-1.jpeg>
-Package pdftex.def Info: index_files/figure-latex/Figure11-1.jpeg  used on input line 1271.
+Package pdftex.def Info: index_files/figure-latex/Figure11-1.jpeg  used on input line 1195.
 (pdftex.def)             Requested size: 469.76265pt x 201.32684pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[25 <./index_files/figure-latex/Figure11-1.jpeg>]
-Underfull \vbox (badness 10000) detected at line 1398
+[22]
+Overfull \vbox (0.39754pt too high) detected at line 1256
  []
 
-[26]
-<index_files/figure-latex/Figure15-1.jpeg, id=238, 578.16pt x 216.81pt>
+[23 <./index_files/figure-latex/Figure11-1.jpeg>] [24]
+<index_files/figure-latex/Figure15-1.jpeg, id=231, 578.16pt x 216.81pt>
 File: index_files/figure-latex/Figure15-1.jpeg Graphic file (type jpg)
 <use index_files/figure-latex/Figure15-1.jpeg>
-Package pdftex.def Info: index_files/figure-latex/Figure15-1.jpeg  used on input line 1460.
+Package pdftex.def Info: index_files/figure-latex/Figure15-1.jpeg  used on input line 1366.
 (pdftex.def)             Requested size: 469.75385pt x 176.15768pt.
-[27] [28 <./index_files/figure-latex/Figure15-1.jpeg>] [29] [30] [31] (./index.aux)
+[25 <./index_files/figure-latex/Figure15-1.jpeg>] [26] [27] [28] (./index.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 16296 strings out of 478033
- 269740 string characters out of 5838239
- 1887330 words of memory out of 5000000
- 35894 multiletter control sequences out of 15000+600000
+ 16407 strings out of 478033
+ 270820 string characters out of 5838239
+ 1879330 words of memory out of 5000000
+ 36006 multiletter control sequences out of 15000+600000
  573644 words of font info for 144 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 77i,10n,81p,1604b,556s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy5.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on index.pdf (31 pages, 2224636 bytes).
+ 77i,10n,81p,1604b,704s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy5.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/mauriciomardones/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
+Output written on index.pdf (28 pages, 2215969 bytes).
 PDF statistics:
- 427 PDF objects out of 1000 (max. 8388607)
- 335 compressed objects within 4 object streams
- 88 named destinations out of 1000 (max. 500000)
+ 416 PDF objects out of 1000 (max. 8388607)
+ 327 compressed objects within 4 object streams
+ 87 named destinations out of 1000 (max. 500000)
  32915 words of extra memory for PDF output out of 35830 (max. 10000000)
 

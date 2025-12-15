@@ -6,5 +6,10 @@
 *.pptx
 index_files/
 *.docx
-*.csv
 *.pdf
+# Permitir solo estos archivos específicos
+!data/lenghtBS.csv
+!data/lenghtEI.csv
+!data/lenghtJOIN.csv
+!data/lenghtSSIW.csv
+!data/lenghtGerlache.csv

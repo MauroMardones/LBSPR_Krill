@@ -1736,28 +1736,12 @@ font-size: 0.95em;
 
 <h1 class="title toc-ignore">Supporting Information 1</h1>
 <h3 class="subtitle">Disparate estimates of intrinsic productivity for Antarctic krill (Euphausia superba) across small spatial scales under a rapidly changing ocean.</h3>
-<h4 class="date">02 June, 2025</h4>
+<h4 class="date">15 December, 2025</h4>
 
 </div>
 
 
 <div style="page-break-after: always;"></div>
-<pre class="r"><code>## Installing the Package The LBSPR package is now
-## available on CRAN: install.packages(&#39;LBSPR&#39;)
-## install.packages(&#39;devtools&#39;)
-## devtools::install_github(&#39;AdrianHordyk/LBSPR&#39;) load the
-## package
-library(LBSPR)
-library(devtools)  #to install_github
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-library(stringr)
-library(ggpubr)
-library(kableExtra)
-library(hrbrthemes)
-library(ggthemes)
-library(tidyverse)</code></pre>
 <div style="page-break-after: always;"></div>
 <div id="context" class="section level1">
 <h1>CONTEXT</h1>
@@ -1778,6 +1762,25 @@ Figure 1: Sizes compositions from SISO program monitoring krill fishery by strat
 </div>
 <div id="lbspr-modeling" class="section level2">
 <h2>LBSPR Modeling</h2>
+<div id="loading-packages" class="section level3">
+<h3>Loading packages</h3>
+<pre class="r"><code>## Installing the Package The LBSPR package is now
+## available on CRAN: install.packages(&#39;LBSPR&#39;)
+## install.packages(&#39;devtools&#39;)
+## devtools::install_github(&#39;AdrianHordyk/LBSPR&#39;) load the
+## package
+library(LBSPR)
+library(devtools)  #to install_github
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(stringr)
+library(ggpubr)
+library(kableExtra)
+library(hrbrthemes)
+library(ggthemes)
+library(tidyverse)</code></pre>
+</div>
 <div id="biological-and-fishery-parameters-krill" class="section level3">
 <h3>Biological and fishery parameters krill</h3>
 <pre class="r"><code># Create a new LB_pars Object To create a new LB_pars
@@ -1825,17 +1828,7 @@ MyPars@BinWidth &lt;- 1
 MyPars@BinMax &lt;- 70
 MyPars@BinMin &lt;- 0
 MyPars@L_units &lt;- &quot;mm&quot;</code></pre>
-<pre class="r"><code>tablepar &lt;- data.frame(Value = c(MyPars@Linf, MyPars@L50, MyPars@L95,
-    round(MyPars@MK, 3), MyPars@SL50, MyPars@SL95, MyPars@SPR,
-    MyPars@Walpha, MyPars@Wbeta, MyPars@BinMax, MyPars@BinMin,
-    MyPars@L_units), Descrption = c(&quot;VB asymptotic length&quot;, &quot;Maturity 50%&quot;,
-    &quot;Maturity 95%&quot;, &quot;M/K Ratio&quot;, &quot;Selectivity 50%&quot;, &quot;Seletivity 95%&quot;,
-    &quot;SPR&quot;, &quot;a (Length-Weight Relation)&quot;, &quot;b (Length-Weight Relation)&quot;,
-    &quot;Bin Min&quot;, &quot;Bin Max&quot;, &quot;Units&quot;))</code></pre>
 <p>These parameters were taken from previous works about krill life history and fishery <span class="citation">(<a href="#ref-Maschette2020">Maschette et al., 2021</a>; <a href="#ref-Thanassekos2014">Thanassekos et al., 2014</a>)</span>, which are described in Table <a href="#tab:Table1">1</a>.</p>
-<pre class="r"><code>kbl(tablepar, longtable = F, booktabs = T, caption = &quot;Krill biological and fishery parameters&quot;) %&gt;%
-    kable_styling(latex_options = c(&quot;striped&quot;, &quot;hold_position&quot;),
-        html_font = &quot;arial&quot;)</code></pre>
 <table class="table" style="color: black; font-family: arial; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:Table1">Table 1: </span>Krill biological and fishery parameters
@@ -1843,108 +1836,108 @@ MyPars@L_units &lt;- &quot;mm&quot;</code></pre>
 <thead>
 <tr>
 <th style="text-align:left;">
-Value
+Description
 </th>
 <th style="text-align:left;">
-Descrption
+Value
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-60
+VB asymptotic length
 </td>
 <td style="text-align:left;">
-VB asymptotic length
+60
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-34
-</td>
 <td style="text-align:left;">
 Maturity 50%
 </td>
+<td style="text-align:left;">
+34
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-55
-</td>
 <td style="text-align:left;">
 Maturity 95%
 </td>
+<td style="text-align:left;">
+55
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-0.889
-</td>
 <td style="text-align:left;">
 M/K Ratio
 </td>
+<td style="text-align:left;">
+0.889
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-40
-</td>
 <td style="text-align:left;">
 Selectivity 50%
 </td>
+<td style="text-align:left;">
+40
+</td>
 </tr>
 <tr>
+<td style="text-align:left;">
+Selectivity 95%
+</td>
 <td style="text-align:left;">
 56
 </td>
-<td style="text-align:left;">
-Seletivity 95%
-</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-0.75
-</td>
 <td style="text-align:left;">
 SPR
 </td>
+<td style="text-align:left;">
+0.75
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-1
-</td>
 <td style="text-align:left;">
 a (Length-Weight Relation)
 </td>
+<td style="text-align:left;">
+1
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-3.0637
-</td>
 <td style="text-align:left;">
 b (Length-Weight Relation)
 </td>
+<td style="text-align:left;">
+3.0637
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-70
-</td>
 <td style="text-align:left;">
 Bin Min
 </td>
-</tr>
-<tr>
 <td style="text-align:left;">
 0
 </td>
+</tr>
+<tr>
 <td style="text-align:left;">
 Bin Max
+</td>
+<td style="text-align:left;">
+70
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-mm
+Units
 </td>
 <td style="text-align:left;">
-Units
+mm
 </td>
 </tr>
 </tbody>
@@ -1989,21 +1982,23 @@ slotNames(MyLengths)</code></pre>
 <pre class="r"><code># Brainsflied Strata
 datdir &lt;- setwd(&quot;~/DOCAS/LBSPR_Krill&quot;)
 Lenbs &lt;- new(&quot;LB_lengths&quot;, LB_pars = MyPars, file = paste0(datdir,
-    &quot;/lenghtBS_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;, header = T)
+    &quot;/data/lenghtBS_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;,
+    header = T)
 # Elephan Island Strata
 Lenei &lt;- new(&quot;LB_lengths&quot;, LB_pars = MyPars, file = paste0(datdir,
-    &quot;/lenghtEI_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;, header = T)
+    &quot;/data/lenghtEI_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;,
+    header = T)
 # Gerlache Strata
 Lengc &lt;- new(&quot;LB_lengths&quot;, LB_pars = MyPars, file = paste0(datdir,
-    &quot;/lenghtExtra_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;,
+    &quot;/data/lenghtExtra_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;,
     header = T)
 # Join Strata
 Lenjo &lt;- new(&quot;LB_lengths&quot;, LB_pars = MyPars, file = paste0(datdir,
-    &quot;/lenghtJOIN_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;,
+    &quot;/data/lenghtJOIN_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;,
     header = T)
 # SSIW Strata
 Lenssiw &lt;- new(&quot;LB_lengths&quot;, LB_pars = MyPars, file = paste0(datdir,
-    &quot;/lenghtSSIW_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;,
+    &quot;/data/lenghtSSIW_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;,
     header = T)</code></pre>
 </div>
 <div id="fit-the-model-by-strata" class="section level3">
@@ -2167,22 +2162,6 @@ Figure 6: Krill Intrinsic Productivity (SPR) by strata and by year
 </p>
 </div>
 <p>All the estimated values of SPR and their associated variance by stratum and by year can be identified in Table <a href="#tab:Table2">2</a>.</p>
-<pre class="r"><code>allsprwide_reorganizado &lt;- allsprwide %&gt;%
-    mutate(BS = ifelse(!is.na(`SPR BS`), paste0(`SPR BS`, &quot; (&quot;,
-        `SD BS`, &quot;)&quot;), NA), EI = ifelse(!is.na(`SPR EI`), paste0(`SPR EI`,
-        &quot; (&quot;, `SD EI`, &quot;)&quot;), NA), GS = ifelse(!is.na(`SPR GS`),
-        paste0(`SPR GS`, &quot; (&quot;, `SD GS`, &quot;)&quot;), NA), JOIN = ifelse(!is.na(`SPR JOIN`),
-        paste0(`SPR JOIN`, &quot; (&quot;, `SD JOIN`, &quot;)&quot;), NA), SSWI = ifelse(!is.na(`SPR SSWI`),
-        paste0(`SPR SSWI`, &quot; (&quot;, `SD SSWI`, &quot;)&quot;), NA)) %&gt;%
-    select(Year, BS, EI, GS, JOIN, SSWI) %&gt;%
-    arrange(Year)
-
-# guardo write_csv(allsprwide_reorganizado,
-# &#39;SPR_Total.csv&#39;)
-
-kbl(allsprwide_reorganizado, longtable = FALSE, booktabs = TRUE,
-    caption = &quot;Estimates of SPR by Strata (values in parentheses represent the standard deviation)&quot;) %&gt;%
-    kable_styling(latex_options = c(&quot;scale_down&quot;, &quot;hold_position&quot;))</code></pre>
 <table class="table" style="color: black; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:Table2">Table 2: </span>Estimates of SPR by Strata (values in parentheses represent the standard deviation)
@@ -2578,12 +2557,12 @@ NA
 <h2>Sensitivity and perfomance analysis</h2>
 <p>The results of the methods in the reference setting are compared to the obtained under overstimation/underestimation in intrinsic productivity regarding asymptotic length von Bertalanffy <span class="math inline">\(L_{\infty}\)</span> parameter in krill. First, it was possible to identify that for all strata, the impact of low <span class="math inline">\(L_{\infty}\)</span> ranges under the base model (60 mm) overestimates the level of reproductive potential krill with values between 42% and 32% (Bransfield and Elephant Island strata respectively). Regarding higher <span class="math inline">\(L_{\infty}\)</span> settings, the model tends to underestimate the reproductive potential with values between -25% and -30% (Gerlache and Joinville strata) Figure <a href="#fig:Figure9">7</a>, Table <a href="#tab:Table3"><strong>??</strong></a>.</p>
 <pre class="r"><code>for (i in 55:65) {
-    nombre_objeto &lt;- paste0(&quot;MyPars_&quot;, i)  # Crear un nombre único para cada objeto modificado
+    nombre_objeto &lt;- paste0(&quot;MyPars_&quot;, i)
     objeto_modificado &lt;- MyPars  # Crear una copia del objeto original
 
     objeto_modificado@Linf &lt;- i  # Modificar el valor de @Linf en cada iteración
 
-    assign(nombre_objeto, objeto_modificado, envir = .GlobalEnv)  # Asignar el objeto modificado al nombre creado
+    assign(nombre_objeto, objeto_modificado, envir = .GlobalEnv)
 
     # Resto del código que deseas ejecutar con el objeto
     # modificado A blank LB_pars object created Default
@@ -2763,9 +2742,6 @@ tablinf_reorganizado &lt;- tablinf %&gt;%
 
 # write_csv(tablinf_reorganizado, &#39;SPR_Linf.csv&#39;)</code></pre>
 <p>All the estimated values of SPR by L<sub>inf</sub>scenario by stratum can be identified in Table <a href="#tab:Table4">3</a>.</p>
-<pre class="r"><code>kbl(tablinf_reorganizado, longtable = FALSE, booktabs = TRUE,
-    caption = &quot;\\label{Table3}Estimated by asymptotyc lenght (VB) scenario (values in parentheses represent the standard deviation)&quot;) %&gt;%
-    kable_styling(latex_options = c(&quot;scale_down&quot;, &quot;hold_position&quot;))</code></pre>
 <table class="table" style="color: black; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:Table4">Table 3: </span>Estimated by asymptotyc lenght (VB) scenario (values in parentheses represent the standard deviation)
@@ -3140,25 +3116,6 @@ valprosswi_largo$SPRstra &lt;- rep(&quot;SSWI&quot;, nrow(valprosswi_largo))
 # agrupo
 valprotodo &lt;- rbind(valprosswi_largo, valproei_largo, valprobs_largo,
     valprojo_largo, valprogc_largo)</code></pre>
-<pre class="r"><code>tablk &lt;- valprotodo %&gt;%
-    group_by(Parameter, SPRstra) %&gt;%
-    summarise(Median = mean(SPR), Variance = var(SPR), SD = sqrt(Variance)) %&gt;%
-    pivot_wider(names_from = SPRstra, values_from = c(Median,
-        Variance, SD), names_sep = &quot; &quot;) %&gt;%
-    rename(`Growth scenario` = &quot;Parameter&quot;) %&gt;%
-    mutate_if(is.numeric, round, 2)
-
-# Reorganización de las columnas
-tablk_reorganizado &lt;- tablk %&gt;%
-    mutate(BS = paste0(`Median BS`, &quot; (&quot;, `SD BS`, &quot;)&quot;), EI = paste0(`Median EI`,
-        &quot; (&quot;, `SD EI`, &quot;)&quot;), GS = paste0(`Median GS`, &quot; (&quot;, `SD GS`,
-        &quot;)&quot;), JOIN = paste0(`Median JOIN`, &quot; (&quot;, `SD JOIN`, &quot;)&quot;),
-        SSWI = paste0(`Median SSWI`, &quot; (&quot;, `SD SSWI`, &quot;)&quot;)) %&gt;%
-    select(`Growth scenario`, BS, EI, GS, JOIN, SSWI)  # Selección de columnas necesarias
-
-# Creación de la tabla en LaTeX
-kbl(tablk_reorganizado, longtable = FALSE, booktabs = TRUE, caption = &quot;\\label{Table7}Estimates of SPR by Growth Scenario (values in parentheses represent the standard deviation)&quot;) %&gt;%
-    kable_styling(latex_options = c(&quot;scale_down&quot;, &quot;hold_position&quot;))</code></pre>
 <table class="table" style="color: black; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:Table5">Table 4: </span>Estimates of SPR by Growth Scenario (values in parentheses represent the standard deviation)
@@ -3248,7 +3205,6 @@ Med
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># write_csv(tablk_reorganizado, &#39;SPR_K.csv&#39;)</code></pre>
 <pre class="r"><code>sensproto2 &lt;- ggplot(valprotodo %&gt;%
     filter(SPR &lt; 0.99) %&gt;%
     drop_na() %&gt;%
@@ -3279,15 +3235,15 @@ Figure 8: Sensitivity analysis by strata about krill growth type
 <p>Reading data</p>
 <pre class="r"><code>datdir &lt;- setwd(&quot;~/DOCAS/LBSPR_Krill&quot;)
 Len481 &lt;- new(&quot;LB_lengths&quot;, LB_pars = MyPars, file = paste0(datdir,
-    &quot;/lenght481_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;,
+    &quot;/data/lenght481_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;,
     header = T)
 
 Len482 &lt;- new(&quot;LB_lengths&quot;, LB_pars = MyPars, file = paste0(datdir,
-    &quot;/lenght482_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;,
+    &quot;/data/lenght482_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;,
     header = T)
 
 Len483 &lt;- new(&quot;LB_lengths&quot;, LB_pars = MyPars, file = paste0(datdir,
-    &quot;/lenght483_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;,
+    &quot;/data/lenght483_nochina.csv&quot;), dataType = &quot;freq&quot;, sep = &quot;,&quot;,
     header = T)</code></pre>
 <p>The LBSPR model is fitted by strata using the <code>LBSPRfit</code> function.</p>
 <pre class="r"><code>fit481 &lt;- LBSPRfit(MyPars, Len481)
@@ -3337,19 +3293,6 @@ Figure 9: Krill Intrinsic Productivity (SPR) by subarea and by year
 </p>
 </div>
 <p>Main outputs in Table <a href="#tab:Table6">5</a>.</p>
-<pre class="r"><code>spr48wide_reorganizado &lt;- spr48wide %&gt;%
-    mutate(`481` = ifelse(!is.na(`SPR 481`), paste0(`SPR 481`,
-        &quot; (&quot;, `SD 481`, &quot;)&quot;), NA), `482` = ifelse(!is.na(`SPR 482`),
-        paste0(`SPR 482`, &quot; (&quot;, `SD 482`, &quot;)&quot;), NA), `483` = ifelse(!is.na(`SPR 483`),
-        paste0(`SPR 483`, &quot; (&quot;, `SD 483`, &quot;)&quot;), NA)) %&gt;%
-    select(Year, `481`, `482`, `483`) %&gt;%
-    arrange(Year)
-
-# write_csv(spr48wide_reorganizado, &#39;SPR_all_48.csv&#39;)
-
-kbl(spr48wide_reorganizado, longtable = FALSE, booktabs = TRUE,
-    caption = &quot;\\label{Table6}Estimates of SPR by SubArea (parentheses represent the standard deviation)&quot;) %&gt;%
-    kable_styling(latex_options = c(&quot;scale_down&quot;, &quot;hold_position&quot;))</code></pre>
 <table class="table" style="color: black; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:Table6">Table 5: </span>Estimates of SPR by SubArea (parentheses represent the standard deviation)
@@ -3767,6 +3710,443 @@ Figure 10: Plot to SPR in different context to 48.1 subarea
 </div>
 <div style="page-break-after: always;"></div>
 </div>
+</div>
+<div id="glossary" class="section level1">
+<h1>GLOSSARY</h1>
+<table class="table" style="color: black; font-family: arial; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:kable-version">Table 6: </span>Glossary of Technical Terms
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;">
+Term
+</th>
+<th style="text-align:left;font-weight: bold;">
+Definition
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Intrinsic Productivity
+</td>
+<td style="text-align:left;width: 10cm; ">
+Capacity of a population to reproduce and sustain itself, which depends on reproductive and somatic conditions.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+SPR
+</td>
+<td style="text-align:left;width: 10cm; ">
+Spawning Potential Ratio. Ratio of egg production per recruit under fishing to unfished conditions; key BRP.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+LBSPR
+</td>
+<td style="text-align:left;width: 10cm; ">
+Length-Based Spawning Potential Ratio model used to estimate stock status from length data.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+VBGF
+</td>
+<td style="text-align:left;width: 10cm; ">
+Von Bertalanffy Growth Function. Growth model describing length-at-age through parameters Linf, k, and t0.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Linf
+</td>
+<td style="text-align:left;width: 10cm; ">
+Asymptotic length; theoretical maximum body size.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+k
+</td>
+<td style="text-align:left;width: 10cm; ">
+Growth coefficient; rate at which individuals approach Linf.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+M/k
+</td>
+<td style="text-align:left;width: 10cm; ">
+Life-history invariant representing growth–mortality balance and productivity.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+M
+</td>
+<td style="text-align:left;width: 10cm; ">
+Natural Mortality. Instantaneous mortality in the absence of fishing.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+F/M
+</td>
+<td style="text-align:left;width: 10cm; ">
+Relative measure of fishing mortality compared to natural mortality.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Maturity Ogive
+</td>
+<td style="text-align:left;width: 10cm; ">
+Logistic function describing proportion of mature individuals by length.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+L50
+</td>
+<td style="text-align:left;width: 10cm; ">
+Length at which half the population is mature.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+L95
+</td>
+<td style="text-align:left;width: 10cm; ">
+Length where 95% of individuals are mature.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+CVL
+</td>
+<td style="text-align:left;width: 10cm; ">
+Coefficient of variation in length used in LBSPR.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Recruitment
+</td>
+<td style="text-align:left;width: 10cm; ">
+Entry of new individuals into the population or fishery.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Recruitment Variability
+</td>
+<td style="text-align:left;width: 10cm; ">
+Temporal fluctuation in the number of recruits influencing productivity.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+EPR
+</td>
+<td style="text-align:left;width: 10cm; ">
+Egg Production per Recruit. Lifetime reproductive output of a recruit, fished or unfished.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Growth Proxy
+</td>
+<td style="text-align:left;width: 10cm; ">
+Use of length metrics as indicators of physiological conditions.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Length Composition
+</td>
+<td style="text-align:left;width: 10cm; ">
+Frequency distribution of observed total lengths from fishery-dependent data.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Selectivity
+</td>
+<td style="text-align:left;width: 10cm; ">
+Probability that an individual of a given size enters the fishery.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+SL50
+</td>
+<td style="text-align:left;width: 10cm; ">
+Lengths at 50% and 95% probability of gear selectivity.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+SL95
+</td>
+<td style="text-align:left;width: 10cm; ">
+Length at 95% probability of gear selectivity.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Fishery-Dependent Data
+</td>
+<td style="text-align:left;width: 10cm; ">
+Data collected onboard vessels such as SISO length compositions.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Steady-State Distribution
+</td>
+<td style="text-align:left;width: 10cm; ">
+Expected equilibrium length distribution under constant F and M.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+BRP
+</td>
+<td style="text-align:left;width: 10cm; ">
+Biological Reference Point. Benchmark to evaluate stock status (e.g., SPR20%, SPR75%).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+LRP
+</td>
+<td style="text-align:left;width: 10cm; ">
+Limit Reference Point. Threshold below which the stock status is considered impaired (SPR20%).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+TRP
+</td>
+<td style="text-align:left;width: 10cm; ">
+Target Reference Point. Desired stock status objective (SPR75% for krill).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+MSY
+</td>
+<td style="text-align:left;width: 10cm; ">
+Maximum Sustainable Yield. Largest long-term average catch that can be sustainably taken.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Hockey-Stick HCR
+</td>
+<td style="text-align:left;width: 10cm; ">
+Piecewise-linear harvest control rule used in fisheries management.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Pseudo-Cohort Analysis
+</td>
+<td style="text-align:left;width: 10cm; ">
+Length-based analytical approach using multiple length frequencies (LBPA).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Data-Poor Assessment
+</td>
+<td style="text-align:left;width: 10cm; ">
+Stock assessment using limited inputs
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Integrated Assessment Model
+</td>
+<td style="text-align:left;width: 10cm; ">
+Model synthesizing multiple data types within a unified population framework.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+MP
+</td>
+<td style="text-align:left;width: 10cm; ">
+Management Procedure. Pre-agreed algorithm determining harvest decisions under uncertainty.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+HCR
+</td>
+<td style="text-align:left;width: 10cm; ">
+Harvest Control Rule. Algorithm linking observed indicators (e.g., SPR) to allowed catch.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Catch Limit
+</td>
+<td style="text-align:left;width: 10cm; ">
+The total combined catch of Euphausia superba in Statistical Subareas 48.1, 48.2, 48.3 and 48.4 shall be limited to 5.61 million tonnes in any fishing season (CM 51-07).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Trigger Level
+</td>
+<td style="text-align:left;width: 10cm; ">
+Total combined catch in Statistical Subareas 48.1, 48.2, 48.3 and 48.4 shall be further limited to 620 000 tonnes in any fishing season (CM 51-07).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+CCAMLR
+</td>
+<td style="text-align:left;width: 10cm; ">
+Commission for the Conservation of Antarctic Marine Living Resources.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+SISO
+</td>
+<td style="text-align:left;width: 10cm; ">
+CCAMLR’s Scheme of International Scientific Observation providing fishery monitoring data.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Subarea 48.1
+</td>
+<td style="text-align:left;width: 10cm; ">
+Main krill fishing area along the Western Antarctic Peninsula.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Management Strata
+</td>
+<td style="text-align:left;width: 10cm; ">
+Spatial fishery management units in 48.1 (BS, EI, GS, JOIN, SSWI).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+SSMU
+</td>
+<td style="text-align:left;width: 10cm; ">
+Small-Scale Management Unit used for ecosystem-based krill management.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+CM 51-07
+</td>
+<td style="text-align:left;width: 10cm; ">
+Conservation Measure specifying spatial distribution of the trigger level; expired in 2024.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Spatial Heterogeneity
+</td>
+<td style="text-align:left;width: 10cm; ">
+Differences in productivity or population structure across regions.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+WAP
+</td>
+<td style="text-align:left;width: 10cm; ">
+Western Antarctic Peninsula, a region experiencing rapid warming and sea-ice decline.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+SST
+</td>
+<td style="text-align:left;width: 10cm; ">
+Sea Surface Temperature; key environmental driver affecting krill growth and productivity.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+SIC
+</td>
+<td style="text-align:left;width: 10cm; ">
+Sea Ice Concentration derived from Nimbus-7; influences recruitment.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Chlorophyll-a
+</td>
+<td style="text-align:left;width: 10cm; ">
+Proxy for primary productivity and food availability.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Environmental Covariate
+</td>
+<td style="text-align:left;width: 10cm; ">
+External variable influencing krill growth dynamics.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+GLMM
+</td>
+<td style="text-align:left;width: 10cm; ">
+Mixed-effects model incorporating fixed effects and random structure.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Pearson Correlation
+</td>
+<td style="text-align:left;width: 10cm; ">
+Correlation metric assessing relationship between length and environmental variables.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+Rasterization
+</td>
+<td style="text-align:left;width: 10cm; ">
+Conversion of spatial satellite data to uniform grids.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+sf
+</td>
+<td style="text-align:left;width: 10cm; ">
+R package for handling spatial vector data.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; font-weight: bold;">
+ncdf4
+</td>
+<td style="text-align:left;width: 10cm; ">
+R interface for working with NetCDF satellite and oceanographic data.
+</td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
 </div>
 <div id="code-repository" class="section level1">
 <h1>CODE REPOSITORY</h1>

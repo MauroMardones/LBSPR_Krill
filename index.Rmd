@@ -3,12 +3,12 @@ title: "Supporting Information 1"
 subtitle: "Disparate estimates of intrinsic productivity for Antarctic krill (Euphausia superba) across small spatial scales under a rapidly changing ocean."
 #author: "Mardones, M; Jarvis Mason, E.T.;  Santa Cruz, F.; Watters, G.; Cárdenas, C.A"
 date:  "`r format(Sys.time(), '%d %B, %Y')`"
-bibliography: LBSPR.bib
-csl: apa.csl
+bibliography: bib/LBSPR.bib
+csl: bib/apa.csl
 link-citations: yes
 linkcolor: blue
 output:
-  bookdown::pdf_document2:
+  bookdown::html_document2:
     fig_caption: yes
     keep_md: true
     toc: true
@@ -50,6 +50,31 @@ options(bitmapType = "cairo")
 ```
 
 
+\pagebreak
+
+# CONTEXT
+
+This supplementary material with essential formulas, datasets, and code snippets is delivered for the application of the LBSPR model in studying krill populations within the West Antarctic Peninsula (WAP) region. The LBSPR model, pivotal for unraveling krill dynamics, is reinforced by mathematical expressions elucidating key parameters and environmental influences. Curated datasets provide valuable insights into factors shaping krill habitats. With a strong emphasis on reproducibility, this resource ensures that findings can undergo independent validation, fostering trust in scientific outcomes. Transparent documentation of methods and assumptions promotes understanding and scrutiny of the analysis process by peers.
+
+
+# METHODOLOGY
+
+## Monitoring Data (SISO Program)
+
+For this analysis, data from the monitoring of the krill fishery were used, which have been systematically collected on board fishing vessels by the CCAMLR SISO (Scheme of International Scientific Observation) program. Krill sizes compositions were obtained from the entire area 48.1, which was combined in each management stratum defined at 2.1 section (Figure \@ref(fig:Figure1)). For this analysis, 1,266,267 krill individuals were measured from fishery activity, the majority (~75%) from the Bransfield, Elephant and SouthWest strata. 
+
+```{r Figure1, echo=FALSE, out.width='60%', fig.cap="Sizes compositions from SISO program monitoring krill fishery by strata (BS=Brainsfield Strait, EI= Elephant Island, GS= Gerlache Strait, JOIN= Joinville Island, SSWI= South West). Red line represent recruit size"}
+knitr::include_graphics('index_files/figure-html/Strata_Nochina.png')
+```
+
+The information gaps (years without sizes composition data) are not calculated because there is no autocorrelation between years, but singular estimators over time.
+
+
+## LBSPR Modeling
+
+
+### Loading packages 
+
 
 ```{r message=FALSE}
 ## Installing the Package
@@ -86,28 +111,6 @@ thememau <- theme(axis.text.y = element_blank(),
                   panel.grid.minor = element_line(colour = "white", 
                                                   size = 0.1))
 ```
-
-\pagebreak
-
-# CONTEXT
-
-This supplementary material with essential formulas, datasets, and code snippets is delivered for the application of the LBSPR model in studying krill populations within the West Antarctic Peninsula (WAP) region. The LBSPR model, pivotal for unraveling krill dynamics, is reinforced by mathematical expressions elucidating key parameters and environmental influences. Curated datasets provide valuable insights into factors shaping krill habitats. With a strong emphasis on reproducibility, this resource ensures that findings can undergo independent validation, fostering trust in scientific outcomes. Transparent documentation of methods and assumptions promotes understanding and scrutiny of the analysis process by peers.
-
-
-# METHODOLOGY
-
-## Monitoring Data (SISO Program)
-
-For this analysis, data from the monitoring of the krill fishery were used, which have been systematically collected on board fishing vessels by the CCAMLR SISO (Scheme of International Scientific Observation) program. Krill sizes compositions were obtained from the entire area 48.1, which was combined in each management stratum defined at 2.1 section (Figure \@ref(fig:Figure1)). For this analysis, 1,266,267 krill individuals were measured from fishery activity, the majority (~75%) from the Bransfield, Elephant and SouthWest strata. 
-
-```{r Figure1, echo=FALSE, out.width='60%', fig.cap="Sizes compositions from SISO program monitoring krill fishery by strata (BS=Brainsfield Strait, EI= Elephant Island, GS= Gerlache Strait, JOIN= Joinville Island, SSWI= South West). Red line represent recruit size"}
-knitr::include_graphics('index_files/figure-html/Strata_Nochina.png')
-```
-
-The information gaps (years without sizes composition data) are not calculated because there is no autocorrelation between years, but singular estimators over time.
-
-
-## LBSPR Modeling
 
 ### Biological and fishery parameters krill
 
@@ -168,36 +171,43 @@ MyPars@L_units <- "mm"
 ```
 
 
-```{r table_par}
-tablepar <-data.frame(Value=c(MyPars@Linf,
-                       MyPars@L50 ,
-                       MyPars@L95 ,
-                       round(MyPars@MK,3) ,
-                       MyPars@SL50 ,
-                       MyPars@SL95 ,
-                       MyPars@SPR ,
-                       MyPars@Walpha ,
-                       MyPars@Wbeta ,
-                       MyPars@BinMax,
-                       MyPars@BinMin ,
-                       MyPars@L_units),
-                      Descrption=c("VB asymptotic length",
-                                   "Maturity 50%",
-                                   "Maturity 95%",
-                                   "M/K Ratio",
-                                   "Selectivity 50%",
-                                   "Seletivity 95%",
-                                   "SPR",
-                                   "a (Length-Weight Relation)",
-                                   "b (Length-Weight Relation)",
-                                   "Bin Min",
-                                   "Bin Max",
-                                   "Units"))
+```{r table_par, echo=FALSE}
+tablepar <- data.frame(
+  Description = c(
+    "VB asymptotic length",
+    "Maturity 50%",
+    "Maturity 95%",
+    "M/K Ratio",
+    "Selectivity 50%",
+    "Selectivity 95%",
+    "SPR",
+    "a (Length-Weight Relation)",
+    "b (Length-Weight Relation)",
+    "Bin Min",
+    "Bin Max",
+    "Units"
+  ),
+  
+  Value = c(
+    MyPars@Linf,
+    MyPars@L50,
+    MyPars@L95,
+    round(MyPars@MK, 3),
+    MyPars@SL50,
+    MyPars@SL95,
+    MyPars@SPR,
+    MyPars@Walpha,
+    MyPars@Wbeta,
+    MyPars@BinMin,
+    MyPars@BinMax,
+    MyPars@L_units
+  )
+)
 ```
 
 These parameters were taken from previous works about krill life history and fishery [@Thanassekos2014; @Maschette2020], which are described in Table \@ref(tab:Table1).
 
-```{r Table1}
+```{r Table1, echo=FALSE}
 kbl(tablepar, 
     longtable = F, 
     booktabs = T, 
@@ -266,35 +276,35 @@ However, it is probably easier to create the `LB_lengths` object by directly rea
 datdir <- setwd("~/DOCAS/LBSPR_Krill")
 Lenbs <- new("LB_lengths", 
              LB_pars=MyPars, 
-             file=paste0(datdir, "/lenghtBS_nochina.csv"), 
+             file=paste0(datdir, "/data/lenghtBS_nochina.csv"), 
              dataType="freq",
              sep=",",
              header=T)
 #Elephan Island Strata
 Lenei <- new("LB_lengths", 
              LB_pars=MyPars, 
-             file=paste0(datdir, "/lenghtEI_nochina.csv"),
+             file=paste0(datdir, "/data/lenghtEI_nochina.csv"),
              dataType="freq",
              sep=",",
              header=T)
 #Gerlache Strata
 Lengc <- new("LB_lengths", 
              LB_pars=MyPars, 
-             file=paste0(datdir, "/lenghtExtra_nochina.csv"), 
+             file=paste0(datdir, "/data/lenghtExtra_nochina.csv"), 
              dataType="freq",
              sep=",",
              header=T)
 #Join Strata
 Lenjo <- new("LB_lengths", 
              LB_pars=MyPars, 
-             file=paste0(datdir, "/lenghtJOIN_nochina.csv"), 
+             file=paste0(datdir, "/data/lenghtJOIN_nochina.csv"), 
              dataType="freq",
              sep=",",
              header=T)
 #SSIW Strata
 Lenssiw <- new("LB_lengths", 
                LB_pars=MyPars, 
-               file=paste0(datdir, "/lenghtSSIW_nochina.csv"), 
+               file=paste0(datdir, "/data/lenghtSSIW_nochina.csv"), 
                dataType="freq",
                sep=",",
                header=T)
@@ -561,7 +571,7 @@ allsprpl2
 
 All the estimated values of SPR and their associated variance by stratum and by year can be identified in  Table \@ref(tab:Table2).
 
-```{r Table2}
+```{r Table2, echo=FALSE}
 
 allsprwide_reorganizado <- allsprwide %>%
   mutate(
@@ -595,12 +605,12 @@ The results of the methods in the reference setting are compared to the obtained
 ```{r message=FALSE}
 
 for (i in 55:65) {
-  nombre_objeto <- paste0("MyPars_", i)  # Crear un nombre único para cada objeto modificado
+  nombre_objeto <- paste0("MyPars_", i)  
   objeto_modificado <- MyPars  # Crear una copia del objeto original
   
   objeto_modificado@Linf <- i  # Modificar el valor de @Linf en cada iteración
   
-  assign(nombre_objeto, objeto_modificado, envir = .GlobalEnv)  # Asignar el objeto modificado al nombre creado
+  assign(nombre_objeto, objeto_modificado, envir = .GlobalEnv) 
   
   # Resto del código que deseas ejecutar con el objeto modificado
 ## A blank LB_pars object created
@@ -885,7 +895,7 @@ tablinf_reorganizado <- tablinf %>%
 
 All the estimated values of SPR by L~inf~scenario by stratum can be identified in  Table \@ref(tab:Table4).
 
-```{r Table4, message=F}
+```{r Table4, message=F, echo=F}
 kbl(tablinf_reorganizado, 
     longtable = FALSE, 
     booktabs = TRUE, 
@@ -1057,7 +1067,7 @@ valprotodo <- rbind(valprosswi_largo,
 ```
 
 
-```{r Table5, message=FALSE}
+```{r Table5, message=FALSE, echo=FALSE}
 tablk <- valprotodo %>% 
   group_by(Parameter, SPRstra) %>% 
   summarise(Median = mean(SPR),
@@ -1126,21 +1136,21 @@ Reading data
 datdir <- setwd("~/DOCAS/LBSPR_Krill")
 Len481 <- new("LB_lengths", 
              LB_pars=MyPars, 
-             file=paste0(datdir, "/lenght481_nochina.csv"), 
+             file=paste0(datdir, "/data/lenght481_nochina.csv"), 
              dataType="freq",
              sep=",",
              header=T)
 
 Len482 <- new("LB_lengths", 
              LB_pars=MyPars, 
-             file=paste0(datdir, "/lenght482_nochina.csv"),
+             file=paste0(datdir, "/data/lenght482_nochina.csv"),
              dataType="freq",
              sep=",",
              header=T)
 
 Len483 <- new("LB_lengths", 
              LB_pars=MyPars, 
-             file=paste0(datdir, "/lenght483_nochina.csv"), 
+             file=paste0(datdir, "/data/lenght483_nochina.csv"), 
              dataType="freq",
              sep=",",
              header=T)
@@ -1229,7 +1239,8 @@ spr48plot
 ```
 
 Main outputs in Table \@ref(tab:Table6).
-```{r Table6}
+
+```{r Table6, echo=FALSE}
 spr48wide_reorganizado <- spr48wide %>%
   mutate(
     `481` = ifelse(!is.na(`SPR 481`), paste0(`SPR 481`, " (", `SD 481`, ")"), NA),
@@ -1439,7 +1450,7 @@ ggarrange(spr481plot,
 
 \newpage
 
-# GLOSSARY OF TECHNICAL TERMS
+# GLOSSARY 
 
 ```{r glossary, results='asis', echo=FALSE}
 
@@ -1447,8 +1458,9 @@ glossary <- tribble(
   ~Term, ~Definition,
 
   # Biological & life-history terms
-    "SPR", "Spawning Potential Ratio. Ratio of egg production per recruit under fishing to unfished conditions; key BRP.",
-  "Intrinsic Productivity", "Capacity of a population to replenish itself through growth and reproduction.",
+  "Intrinsic Productivity", "Capacity of a population to reproduce and sustain itself, which depends on reproductive and somatic conditions.",
+  "SPR", "Spawning Potential Ratio. Ratio of egg production per recruit under fishing to unfished conditions; key BRP.",
+  "LBSPR", "Length-Based Spawning Potential Ratio model used to estimate stock status from length data.",
   "VBGF", "Von Bertalanffy Growth Function. Growth model describing length-at-age through parameters Linf, k, and t0.",
   "Linf", "Asymptotic length; theoretical maximum body size.",
   "k", "Growth coefficient; rate at which individuals approach Linf.",
@@ -1462,8 +1474,8 @@ glossary <- tribble(
   "Recruitment", "Entry of new individuals into the population or fishery.",
   "Recruitment Variability", "Temporal fluctuation in the number of recruits influencing productivity.",
   "EPR", "Egg Production per Recruit. Lifetime reproductive output of a recruit, fished or unfished.",
-  "Growth Proxy", "Use of length metrics as indicators of environmental and physiological conditions.",
-  "LBSPR", "Length-Based Spawning Potential Ratio model used to estimate stock status from length data.",
+  "Growth Proxy", "Use of length metrics as indicators of physiological conditions.",
+
 
   # Fishery, selectivity & stock assessment
   "Length Composition", "Frequency distribution of observed total lengths from fishery-dependent data.",
@@ -1475,23 +1487,23 @@ glossary <- tribble(
   "BRP", "Biological Reference Point. Benchmark to evaluate stock status (e.g., SPR20%, SPR75%).",
   "LRP", "Limit Reference Point. Threshold below which the stock status is considered impaired (SPR20%).",
   "TRP", "Target Reference Point. Desired stock status objective (SPR75% for krill).",
-  "MSY", "Maximum long-term average catch achievable without harming stock productivity.",
+  "MSY", "Maximum Sustainable Yield. Largest long-term average catch that can be sustainably taken.",
   "Hockey-Stick HCR", "Piecewise-linear harvest control rule used in fisheries management.",
   "Pseudo-Cohort Analysis", "Length-based analytical approach using multiple length frequencies (LBPA).",
-  "Data-Poor Assessment", "Stock assessment using limited inputs, often only length data.",
+  "Data-Poor Assessment", "Stock assessment using limited inputs",
   "Integrated Assessment Model", "Model synthesizing multiple data types within a unified population framework.",
   "MP", "Management Procedure. Pre-agreed algorithm determining harvest decisions under uncertainty.",
   "HCR", "Harvest Control Rule. Algorithm linking observed indicators (e.g., SPR) to allowed catch.",
-  "Trigger Level", "Catch limit threshold initiating spatial allocation under CM 51-07.",
+  "Catch Limit", "The total combined catch of Euphausia superba in Statistical Subareas 48.1, 48.2, 48.3 and 48.4 shall be limited to 5.61 million tonnes in any fishing season (CM 51-07).",
+  "Trigger Level", "Total combined catch in Statistical Subareas 48.1, 48.2, 48.3 and 48.4 shall be further limited to 620 000 tonnes in any fishing season (CM 51-07).",
 
   # CCAMLR & spatial management
   "CCAMLR", "Commission for the Conservation of Antarctic Marine Living Resources.",
   "SISO", "CCAMLR’s Scheme of International Scientific Observation providing fishery monitoring data.",
   "Subarea 48.1", "Main krill fishing area along the Western Antarctic Peninsula.",
-  "Management Strata", "Spatial units in 48.1 (BS, EI, GS, JOIN, SSWI).",
+  "Management Strata", "Spatial fishery management units in 48.1 (BS, EI, GS, JOIN, SSWI).",
   "SSMU", "Small-Scale Management Unit used for ecosystem-based krill management.",
   "CM 51-07", "Conservation Measure specifying spatial distribution of the trigger level; expired in 2024.",
-  "Adaptive Allocation", "Adjustment of catch limits across strata based on population indicators.",
   "Spatial Heterogeneity", "Differences in productivity or population structure across regions.",
 
   # Oceanographic & environmental variables
@@ -1500,7 +1512,6 @@ glossary <- tribble(
   "SIC", "Sea Ice Concentration derived from Nimbus-7; influences recruitment.",
   "Chlorophyll-a", "Proxy for primary productivity and food availability.",
   "Environmental Covariate", "External variable influencing krill growth dynamics.",
-  "Growth Habitat", "Environmental conditions associated with krill somatic growth potential.",
 
   # Modeling, statistics & computation
   "GLMM", "Mixed-effects model incorporating fixed effects and random structure.",
@@ -1512,10 +1523,7 @@ glossary <- tribble(
 
 ```
 
-```{r kable-version, results='asis', echo=TRUE}
-library(kableExtra)
-library(dplyr)
-
+```{r kable-version, results='asis', echo=FALSE}
 glossary %>%
   kbl(
     booktabs = TRUE,
@@ -1525,10 +1533,11 @@ glossary %>%
    kable_styling(latex_options = c("striped", 
                                    "hold_position"),
                  html_font = "arial",
-                 repeat_header_text = T) %>%
+                 repeat_header_text = T,
+                 full_width = T) %>%
   column_spec(1, width = "3cm", bold = TRUE) %>%
   column_spec(2, width = "10cm") %>%
-  row_spec(0, bold = TRUE)
+  row_spec(0, bold = TRUE) 
 
 ```
 

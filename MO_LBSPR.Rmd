@@ -173,14 +173,13 @@ results <- lapply(F_scenarios, evaluate_LBSPR) %>% bind_rows()
 Fses <- ggplot(results, aes(x = F_real, y = F_est)) +
   geom_point() +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
-  labs(x = "F Real", y = "F Estimado (LBSPR)", title = "") +
-  theme_minimal()
-
+  labs(x = "F Real", y = "F Estimated", title = "") +
+  theme_bw()
 sprses <- ggplot(results, aes(x = SPR_real, y = SPR_est)) +
   geom_point() +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
-  labs(x = "SPR Real", y = "SPR Estimado (LBSPR)", title = "") +
-  theme_minimal()
+  labs(x = "SPR Real", y = "SPR Estimated", title = "") +
+  theme_bw()
 
 ggarrange(Fses,
           sprses,
