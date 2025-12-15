@@ -352,17 +352,110 @@ display: none;
 </div>
 
 
-<div id="lbspr_krill" class="section level1">
-<h1>LBSPR_Krill</h1>
-<p>testing yield in Krill at 48.1 AP.</p>
-<p>The objective of this document is to apply the methodology of know
-productivity based in YPR with a based on poor data called the
-Length-Based Spawning Potential Ratio (LBSPR) <span class="citation">[@Hordyk2016]</span>. This exercise studies the case of
-the Antarctic Krill (<em>Euphausia superba)</em> in Antarctic Peninsula
-subarea 48.1.</p>
-<p>This excercise is academic project part of PHD Antarctic and
-Subantarctic Science program</p>
-<p>Autocontent code and analysis can see in this <a href="https://mauromardones.github.io/LBSPR_Krill/">link</a></p>
+<div id="testing-intrinsic-productivity-in-antarctic-krill-at-subarea-48.1-antarctic-peninsula" class="section level1">
+<h1><strong>Testing Intrinsic Productivity in Antarctic Krill at Subarea
+48.1 (Antarctic Peninsula)</strong></h1>
+<div id="overview" class="section level2">
+<h2><strong>Overview</strong></h2>
+<p>This project applies a length-based approach to assess the intrinsic
+productivity of Antarctic krill (<em>Euphausia superba</em>) in Subarea
+48.1 (Antarctic Peninsula). Specifically, we use the
+<strong>Length-Based Spawning Potential Ratio (LBSPR)</strong>
+methodology <span class="citation">[@Hordyk2016]</span> to evaluate the
+sustainability of krill exploitation under data-limited conditions. The
+analysis is grounded in <strong>Yield per Recruit (YPR)</strong> theory
+and adapted to krill fisheries using size-structured population
+data.</p>
+<p>This research is part of an <strong>academic project</strong> within
+the <strong>Doctoral Program in Antarctic and Subantarctic
+Sciences</strong> at the <strong>Universidad de Magallanes,
+Chile</strong>.</p>
+<hr />
+</div>
+<div id="objectives" class="section level2">
+<h2><strong>Objectives</strong></h2>
+<ul>
+<li>Evaluate the reproductive potential of Antarctic krill using the
+<strong>LBSPR</strong> framework.</li>
+<li>Analyze the effects of fishing pressure on size structure and
+population productivity.</li>
+<li>Provide quantitative insights into the sustainability of krill
+exploitation in Subarea 48.1.</li>
+</ul>
+<hr />
+</div>
+<div id="methodology" class="section level2">
+<h2><strong>Methodology</strong></h2>
+<p>This repository contains the <strong>source code</strong> required to
+reproduce the analyses presented in the associated manuscript.</p>
+<p>The complete workflow to replicate the exercise is provided in:</p>
+<p><strong><code>index.Rmd</code></strong></p>
+<p>This R Markdown file includes all steps necessary to run the
+<strong>LBSPR</strong> model, from data loading and formatting to model
+execution and figure generation.</p>
+<hr />
+</div>
+<div id="data-availability-and-required-input-files" class="section level2">
+<h2><strong>Data Availability and Required Input Files</strong></h2>
+<p>The <strong>processed input data</strong> required to run the LBSPR
+analyses are archived in Zenodo and must be downloaded prior to
+execution of the code.</p>
+<div id="zenodo-repository" class="section level3">
+<h3><strong>Zenodo repository</strong></h3>
+<p><strong>DOI:</strong> <a href="https://doi.org/10.5281/zenodo.17936869">https://doi.org/10.5281/zenodo.17936869</a></p>
+<p><strong>Citation:</strong> Mardones, M. (2025). <em>LBSPR-based stock
+assessment of Antarctic krill (Euphausia superba): code and processed
+data</em> (v1.0.0) [Data set]. Zenodo. <a href="https://doi.org/10.5281/zenodo.17936869">https://doi.org/10.5281/zenodo.17936869</a></p>
+<hr />
+</div>
+</div>
+<div id="how-to-reproduce-the-analysis" class="section level2">
+<h2><strong>How to Reproduce the Analysis</strong></h2>
+<ol style="list-style-type: decimal">
+<li><p>Clone or download this GitHub repository.</p></li>
+<li><p>Download the processed data from Zenodo using the DOI
+above.</p></li>
+<li><p>Copy the following files into the <code>data/</code> directory of
+the repository:</p>
+<ul>
+<li><code>lenghtBS.csv</code></li>
+<li><code>lenghtEI.csv</code></li>
+<li><code>lenghtJOIN.csv</code></li>
+<li><code>lenghtSSIW.csv</code></li>
+<li><code>lenghtExtra.csv</code></li>
+</ul></li>
+</ol>
+<p>These files contain <strong>processed length–frequency
+distributions</strong>, formatted according to the input requirements of
+the <strong>LBSPR</strong> model.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Open <code>index.Rmd</code> in <strong>RStudio</strong> (or a
+compatible R environment).</li>
+<li>Set the working directory to the root of this repository.</li>
+<li>Knit or run the R Markdown file to reproduce all results and
+figures.</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> These datasets are <strong>processed and
+aggregated</strong> and are provided exclusively to enable
+reproducibility of the analytical workflow. They do not represent
+original raw observations and do not substitute primary data
+sources.</p>
+</blockquote>
+<hr />
+</div>
+<div id="reproducibility-code" class="section level2">
+<h2><strong>Reproducibility &amp; Code</strong></h2>
+<p>A user-friendly rendered version of the analysis and documentation is
+available at:</p>
+<p>🔗 <strong>LBSPR Krill Analysis</strong> <a href="https://mauromardones.github.io/LBSPR_Krill/">https://mauromardones.github.io/LBSPR_Krill/</a></p>
+<hr />
+</div>
+<div id="contact" class="section level2">
+<h2><strong>Contact</strong></h2>
+<p>For questions, comments, or collaboration, feel free to reach
+out.</p>
+</div>
 </div>
 
 
